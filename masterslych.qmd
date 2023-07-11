@@ -1,11 +1,10 @@
 ---
 title: "МастерСлух"
+date: "Документ создан: `r format(Sys.time(), '%Y-%m-%d')`"
 
 editor_options: 
   chunk_output_type: console
 ---
-
-Отчет по компаниям
 
 ```{r include = FALSE}
 library(ryandexdirect)
@@ -19,11 +18,7 @@ knitr::opts_template$set(my_knitr_opts = list(message=FALSE, warning=FALSE, cach
 
 ```
 
-## Проба пера
-
-Ниже видем формулу через Latex разметку
-
-$c = \pm\sqrt{a^2 + b^2}$
+## Отчет по целям
 
 ```{r opts.label = "my_knitr_opts"}
 data_mc <- yadirGetReport(ReportType        = "CUSTOM_REPORT",
@@ -48,7 +43,6 @@ data_mc <- yadirGetReport(ReportType        = "CUSTOM_REPORT",
 
 
 ```
-
 
 ```{r opts.label = "my_knitr_opts"}
 # подготовим данные к анализу
@@ -88,7 +82,6 @@ master_sluh %>%
 
 ```
 
-
 График: Сумма целей по дням
 
 ```{r  opts.label = "my_knitr_opts"}
@@ -114,8 +107,6 @@ ggplot(master_sluh, aes(x = Date, y = Goals))+
         axis.text     = element_text(size = 10, color = "gray50"), 
         panel.grid    = element_blank())
 ```
-
-
 
 ```{r opts.label = "my_knitr_opts"}
 # создаем таблицу №2
@@ -147,8 +138,7 @@ master_sluh_total <- master_sluh  %>%
     names_to = "Var",
     values_to = "Data") %>%  
   pivot_wider(names_from = Month,
-              values_from = Data)  %>% 
-  add_row(Var = str_glue('Обновлено: {as.character(round(Sys.time()))}')) %>% 
+              values_from = Data) %>% 
   rename(" " = Var)
 
 master_sluh_total %>% 
@@ -156,4 +146,7 @@ master_sluh_total %>%
   kable_paper(lightable_options = c("striped", "hover", "condensed", "responsive"))
 
 ```
+
+
+## Отчет по регионам
 
