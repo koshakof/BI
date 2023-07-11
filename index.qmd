@@ -1,8 +1,11 @@
 ---
 title: "BI"
+
 editor_options: 
   chunk_output_type: console
 ---
+
+
 
 This is a Quarto website.
 
