@@ -1,0 +1,159 @@
+---
+title: "МастерСлух"
+
+editor_options: 
+  chunk_output_type: console
+---
+
+Отчет по компаниям
+
+```{r include = FALSE}
+library(ryandexdirect)
+library(clock)
+library(tidyverse)
+library(kableExtra)
+
+
+# set knitr optn
+knitr::opts_template$set(my_knitr_opts = list(message=FALSE, warning=FALSE, cache=TRUE, echo=FALSE))
+
+```
+
+## Проба пера
+
+Ниже видем формулу через Latex разметку
+
+$c = \pm\sqrt{a^2 + b^2}$
+
+```{r opts.label = "my_knitr_opts"}
+data_mc <- yadirGetReport(ReportType        = "CUSTOM_REPORT",
+                          DateRangeType     = "CUSTOM_DATE",
+                          DateFrom          = "2023-01-01",
+                          DateTo            = Sys.Date() - 1,
+                          FieldNames        = c("Date",
+                                                "CampaignName",
+                                                "Cost",
+                                                "Clicks",
+                                                "Conversions"),
+                          Goals             = c(301649121,
+                                                301314275,
+                                                301313194,
+                                                301315472),
+                          AttributionModels = "LYDC",
+                          IncludeVAT        = "NO",
+                          IncludeDiscount   = "NO",
+                          AgencyAccount     = "platzkart.ru-e2",
+                          Login             = "e-17332282",
+                          TokenPath         = "direct_token")
+
+
+```
+
+
+```{r opts.label = "my_knitr_opts"}
+# подготовим данные к анализу
+## задаем вектор имен
+mc_names <- c("Calls", "B24", "Forms", "EMails")
+
+## обработаем данные по целям
+df1_mc <- data_mc %>%
+  select(5:ncol(.)) %>%
+  mutate(across(where(is.character), ~as.numeric(str_replace(., "--", "0")))) %>%
+  rename_at(vars(Conversions_301649121_LYDC:Conversions_301315472_LYDC), ~mc_names) %>%
+  mutate(Goals = rowSums(across(Calls:EMails, abs))) %>%
+  relocate(Goals)
+
+## preparing the second data set
+df2_mc <- data_mc %>%
+  select(1:4)
+
+## combining data sets
+df_mc <- tibble(cbind(df2_mc, df1_mc))
+
+```
+
+Таблица: Кол-во целей по дням
+
+```{r opts.label = "my_knitr_opts"}
+# создаем таблицу №1
+master_sluh <- df_mc %>%
+  reframe(round(across(where(is.numeric), sum)), 0, .by = Date ) %>%
+  mutate(CPC = round(ifelse(Cost == 0 | Clicks == 0, 0, Cost / Clicks)),
+         CPALC    = round(ifelse(Cost == 0 | Goals == 0, 0, Cost / Goals))) %>%
+  select(Date, Cost, Clicks, CPC, Goals, CPALC, Calls, Forms, B24, EMails)
+
+master_sluh %>% 
+  kbl() %>%
+  kable_paper(lightable_options = c("striped", "hover", "condensed", "responsive"))
+
+```
+
+
+График: Сумма целей по дням
+
+```{r  opts.label = "my_knitr_opts"}
+ggplot(master_sluh, aes(x = Date, y = Goals))+
+  geom_col(fill = "#b290fc")+
+  geom_text(
+    aes(label = Goals),
+    check_overlap = TRUE,
+    vjust = -1,
+    size = 2,
+    color = "grey40")+
+  scale_x_date(NULL,
+               breaks = scales::breaks_width("week"),
+               labels = scales::label_date_short())+
+  scale_y_continuous(breaks = seq(1,10,1))+
+  theme_minimal()+
+  labs(title    = "Динамика достижения целей",
+       subtitle = "Директ",
+       y        = "Цели")+
+  theme(plot.title    = element_text(size = 12, color = "gray40"),
+        plot.subtitle = element_text(size = 10, color = "gray40"),
+        axis.title    = element_text(size = 10, color = "gray50"),
+        axis.text     = element_text(size = 10, color = "gray50"), 
+        panel.grid    = element_blank())
+```
+
+
+
+```{r opts.label = "my_knitr_opts"}
+# создаем таблицу №2
+master_sluh_total <- master_sluh  %>%
+  mutate(Month = clock::date_format(Date, format = "%m-%y")) %>% 
+  reframe(Days     = n(),
+          Cost     = round(sum(Cost), 2),
+          Clicks   = round(sum(Clicks)),
+          CPC      = round(Cost / Clicks, 2),
+          Goals    = round(sum(Goals)),
+          CPA      = round(ifelse(Goals == 0, 0, Cost / Goals), 2),
+          DayGoals = round(Goals/Days,2),
+          CR       = round(Goals / Clicks * 100, 2),
+          Звонки   = round(sum(Calls)),
+          Forms    = round(sum(Forms)),
+          B24      = round(sum(B24)),
+          EMails   = round(sum(EMails)),
+          .by = Month) %>%
+  rename("Рабочих дней РК"            = Days,
+         "Итого расход, руб"          = Cost,
+         "Итого переходов"            = Clicks,
+         "Средняя цена перехода, руб" = CPC,
+         "Итого обращений"            = Goals,
+         "Цена обращения, руб"        = CPA,
+         "Обращений в день"           = DayGoals,
+         "Конверсия, %"               = CR) %>% 
+  pivot_longer(
+    cols = !Month,
+    names_to = "Var",
+    values_to = "Data") %>%  
+  pivot_wider(names_from = Month,
+              values_from = Data)  %>% 
+  add_row(Var = str_glue('Обновлено: {as.character(round(Sys.time()))}')) %>% 
+  rename(" " = Var)
+
+master_sluh_total %>% 
+  kbl() %>%
+  kable_paper(lightable_options = c("striped", "hover", "condensed", "responsive"))
+
+```
+

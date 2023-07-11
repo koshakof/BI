@@ -1,7 +1,13 @@
 ---
 title: "Отчеты"
+
+editor_options: 
+  chunk_output_type: console
 ---
 
-Данный сайт предоставляет отчеты в онлайн режиме.
+
+Проекты
+
+[МастерСлух](/masterslych.html)
 
 

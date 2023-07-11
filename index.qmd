@@ -1,5 +1,6 @@
 ---
-title: "BI"
+title: "О проекте"
+
 editor_options: 
   chunk_output_type: console
 ---

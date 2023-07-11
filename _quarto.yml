@@ -3,18 +3,27 @@ project:
   output-dir: docs
 
 website:
-  title: "BI"
+  title: "PLATZKART BI"
   navbar:
     left:
       - href: index.qmd
         text: Home
       - reports.qmd
+      - masterslych.qmd
+  page-footer:
+    center: 
+      - text: "Reports"
+        href: reports.qmd
+      
 
 format:
   html:
-    theme: cosmo
+    theme:
+      light: minty
+      dark: cyborg
     css: styles.css
     toc: true
+    html-math-method: katex
 
 editor: visual
 
