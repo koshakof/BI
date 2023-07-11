@@ -39,11 +39,23 @@ vignettes/*.pdf
 # R Environment Variables
 .Renviron
 
-
 # translation temp files
 po/*~
 
 # RStudio Connect folder
 rsconnect/
 
+# Quarto
 /.quarto/
+
+# Site
+_site/
+
+# Renv
+library/
+local/
+cellar/
+lock/
+python/
+sandbox/
+staging/
