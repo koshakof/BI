@@ -50,12 +50,3 @@ rsconnect/
 
 # Site
 _site/
-
-# Renv
-library/
-local/
-cellar/
-lock/
-python/
-sandbox/
-staging/
