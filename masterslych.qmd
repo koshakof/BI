@@ -18,6 +18,93 @@ knitr::opts_template$set(my_knitr_opts = list(message=FALSE, warning=FALSE, cach
 
 ```
 
+## Обзор рекламных кампаний
+
+```{r opts.label = "my_knitr_opts"}
+data_account <- yadirGetReport(ReportType        = "CUSTOM_REPORT",
+                               DateRangeType     = "CUSTOM_DATE",
+                               DateFrom          = "2023-06-01",
+                               DateTo            = Sys.Date() - 1,
+                               FieldNames        = c("Date",
+                                                     "CampaignName",
+                                                     "Impressions",
+                                                     "WeightedImpressions",
+                                                     "Clicks",
+                                                     "Sessions",
+                                                     "Bounces",
+                                                     "Cost",
+                                                     "Conversions"),
+                               Goals             = c(301649121,
+                                                     301314275,
+                                                     301313194,
+                                                     301315472),
+                               AttributionModels = c("FCCD", "AUTO"),
+                               IncludeVAT        = "NO",
+                               IncludeDiscount   = "NO",
+                               AgencyAccount     = "platzkart.ru-e2",
+                               Login             = "e-17332282",
+                               TokenPath         = "direct_token")
+```
+
+
+```{r opts.label = "my_knitr_opts"}
+# подготовим данные к анализу
+## задаем вектор имен
+mc_names <- c("Calls_F", 
+              "Calls_A", 
+              "B24_F", 
+              "B24_A", 
+              "Forms_F", 
+              "Forms_A", 
+              "EMails_F", 
+              "EMails_A")
+
+## обработаем данные по целям
+df1_mc <- data_account %>%
+  select(9:ncol(.)) %>%
+  mutate(across(where(is.character), ~as.numeric(str_replace(., "--", "0")))) %>%
+  rename_at(vars(Conversions_301649121_FCCD:Conversions_301315472_AUTO), ~mc_names) %>%
+  transmute(Goals_F = rowSums(across(ends_with("_F"), ~abs(.x))),
+            Goals_A = rowSums(across(ends_with("_A"), ~abs(.x))))
+
+## preparing the second data set
+df2_mc <- data_account %>%
+  select(1:8)
+
+## combining data sets
+account <- tibble(cbind(df2_mc, df1_mc))
+
+```
+
+> Таблица: Метрики по всему аккаунту
+
+```{r opts.label = "my_knitr_opts"}
+account %>% 
+  reframe(across(where(is.numeric), sum)) %>% 
+  relocate(Cost) %>% 
+  arrange(desc(Cost)) %>% 
+  kbl(caption = "Метрики по всему аккаунту") %>% 
+  kable_paper(lightable_options = c("bordered", "striped", "hover", "condensed", "responsive"))
+
+```
+
+
+
+> Таблица: Метрики в разрезе рекламных кампаний
+
+```{r opts.label = "my_knitr_opts"}
+account %>% 
+  reframe(across(where(is.numeric), sum), .by = CampaignName) %>%
+  relocate(Cost,.after = CampaignName) %>% 
+  arrange(desc(Cost)) %>% 
+  kbl() %>% 
+  kable_paper(lightable_options = c("striped", "hover", "condensed", "responsive"))
+
+```
+
+
+
+
 ## Отчет по целям
 
 ```{r opts.label = "my_knitr_opts"}
@@ -34,7 +121,7 @@ data_mc <- yadirGetReport(ReportType        = "CUSTOM_REPORT",
                                                 301314275,
                                                 301313194,
                                                 301315472),
-                          AttributionModels = "LYDC",
+                          AttributionModels = "AUTO",
                           IncludeVAT        = "NO",
                           IncludeDiscount   = "NO",
                           AgencyAccount     = "platzkart.ru-e2",
@@ -53,7 +140,7 @@ mc_names <- c("Calls", "B24", "Forms", "EMails")
 df1_mc <- data_mc %>%
   select(5:ncol(.)) %>%
   mutate(across(where(is.character), ~as.numeric(str_replace(., "--", "0")))) %>%
-  rename_at(vars(Conversions_301649121_LYDC:Conversions_301315472_LYDC), ~mc_names) %>%
+  rename_at(vars(Conversions_301649121_AUTO:Conversions_301315472_AUTO), ~mc_names) %>%
   mutate(Goals = rowSums(across(Calls:EMails, abs))) %>%
   relocate(Goals)
 
@@ -66,47 +153,20 @@ df_mc <- tibble(cbind(df2_mc, df1_mc))
 
 ```
 
-Таблица: Кол-во целей по дням
 
 ```{r opts.label = "my_knitr_opts"}
-# создаем таблицу №1
+
+# Таблица: Кол-во целей по дням
 master_sluh <- df_mc %>%
   reframe(round(across(where(is.numeric), sum)), 0, .by = Date ) %>%
   mutate(CPC = round(ifelse(Cost == 0 | Clicks == 0, 0, Cost / Clicks)),
          CPALC    = round(ifelse(Cost == 0 | Goals == 0, 0, Cost / Goals))) %>%
   select(Date, Cost, Clicks, CPC, Goals, CPALC, Calls, Forms, B24, EMails)
 
-master_sluh %>% 
-  kbl() %>%
-  kable_paper(lightable_options = c("striped", "hover", "condensed", "responsive"))
-
 ```
 
-График: Сумма целей по дням
 
-```{r  opts.label = "my_knitr_opts"}
-ggplot(master_sluh, aes(x = Date, y = Goals))+
-  geom_col(fill = "#b290fc")+
-  geom_text(
-    aes(label = Goals),
-    check_overlap = TRUE,
-    vjust = -1,
-    size = 2,
-    color = "grey40")+
-  scale_x_date(NULL,
-               breaks = scales::breaks_width("week"),
-               labels = scales::label_date_short())+
-  scale_y_continuous(breaks = seq(1,10,1))+
-  theme_minimal()+
-  labs(title    = "Динамика достижения целей",
-       subtitle = "Директ",
-       y        = "Цели")+
-  theme(plot.title    = element_text(size = 12, color = "gray40"),
-        plot.subtitle = element_text(size = 10, color = "gray40"),
-        axis.title    = element_text(size = 10, color = "gray50"),
-        axis.text     = element_text(size = 10, color = "gray50"), 
-        panel.grid    = element_blank())
-```
+> Таблица: Сводка по аккаунту
 
 ```{r opts.label = "my_knitr_opts"}
 # создаем таблицу №2
@@ -144,6 +204,65 @@ master_sluh_total <- master_sluh  %>%
 master_sluh_total %>% 
   kbl() %>%
   kable_paper(lightable_options = c("striped", "hover", "condensed", "responsive"))
+
+```
+
+
+> График: Сумма целей по дням
+
+```{r  opts.label = "my_knitr_opts"}
+ggplot(master_sluh, aes(x = Date, y = Goals))+
+  geom_line(color = "gray")+
+  geom_point(aes(y = Goals), color = 'white', size = 3)+
+  geom_point(color = "#b290fc") +
+  geom_text(aes(label = Goals),
+            check_overlap = TRUE,
+            vjust = -1,
+            size = 2,
+            color = "grey40")+
+  scale_x_date(breaks = scales::breaks_width("day"),
+               labels = scales::label_date_short())+
+  scale_y_continuous(breaks = seq(1,10,1))+
+  theme_minimal()+
+  labs(title    = "Динамика достижения целей",
+       subtitle = "Директ",
+       y        = "Цели")+
+  theme(plot.title    = element_text(size = 12, color = "gray40"),
+        plot.subtitle = element_text(size = 10, color = "gray40"),
+        axis.title    = element_text(size = 10, color = "gray50"),
+        axis.text     = element_text(size = 10, color = "gray50"), 
+        panel.grid    = element_blank())
+
+```
+
+
+> График: Сравнение периодов
+
+Данные указаны в формате «неделя месяц год».
+
+```{r opts.label = "my_knitr_opts"}
+
+# Группировка данных по месяцам и вычисление суммы значений
+df_mc_sum_week <- df_mc %>%
+  mutate(Week = floor_date(Date, "week", week_start = 1)) %>%
+  summarise(SumGoals = sum(Goals), .by = Week)
+
+# Построение столбчатого графика
+ggplot(df_mc_sum_week, aes(x = Week, y = SumGoals, label = SumGoals))+
+  geom_col(fill = "#b290fc")+
+  geom_text(position = position_stack(vjust = 0.8), color = "white")+
+  scale_x_date(breaks = scales::breaks_width("week"),
+               labels = scales::date_format("%W %b %y"))+
+  labs(title    = "Сумма целей по неделям",
+       subtitle = "Директ",
+       x        = "«Формат даты: Неделя Месяц Год»",
+       y        = "Сумма целей") +
+  theme_minimal()+
+  theme(plot.title    = element_text(size = 12, color = "gray40"),
+        plot.subtitle = element_text(size = 11, color = "gray40"),
+        axis.title    = element_text(size = 10, color = "gray50"),
+        axis.text     = element_text(size = 10, color = "gray50"), 
+        panel.grid    = element_blank())
 
 ```
 
