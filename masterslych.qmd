@@ -1,7 +1,6 @@
 ---
 title: "МастерСлух"
 date: "Документ создан: `r format(Sys.time(), '%Y-%m-%d')`"
-
 editor_options: 
   chunk_output_type: console
 ---
