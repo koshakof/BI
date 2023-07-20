@@ -268,3 +268,36 @@ ggplot(df_mc_sum_week, aes(x = Week, y = SumGoals, label = SumGoals))+
 
 ## Отчет по регионам
 
+Примеры таблиц которые могут пригодится
+```{r}
+# сравним периоды ----
+last30_days <- last30_days |> 
+  mutate(CampaignId = as.character(CampaignId)) |> 
+  add_row(CampaignId = 'Последние 30 дней', .before = 1)
+
+last7_days <- last7_days |> 
+  mutate(CampaignId = as.character(CampaignId)) |> 
+  add_row(CampaignId = 'Последние 7 дней', .before = 1)
+
+periods <- bind_rows(last30_days, last7_days)
+
+
+(daysDif <- df %>%
+  summarise(round(across(where(is.numeric), sum)), 0, .by = Date) %>%
+  mutate(CTR     = round(Clicks / Impressions * 100, 2),
+         CPA     = round(ifelse(Cost == 0 | LYDC == 0, 0, Cost / LYDC)),
+         ctrD    = round(-(lag(CTR) - CTR) / CTR, 2),
+         costD   = round(-(lag(Cost) - Cost) / Cost, 2),
+         cpaD    = round(-(lag(CPA) - CPA) / CPA, 2),
+         convD   = round(-(lag(LYDC) - LYDC) / LYDC, 2),
+         clicksD = round(-(lag(Clicks) - Clicks) / Clicks, 2),
+         impD    = round(-(lag(Impressions) - Impressions) / Impressions, 2))%>%
+  select(Date, Cost, costD, LYDC, convD, CPA, cpaD, Clicks, clicksD, CTR, ctrD, Impressions, impD) %>%
+  ## replace inf and NaN
+  mutate(convD = ifelse(is.infinite(convD), -1, ifelse(is.nan(convD), 0, convD)), 
+         cpaD  = ifelse(is.infinite(cpaD), -1, ifelse(is.nan(cpaD), 0, cpaD)))
+ )
+
+
+```
+
