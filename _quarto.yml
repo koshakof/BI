@@ -4,6 +4,7 @@ project:
 
 website:
   title: "PLATZKART BI"
+  description: "Система отслеживания результатов ведения проектов"
   navbar:
     left:
       - href: index.qmd
