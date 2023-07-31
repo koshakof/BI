@@ -4,11 +4,6 @@ editor_options:
   chunk_output_type: console
 ---
 
-
 ## Проекты
 
 [МастерСлух](/masterslych.html)
-
-
-
-

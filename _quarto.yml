@@ -1,6 +1,7 @@
 project:
   type: website
   output-dir: docs
+lang: ru
 
 website:
   title: "PLATZKART BI"
@@ -14,16 +15,15 @@ website:
     center: 
       - text: "Reports"
         href: reports.qmd
-      
-
 format:
   html:
-    theme:
-      light: lux
-      dark: cyborg
-    css: styles.css
     toc: true
-    html-math-method: katex
-
-editor: visual
-
+    toc-location: left
+    page-layout: full
+    css: styles.css
+execute:
+  warning: false
+  message: false
+  error: false
+  echo: false
+  output: asis

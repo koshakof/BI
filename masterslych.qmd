@@ -1,25 +1,31 @@
 ---
+lang: ru
 title: "МастерСлух"
-date: "Документ создан: `r format(Sys.time(), '%Y-%m-%d')`"
+date: today
+date-format:  D dddd MMM YYYY
 editor_options: 
   chunk_output_type: console
+
+navbar:
+  left:
+    - href: index.qmd
+      text: "О проекте"
+      
+
 ---
 
 ```{r include = FALSE}
+
 library(ryandexdirect)
 library(clock)
 library(tidyverse)
 library(kableExtra)
 
-
-# set knitr optn
-knitr::opts_template$set(my_knitr_opts = list(message=FALSE, warning=FALSE, cache=TRUE, echo=FALSE))
-
 ```
 
 ## Обзор рекламных кампаний
 
-```{r opts.label = "my_knitr_opts"}
+```{r}
 data_account <- yadirGetReport(ReportType        = "CUSTOM_REPORT",
                                DateRangeType     = "CUSTOM_DATE",
                                DateFrom          = "2023-06-01",
@@ -46,7 +52,7 @@ data_account <- yadirGetReport(ReportType        = "CUSTOM_REPORT",
 ```
 
 
-```{r opts.label = "my_knitr_opts"}
+```{r}
 # подготовим данные к анализу
 ## задаем вектор имен
 mc_names <- c("Calls_F", 
@@ -77,7 +83,7 @@ account <- tibble(cbind(df2_mc, df1_mc))
 
 > Таблица: Метрики по всему аккаунту
 
-```{r opts.label = "my_knitr_opts"}
+```{r}
 account %>% 
   reframe(across(where(is.numeric), sum)) %>% 
   relocate(Cost) %>% 
@@ -91,7 +97,7 @@ account %>%
 
 > Таблица: Метрики в разрезе рекламных кампаний
 
-```{r opts.label = "my_knitr_opts"}
+```{r}
 account %>% 
   reframe(across(where(is.numeric), sum), .by = CampaignName) %>%
   relocate(Cost,.after = CampaignName) %>% 
@@ -106,7 +112,7 @@ account %>%
 
 ## Отчет по целям
 
-```{r opts.label = "my_knitr_opts"}
+```{r}
 data_mc <- yadirGetReport(ReportType        = "CUSTOM_REPORT",
                           DateRangeType     = "CUSTOM_DATE",
                           DateFrom          = "2023-01-01",
@@ -130,7 +136,7 @@ data_mc <- yadirGetReport(ReportType        = "CUSTOM_REPORT",
 
 ```
 
-```{r opts.label = "my_knitr_opts"}
+```{r}
 # подготовим данные к анализу
 ## задаем вектор имен
 mc_names <- c("Calls", "B24", "Forms", "EMails")
@@ -153,7 +159,7 @@ df_mc <- tibble(cbind(df2_mc, df1_mc))
 ```
 
 
-```{r opts.label = "my_knitr_opts"}
+```{r}
 
 # Таблица: Кол-во целей по дням
 master_sluh <- df_mc %>%
@@ -167,7 +173,7 @@ master_sluh <- df_mc %>%
 
 > Таблица: Сводка по аккаунту
 
-```{r opts.label = "my_knitr_opts"}
+```{r}
 # создаем таблицу №2
 master_sluh_total <- master_sluh  %>%
   mutate(Month = clock::date_format(Date, format = "%m-%y")) %>% 
@@ -209,7 +215,7 @@ master_sluh_total %>%
 
 > График: Сумма целей по дням
 
-```{r  opts.label = "my_knitr_opts"}
+```{r}
 ggplot(master_sluh, aes(x = Date, y = Goals))+
   geom_line(color = "gray")+
   geom_point(aes(y = Goals), color = 'white', size = 3)+
@@ -239,7 +245,7 @@ ggplot(master_sluh, aes(x = Date, y = Goals))+
 
 Данные указаны в формате «неделя месяц год».
 
-```{r opts.label = "my_knitr_opts"}
+```{r}
 
 # Группировка данных по месяцам и вычисление суммы значений
 df_mc_sum_week <- df_mc %>%
@@ -269,7 +275,7 @@ ggplot(df_mc_sum_week, aes(x = Week, y = SumGoals, label = SumGoals))+
 ## Отчет по регионам
 
 Примеры таблиц которые могут пригодится
-```{r}
+```{r, include = F, eval = F}
 # сравним периоды ----
 last30_days <- last30_days |> 
   mutate(CampaignId = as.character(CampaignId)) |> 

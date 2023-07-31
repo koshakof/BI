@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "О проекте",
     "section": "",
-    "text": "Сайт создан для онлайн отчетности.\nСодержание:\n\nОбзор рекламных кампаний 1.1. Клики и показы по дням недели 1.2. Клики в системе 6 сигм"
+    "text": "Прототип сайт онлайн отчетности."
   },
   {
     "objectID": "reports.html",
@@ -16,9 +16,9 @@
   {
     "objectID": "masterslych.html",
     "href": "masterslych.html",
-    "title": "МастерСлух",
+    "title": "PLATZKART BI",
     "section": "",
-    "text": "Таблица: Метрики по всему аккаунту\n\n\n\n\nМетрики по всему аккаунту\n\n\nCost\nImpressions\nWeightedImpressions\nClicks\nSessions\nBounces\nGoals_F\nGoals_A\n\n\n\n\n17201.05\n3879\n2717.22\n207\n508\n156\n4\n6\n\n\n\n\n\n\n\n\nТаблица: Метрики в разрезе рекламных кампаний\n\n\n\n\n\n\nCampaignName\nCost\nImpressions\nWeightedImpressions\nClicks\nSessions\nBounces\nGoals_F\nGoals_A\n\n\n\n\n[поиск] Слуховые аппараты. Вендоры. ТГ\n4822.69\n370\n353.55\n61\n160\n47\n2\n2\n\n\n[поиск] Фид. ДО\n4803.17\n620\n618.40\n53\n109\n23\n0\n0\n\n\n[поиск] Бренд. ТГ\n3668.51\n259\n229.46\n45\n114\n37\n2\n4\n\n\n[галерея] Фид. ДО\n2744.93\n2515\n1404.83\n32\n86\n33\n0\n0\n\n\n[поиск] Батарейки. ТГ\n899.27\n76\n73.00\n12\n30\n12\n0\n0\n\n\n[поиск] Слуховые аппараты. ТГ\n262.48\n39\n37.98\n4\n9\n4\n0\n0"
+    "text": "Таблица: Метрики по всему аккаунту\n\n\n\nМетрики по всему аккаунту\n\n\nCost\nImpressions\nWeightedImpressions\nClicks\nSessions\nBounces\nGoals_F\nGoals_A\n\n\n\n\n47072.8\n7816\n5678.99\n505\n1126\n340\n9\n14\n\n\n\n\n\n\n\nТаблица: Метрики в разрезе рекламных кампаний\n\n\n\n\n\nCampaignName\nCost\nImpressions\nWeightedImpressions\nClicks\nSessions\nBounces\nGoals_F\nGoals_A\n\n\n\n\n[поиск] Слуховые аппараты. ТГ\n16660.82\n1156\n1128.49\n158\n336\n93\n3\n2\n\n\n[поиск] Слуховые аппараты. Вендоры. ТГ\n9199.20\n492\n474.25\n99\n235\n57\n4\n5\n\n\n[поиск] Фид. ДО\n7267.42\n991\n981.83\n87\n188\n50\n0\n0\n\n\n[поиск] Бренд. ТГ\n6896.11\n421\n391.36\n74\n172\n62\n2\n7\n\n\n[поиск] Батарейки. ТГ\n3727.58\n201\n203.36\n38\n88\n39\n0\n0\n\n\n[галерея] Фид. ДО\n3321.67\n4555\n2499.70\n49\n107\n39\n0\n0"
   },
   {
     "objectID": "masterslych.html#проба-пера",
@@ -30,16 +30,16 @@
   {
     "objectID": "masterslych.html#отчет-по-целям",
     "href": "masterslych.html#отчет-по-целям",
-    "title": "МастерСлух",
+    "title": "PLATZKART BI",
     "section": "Отчет по целям",
-    "text": "Отчет по целям\n\nТаблица: Сводка по аккаунту\n\n\n\n\n\n\n\n06-23\n07-23\n\n\n\n\nРабочих дней РК\n4.00\n13.00\n\n\nИтого расход, руб\n2056.00\n15147.00\n\n\nИтого переходов\n32.00\n175.00\n\n\nСредняя цена перехода, руб\n64.25\n86.55\n\n\nИтого обращений\n3.00\n3.00\n\n\nЦена обращения, руб\n685.33\n5049.00\n\n\nОбращений в день\n0.75\n0.23\n\n\nКонверсия, %\n9.38\n1.71\n\n\nЗвонки\n2.00\n1.00\n\n\nForms\n0.00\n1.00\n\n\nB24\n0.00\n1.00\n\n\nEMails\n1.00\n0.00\n\n\n\n\n\n\n\n\nГрафик: Сумма целей по дням\n\n\n\n\n\n\n\nГрафик: Сравнение периодов\n\nДанные указаны в формате «неделя месяц год»."
+    "text": "Отчет по целям\n\nТаблица: Сводка по аккаунту\n\n\n\n\n\n\n06-23\n07-23\n\n\n\n\nРабочих дней РК\n4.00\n30.00\n\n\nИтого расход, руб\n2056.00\n45017.00\n\n\nИтого переходов\n32.00\n473.00\n\n\nСредняя цена перехода, руб\n64.25\n95.17\n\n\nИтого обращений\n3.00\n11.00\n\n\nЦена обращения, руб\n685.33\n4092.45\n\n\nОбращений в день\n0.75\n0.37\n\n\nКонверсия, %\n9.38\n2.33\n\n\nЗвонки\n2.00\n4.00\n\n\nForms\n0.00\n2.00\n\n\nB24\n0.00\n4.00\n\n\nEMails\n1.00\n1.00\n\n\n\n\n\n\n\nГрафик: Сумма целей по дням\n\n\n\nГрафик: Сравнение периодов\n\nДанные указаны в формате «неделя месяц год»."
   },
   {
     "objectID": "masterslych.html#отчет-по-регионам",
     "href": "masterslych.html#отчет-по-регионам",
-    "title": "МастерСлух",
+    "title": "PLATZKART BI",
     "section": "Отчет по регионам",
-    "text": "Отчет по регионам"
+    "text": "Отчет по регионам\nПримеры таблиц которые могут пригодится"
   },
   {
     "objectID": "sniny_page.html",
@@ -86,8 +86,8 @@
   {
     "objectID": "masterslych.html#обзор-рекламных-кампаний",
     "href": "masterslych.html#обзор-рекламных-кампаний",
-    "title": "МастерСлух",
+    "title": "PLATZKART BI",
     "section": "",
-    "text": "Таблица: Метрики по всему аккаунту\n\n\n\n\nМетрики по всему аккаунту\n\n\nCost\nImpressions\nWeightedImpressions\nClicks\nSessions\nBounces\nGoals_F\nGoals_A\n\n\n\n\n17201.05\n3879\n2717.22\n207\n508\n156\n4\n6\n\n\n\n\n\n\n\n\nТаблица: Метрики в разрезе рекламных кампаний\n\n\n\n\n\n\nCampaignName\nCost\nImpressions\nWeightedImpressions\nClicks\nSessions\nBounces\nGoals_F\nGoals_A\n\n\n\n\n[поиск] Слуховые аппараты. Вендоры. ТГ\n4822.69\n370\n353.55\n61\n160\n47\n2\n2\n\n\n[поиск] Фид. ДО\n4803.17\n620\n618.40\n53\n109\n23\n0\n0\n\n\n[поиск] Бренд. ТГ\n3668.51\n259\n229.46\n45\n114\n37\n2\n4\n\n\n[галерея] Фид. ДО\n2744.93\n2515\n1404.83\n32\n86\n33\n0\n0\n\n\n[поиск] Батарейки. ТГ\n899.27\n76\n73.00\n12\n30\n12\n0\n0\n\n\n[поиск] Слуховые аппараты. ТГ\n262.48\n39\n37.98\n4\n9\n4\n0\n0"
+    "text": "Таблица: Метрики по всему аккаунту\n\n\n\nМетрики по всему аккаунту\n\n\nCost\nImpressions\nWeightedImpressions\nClicks\nSessions\nBounces\nGoals_F\nGoals_A\n\n\n\n\n47072.8\n7816\n5678.99\n505\n1126\n340\n9\n14\n\n\n\n\n\n\n\nТаблица: Метрики в разрезе рекламных кампаний\n\n\n\n\n\nCampaignName\nCost\nImpressions\nWeightedImpressions\nClicks\nSessions\nBounces\nGoals_F\nGoals_A\n\n\n\n\n[поиск] Слуховые аппараты. ТГ\n16660.82\n1156\n1128.49\n158\n336\n93\n3\n2\n\n\n[поиск] Слуховые аппараты. Вендоры. ТГ\n9199.20\n492\n474.25\n99\n235\n57\n4\n5\n\n\n[поиск] Фид. ДО\n7267.42\n991\n981.83\n87\n188\n50\n0\n0\n\n\n[поиск] Бренд. ТГ\n6896.11\n421\n391.36\n74\n172\n62\n2\n7\n\n\n[поиск] Батарейки. ТГ\n3727.58\n201\n203.36\n38\n88\n39\n0\n0\n\n\n[галерея] Фид. ДО\n3321.67\n4555\n2499.70\n49\n107\n39\n0\n0"
   }
 ]
