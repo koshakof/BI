@@ -21,9 +21,4 @@ format:
     toc-location: left
     page-layout: full
     css: styles.css
-execute:
-  warning: false
-  message: false
-  error: false
-  echo: false
-  output: asis
+
