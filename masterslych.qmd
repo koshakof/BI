@@ -5,10 +5,6 @@ date: today
 date-format:  D dddd MMM YYYY
 editor_options: 
   chunk_output_type: console
-navbar:
-  left:
-    - href: index.qmd
-      text: "О проекте"
 execute:
   warning: false
   message: false
