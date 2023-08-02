@@ -16,5 +16,14 @@
   },
   "shiny.qmd": {
     "shiny.html": "e927d99d"
+  },
+  "reports/mc/masterslych.qmd": {
+    "masterslych.html": "0fe08662"
+  },
+  "reports/pator/pator_bi.qmd": {
+    "pator_bi.html": "669feef6"
+  },
+  "reports/reports.qmd": {
+    "reports.html": "07e0621c"
   }
 }

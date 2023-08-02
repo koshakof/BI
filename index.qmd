@@ -1,10 +1,15 @@
 ---
-title: "О проекте"
+title: "PLATZKART BI"
 
 editor_options: 
   chunk_output_type: console
 ---
 
 Прототип сайт онлайн отчетности.
+
+
+Термин и определения.
+
+Модели атрибуции
 
 

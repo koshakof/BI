@@ -1,0 +1,10 @@
+---
+title: "Отчеты"
+editor_options: 
+  chunk_output_type: console
+---
+
+## Проекты
+
+* [МастерСлух](/reports/mc/masterslych.html)
+* [ПАТОР](/reports/pator/pator_bi.qmd)

@@ -1,7 +1,11 @@
+lang: ru
+
 project:
   type: website
   output-dir: docs
-lang: ru
+  render:
+    - "*.qmd"
+
 
 website:
   title: "PLATZKART BI"
@@ -10,11 +14,8 @@ website:
     left:
       - href: index.qmd
         text: "О проекте"
-      - reports.qmd
-  page-footer:
-    center: 
-      - text: "Reports"
-        href: reports.qmd
+      - reports/reports.qmd
+
 format:
   html:
     self-contained: true
