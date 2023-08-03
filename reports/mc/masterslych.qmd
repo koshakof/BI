@@ -9,7 +9,6 @@ execute:
   message: false
   error: false
   echo: false
-  output: asis
 ---
 
 ```{r}
@@ -719,10 +718,9 @@ camp_month %>%
 
 camp_groups <- account %>% 
   reframe(round(across(where(is.numeric), sum)), 
-          .by = c(CampaignName, AdGroupName, AdNetworkType)) %>%
+          .by = c(CampaignName, AdGroupName)) %>%
   mutate(Campaign  = CampaignName,
          Group     = AdGroupName,
-         NetType   = AdNetworkType,
          Cost      = round(Cost),
          wImp      = round(WeightedImpressions),
          `BR,%`    = if_else(Bounces == 0| Sessions == 0, 0, 
@@ -739,8 +737,7 @@ camp_groups <- account %>%
                                  round(GoalsFC/ Clicks * 100, 2)),
          `crLC,%`  = if_else(Clicks == 0| GoalsLC == 0, 0,
                              round(GoalsLC / Clicks * 100, 2))) %>% 
-  select(NetType,
-         Campaign,
+  select(Campaign,
          Group,
          Cost,
          GoalsFC,
@@ -757,7 +754,7 @@ camp_groups <- account %>%
   arrange(Campaign, desc(Cost))
 
 # задаем стиль выбранных колонок
-camp_groups[, c(4,5,6)] <- lapply(camp_groups[, c(4,5,6)], 
+camp_groups[, c(3,4,5)] <- lapply(camp_groups[, c(3,4,5)], 
                                  function(x) {
                                    cell_spec(x, 
                                              color = "black", 
@@ -787,10 +784,247 @@ camp_groups %>%
   row_spec(1:length(camp_groups$Campaign),
            align = "r",
            font_size = 14) %>%
-  column_spec(c(3, 6),
+  column_spec(c(2, 5),
               border_right = T) %>% 
   scroll_box(height = "500px",
              fixed_thead = T)
+
+
+```
+
+
+### Кампании 30 дней
+
+```{r}
+
+camp_30 <- account %>% 
+  filter(Date >= Sys.Date()-31) %>% 
+  reframe(round(across(where(is.numeric), sum)), 
+          .by = CampaignName) %>%
+  mutate(Campaign  = CampaignName,
+         Cost      = round(Cost),
+         wImp      = round(WeightedImpressions),
+         `BR,%`    = if_else(Bounces == 0| Sessions == 0, 0, 
+                              round(Bounces / Sessions * 100)),
+         `wCTR,%`  = if_else(Clicks == 0| WeightedImpressions == 0, 0, 
+                                 round(Clicks / WeightedImpressions * 100, 2)),
+         `cpaFC,₽` = if_else(Cost == 0| GoalsFC == 0, 0,
+                                 round(Cost / GoalsFC)),
+         `cpaLC,₽` = if_else(Cost == 0| GoalsLC == 0, 0,
+                                 round(Cost / GoalsLC)),
+         `CPC,₽`   = if_else(Cost == 0| Clicks == 0, 0,
+                                 round(Cost / Clicks)),
+         `crFC,%`  = if_else(Clicks == 0| GoalsFC == 0, 0,
+                                 round(GoalsFC/ Clicks * 100, 2)),
+         `crLC,%`  = if_else(Clicks == 0| GoalsLC == 0, 0,
+                             round(GoalsLC / Clicks * 100, 2))) %>% 
+  select(Campaign,
+         Cost,
+         GoalsFC,
+         GoalsLC,
+         `cpaFC,₽`,
+         `cpaLC,₽`,
+         `crFC,%`,
+         `crLC,%`,
+         wImp,
+         Clicks,
+         `CPC,₽`,
+         `wCTR,%`,
+         `BR,%`) %>% 
+  arrange(desc(Cost))
+
+# задаем стиль выбранных колонок
+camp_30[, c(2,3,4)] <- lapply(camp_30[, c(2,3,4)], 
+                                 function(x) {
+                                   cell_spec(x, 
+                                             color = "black", 
+                                             bold = F,
+                                             background = spec_color(x, 
+                                                                     end = 0.9, 
+                                                                     option = "C", 
+                                                                     direction = -1,
+                                                                     alpha = 0.4))
+                                   })
+
+camp_30 %>% 
+  kbl(format = "html",
+      caption = "Таблица: Сводка по РК за последние 30 дней", 
+      escape = F) %>% 
+  kable_paper() %>% 
+  kable_styling(bootstrap_options = c("hover", "condensed", "responsive"),
+                full_width = F) %>% 
+  row_spec(0, 
+           background = "#DBB9FA", 
+           color = "#5A5A5A",
+           align = "r") %>%
+  row_spec(1:length(camp_30$Campaign),
+           align = "r") %>%
+  column_spec(c(1,4),
+              border_right = T)
+
+```
+
+
+### Группы 30 дней
+
+```{r}
+
+groups_30 <- account %>% 
+  filter(Date >= Sys.Date()-31) %>%
+  reframe(round(across(where(is.numeric), sum)), 
+          .by = c(CampaignName, AdGroupName)) %>%
+  mutate(Campaign  = CampaignName,
+         Group     = AdGroupName,
+         Cost      = round(Cost),
+         wImp      = round(WeightedImpressions),
+         `BR,%`    = if_else(Bounces == 0| Sessions == 0, 0, 
+                              round(Bounces / Sessions * 100)),
+         `wCTR,%`  = if_else(Clicks == 0| WeightedImpressions == 0, 0, 
+                                 round(Clicks / WeightedImpressions * 100, 2)),
+         `cpaFC,₽` = if_else(Cost == 0| GoalsFC == 0, 0,
+                                 round(Cost / GoalsFC)),
+         `cpaLC,₽` = if_else(Cost == 0| GoalsLC == 0, 0,
+                                 round(Cost / GoalsLC)),
+         `CPC,₽`   = if_else(Cost == 0| Clicks == 0, 0,
+                                 round(Cost / Clicks)),
+         `crFC,%`  = if_else(Clicks == 0| GoalsFC == 0, 0,
+                                 round(GoalsFC/ Clicks * 100, 2)),
+         `crLC,%`  = if_else(Clicks == 0| GoalsLC == 0, 0,
+                             round(GoalsLC / Clicks * 100, 2))) %>% 
+  select(Campaign,
+         Group,
+         Cost,
+         GoalsFC,
+         GoalsLC,
+         `cpaFC,₽`,
+         `cpaLC,₽`,
+         `crFC,%`,
+         `crLC,%`,
+         wImp,
+         Clicks,
+         `CPC,₽`,
+         `wCTR,%`,
+         `BR,%`) %>% 
+  arrange(Campaign, desc(Cost)) %>% 
+  filter(Cost > 0)
+
+# задаем стиль выбранных колонок
+groups_30[, c(3,4,5)] <- lapply(groups_30[, c(3,4,5)], 
+                                 function(x) {
+                                   cell_spec(x, 
+                                             color = "black", 
+                                             bold = F,
+                                             background = spec_color(x, 
+                                                                     end = 0.9, 
+                                                                     option = "C", 
+                                                                     direction = -1,
+                                                                     alpha = 0.4))
+                                   })
+
+
+groups_30 %>% 
+  kbl(format = "html",
+      caption = "Метрики по группам за последние 30 дней и затратами больше 0",
+      escape = F) %>% 
+  kable_paper() %>% 
+  kable_styling(bootstrap_options = c("hover", 
+                                      "condensed", 
+                                      "responsive"),
+                full_width = F, 
+                fixed_thead = T) %>% 
+  row_spec(0, 
+           background = "#DBB9FA", 
+           color = "#5A5A5A",
+           font_size = 16) %>% 
+  row_spec(1:length(groups_30$Campaign),
+           align = "r",
+           font_size = 14) %>%
+  column_spec(c(2, 5),
+              border_right = T) %>% 
+  scroll_box(height = "500px",
+             fixed_thead = T)
+
+
+```
+
+
+### Группы 7 дней
+
+```{r}
+
+groups_7 <- account %>% 
+  filter(Date >= Sys.Date()-8) %>%
+  reframe(round(across(where(is.numeric), sum)), 
+          .by = c(CampaignName, AdGroupName)) %>%
+  mutate(Campaign  = CampaignName,
+         Group     = AdGroupName,
+         Cost      = round(Cost),
+         wImp      = round(WeightedImpressions),
+         `BR,%`    = if_else(Bounces == 0| Sessions == 0, 0, 
+                              round(Bounces / Sessions * 100)),
+         `wCTR,%`  = if_else(Clicks == 0| WeightedImpressions == 0, 0, 
+                                 round(Clicks / WeightedImpressions * 100, 2)),
+         `cpaFC,₽` = if_else(Cost == 0| GoalsFC == 0, 0,
+                                 round(Cost / GoalsFC)),
+         `cpaLC,₽` = if_else(Cost == 0| GoalsLC == 0, 0,
+                                 round(Cost / GoalsLC)),
+         `CPC,₽`   = if_else(Cost == 0| Clicks == 0, 0,
+                                 round(Cost / Clicks)),
+         `crFC,%`  = if_else(Clicks == 0| GoalsFC == 0, 0,
+                                 round(GoalsFC/ Clicks * 100, 2)),
+         `crLC,%`  = if_else(Clicks == 0| GoalsLC == 0, 0,
+                             round(GoalsLC / Clicks * 100, 2))) %>% 
+  select(Campaign,
+         Group,
+         Cost,
+         GoalsFC,
+         GoalsLC,
+         `cpaFC,₽`,
+         `cpaLC,₽`,
+         `crFC,%`,
+         `crLC,%`,
+         wImp,
+         Clicks,
+         `CPC,₽`,
+         `wCTR,%`,
+         `BR,%`) %>% 
+  arrange(Campaign, desc(Cost)) %>% 
+  filter(Cost > 0)
+
+# задаем стиль выбранных колонок
+groups_7[, c(3,4,5)] <- lapply(groups_7[, c(3,4,5)], 
+                                 function(x) {
+                                   cell_spec(x, 
+                                             color = "black", 
+                                             bold = F,
+                                             background = spec_color(x, 
+                                                                     end = 0.9, 
+                                                                     option = "C", 
+                                                                     direction = -1,
+                                                                     alpha = 0.4))
+                                   })
+
+
+groups_7 %>% 
+  kbl(format = "html",
+      caption = "Метрики по группам за последние 7 дней и затратами больше 0",
+      escape = F) %>% 
+  kable_paper() %>% 
+  kable_styling(bootstrap_options = c("hover", 
+                                      "condensed", 
+                                      "responsive"),
+                full_width = F, 
+                fixed_thead = T) %>% 
+  row_spec(0, 
+           background = "#DBB9FA", 
+           color = "#5A5A5A",
+           font_size = 16) %>% 
+  row_spec(1:length(groups_7$Campaign),
+           align = "r",
+           font_size = 14) %>%
+  column_spec(c(2, 5),
+              border_right = T) %>% 
+  scroll_box(height = "500px")
 
 
 ```
@@ -816,6 +1050,7 @@ ads_raw_data <- yadirGetReport(ReportType        = "CUSTOM_REPORT",
                                                      "AdNetworkType",
                                                      "CampaignName",
                                                      "AdFormat",
+                                                     "AdId",
                                                      "Slot",
                                                      "WeightedImpressions",
                                                      "Clicks",
@@ -870,9 +1105,9 @@ mc_names <- c("Calls_F",
 
 ## обработаем данные по целям
 ads <- ads_raw_data %>%
-  mutate(across(c(11:ncol(.)), ~ ifelse(. == "--", 0, .)),
-         across(c(11:ncol(.)), as.numeric)) %>%
-  rename_at(vars(11:ncol(.)), ~ mc_names) %>%
+  mutate(across(c(12:ncol(.)), ~ ifelse(. == "--", 0, .)),
+         across(c(12:ncol(.)), as.numeric)) %>%
+  rename_at(vars(12:ncol(.)), ~ mc_names) %>%
   mutate(GoalsFC = rowSums(across(ends_with("_F"), ~abs(.x))),
          GoalsLC = rowSums(across(ends_with("_A"), ~abs(.x))))
 
@@ -1134,43 +1369,225 @@ slots %>%
 
 ```
 
+
+### Объявления
+
+```{r, include = FALSE, eval = FALSE}
+# запрос текстов объявлений
+## запрос запущенных ТГ кампаний
+mc_camp <- yadirGetCampaign(AgencyAccount     = "platzkart.ru-e2",
+                             Login             = "e-17332282",
+                             TokenPath         = "direct_token",
+                             States            = "ON")
+
+
+# запрос данных по объявлениям
+mc_ads_raw <- yadirGetAds(CampaignIds   = mc_camp$Id,
+                          AgencyAccount = "platzkart.ru-e2",
+                          Login         = "e-17332282",
+                          TokenPath     = "direct_token",
+                          States        = "ON") 
+
+# формируем таблицу 
+mc_ads <- mc_ads_raw %>%
+  mutate(Id = as.character(Id),
+         TextAdHref = str_replace_all(.$TextAdHref,
+                                      '(\\?.*)',
+                                      '')) %>% 
+  select(Id,
+         TextAdTitle, 
+         TextAdTitle2, 
+         TextAdText, 
+         TextAdHref)
+```
+
+
+```{r temp5, include = FALSE, eval = FALSE}
+
+# временный код для сокращения времени рендера
+vroom::vroom_write(x      = mc_ads, 
+                   file   = "~/GitHub/BI/data/mc_ads.txt", 
+                   delim  = ",",
+                   append = FALSE)
+
+```
+
+
+```{r temp6}
+
+# загрузка данных
+mc_ads <- vroom::vroom(file = "~/GitHub/BI/data/mc_ads.txt") %>% 
+  mutate(Id = as.character(Id))
+
+```
+
+
+```{r}
+
+ads_jouin <- full_join(ads, mc_ads, by = c(AdId = "Id"))
+
+ads_df <- ads_jouin %>% 
+  reframe(round(across(where(is.numeric), sum)), 
+          .by = c(CampaignName, 
+                  AdId,
+                  TextAdTitle,
+                  TextAdTitle2,
+                  TextAdText,
+                  TextAdHref)) %>%
+  filter(Clicks > 29) %>% 
+  mutate(Cost      = round(Cost),
+         wImp      = round(WeightedImpressions),
+         `BR,%`    = if_else(Bounces == 0| Sessions == 0, 0, 
+                              round(Bounces / Sessions * 100)),
+         `wCTR,%`  = if_else(Clicks == 0| WeightedImpressions == 0, 0, 
+                                 round(Clicks / WeightedImpressions * 100, 2)),
+         `cpaFC,₽` = if_else(Cost == 0| GoalsFC == 0, 0,
+                                 round(Cost / GoalsFC)),
+         `cpaLC,₽` = if_else(Cost == 0| GoalsLC == 0, 0,
+                                 round(Cost / GoalsLC)),
+         `CPC,₽`   = if_else(Cost == 0| Clicks == 0, 0,
+                                 round(Cost / Clicks)),
+         `crFC,%`  = if_else(Clicks == 0| GoalsFC == 0, 0,
+                                 round(GoalsFC/ Clicks * 100, 2)),
+         `crLC,%`  = if_else(Clicks == 0| GoalsLC == 0, 0,
+                             round(GoalsLC / Clicks * 100, 2))) %>% 
+  select(CampaignName, 
+         AdId,
+         TextAdTitle,
+         TextAdTitle2,
+         TextAdText,
+         TextAdHref,
+         Cost,
+         GoalsFC,
+         GoalsLC,
+         `cpaFC,₽`,
+         `cpaLC,₽`,
+         `crFC,%`,
+         `crLC,%`,
+         wImp,
+         Clicks,
+         `CPC,₽`,
+         `wCTR,%`,
+         `BR,%`) %>% 
+  arrange(desc(Cost))
+
+ads_df %>% 
+  kbl(format = "html", 
+      caption = "Метрики объявлений у которых больше 29 кликов", 
+      escape = F) %>% 
+  kable_paper() %>% 
+  kable_styling(bootstrap_options = c("hover", "condensed", "responsive"), 
+                fixed_thead = TRUE) %>% 
+  row_spec(0, 
+           background = "#DBB9FA", 
+           color = "#5A5A5A", 
+           font_size = 16) %>% 
+  row_spec(1:length(slots$ads_df),
+           align = "r",
+           font_size = 14) %>%
+  column_spec(c(3, 6),
+              border_right = T) %>%
+  scroll_box(height = "500px", 
+             fixed_thead = T)
+
+
+```
+
+
+
+
+### Тип клика
+
+По какой части объявления кликнул пользователь:
+
+- TITLE — заголовок объявления. Клик по отображаемой ссылке считается кликом по заголовку.
+- SITELINK1, SITELINK2, ..., SITELINK8 — быстрые ссылки.
+- VCARD — визитка.
+- CHAT — чат с оператором.
+- PHONE — номер телефона.
+- MOBILE_APP_ICON — иконка приложения (для рекламы мобильных приложений).
+- BUTTON — кнопка загрузки/установки (для рекламы мобильных приложений).
+- PRODUCT_EXTENSIONS — товарные дополнения.
+- MARKET — Маркет.
+- UNKNOWN.
+
+::: {.callout-caution}
+## Примечание
+
+Для графических объявлений, смарт-баннеров, медийных баннеров и баннеров на поиске любой клик по объявлению считается кликом по заголовку.
+:::
+
+
+```{r, include = FALSE, eval = FALSE}
+
+# запрос данных по типу клика
+click_type_raw <- yadirGetReport(ReportType        = "CUSTOM_REPORT",
+                                 DateRangeType     = "CUSTOM_DATE",
+                                 DateFrom          = "2023-06-01",
+                                 DateTo            = Sys.Date() - 1,
+                                 FieldNames        = c("AdId",
+                                                       "ClickType"),
+                                 IncludeVAT        = "NO",
+                                 IncludeDiscount   = "NO",
+                                 AgencyAccount     = "platzkart.ru-e2",
+                                 Login             = "e-17332282",
+                                 TokenPath         = "direct_token")
+
+```
+
+
+```{r temp7, include = FALSE, eval = FALSE}
+
+# временный код для сокращения времени рендера
+vroom::vroom_write(x      = click_type_raw, 
+                   file   = "~/GitHub/BI/data/mc_click_type_raw.txt", 
+                   delim  = ",",
+                   append = FALSE)
+
+```
+
+
+```{r temp8}
+
+# загрузка данных
+click_type_raw <- vroom::vroom(file = "~/GitHub/BI/data/mc_click_type_raw.txt")
+
+```
+
+
+```{r}
+
+# сводка по типам кликов
+click_type_raw %>% 
+  count(ClickType) %>%
+  filter(!ClickType %in% "UNKNOWN") %>% 
+  mutate(ClickType = fct_reorder(ClickType, -n)) %>% 
+  ggplot(aes(x = ClickType, y = n, fill = ClickType))+
+  geom_col()+
+  theme_minimal()+
+  labs(title = "График: Кол-во кликов по элементам объявления",
+       x     = "Тип клика",
+       y     = "Кол-во кликов")+
+  theme(title = element_text(size = 12, color = "gray50"),
+        legend.position = "null",
+        axis.title      = element_text(size = 10, color = "gray40"),
+        axis.title.x    = element_text(hjust = 0.1),
+        axis.text       = element_text(size = 10, color = "gray40"),
+        axis.text.x     = element_text(angle = 90),
+        panel.grid      = element_blank())
+
+```
+
+
 ::::
 
 
 
 
-```{r, include = F, eval = F}
-
-# Примеры таблиц которые могут пригодится
-# сравним периоды
-
-last30_days <- last30_days |> 
-  mutate(CampaignId = as.character(CampaignId)) |> 
-  add_row(CampaignId = 'Последние 30 дней', .before = 1)
-
-last7_days <- last7_days |> 
-  mutate(CampaignId = as.character(CampaignId)) |> 
-  add_row(CampaignId = 'Последние 7 дней', .before = 1)
-
-periods <- bind_rows(last30_days, last7_days)
 
 
-(daysDif <- df %>%
-  summarise(round(across(where(is.numeric), sum)), 0, .by = Date) %>%
-  mutate(CTR     = round(Clicks / Impressions * 100, 2),
-         CPA     = round(ifelse(Cost == 0 | LYDC == 0, 0, Cost / LYDC)),
-         ctrD    = round(-(lag(CTR) - CTR) / CTR, 2),
-         costD   = round(-(lag(Cost) - Cost) / Cost, 2),
-         cpaD    = round(-(lag(CPA) - CPA) / CPA, 2),
-         convD   = round(-(lag(LYDC) - LYDC) / LYDC, 2),
-         clicksD = round(-(lag(Clicks) - Clicks) / Clicks, 2),
-         impD    = round(-(lag(Impressions) - Impressions) / Impressions, 2))%>%
-  select(Date, Cost, costD, LYDC, convD, CPA, cpaD, Clicks, clicksD, CTR, ctrD, Impressions, impD) %>%
-  ## replace inf and NaN
-  mutate(convD = ifelse(is.infinite(convD), -1, ifelse(is.nan(convD), 0, convD)), 
-         cpaD  = ifelse(is.infinite(cpaD), -1, ifelse(is.nan(cpaD), 0, cpaD)))
- )
 
 
-```
+
+
 

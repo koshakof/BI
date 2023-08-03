@@ -5,6 +5,7 @@ project:
   output-dir: docs
   render:
     - "*.qmd"
+    - "!reports/pator/"
 
 
 website:
