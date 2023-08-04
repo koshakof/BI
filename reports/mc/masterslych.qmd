@@ -9,6 +9,8 @@ execute:
   message: false
   error: false
   echo: false
+  output: asis
+
 ---
 
 ```{r}
@@ -20,11 +22,12 @@ library(scales)
 library(kableExtra)
 library(ggrepel)
 library(reactable)
+library(DT)
 
 ```
 
 
-```{r, include = F, eval = F}
+```{r get data, include = F, eval = F}
 
 # запрос данных Директ API
 acc_raw_data <- yadirGetReport(ReportType        = "CUSTOM_REPORT",
@@ -146,6 +149,9 @@ account %>%
                 fixed_thead = TRUE) %>% 
   row_spec(0, background = "#DBB9FA", color = "#5A5A5A")
 
+
+
+
 ```
 
 
@@ -262,19 +268,28 @@ acc_month[, c(3,4,5)] <- lapply(acc_month[, c(3,4,5)],
                                                                      alpha = 0.4))
                                  })
 
-# выводим как html
-acc_month %>% 
-  kbl(format = "html",
-      escape = FALSE,
-      caption = "Таблица: Сводка по месяцам", 
-      align = "c") %>% 
-  kable_paper() %>% 
-  kable_styling(bootstrap_options = c("hover", "condensed", "responsive")) %>% 
-  column_spec(c(2,5), 
-              border_right = TRUE) %>% 
-  row_spec(0, 
-           background = "#DBB9FA", 
-           color = "#5A5A5A")
+# создаем таблицу с помощью библиотеке DT
+DT::datatable(acc_month,
+              extensions = c('Buttons',
+                             'ColReorder',
+                             'FixedHeader'),
+              escape  = FALSE,
+              class   = 'display compact nowrap',
+              caption = htmltools::tags$caption(style = 'caption-side: top; text-align: left; color: gray;',
+                                                htmltools::h4('Таблица: Данные по месяцам')),
+              options = list(columnDefs = list(list(className = 'dt-right', 
+                                                    targets = 3:5)),
+                             pageLength  = 10,
+                             dom         = "Btpli",
+                             language    = list(url = '//cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json'),
+                             buttons     = c('csv', 'excel', 'pdf'),
+                             colReorder  = TRUE,
+                             fixedHeader = TRUE)) %>%
+  formatStyle('Clicks',
+              background         = styleColorBar(acc_month$Clicks, '#C4D8F3'),
+              backgroundSize     = '100% 90%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'center' )
 
 ```
 
@@ -401,6 +416,7 @@ account %>%
               linetype   = "dashed",
               linewidth  = 0.1)+
   geom_vline(xintercept = as.Date("2023-07-24"), linetype = 2, color = "red")+
+  geom_vline(xintercept = as.Date("2023-07-31"), linetype = 2, color = "red")+
   scale_color_manual(values = c("#00E5FF","#fc4526","#FF80FF"))+
   scale_x_date(date_breaks = "day", date_labels = "%d")+
   scale_y_log10() +
@@ -413,15 +429,25 @@ account %>%
         axis.text  = element_text(size = 10, color = "gray40"),
         panel.grid = element_blank())+
   geom_label_repel(aes(x = as.Date("2023-07-24"), y = 0,
-                label = "24 Июль. \n Вкл стратегия по конверсиям"),
+                label = "24 Июль. \n Вкл «Макс. конверсий"),
             stat = "unique",
-            size = 3, 
+            size = 2.5, 
             color = "gray20",
             fill = "#FF80FF",
-            arrow = arrow(unit(0.02, "npc")),
-            box.padding = 5, 
+            arrow = arrow(unit(0, "npc")),
+            box.padding = 3, 
             label.padding = 0.5, 
-            direction = "x")
+            direction = "y")+
+  geom_label_repel(aes(x = as.Date("2023-07-31"), y = 0,
+                label = "24 Июль. \n Вкл «Макс. кликов"),
+            stat = "unique",
+            size = 2.5, 
+            color = "gray20",
+            fill = "#FF80FF",
+            #arrow = arrow(unit(0, "npc")),
+            box.padding = 3, 
+            label.padding = 0.5, 
+            direction = "y")
 
 ```
 
@@ -453,15 +479,7 @@ account %>%
         legend.text = element_text(size = 10, color = "gray50"),
         axis.title = element_text(size = 10, color = "gray40"),
         axis.text  = element_text(size = 10, color = "gray40"),
-        panel.grid = element_blank())+
-  geom_label_repel(aes(x = as.Date("2023-07-24"), y = 0,
-                label = "24 Июль. \n Вкл стратегия по конверсиям"),
-            stat = "unique",
-            size = 3, 
-            color = "gray20",
-            fill = "#FF80FF",
-            arrow = arrow(unit(0.02, "npc")),
-            box.padding = 2)
+        panel.grid = element_blank())
 
 ```
 
@@ -617,21 +635,34 @@ camps[, c(3,4,5)] <- lapply(camps[, c(3,4,5)],
                                                                      alpha = 0.4))
                                    })
 
-camps %>% 
-  kbl(format = "html",
-      caption = "Таблица: Сводка по РК за весь период", 
-      escape = F) %>% 
-  kable_paper() %>% 
-  kable_styling(bootstrap_options = c("hover", "condensed", "responsive"),
-                full_width = F) %>% 
-  row_spec(0, 
-           background = "#DBB9FA", 
-           color = "#5A5A5A",
-           align = "r") %>%
-  row_spec(1:length(camps$CampaignType),
-           align = "r") %>%
-  column_spec(c(2,5),
-              border_right = T)
+# создаем таблицу с помощью библиотеке DT
+DT::datatable(camps,
+              extensions = c('Buttons',
+                             'ColReorder',
+                             'FixedHeader',
+                             'RowGroup'),
+              escape  = FALSE,
+              class   = 'display compact nowrap',
+              caption = htmltools::tags$caption(style = 'caption-side: top; text-align: left; color: gray;',
+                                                htmltools::h4('Таблица: Срез по рекламной кампании')),
+              options = list(columnDefs = list(list(className = 'dt-right', 
+                                                    targets = 3:5)),
+                             pageLength = 10,
+                             dom        = "Btpli",
+                             language   = list(url = '//cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json'),
+                             buttons    = c('csv', 'excel', 'pdf'),
+                             colReorder = TRUE,
+                             fixedHeader = TRUE)) %>%
+  formatStyle(columns            = 'Clicks',
+              background         = styleColorBar(camps$Clicks, '#C4D8F3'),
+              backgroundSize     = '100% 90%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'center' ) %>% 
+  formatStyle(columns            = 'wImp',
+              background         = styleColorBar(camps$wImp, '#C4D8F3'),
+              backgroundSize     = '100% 90%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'center' )
 
 ```
 
@@ -693,29 +724,43 @@ camp_month[, c(4,5,6)] <- lapply(camp_month[, c(4,5,6)],
                                                                      alpha = 0.4))
                                    })
 
-camp_month %>% 
-  kbl(format = "html",
-      caption = "Таблица: Сводка по РК в разрезе месяцев", 
-      escape = F) %>% 
-  kable_paper() %>% 
-  kable_styling(bootstrap_options = c("hover", "condensed", "responsive"),
-                full_width = F) %>% 
-  row_spec(0, 
-           background = "#DBB9FA", 
-           color = "#5A5A5A",
-           align = "r") %>%
-  row_spec(1:length(camp_month$Month),
-           align = "r") %>%
-  column_spec(c(3,6),
-              border_right = T)
+# создаем таблицу с помощью библиотеке DT
+DT::datatable(camp_month,
+              extensions = c('Buttons',
+                             'ColReorder',
+                             'FixedHeader',
+                             'RowGroup'),
+              escape  = FALSE,
+              class   = 'display compact nowrap',
+              caption = htmltools::tags$caption(style = 'caption-side: top; text-align: left; color: gray;',
+                                                htmltools::h4('Таблица: Срез по рекламной кампании')),
+              options = list(columnDefs = list(list(className = 'dt-right', targets = 4:6),
+                                               list(className = 'dt-center', targets = 2)),
+                             pageLength = 10,
+                             dom        = "Btpli",
+                             language   = list(url = '//cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json'),
+                             buttons    = c('csv', 'excel', 'pdf'),
+                             colReorder = TRUE,
+                             fixedHeader = TRUE)) %>%
+  formatStyle(columns            = 'Clicks',
+              background         = styleColorBar(camp_month$Clicks, '#C4D8F3'),
+              backgroundSize     = '100% 90%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'center' ) %>% 
+  formatStyle(columns            = 'wImp',
+              background         = styleColorBar(camp_month$wImp, '#C4D8F3'),
+              backgroundSize     = '100% 90%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'center' )
 
 ```
+
 
 
 ### Группы
 
 ```{r}
-
+# создаем таблицу
 camp_groups <- account %>% 
   reframe(round(across(where(is.numeric), sum)), 
           .by = c(CampaignName, AdGroupName)) %>%
@@ -753,7 +798,7 @@ camp_groups <- account %>%
          `BR,%`) %>% 
   arrange(Campaign, desc(Cost))
 
-# задаем стиль выбранных колонок
+# задаем стиль выбранных колонок с помощью библиотеки kableExtra
 camp_groups[, c(3,4,5)] <- lapply(camp_groups[, c(3,4,5)], 
                                  function(x) {
                                    cell_spec(x, 
@@ -766,31 +811,39 @@ camp_groups[, c(3,4,5)] <- lapply(camp_groups[, c(3,4,5)],
                                                                      alpha = 0.4))
                                    })
 
-
-camp_groups %>% 
-  kbl(format = "html",
-      caption = "Метрики по РК, группам, типу площадки",
-      escape = F) %>% 
-  kable_paper() %>% 
-  kable_styling(bootstrap_options = c("hover", 
-                                      "condensed", 
-                                      "responsive"),
-                full_width = F, 
-                fixed_thead = T) %>% 
-  row_spec(0, 
-           background = "#DBB9FA", 
-           color = "#5A5A5A",
-           font_size = 16) %>% 
-  row_spec(1:length(camp_groups$Campaign),
-           align = "r",
-           font_size = 14) %>%
-  column_spec(c(2, 5),
-              border_right = T) %>% 
-  scroll_box(height = "500px",
-             fixed_thead = T)
-
+# создаем таблицу с помощью библиотеке DT
+DT::datatable(camp_groups,
+              extensions = c('Buttons',
+                             'ColReorder',
+                             'FixedHeader',
+                             'RowGroup'),
+              escape  = FALSE,
+              class   = 'display compact nowrap',
+              caption = htmltools::tags$caption(style = 'caption-side: top; text-align: left; color: gray;',
+                                                htmltools::h4('Таблица: Данные по группам и кампаниям')),
+              options = list(columnDefs = list(list(className = 'dt-right', 
+                                                    targets = 3:5)),
+                             pageLength = 10,
+                             dom        = "Btpli",
+                             language   = list(url = '//cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json'),
+                             buttons    = c('csv', 'excel', 'pdf'),
+                             colReorder = TRUE,
+                             fixedHeader = TRUE,
+                             rowGroup = list(dataSrc = 1),
+                             selection = 'none')) %>%
+  formatStyle('Clicks',
+              background = styleColorBar(camp_groups$Clicks, '#C4D8F3'),
+              backgroundSize = '100% 90%',
+              backgroundRepeat = 'no-repeat',
+              backgroundPosition = 'center' ) %>% 
+  formatStyle(columns            = 'wImp',
+              background         = styleColorBar(camp_month$wImp, '#C4D8F3'),
+              backgroundSize     = '100% 90%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'center' )
 
 ```
+
 
 
 ### Кампании 30 дней
@@ -846,21 +899,34 @@ camp_30[, c(2,3,4)] <- lapply(camp_30[, c(2,3,4)],
                                                                      alpha = 0.4))
                                    })
 
-camp_30 %>% 
-  kbl(format = "html",
-      caption = "Таблица: Сводка по РК за последние 30 дней", 
-      escape = F) %>% 
-  kable_paper() %>% 
-  kable_styling(bootstrap_options = c("hover", "condensed", "responsive"),
-                full_width = F) %>% 
-  row_spec(0, 
-           background = "#DBB9FA", 
-           color = "#5A5A5A",
-           align = "r") %>%
-  row_spec(1:length(camp_30$Campaign),
-           align = "r") %>%
-  column_spec(c(1,4),
-              border_right = T)
+# создаем таблицу с помощью библиотеке DT
+datatable(camp_30,
+          extensions = c('Buttons',
+                         'ColReorder',
+                         'FixedHeader',
+                         'FixedColumns'),
+              escape  = FALSE,
+              class   = 'display compact nowrap',
+              caption = htmltools::tags$caption(style = 'caption-side: top; text-align: left; color: gray;',
+                                                htmltools::h4('Таблица: Данные по РК за 30 дней')),
+              options = list(columnDefs = list(list(className = 'dt-right', targets = 2:4)),
+                             pageLength = 10,
+                             dom        = "Btpli",
+                             language   = list(url = '//cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json'),
+                             buttons    = c('csv', 'excel', 'pdf'),
+                             colReorder = TRUE,
+                             fixedHeader = TRUE,
+                             fixedColumns = list(leftColumns = 2))) %>%
+  formatStyle(columns            = 'Clicks',
+              background         = styleColorBar(camp_30$Clicks, '#C4D8F3'),
+              backgroundSize     = '100% 90%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'center' ) %>% 
+  formatStyle(columns            = 'wImp',
+              background         = styleColorBar(camp_month$wImp, '#C4D8F3'),
+              backgroundSize     = '100% 90%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'center' )
 
 ```
 
@@ -922,27 +988,36 @@ groups_30[, c(3,4,5)] <- lapply(groups_30[, c(3,4,5)],
                                    })
 
 
-groups_30 %>% 
-  kbl(format = "html",
-      caption = "Метрики по группам за последние 30 дней и затратами больше 0",
-      escape = F) %>% 
-  kable_paper() %>% 
-  kable_styling(bootstrap_options = c("hover", 
-                                      "condensed", 
-                                      "responsive"),
-                full_width = F, 
-                fixed_thead = T) %>% 
-  row_spec(0, 
-           background = "#DBB9FA", 
-           color = "#5A5A5A",
-           font_size = 16) %>% 
-  row_spec(1:length(groups_30$Campaign),
-           align = "r",
-           font_size = 14) %>%
-  column_spec(c(2, 5),
-              border_right = T) %>% 
-  scroll_box(height = "500px",
-             fixed_thead = T)
+# создаем таблицу с помощью библиотеке DT
+DT::datatable(camp_groups,
+              extensions = c('Buttons',
+                             'ColReorder',
+                             'RowGroup',
+                             'FixedHeader'),
+              escape  = FALSE,
+              class   = 'display compact nowrap',
+              caption = htmltools::tags$caption(style = 'caption-side: top; text-align: left; color: gray;',
+                                                htmltools::h4('Таблица: Данные по группам и кампаниям')),
+              options = list(columnDefs = list(list(className = 'dt-right', 
+                                                    targets = 3:5)),
+                             pageLength = 10,
+                             dom        = "Btpli",
+                             language   = list(url = '//cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json'),
+                             buttons    = c('csv', 'excel', 'pdf'),
+                             colReorder = TRUE,
+                             fixedHeader = TRUE,
+                             rowGroup = list(dataSrc = 1),
+                             selection = 'none')) %>%
+  formatStyle(columns            = 'Clicks',
+              background         = styleColorBar(camp_groups$Clicks, '#C4D8F3'),
+              backgroundSize     = '100% 90%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'center' ) %>% 
+  formatStyle(columns            = 'wImp',
+              background         = styleColorBar(camp_month$wImp, '#C4D8F3'),
+              backgroundSize     = '100% 90%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'center' )
 
 
 ```
@@ -1005,26 +1080,35 @@ groups_7[, c(3,4,5)] <- lapply(groups_7[, c(3,4,5)],
                                    })
 
 
-groups_7 %>% 
-  kbl(format = "html",
-      caption = "Метрики по группам за последние 7 дней и затратами больше 0",
-      escape = F) %>% 
-  kable_paper() %>% 
-  kable_styling(bootstrap_options = c("hover", 
-                                      "condensed", 
-                                      "responsive"),
-                full_width = F, 
-                fixed_thead = T) %>% 
-  row_spec(0, 
-           background = "#DBB9FA", 
-           color = "#5A5A5A",
-           font_size = 16) %>% 
-  row_spec(1:length(groups_7$Campaign),
-           align = "r",
-           font_size = 14) %>%
-  column_spec(c(2, 5),
-              border_right = T) %>% 
-  scroll_box(height = "500px")
+# создаем таблицу с помощью библиотеке DT
+datatable(groups_7,
+          extensions = c('Buttons',
+                         'ColReorder',
+                         'RowGroup',
+                         'FixedHeader'),
+          escape  = FALSE,
+          class   = 'display compact nowrap',
+          caption = htmltools::tags$caption(style = 'caption-side: top; text-align: left; color: gray;',
+                                            htmltools::h4('Таблица: Данные по группам и кампаниям')),
+          options = list(columnDefs = list(list(className = 'dt-right', targets = 3:5)),
+                             pageLength = 10,
+                             dom        = "Btpli",
+                             language   = list(url = '//cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json'),
+                             buttons    = c('csv', 'excel', 'pdf'),
+                             colReorder = TRUE,
+                             fixedHeader = TRUE,
+                             rowGroup = list(dataSrc = 1),
+                             selection = 'none')) %>%
+  formatStyle(columns            = 'Clicks',
+              background         = styleColorBar(groups_7$Clicks, '#C4D8F3'),
+              backgroundSize     = '100% 90%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'center' ) %>% 
+  formatStyle(columns            = 'wImp',
+              background         = styleColorBar(groups_7$wImp, '#C4D8F3'),
+              backgroundSize     = '100% 90%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'center' )
 
 
 ```
@@ -1039,7 +1123,7 @@ groups_7 %>%
 
 Рассмотрим данные по объявлениям из действущхи РК.
 
-```{r, include = F, eval = F}
+```{r get data ads, include = F, eval = F}
 
 # запрос данных Директ API
 ads_raw_data <- yadirGetReport(ReportType        = "CUSTOM_REPORT",
@@ -1372,7 +1456,7 @@ slots %>%
 
 ### Объявления
 
-```{r, include = FALSE, eval = FALSE}
+```{r get data ads text, include = FALSE, eval = FALSE}
 # запрос текстов объявлений
 ## запрос запущенных ТГ кампаний
 mc_camp <- yadirGetCampaign(AgencyAccount     = "platzkart.ru-e2",
@@ -1500,25 +1584,26 @@ ads_df %>%
 
 По какой части объявления кликнул пользователь:
 
-- TITLE — заголовок объявления. Клик по отображаемой ссылке считается кликом по заголовку.
-- SITELINK1, SITELINK2, ..., SITELINK8 — быстрые ссылки.
-- VCARD — визитка.
-- CHAT — чат с оператором.
-- PHONE — номер телефона.
-- MOBILE_APP_ICON — иконка приложения (для рекламы мобильных приложений).
-- BUTTON — кнопка загрузки/установки (для рекламы мобильных приложений).
-- PRODUCT_EXTENSIONS — товарные дополнения.
-- MARKET — Маркет.
-- UNKNOWN.
+- TITLE — заголовок объявления. Клик по отображаемой ссылке считается кликом по заголовку
+- SITELINK1, SITELINK2, ..., SITELINK8 — быстрые ссылки
+- VCARD — визитка
+- CHAT — чат с оператором
+- PHONE — номер телефона
+- MOBILE_APP_ICON — иконка приложения (для рекламы мобильных приложений)
+- BUTTON — кнопка загрузки/установки (для рекламы мобильных приложений)
+- PRODUCT_EXTENSIONS — товарные дополнения
+- MARKET — Маркет
 
 ::: {.callout-caution}
+
 ## Примечание
 
 Для графических объявлений, смарт-баннеров, медийных баннеров и баннеров на поиске любой клик по объявлению считается кликом по заголовку.
+
 :::
 
 
-```{r, include = FALSE, eval = FALSE}
+```{r get data cliclType, include = FALSE, eval = FALSE}
 
 # запрос данных по типу клика
 click_type_raw <- yadirGetReport(ReportType        = "CUSTOM_REPORT",
