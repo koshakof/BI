@@ -418,7 +418,7 @@ account %>%
   geom_vline(xintercept = as.Date("2023-07-24"), linetype = 2, color = "red")+
   geom_vline(xintercept = as.Date("2023-07-31"), linetype = 2, color = "red")+
   scale_color_manual(values = c("#00E5FF","#fc4526","#FF80FF"))+
-  scale_x_date(date_breaks = "day", date_labels = "%d")+
+  scale_x_date(date_breaks = "5 day", date_labels = "%d")+
   scale_y_log10() +
   theme_minimal() +
   labs(x = NULL, y = NULL) +
@@ -484,6 +484,52 @@ account %>%
 ```
 
 
+### 30 дней
+
+```{r}
+#| fig-cap: "График показов, кликов и целей за последние 30 дней"
+
+account %>% 
+  reframe(across(where(is.numeric), sum), .by = Date) %>% 
+  filter(Date >= Sys.Date()-31) %>% 
+  ggplot() +
+  geom_line(mapping = aes(x = Date, y = WeightedImpressions, color = "wImp"))+
+  geom_smooth(aes(x = Date, y = WeightedImpressions), 
+              method = "lm",
+              se = FALSE,
+              color = "#FF80FF",
+              linetype   = "dashed",
+              linewidth  = 0.1)+
+  geom_line(mapping = aes(x = Date, y = Clicks, color = "Clicks"))+
+  geom_smooth(aes(x = Date, y = Clicks), 
+              method = "lm",
+              se = FALSE,
+              color = "#00E5FF",
+              linetype   = "dashed",
+              linewidth  = 0.1)+
+  geom_line(mapping = aes(x = Date, y = GoalsLC, color = "GoalsLC"))+
+  geom_smooth(aes(x = Date, y = GoalsLC), 
+              method = "lm",
+              se = FALSE,
+              color = "#fc4526",
+              linetype   = "dashed",
+              linewidth  = 0.1)+
+  geom_vline(xintercept = as.Date("2023-03-06"), linetype = 2, color = "red")+
+  geom_vline(xintercept = as.Date("2023-06-08"), linetype = 2, color = "red")+
+  scale_color_manual(values = c("#00E5FF","#fc4526","#FF80FF"))+
+  scale_x_date(date_breaks = "day", date_labels = "%d")+
+  scale_y_log10() +
+  theme_minimal() +
+  labs(x = NULL, y = NULL) +
+  theme(legend.position = "top",
+        legend.title = element_blank(),
+        legend.text = element_text(size = 10, color = "gray50"),
+        axis.title = element_text(size = 10, color = "gray40"),
+        axis.text  = element_text(size = 7, color = "gray40"))
+
+```
+
+
 ### 7 дней
 
 ```{r}
@@ -530,50 +576,7 @@ account %>%
 ```
 
 
-### 30 дней
 
-```{r}
-#| fig-cap: "График показов, кликов и целей за последние 30 дней"
-
-account %>% 
-  reframe(across(where(is.numeric), sum), .by = Date) %>% 
-  filter(Date >= Sys.Date()-31) %>% 
-  ggplot() +
-  geom_line(mapping = aes(x = Date, y = WeightedImpressions, color = "wImp"))+
-  geom_smooth(aes(x = Date, y = WeightedImpressions), 
-              method = "lm",
-              se = FALSE,
-              color = "#FF80FF",
-              linetype   = "dashed",
-              linewidth  = 0.1)+
-  geom_line(mapping = aes(x = Date, y = Clicks, color = "Clicks"))+
-  geom_smooth(aes(x = Date, y = Clicks), 
-              method = "lm",
-              se = FALSE,
-              color = "#00E5FF",
-              linetype   = "dashed",
-              linewidth  = 0.1)+
-  geom_line(mapping = aes(x = Date, y = GoalsLC, color = "GoalsLC"))+
-  geom_smooth(aes(x = Date, y = GoalsLC), 
-              method = "lm",
-              se = FALSE,
-              color = "#fc4526",
-              linetype   = "dashed",
-              linewidth  = 0.1)+
-  geom_vline(xintercept = as.Date("2023-03-06"), linetype = 2, color = "red")+
-  geom_vline(xintercept = as.Date("2023-06-08"), linetype = 2, color = "red")+
-  scale_color_manual(values = c("#00E5FF","#fc4526","#FF80FF"))+
-  scale_x_date(date_breaks = "day", date_labels = "%d")+
-  scale_y_log10() +
-  theme_minimal() +
-  labs(x = NULL, y = NULL) +
-  theme(legend.position = "top",
-        legend.title = element_blank(),
-        legend.text = element_text(size = 10, color = "gray50"),
-        axis.title = element_text(size = 10, color = "gray40"),
-        axis.text  = element_text(size = 7, color = "gray40"))
-
-```
 
 :::
 
@@ -1114,6 +1117,46 @@ datatable(groups_7,
 ```
 
 
+### Полярный график по РК
+
+```{r}
+
+account %>% 
+  reframe(across(where(is.numeric), sum), .by = CampaignName) %>% 
+  select(CampaignName, GoalsLC) %>% 
+  ggplot(aes(x = reorder(CampaignName, -GoalsLC), 
+             y = GoalsLC,
+             color = CampaignName)) +
+  geom_point()+
+  geom_text(aes(label = GoalsLC),
+            nudge_y = 0.5)+
+  theme_minimal()+
+  labs(x = NULL,
+       y = NULL)+
+  theme(legend.position = "none")+
+  coord_polar()
+
+account %>% 
+  reframe(across(where(is.numeric), sum), .by = CampaignName) %>% 
+  select(CampaignName, Clicks) %>% 
+  kbl() %>% 
+  kable_paper()
+
+account %>% 
+  reframe(across(where(is.numeric), sum), .by = CampaignName) %>% 
+  select(CampaignName, Clicks) %>% 
+  ggplot(aes(x = reorder(CampaignName, -Clicks), y = Clicks, group = 1)) +
+  geom_point() +
+  geom_line() +
+  coord_polar() +
+  theme_minimal() +
+  labs(x = NULL, y = NULL)
+
+
+```
+
+
+
 :::
 
 
@@ -1211,7 +1254,6 @@ ads %>%
   ggplot()+
   geom_col(aes(x = CampaignName, y = WeightedImpressions, fill = AdFormat),
            position = "dodge")+
-  scale_fill_manual(values = c("#19a6b3","#f26c0d","#5e3894"))+
   scale_y_log10()+
   theme_minimal()+
   theme(legend.position = "top",
@@ -1235,7 +1277,6 @@ ads %>%
   ggplot()+
   geom_col(aes(x = CampaignName, y = Clicks, fill = AdFormat),
            position = "dodge")+
-  scale_fill_manual(values = c("#19a6b3","#f26c0d","#5e3894"))+
   theme_minimal()+
   theme(legend.position = "top",
         legend.title = element_text(size = 12, color = "gray50"),
@@ -1667,9 +1708,40 @@ click_type_raw %>%
 ::::
 
 
+## Сегменты
 
+```{r get data segments, include = F, eval = F}
 
-
+# запрос данных Директ API
+segments_raw <- yadirGetReport(ReportType        = "CUSTOM_REPORT",
+                               DateRangeType     = "CUSTOM_DATE",
+                               DateFrom          = "2023-06-01",
+                               DateTo            = Sys.Date() - 1,
+                               FieldNames        = c("Date",
+                                                     "AdNetworkType",
+                                                     "CampaignName",
+                                                     "LocationOfPresenceName",
+                                                     "Device",
+                                                     "Gender",
+                                                     "Age",
+                                                     "IncomeGrade",
+                                                     "WeightedImpressions",
+                                                     "Clicks",
+                                                     "Sessions",
+                                                     "Bounces",
+                                                     "Cost",
+                                                     "Conversions"),
+                               Goals             = c(301649121,
+                                                     301314275,
+                                                     301313194,
+                                                     301315472),
+                               AttributionModels = c("FCCD", "AUTO"),
+                               IncludeVAT        = "NO",
+                               IncludeDiscount   = "NO",
+                               AgencyAccount     = "platzkart.ru-e2",
+                               Login             = "e-17332282",
+                               TokenPath         = "direct_token")
+```
 
 
 

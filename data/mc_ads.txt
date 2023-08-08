@@ -157,12 +157,12 @@ Id,TextAdTitle,TextAdTitle2,TextAdText,TextAdHref
 14432395288,МастерСлух™ официальный сайт,Батарейки слуховых аппаратов,Бесплатная настройка слухового аппарата в течение года. Узнайте больше!,https://mastersluh-krasnodar.ru/product/aksessuary-dlya-slukhovykh-apparatov/batareyki-dlya-slukhovykh-apparatov/
 14432395295,МастерСлух™ официальный сайт,Медцентры в Краснодаре,Скидка 10% при единовременной покупке двух слуховых аппаратов. Узнайте больше,https://mastersluh-krasnodar.ru/sales/skidka-10-pri-edinovremennoy-pokupke-dvyx-sluxovix-apparatov/
 14432395296,МастерСлух™ официальный сайт,Медцентры в Краснодаре,Бесплатная настройка аппарата в течение года. Узнать подробнее,https://mastersluh-krasnodar.ru/sales/besplatnie-nastroiki-sluxovix-apparatov/
-14669343467,Слуховые аппараты в Краснодаре,МастерСлух™ официальный сайт,260 моделей от проверенных брендов в наличии. Бесплатная настройка. Узнайте больше.,https://mastersluh-krasnodar.ru/product/slukhovye-apparaty/
-14669343468,Слуховые аппараты в Краснодаре,МастерСлух™ официальный сайт,Слуховые аппараты для детей и взрослых с любой степенью потери слуха. Выбирайте.,https://mastersluh-krasnodar.ru/product/slukhovye-apparaty/
-14669343469,Слуховые аппараты в Краснодаре,МастерСлух™ официальный сайт,Бесплатная настройка аппарата в течение года. Изготовка личных вкладышей. Выбирайте.,https://mastersluh-krasnodar.ru/product/slukhovye-apparaty/
-14669343470,Слуховые аппараты Краснодар,МастерСлух™,260 моделей. Бесплатная настройка. Узнайте больше.,https://mastersluh-krasnodar.ru/product/slukhovye-apparaty/
-14669343471,Слуховые аппараты Краснодар,МастерСлух™,Слуховые аппараты для детей и взрослых. Узнайте больше.,https://mastersluh-krasnodar.ru/product/slukhovye-apparaty/
-14669343472,Слуховые аппараты Краснодар,МастерСлух™,Бесплатная настройка слухового аппарата в течение года. Узнайте больше!,https://mastersluh-krasnodar.ru/product/slukhovye-apparaty/
+14669343467,Слуховые аппараты. Доставка из Краснодара,МастерСлух™,260 моделей от проверенных брендов в наличии. Бесплатная настройка. Узнайте больше.,https://mastersluh-krasnodar.ru/product/slukhovye-apparaty/
+14669343468,Слуховые аппараты. Доставка из Краснодара,МастерСлух™,Слуховые аппараты для детей и взрослых с любой степенью потери слуха. Выбирайте.,https://mastersluh-krasnodar.ru/product/slukhovye-apparaty/
+14669343469,Слуховые аппараты. Доставка из Краснодара,МастерСлух™,Бесплатная настройка аппарата в течение года. Изготовка личных вкладышей. Выбирайте.,https://mastersluh-krasnodar.ru/product/slukhovye-apparaty/
+14669343470,Слуховые аппараты. Доставка из Краснодара,МастерСлух™,260 моделей. Бесплатная настройка. Узнайте больше.,https://mastersluh-krasnodar.ru/product/slukhovye-apparaty/
+14669343471,Слуховые аппараты. Доставка из Краснодара,МастерСлух™,Слуховые аппараты для детей и взрослых. Узнайте больше.,https://mastersluh-krasnodar.ru/product/slukhovye-apparaty/
+14669343472,Слуховые аппараты. Доставка из Краснодара,МастерСлух™,Бесплатная настройка слухового аппарата в течение года. Узнайте больше!,https://mastersluh-krasnodar.ru/product/slukhovye-apparaty/
 14731111897,Продажа слуховых аппаратов,Подбор и настройка. МастерСлух™,260 моделей от проверенных брендов в наличии. Бесплатная настройка. Узнайте больше.,https://mastersluh-krasnodar.ru/product/slukhovye-apparaty/
 14731111898,Продажа слуховых аппаратов,Подбор и настройка. МастерСлух™,Слуховые аппараты для детей и взрослых с любой степенью потери слуха. Выбирайте.,https://mastersluh-krasnodar.ru/product/slukhovye-apparaty/
 14731111899,Продажа слуховых аппаратов,Подбор и настройка. МастерСлух™,Бесплатная настройка аппарата в течение года. Изготовка личных вкладышей. Выбирайте.,https://mastersluh-krasnodar.ru/product/slukhovye-apparaty/
@@ -229,3 +229,17 @@ Id,TextAdTitle,TextAdTitle2,TextAdText,TextAdHref
 14767708062,ReSound заушные cлуховые аппараты,Медцентр МастерСлух™,Инновационные слуховые аппараты ReSound из Дании.,https://mastersluh-krasnodar.ru/product/slukhovye-apparaty/zaushnye/resound/
 14767708063,ReSound заушные cлуховые аппараты,Медцентр МастерСлух™,Слуховые аппараты ReSound для детей и взрослых. Узнайте больше,https://mastersluh-krasnodar.ru/product/slukhovye-apparaty/zaushnye/resound/
 14767708064,ReSound заушные cлуховые аппараты,Медцентр МастерСлух™,При покупке аппарата ReSound бесплатная настройка в течение года. Узнайте больше,https://mastersluh-krasnodar.ru/product/slukhovye-apparaty/zaushnye/resound/
+14847936715,Слуховые аппараты в Краснодаре,МастерСлух™ официальный сайт,260 моделей от проверенных брендов в наличии. Бесплатная настройка. Узнайте больше.,https://mastersluh-krasnodar.ru/product/slukhovye-apparaty/
+14847936716,Слуховые аппараты в Краснодаре,МастерСлух™ официальный сайт,Слуховые аппараты для детей и взрослых с любой степенью потери слуха. Выбирайте.,https://mastersluh-krasnodar.ru/product/slukhovye-apparaty/
+14847936717,Слуховые аппараты в Краснодаре,МастерСлух™ официальный сайт,Бесплатная настройка аппарата в течение года. Изготовка личных вкладышей. Выбирайте.,https://mastersluh-krasnodar.ru/product/slukhovye-apparaty/
+14847936718,Слуховые аппараты Краснодар,МастерСлух™,260 моделей. Бесплатная настройка. Узнайте больше.,https://mastersluh-krasnodar.ru/product/slukhovye-apparaty/
+14847936719,Слуховые аппараты Краснодар,МастерСлух™,Слуховые аппараты для детей и взрослых. Узнайте больше.,https://mastersluh-krasnodar.ru/product/slukhovye-apparaty/
+14847936720,Слуховые аппараты Краснодар,МастерСлух™,Бесплатная настройка слухового аппарата в течение года. Узнайте больше!,https://mastersluh-krasnodar.ru/product/slukhovye-apparaty/
+14848476268,Комплексное решение проблем со слухом,Медцентр МастерСлух™,Диагностика и лечение слуха у детей и взрослых,https://mastersluh-krasnodar.ru
+14848573547,Комплексное решение проблем со слухом,Медцентр МастерСлух™,Диагностика и лечение слуха у детей и взрослых,https://mastersluh-krasnodar.ru
+14848759066,Слуховые аппараты,МастерСлух™ официальный сайт,Скидка 10% при единовременной покупке двух слуховых аппаратов. Узнайте больше,https://mastersluh-krasnodar.ru/sales/skidka-10-pri-edinovremennoy-pokupke-dvyx-sluxovix-apparatov/
+14848759067,Слуховые аппараты,МастерСлух™ официальный сайт,Бесплатная настройка аппарата в течение года. Узнать подробнее,https://mastersluh-krasnodar.ru/sales/besplatnie-nastroiki-sluxovix-apparatov/
+14848885048,NA,NA,NA,NA
+14848885049,NA,NA,NA,NA
+14848885050,NA,NA,NA,NA
+14849015310,Комплексное решение проблем со слухом,Медцентр МастерСлух™,Диагностика и лечение слуха у детей и взрослых,https://mastersluh-krasnodar.ru
