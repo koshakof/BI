@@ -1358,22 +1358,27 @@ formats %>%
 
 ads %>% 
   filter(Date >= Sys.Date()-31) %>% 
-  reframe(round(across(where(is.numeric), sum)), .by =c(CampaignName, Slot)) %>%
+  reframe(round(across(where(is.numeric), sum)), 
+          .by =c(CampaignName, Slot)) %>%
   ggplot()+
-  geom_col(aes(x = CampaignName, y = WeightedImpressions, fill = Slot),
+  geom_col(aes(x = CampaignName, 
+               y = WeightedImpressions, 
+               fill = Slot),
            position = "dodge")+
-  scale_fill_manual(values = c("#19a6b3","#f26c0d","#5e3894", "#FF00FF","#8F989B"))+
+  scale_fill_manual(values = c("#19a6b3",
+                               "#f26c0d",
+                               "#5e3894",
+                               "#FF00FF",
+                               "#8F989B"))+
   scale_y_log10()+
-  labs(x = NULL,
-       y = "Imp")+
   theme_minimal()+
   theme(legend.position = "top",
-        legend.title = element_text(size = 12, color = "gray50"),
-        legend.text = element_text(size = 10, color = "gray50"),
-        axis.title = element_text(size = 10, color = "gray40"),
-        axis.text  = element_text(size = 10, color = "gray40"),
-        axis.text.x = element_text(angle = 90))+
-  labs(x = "Кампании",
+        legend.title    = element_text(size = 12, color = "gray50"),
+        legend.text     = element_text(size = 10, color = "gray50"),
+        axis.title      = element_text(size = 10, color = "gray40"),
+        axis.text       = element_text(size = 10, color = "gray40"),
+        axis.text.x     = element_text(angle = 90))+
+  labs(x = NULL,
        y = "Показы")
 
 ```
