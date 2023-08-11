@@ -576,11 +576,10 @@ account %>%
 ```
 
 
-
-
 :::
 
 ::::
+
 
 
 ## Данные по рекламным кампаниям
@@ -1091,17 +1090,20 @@ datatable(groups_7,
                          'FixedHeader'),
           escape  = FALSE,
           class   = 'display compact nowrap',
-          caption = htmltools::tags$caption(style = 'caption-side: top; text-align: left; color: gray;',
+          caption = htmltools::tags$caption(style = 'caption-side: top; 
+                                            text-align: left; 
+                                            color: gray;',
                                             htmltools::h4('Таблица: Данные по группам и кампаниям')),
-          options = list(columnDefs = list(list(className = 'dt-right', targets = 3:5)),
-                             pageLength = 10,
-                             dom        = "Btpli",
-                             language   = list(url = '//cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json'),
-                             buttons    = c('csv', 'excel', 'pdf'),
-                             colReorder = TRUE,
-                             fixedHeader = TRUE,
-                             rowGroup = list(dataSrc = 1),
-                             selection = 'none')) %>%
+          options = list(columnDefs = list(list(className = 'dt-right', 
+                                                targets = 3:5)),
+                         pageLength = 10,
+                         dom        = "Btpli",
+                         language   = list(url = '//cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json'),
+                         buttons    = c('csv', 'excel', 'pdf'),
+                         colReorder = TRUE,
+                         fixedHeader = TRUE,
+                         rowGroup = list(dataSrc = 1),
+                         selection = 'none')) %>%
   formatStyle(columns            = 'Clicks',
               background         = styleColorBar(groups_7$Clicks, '#C4D8F3'),
               backgroundSize     = '100% 90%',
@@ -1118,6 +1120,8 @@ datatable(groups_7,
 
 
 ### Полярный график по РК
+
+Полярный график достижения целей в разрезе РК за весь период.
 
 ```{r}
 
@@ -1136,35 +1140,18 @@ account %>%
   theme(legend.position = "none")+
   coord_polar()
 
-account %>% 
-  reframe(across(where(is.numeric), sum), .by = CampaignName) %>% 
-  select(CampaignName, Clicks) %>% 
-  kbl() %>% 
-  kable_paper()
-
-account %>% 
-  reframe(across(where(is.numeric), sum), .by = CampaignName) %>% 
-  select(CampaignName, Clicks) %>% 
-  ggplot(aes(x = reorder(CampaignName, -Clicks), y = Clicks, group = 1)) +
-  geom_point() +
-  geom_line() +
-  coord_polar() +
-  theme_minimal() +
-  labs(x = NULL, y = NULL)
-
 
 ```
-
-
 
 :::
 
 
+
 ## Объявления
 
-:::: {.panel-tabset}
-
 Рассмотрим данные по объявлениям из действущхи РК.
+
+:::: {.panel-tabset}
 
 ```{r get data ads, include = F, eval = F}
 
@@ -1262,7 +1249,7 @@ ads %>%
         axis.title = element_text(size = 10, color = "gray40"),
         axis.text  = element_text(size = 10, color = "gray40"),
         axis.text.x = element_text(angle = 90))+
-  labs(x = "Кампании",
+  labs(x = NULL,
        y = "Показы")
 
 ```
@@ -1284,7 +1271,7 @@ ads %>%
         axis.title = element_text(size = 10, color = "gray40"),
         axis.text  = element_text(size = 10, color = "gray40"),
         axis.text.x = element_text(angle = 90))+
-  labs(x = "Кампании",
+  labs(x = NULL,
        y = "Клики")
 
 ```
@@ -1596,25 +1583,36 @@ ads_df <- ads_jouin %>%
          `BR,%`) %>% 
   arrange(desc(Cost))
 
-ads_df %>% 
-  kbl(format = "html", 
-      caption = "Метрики объявлений у которых больше 29 кликов", 
-      escape = F) %>% 
-  kable_paper() %>% 
-  kable_styling(bootstrap_options = c("hover", "condensed", "responsive"), 
-                fixed_thead = TRUE) %>% 
-  row_spec(0, 
-           background = "#DBB9FA", 
-           color = "#5A5A5A", 
-           font_size = 16) %>% 
-  row_spec(1:length(slots$ads_df),
-           align = "r",
-           font_size = 14) %>%
-  column_spec(c(3, 6),
-              border_right = T) %>%
-  scroll_box(height = "500px", 
-             fixed_thead = T)
 
+# создаем таблицу с помощью библиотеке DT
+datatable(ads_df,
+          extensions = c('Buttons',
+                         'ColReorder',
+                         'FixedHeader'),
+          escape  = FALSE,
+          class   = 'display compact nowrap',
+          caption = htmltools::tags$caption(style = 'caption-side: top; 
+                                            text-align: left; 
+                                            color: gray;',
+                                            htmltools::h4('Таблица: Текстовые объявления')),
+          options = list(columnDefs = list(list(className = 'dt-left', 
+                                                targets = 1:6)),
+                         pageLength = 10,
+                         dom        = "Btpli",
+                         language   = list(url = '//cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json'),
+                         buttons    = c('csv', 'excel', 'pdf'),
+                         colReorder = TRUE,
+                         fixedHeader = TRUE)) %>%
+  formatStyle(columns            = 'Clicks',
+              background         = styleColorBar(ads_df$Clicks, '#C4D8F3'),
+              backgroundSize     = '100% 90%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'center' ) %>% 
+  formatStyle(columns            = 'wImp',
+              background         = styleColorBar(ads_df$wImp, '#C4D8F3'),
+              backgroundSize     = '100% 90%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'center' )
 
 ```
 
@@ -1704,11 +1702,16 @@ click_type_raw %>%
 
 ```
 
-
 ::::
 
 
+
+
 ## Сегменты
+
+Анализ сегментов.
+
+:::: {.panel-tabset}
 
 ```{r get data segments, include = F, eval = F}
 
@@ -1744,7 +1747,151 @@ segments_raw <- yadirGetReport(ReportType        = "CUSTOM_REPORT",
 ```
 
 
+```{r temp9, include = FALSE, eval = FALSE}
+
+# временный код для сокращения времени рендера
+vroom::vroom_write(x      = segments_raw, 
+                   file   = "~/GitHub/BI/data/mc_segments_raw.txt", 
+                   delim  = ",",
+                   append = FALSE)
+
+```
+
+
+```{r temp10}
+
+# загрузка данных
+segments_raw <- vroom::vroom(file = "~/GitHub/BI/data/mc_segments_raw.txt")
+
+```
+
+
+```{r}
+
+# подготовим данные к анализу
+## задаем вектор имен
+mc_names <- c("Calls_F", 
+              "Calls_A", 
+              "B24_F", 
+              "B24_A", 
+              "Forms_F", 
+              "Forms_A", 
+              "EMails_F", 
+              "EMails_A")
+
+## обработаем данные по целям
+segments <- segments_raw %>%
+  mutate(across(c(14:ncol(.)), ~ ifelse(. == "--", 0, .)),
+         across(c(14:ncol(.)), as.numeric)) %>%
+  rename_at(vars(14:ncol(.)), ~ mc_names) %>%
+  mutate(GoalsFC = rowSums(across(ends_with("_F"), ~abs(.x))),
+         GoalsLC = rowSums(across(ends_with("_A"), ~abs(.x))))
+
+```
 
 
 
+### Регионы
 
+```{r}
+reg <- segments %>% 
+  reframe(across(where(is.numeric), sum), 
+          .by = LocationOfPresenceName) %>%
+  mutate(Cost      = round(Cost),
+         wImp      = round(WeightedImpressions),
+         `BR,%`    = if_else(Bounces == 0| Sessions == 0, 0, 
+                              round(Bounces / Sessions * 100)),
+         `wCTR,%`  = if_else(Clicks == 0| WeightedImpressions == 0, 0, 
+                                 round(Clicks / WeightedImpressions * 100, 2)),
+         `cpaFC,₽` = if_else(Cost == 0| GoalsFC == 0, 0,
+                                 round(Cost / GoalsFC)),
+         `cpaLC,₽` = if_else(Cost == 0| GoalsLC == 0, 0,
+                                 round(Cost / GoalsLC)),
+         `CPC,₽`   = if_else(Cost == 0| Clicks == 0, 0,
+                                 round(Cost / Clicks)),
+         `crFC,%`  = if_else(Clicks == 0| GoalsFC == 0, 0,
+                                 round(GoalsFC/ Clicks * 100, 2)),
+         `crLC,%`  = if_else(Clicks == 0| GoalsLC == 0, 0,
+                             round(GoalsLC / Clicks * 100, 2))) %>% 
+  select(LocationOfPresenceName,
+         Cost,
+         GoalsFC,
+         GoalsLC,
+         `cpaFC,₽`,
+         `cpaLC,₽`,
+         `crFC,%`,
+         `crLC,%`,
+         wImp,
+         Clicks,
+         `CPC,₽`,
+         `wCTR,%`,
+         `BR,%`) %>% 
+  arrange(desc(Cost)) %>% 
+  filter(Cost > 0)
+
+# создаем таблицу с помощью библиотеке DT
+datatable(reg,
+          extensions = c('Buttons',
+                         'ColReorder',
+                         'FixedHeader'),
+          escape  = FALSE,
+          class   = 'display compact nowrap',
+          caption = htmltools::tags$caption(style = 'caption-side: top; 
+                                            text-align: left; 
+                                            color: gray;',
+                                            htmltools::h4('Таблица: Регионы')),
+          options = list(pageLength = 10,
+                         dom        = "Btpli",
+                         language   = list(url = '//cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json'),
+                         buttons    = c('csv', 'excel', 'pdf'),
+                         colReorder = TRUE,
+                         fixedHeader = TRUE)) %>%
+  formatStyle(columns            = 'Clicks',
+              background         = styleColorBar(reg$Clicks, '#C4D8F3'),
+              backgroundSize     = '100% 90%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'center' ) %>% 
+  formatStyle(columns            = 'wImp',
+              background         = styleColorBar(reg$wImp, '#C4D8F3'),
+              backgroundSize     = '100% 90%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'center' )
+```
+
+
+```{r}
+
+reg %>% 
+  select(LocationOfPresenceName, GoalsLC) %>%
+  reframe(across(where(is.numeric), sum), 
+          .by = c(LocationOfPresenceName)) %>%
+  arrange(desc(GoalsLC)) %>% 
+  mutate(Location = if_else(row_number() <= 3, 
+                            LocationOfPresenceName, 
+                            "Остальные")) %>%
+  reframe(GoalsLC = sum(GoalsLC), 
+          .by = Location) %>%
+  mutate(Percent = GoalsLC / sum(GoalsLC)) %>% 
+  ggplot(aes(x = "", y = GoalsLC, fill = Location)) +
+  geom_bar(width = 1, stat = "identity") +
+  geom_text(aes(label = paste0(round(Percent * 100, 1), "%")), 
+            position = position_stack(vjust = 0.5),
+            color = "white") +
+  coord_polar("y", start = 0) +
+  scale_fill_brewer(palette = "Set2") +
+  labs(title = "Доля регионов по достижению целей",
+       subtitle = "Директ",
+       x = NULL, 
+       y = NULL, 
+       fill = NULL) +
+  theme_void() +
+  theme(plot.title    = element_text(size = 12, color = "gray40"),
+        plot.subtitle = element_text(size = 10, color = "gray40"),
+        legend.position = "top",
+        legend.text   = element_text(size = 10, color = "gray40"),
+        legend.title  = element_text(size = 11, color = "gray40"))
+
+  
+```
+
+::::
