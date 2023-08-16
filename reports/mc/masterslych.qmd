@@ -10,10 +10,9 @@ execute:
   error: false
   echo: false
   output: asis
-
 ---
 
-```{r}
+```{r lib}
 
 # загрузка библиотек
 library(ryandexdirect)
@@ -1237,9 +1236,12 @@ ads <- ads_raw_data %>%
 
 ads %>% 
   filter(Date >= Sys.Date()-31) %>% 
-  reframe(round(across(where(is.numeric), sum)), .by =c(CampaignName, AdFormat)) %>%
+  reframe(round(across(where(is.numeric), sum)), 
+          .by =c(CampaignName, AdFormat)) %>%
   ggplot()+
-  geom_col(aes(x = CampaignName, y = WeightedImpressions, fill = AdFormat),
+  geom_col(aes(x = CampaignName, 
+               y = WeightedImpressions, 
+               fill = AdFormat),
            position = "dodge")+
   scale_y_log10()+
   theme_minimal()+
