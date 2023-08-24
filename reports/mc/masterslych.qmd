@@ -254,7 +254,7 @@ acc_month <- account %>%
          `wCTR,%`,
          `BR,%`)
 
-# задаем стиль выбранных колонок
+# задаем стиль выбранных колонок пакет kableExtra
 acc_month[, c(3,4,5)] <- lapply(acc_month[, c(3,4,5)], 
                                  function(x) {
                                    cell_spec(x, 
