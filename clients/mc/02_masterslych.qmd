@@ -1,0 +1,2352 @@
+---
+title: "МастерСлух"
+date: today
+date-format:  D dddd MMM YYYY
+editor_options: 
+  chunk_output_type: console
+execute:
+  warning: false
+  message: false
+  error: false
+  echo: false
+  output: asis
+---
+
+```{r lib}
+
+# загрузка библиотек
+library(tidyverse)
+library(scales)
+library(kableExtra)
+library(ggrepel)
+library(reactable)
+library(DT)
+
+```
+
+
+```{r download comp}
+# загрузка данных
+account <- vroom::vroom(file = "~/GitHub/BI/clients/mc/data/account.txt")
+```
+
+
+## Данные по аккаунту
+
+:::: {.panel-tabset}
+
+## Табличные сводки
+
+::: {.panel-tabset}
+
+### Срез по аккаунту
+
+```{r}
+
+# создаем таблицу и выводим как html
+account  |> 
+  reframe(across(where(is.numeric),sum)) |> 
+  mutate(
+    Cost      = round(Cost),
+    wImp      = round(WeightedImpressions),
+    BR    = if_else(Bounces == 0| Sessions == 0, 0, round(Bounces / Sessions * 100)),
+    wCTR  = if_else(Clicks == 0| WeightedImpressions == 0, 0, round(Clicks / WeightedImpressions * 100, 2)),
+    cpaFC = if_else(Cost == 0| GoalsFC == 0, 0, round(Cost / GoalsFC)),
+    cpaLC = if_else(Cost == 0| GoalsLC == 0, 0, round(Cost / GoalsLC)),
+    CPC   = if_else(Cost == 0| Clicks == 0, 0, round(Cost / Clicks)),
+    crFC  = if_else(Clicks == 0| GoalsFC == 0, 0, round(GoalsFC/ Clicks * 100, 2)),
+    crLC  = if_else(Clicks == 0| GoalsLC == 0, 0, round(GoalsLC / Clicks * 100, 2))
+    ) |> 
+  select(
+    Cost,
+    GoalsFC,
+    GoalsLC,
+    cpaFC,
+    cpaLC,
+    crFC,
+    crLC,
+    Clicks,
+    CPC,
+    wCTR,
+    BR
+    ) |> 
+  kbl(
+    caption = "Таблица: Сводка по всему аккаунту",
+    align = "c"
+    ) |> 
+  kable_paper() |> 
+  kable_styling(
+    bootstrap_options = c("hover", "condensed", "responsive"), 
+    fixed_thead = TRUE
+    ) |> 
+  row_spec(0, background = "#DBB9FA", color = "#5A5A5A")
+```
+
+
+
+### Площадки
+
+- AD_... — показы баннеров с нашим предложением на сайтах, где был пользователь
+- SEARCH — показы в поисковой сети
+
+```{r}
+# создаем таблицу и
+acc_net_type <- account  |> 
+  reframe(
+    across(where(is.numeric), sum),
+    .by = AdNetworkType)  |> 
+  mutate(
+    Cost = round(Cost),
+    wImp = round(WeightedImpressions),
+    NetType = AdNetworkType,
+    BR   = if_else(Bounces == 0 | Sessions == 0, 0, round(Bounces / Sessions * 100)),
+    wCTR = if_else(Clicks == 0 | WeightedImpressions == 0, 0, round(Clicks / WeightedImpressions * 100, 2)),
+    cpaFC = if_else(Cost == 0 | GoalsFC == 0, 0, round(Cost / GoalsFC)),
+    cpaLC = if_else(Cost == 0 | GoalsLC == 0, 0, round(Cost / GoalsLC)),
+    CPC   = if_else(Cost == 0 | Clicks == 0, 0, round(Cost / Clicks)),
+    crFC  = if_else(Clicks == 0 | GoalsFC == 0, 0, round(GoalsFC / Clicks * 100, 2)),
+    crLC  = if_else(Clicks == 0 | GoalsLC == 0, 0, round(GoalsLC / Clicks * 100, 2))
+    ) |> 
+  select(
+    NetType,
+    Cost,
+    GoalsFC,
+    GoalsLC,
+    cpaFC,
+    cpaLC,
+    crFC,
+    crLC,
+    Clicks,
+    CPC,
+    wCTR,
+    BR
+  )
+```
+
+
+```{r}
+# выводим как html
+acc_net_type  |> 
+  kbl(
+    format = "html",
+    caption = "Табилца: Сводка по всему аккаунту в разрезе мест показа"
+  ) |> 
+  kable_paper() |> 
+  kable_styling(bootstrap_options = c("hover", "condensed", "responsive")) |> 
+  row_spec(
+    0,
+    background = "#DBB9FA",
+    color = "#5A5A5A",
+    align = "r"
+  ) |> 
+  row_spec(
+    1:length(acc_net_type$NetType),
+    align = "r"
+    )  |> 
+  column_spec(
+    1,
+    border_right = T
+  )
+```
+
+
+
+### Месяцы
+
+```{r}
+# создаем таблицу
+
+acc_month <- account |> 
+  reframe(round(across(where(is.numeric), sum)), 0, .by = Date) |> 
+  mutate(Month = clock::date_format(Date, format = "%m-%y")) |> 
+  reframe(across(where(is.numeric), sum), Days = n(), .by = Month) |> 
+  mutate(
+    Cost = round(Cost),
+    wImp = round(WeightedImpressions),
+    BR = if_else(Bounces == 0 | Sessions == 0, 0, round(Bounces / Sessions * 100)),
+    wCTR = if_else(Clicks == 0 | WeightedImpressions == 0, 0, round(Clicks / WeightedImpressions * 100, 2)),
+    cpaFC = if_else(Cost == 0 | GoalsFC == 0, 0, round(Cost / GoalsFC)),
+    cpaLC = if_else(Cost == 0 | GoalsLC == 0, 0, round(Cost / GoalsLC)),
+    CPC = if_else(Cost == 0 | Clicks == 0, 0, round(Cost / Clicks)),
+    crFC = if_else(Clicks == 0 | GoalsFC == 0, 0, round(GoalsFC / Clicks * 100, 2)),
+    crLC = if_else(Clicks == 0 | GoalsLC == 0, 0, round(GoalsLC / Clicks * 100, 2))
+    ) |> 
+  select(
+    Month,
+    Days,
+    Cost,
+    GoalsFC,
+    GoalsLC,
+    cpaFC,
+    cpaLC,
+    crFC,
+    crLC,
+    wImp,
+    Clicks,
+    CPC,
+    wCTR,
+    BR
+    )
+```
+
+
+```{r}
+# задаем стиль выбранных колонок пакет kableExtra
+
+acc_month[, c(3, 4, 5)] <- lapply(
+  acc_month[, c(3, 4, 5)],
+  function(x) {
+    cell_spec(x,
+      color = "black",
+      bold = F,
+      background = spec_color(x,
+        end = 0.9,
+        option = "C",
+        direction = -1,
+        alpha = 0.4
+      )
+    )
+  }
+)
+
+# создаем таблицу с помощью библиотеке DT
+DT::datatable(
+  acc_month,
+  extensions = c(
+    "Buttons",
+    "ColReorder",
+    "FixedHeader"
+  ),
+  escape = FALSE,
+  class = "display compact nowrap",
+  caption = htmltools::tags$caption(
+    style = "caption-side: top; text-align: left; color: gray;",
+    htmltools::h4("Таблица: Данные по месяцам")
+    ),
+  options = list(
+    columnDefs = list(list(
+      className = "dt-right",
+      targets = 3:5
+    )),
+    pageLength = 10,
+    dom = "Btpli",
+    language = list(url = "//cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json"),
+    buttons = c("csv", "excel", "pdf"),
+    colReorder = TRUE,
+    fixedHeader = TRUE
+    )
+  )  |> 
+  formatStyle("Clicks",
+    background         = styleColorBar(acc_month$Clicks, "#C4D8F3"),
+    backgroundSize     = "100% 90%",
+    backgroundRepeat   = "no-repeat",
+    backgroundPosition = "center"
+  )
+
+```
+
+:::
+
+## Графики
+
+::: {.panel-tabset}
+
+
+### Месяцы
+
+```{r}
+#| fig-cap: "График показов, кликов и целей в лог шкале по месяцам"
+
+account  |> 
+  mutate(Month = floor_date(Date, "month", week_start = 1)) |> 
+  reframe(across(where(is.numeric), sum), .by = Month) |> 
+  select(
+    Month,
+    WeightedImpressions,
+    Clicks,
+    GoalsLC
+  ) |> 
+  ggplot() +
+  geom_area(
+    mapping = aes(
+      x = Month,
+      y = WeightedImpressions,
+      fill = "wImp"
+      ),
+    alpha = 0.5
+    ) +
+  geom_area(
+    mapping = aes(
+      x = Month,
+      y = Clicks,
+      fill = "Clicks"
+      ), 
+    alpha = 0.5
+  ) +
+  geom_area(
+    mapping = aes(
+      x = Month,
+      y = GoalsLC,
+      fill = "GoalsLC"
+      )
+    ) +
+  scale_fill_manual(values = c("#00E5FF", "#B3FFFF", "#FF80FF")) +
+  scale_x_date(date_breaks = "month", date_labels = "%b") +
+  scale_y_log10(labels = label_number_auto()) +
+  theme_minimal() +
+  labs(
+    x = NULL, 
+    y = NULL
+    ) +
+  theme(
+    legend.position = "top",
+    legend.title = element_blank(),
+    legend.text = element_text(size = 10, color = "gray50"),
+    axis.title = element_text(size = 10, color = "gray40"),
+    axis.text = element_text(size = 10, color = "gray40"),
+    panel.grid = element_blank()
+    )
+```
+
+
+### Недели
+
+```{r}
+#| fig-cap: "График показов, кликов и целей в лог шкале по неделям"
+
+account |> 
+  mutate(Week = floor_date(Date, "week", week_start = 1)) |> 
+  reframe(
+    across(where(is.numeric), sum), 
+    .by = Week)  |> 
+  ggplot() +
+  geom_line(
+    mapping = aes(
+      x = Week, 
+      y = WeightedImpressions, 
+      color = "wImp"
+      )) +
+  geom_smooth(
+    aes(
+      x = Week, 
+      y = WeightedImpressions
+      ),
+    formula = "y ~ x",
+    method = "lm",
+    se = FALSE,
+    color = "#FF80FF",
+    linetype = "dashed",
+    linewidth = 0.1
+  ) +
+  geom_line(
+    mapping = aes(
+      x = Week, 
+      y = Clicks, 
+      color = "Clicks"
+      )) +
+  geom_smooth(
+    aes(
+      x = Week, 
+      y = Clicks),
+    formula = "y ~ x",
+    method = "lm",
+    se = FALSE,
+    color = "#00E5FF",
+    linetype = "dashed",
+    linewidth = 0.1
+    ) +
+  geom_line(
+    mapping = aes(
+      x = Week, 
+      y = GoalsLC, 
+      color = "GoalsLC"
+      )) +
+  geom_smooth(
+    aes(
+      x = Week, 
+      y = GoalsLC),
+    formula = "y ~ x",
+    method = "lm",
+    se = FALSE,
+    color = "#fc4526",
+    linetype = "dashed",
+    linewidth = 0.1
+    ) +
+  scale_color_manual(
+    values = c(
+      "#00E5FF", 
+      "#fc4526", 
+      "#FF80FF"
+      )) +
+  scale_x_date(
+    date_breaks = "week", 
+    date_labels = "%W") +
+  scale_y_log10(labels = label_number_auto()) +
+  theme_minimal() +
+  labs(x = NULL, y = NULL) +
+  theme(
+    legend.position = "top",
+    legend.title = element_blank(),
+    legend.text = element_text(size = 10, color = "gray50"),
+    axis.title = element_text(size = 10, color = "gray40"),
+    axis.text = element_text(size = 10, color = "gray40"),
+    panel.grid = element_blank()
+  )
+
+```
+
+
+
+### Дни
+
+```{r}
+#| fig-cap: "Тренд показов, кликов и целей в лог шкале по дням"
+
+account %>%
+  reframe(across(where(is.numeric), sum), .by = Date) %>%
+  ggplot() +
+  geom_line(mapping = aes(x = Date, y = WeightedImpressions, color = "wImp")) +
+  geom_smooth(aes(x = Date, y = WeightedImpressions),
+    method = "lm",
+    se = FALSE,
+    color = "#FF80FF",
+    linetype = "dashed",
+    linewidth = 0.1
+  ) +
+  geom_line(mapping = aes(x = Date, y = Clicks, color = "Clicks")) +
+  geom_smooth(aes(x = Date, y = Clicks),
+    method = "lm",
+    se = FALSE,
+    color = "#00E5FF",
+    linetype = "dashed",
+    linewidth = 0.1
+  ) +
+  geom_line(mapping = aes(x = Date, y = GoalsLC, color = "GoalsLC")) +
+  geom_smooth(aes(x = Date, y = GoalsLC),
+    method = "lm",
+    se = FALSE,
+    color = "#fc4526",
+    linetype = "dashed",
+    linewidth = 0.1
+  ) +
+  geom_vline(xintercept = as.Date("2023-07-24"), linetype = 2, color = "red") +
+  geom_vline(xintercept = as.Date("2023-07-31"), linetype = 2, color = "red") +
+  scale_color_manual(values = c("#00E5FF", "#fc4526", "#FF80FF")) +
+  scale_x_date(date_breaks = "5 day", date_labels = "%d") +
+  scale_y_log10() +
+  theme_minimal() +
+  labs(x = NULL, y = NULL) +
+  theme(
+    legend.position = "top",
+    legend.title = element_blank(),
+    legend.text = element_text(size = 10, color = "gray50"),
+    axis.title = element_text(size = 10, color = "gray40"),
+    axis.text = element_text(size = 10, color = "gray40"),
+    panel.grid = element_blank()
+  ) +
+  geom_label_repel(
+    aes(
+      x = as.Date("2023-07-24"), y = 0,
+      label = "24 Июль. \n Вкл «Макс. конверсий"
+    ),
+    stat = "unique",
+    size = 2.5,
+    color = "gray20",
+    fill = "#FF80FF",
+    arrow = arrow(unit(0, "npc")),
+    box.padding = 3,
+    label.padding = 0.5,
+    direction = "y"
+  ) +
+  geom_label_repel(
+    aes(
+      x = as.Date("2023-07-31"), y = 0,
+      label = "24 Июль. \n Вкл «Макс. кликов"
+    ),
+    stat = "unique",
+    size = 2.5,
+    color = "gray20",
+    fill = "#FF80FF",
+    # arrow = arrow(unit(0, "npc")),
+    box.padding = 3,
+    label.padding = 0.5,
+    direction = "y"
+  )
+
+```
+
+
+### 30 дней
+
+```{r}
+#| fig-cap: "График показов, кликов и целей за последние 30 дней"
+
+account %>% 
+  reframe(across(where(is.numeric), sum), .by = Date) %>% 
+  filter(Date >= Sys.Date()-31) %>% 
+  ggplot() +
+  geom_line(mapping = aes(x = Date, y = WeightedImpressions, color = "wImp"))+
+  geom_smooth(aes(x = Date, y = WeightedImpressions), 
+              method = "lm",
+              se = FALSE,
+              color = "#FF80FF",
+              linetype   = "dashed",
+              linewidth  = 0.1)+
+  geom_line(mapping = aes(x = Date, y = Clicks, color = "Clicks"))+
+  geom_smooth(aes(x = Date, y = Clicks), 
+              method = "lm",
+              se = FALSE,
+              color = "#00E5FF",
+              linetype   = "dashed",
+              linewidth  = 0.1)+
+  geom_line(mapping = aes(x = Date, y = GoalsLC, color = "GoalsLC"))+
+  geom_smooth(aes(x = Date, y = GoalsLC), 
+              method = "lm",
+              se = FALSE,
+              color = "#fc4526",
+              linetype   = "dashed",
+              linewidth  = 0.1)+
+  geom_vline(xintercept = as.Date("2023-03-06"), linetype = 2, color = "red")+
+  geom_vline(xintercept = as.Date("2023-06-08"), linetype = 2, color = "red")+
+  scale_color_manual(values = c("#00E5FF","#fc4526","#FF80FF"))+
+  scale_x_date(date_breaks = "day", date_labels = "%d")+
+  scale_y_log10() +
+  theme_minimal() +
+  labs(x = NULL, y = NULL) +
+  theme(legend.position = "top",
+        legend.title = element_blank(),
+        legend.text = element_text(size = 10, color = "gray50"),
+        axis.title = element_text(size = 10, color = "gray40"),
+        axis.text  = element_text(size = 7, color = "gray40"))
+
+```
+
+
+### 7 дней
+
+```{r}
+#| fig-cap: "График показов, кликов и целей за последние 7 дней"
+
+account %>% 
+  reframe(across(where(is.numeric), sum), .by = Date) %>% 
+  filter(Date >= Sys.Date()-8) %>% 
+  ggplot() +
+  geom_line(mapping = aes(x = Date, y = WeightedImpressions, color = "wImp"))+
+  geom_smooth(aes(x = Date, y = WeightedImpressions), 
+              method = "lm",
+              se = FALSE,
+              color = "#FF80FF",
+              linetype   = "dashed",
+              linewidth  = 0.1)+
+  geom_line(mapping = aes(x = Date, y = Clicks, color = "Clicks"))+
+  geom_smooth(aes(x = Date, y = Clicks), 
+              method = "lm",
+              se = FALSE,
+              color = "#00E5FF",
+              linetype   = "dashed",
+              linewidth  = 0.1)+
+  geom_line(mapping = aes(x = Date, y = GoalsLC, color = "GoalsLC"))+
+  geom_smooth(aes(x = Date, y = GoalsLC), 
+              method = "lm",
+              se = FALSE,
+              color = "#fc4526",
+              linetype   = "dashed",
+              linewidth  = 0.1)+
+  geom_vline(xintercept = as.Date("2023-03-06"), linetype = 2, color = "red")+
+  geom_vline(xintercept = as.Date("2023-06-08"), linetype = 2, color = "red")+
+  scale_color_manual(values = c("#00E5FF","#fc4526","#FF80FF"))+
+  scale_x_date(date_breaks = "day", date_labels = "%d %a")+
+  scale_y_log10() +
+  theme_minimal() +
+  labs(x = NULL, y = NULL) +
+  theme(legend.position = "top",
+        legend.title    = element_blank(),
+        legend.text     = element_text(size = 10, color = "gray50"),
+        axis.title      = element_text(size = 10, color = "gray40"),
+        axis.text       = element_text(size = 10, color = "gray40"))
+
+```
+
+
+:::
+
+::::
+
+
+
+## Данные по рекламным кампаниям
+
+::: {.panel-tabset}
+
+### Типы РК
+
+Срез по типам рекламных кампаний за все время.
+
+```{r}
+camps <- account |> 
+  reframe(
+    across(where(is.numeric), sum), 
+    .by = c(CampaignType)
+    ) |> 
+  mutate(
+    Cost = round(Cost),
+    wImp = round(WeightedImpressions),
+    BR = if_else(Bounces == 0 | Sessions == 0, 0, round(Bounces / Sessions * 100)),
+    wCTR = if_else(Clicks == 0 | WeightedImpressions == 0, 0, round(Clicks / WeightedImpressions * 100, 2)),
+    cpaFC = if_else(Cost == 0 | GoalsFC == 0, 0, round(Cost / GoalsFC)),
+    cpaLC = if_else(Cost == 0 | GoalsLC == 0, 0, round(Cost / GoalsLC)),
+    CPC = if_else(Cost == 0 | Clicks == 0, 0, round(Cost / Clicks)),
+    crFC = if_else(Clicks == 0 | GoalsFC == 0, 0, round(GoalsFC / Clicks * 100, 2)),
+    crLC = if_else(Clicks == 0 | GoalsLC == 0, 0, round(GoalsLC / Clicks * 100, 2))
+    ) |> 
+  select(
+    CampaignType,
+    Cost,
+    GoalsFC,
+    GoalsLC,
+    cpaFC,
+    cpaLC,
+    crFC,
+    crLC,
+    wImp,
+    Clicks,
+    CPC,
+    wCTR,
+    BR
+    ) |> 
+  arrange(CampaignType, desc(Cost))
+
+# задаем стиль выбранных колонок
+camps[, c(3, 4, 5)] <- lapply(
+  camps[, c(3, 4, 5)],
+  function(x) {
+    cell_spec(
+      x,
+      color = "black",
+      bold = F,
+      background = spec_color(
+        x,
+        end = 0.9,
+        option = "C",
+        direction = -1,
+        alpha = 0.4
+      )
+    )
+  }
+)
+
+# создаем таблицу с помощью библиотеке DT
+DT::datatable(camps,
+  extensions = c(
+    "Buttons",
+    "ColReorder",
+    "FixedHeader",
+    "RowGroup"
+  ),
+  escape = FALSE,
+  class = "display compact nowrap",
+  caption = htmltools::tags$caption(
+    style = "caption-side: top; text-align: left; color: gray;",
+    htmltools::h4("Таблица: Срез по рекламной кампании")
+    ),
+  options = list(
+    columnDefs = list(list(
+      className = "dt-right",
+      targets = 3:5
+    )),
+    pageLength = 10,
+    dom = "Btpli",
+    language = list(url = "//cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json"),
+    buttons = c("csv", "excel", "pdf"),
+    colReorder = TRUE,
+    fixedHeader = TRUE
+  )
+) |> 
+  formatStyle(
+    columns = "Clicks",
+    background = styleColorBar(camps$Clicks, "#C4D8F3"),
+    backgroundSize = "100% 90%",
+    backgroundRepeat = "no-repeat",
+    backgroundPosition = "center"
+  ) |> 
+  formatStyle(
+    columns = "wImp",
+    background = styleColorBar(camps$wImp, "#C4D8F3"),
+    backgroundSize = "100% 90%",
+    backgroundRepeat = "no-repeat",
+    backgroundPosition = "center"
+  )
+```
+
+
+
+
+### РК
+
+Срез по рекламныхм кампаниям за все время.
+
+```{r}
+camps <- account |> 
+  reframe(
+    across(where(is.numeric), sum), 
+    .by = c(CampaignName, CampaignType))  |> 
+  mutate(
+    Cost = round(Cost),
+    wImp = round(WeightedImpressions),
+    BR = if_else(Bounces == 0 | Sessions == 0, 0, round(Bounces / Sessions * 100)),
+    wCTR = if_else(Clicks == 0 | WeightedImpressions == 0, 0, round(Clicks / WeightedImpressions * 100, 2)),
+    cpaFC = if_else(Cost == 0 | GoalsFC == 0, 0, round(Cost / GoalsFC)),
+    cpaLC = if_else(Cost == 0 | GoalsLC == 0, 0, round(Cost / GoalsLC)),
+    CPC = if_else(Cost == 0 | Clicks == 0, 0, round(Cost / Clicks)),
+    crFC = if_else(Clicks == 0 | GoalsFC == 0, 0, round(GoalsFC / Clicks * 100, 2)),
+    crLC = if_else(Clicks == 0 | GoalsLC == 0, 0, round(GoalsLC / Clicks * 100, 2))
+    ) |> 
+  select(
+    CampaignType,
+    CampaignName,
+    Cost,
+    GoalsFC,
+    GoalsLC,
+    cpaFC,
+    cpaLC,
+    crFC,
+    crLC,
+    wImp,
+    Clicks,
+    CPC,
+    wCTR,
+    BR
+    ) |> 
+  arrange(CampaignType, desc(Cost))
+
+# задаем стиль выбранных колонок
+camps[, c(3, 4, 5)] <- lapply(
+  camps[, c(3, 4, 5)],
+  function(x) {
+    cell_spec(
+      x,
+      color = "black",
+      bold = F,
+      background = spec_color(
+        x,
+        end = 0.9,
+        option = "C",
+        direction = -1,
+        alpha = 0.4
+      )
+    )
+  }
+)
+
+# создаем таблицу с помощью библиотеке DT
+DT::datatable(camps,
+  extensions = c(
+    "Buttons",
+    "ColReorder",
+    "FixedHeader",
+    "RowGroup"
+  ),
+  escape = FALSE,
+  class = "display compact nowrap",
+  caption = htmltools::tags$caption(
+    style = "caption-side: top; text-align: left; color: gray;",
+    htmltools::h4("Таблица: Срез по рекламной кампании")
+    ),
+  options = list(
+    columnDefs = list(list(
+      className = "dt-right",
+      targets = 3:5
+    )),
+    pageLength = 10,
+    dom = "Btpli",
+    language = list(url = "//cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json"),
+    buttons = c("csv", "excel", "pdf"),
+    colReorder = TRUE,
+    fixedHeader = TRUE
+  )
+) |> 
+  formatStyle(
+    columns = "Clicks",
+    background = styleColorBar(camps$Clicks, "#C4D8F3"),
+    backgroundSize = "100% 90%",
+    backgroundRepeat = "no-repeat",
+    backgroundPosition = "center"
+  ) |> 
+  formatStyle(
+    columns = "wImp",
+    background = styleColorBar(camps$wImp, "#C4D8F3"),
+    backgroundSize = "100% 90%",
+    backgroundRepeat = "no-repeat",
+    backgroundPosition = "center"
+  )
+```
+
+
+### РК по Месяцам
+
+```{r}
+camp_month <- account |> 
+  reframe(
+    round(across(where(is.numeric), sum)),
+    .by = c(Date, CampaignName)
+  ) |> 
+  mutate(Month = clock::date_format(Date, format = "%m-%y")) |> 
+  reframe(
+    round(across(where(is.numeric), sum)),
+    Days = n(),
+    .by = c(Month, CampaignName)
+  ) |> 
+  mutate(
+    Campaign = CampaignName,
+    Cost = round(Cost),
+    wImp = round(WeightedImpressions),
+    BR = if_else(Bounces == 0 | Sessions == 0, 0, round(Bounces / Sessions * 100)),
+    wCTR = if_else(Clicks == 0 | WeightedImpressions == 0, 0, round(Clicks / WeightedImpressions * 100, 2)),
+    cpaFC = if_else(Cost == 0 | GoalsFC == 0, 0, round(Cost / GoalsFC)),
+    cpaLC = if_else(Cost == 0 | GoalsLC == 0, 0,round(Cost / GoalsLC)),
+    CPC = if_else(Cost == 0 | Clicks == 0, 0, round(Cost / Clicks)),
+    crFC = if_else(Clicks == 0 | GoalsFC == 0, 0, round(GoalsFC / Clicks * 100, 2)),
+    crLC = if_else(Clicks == 0 | GoalsLC == 0, 0, round(GoalsLC / Clicks * 100, 2))
+    ) |> 
+  select(
+    Month,
+    Days,
+    Campaign,
+    Cost,
+    GoalsFC,
+    GoalsLC,
+    cpaFC,
+    cpaLC,
+    crFC,
+    crLC,
+    wImp,
+    Clicks,
+    CPC,
+    wCTR,
+    BR
+    )
+```
+
+
+```{r}
+# задаем стиль выбранных колонок
+
+camp_month[, c(4, 5, 6)] <- lapply(
+  camp_month[, c(4, 5, 6)],
+  function(x) {
+    cell_spec(x,
+      color = "black",
+      bold = F,
+      background = spec_color(x,
+        end = 0.9,
+        option = "C",
+        direction = -1,
+        alpha = 0.4
+      )
+    )
+  }
+)
+
+# создаем таблицу с помощью библиотеке DT
+DT::datatable(camp_month,
+  extensions = c(
+    "Buttons",
+    "ColReorder",
+    "FixedHeader",
+    "RowGroup"
+  ),
+  escape = FALSE,
+  class = "display compact nowrap",
+  caption = htmltools::tags$caption(
+    style = "caption-side: top; text-align: left; color: gray;",
+    htmltools::h4("Таблица: Срез по рекламной кампании")
+  ),
+  options = list(
+    columnDefs = list(
+      list(className = "dt-right", targets = 4:6),
+      list(className = "dt-center", targets = 2)
+    ),
+    pageLength = 10,
+    dom = "Btpli",
+    language = list(url = "//cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json"),
+    buttons = c("csv", "excel", "pdf"),
+    colReorder = TRUE,
+    fixedHeader = TRUE
+  )
+)  |> 
+  formatStyle(
+    columns = "Clicks",
+    background = styleColorBar(camp_month$Clicks, "#C4D8F3"),
+    backgroundSize = "100% 90%",
+    backgroundRepeat = "no-repeat",
+    backgroundPosition = "center"
+  )  |> 
+  formatStyle(
+    columns = "wImp",
+    background = styleColorBar(camp_month$wImp, "#C4D8F3"),
+    backgroundSize = "100% 90%",
+    backgroundRepeat = "no-repeat",
+    backgroundPosition = "center"
+  )
+
+```
+
+
+
+### Группы
+
+```{r}
+# создаем таблицу
+camp_groups <- account %>% 
+  reframe(round(across(where(is.numeric), sum)), 
+          .by = c(CampaignName, AdGroupName)) %>%
+  mutate(Campaign  = CampaignName,
+         Group     = AdGroupName,
+         Cost      = round(Cost),
+         wImp      = round(WeightedImpressions),
+         `BR,%`    = if_else(Bounces == 0| Sessions == 0, 0, 
+                              round(Bounces / Sessions * 100)),
+         `wCTR,%`  = if_else(Clicks == 0| WeightedImpressions == 0, 0, 
+                                 round(Clicks / WeightedImpressions * 100, 2)),
+         `cpaFC,₽` = if_else(Cost == 0| GoalsFC == 0, 0,
+                                 round(Cost / GoalsFC)),
+         `cpaLC,₽` = if_else(Cost == 0| GoalsLC == 0, 0,
+                                 round(Cost / GoalsLC)),
+         `CPC,₽`   = if_else(Cost == 0| Clicks == 0, 0,
+                                 round(Cost / Clicks)),
+         `crFC,%`  = if_else(Clicks == 0| GoalsFC == 0, 0,
+                                 round(GoalsFC/ Clicks * 100, 2)),
+         `crLC,%`  = if_else(Clicks == 0| GoalsLC == 0, 0,
+                             round(GoalsLC / Clicks * 100, 2))) %>% 
+  select(Campaign,
+         Group,
+         Cost,
+         GoalsFC,
+         GoalsLC,
+         `cpaFC,₽`,
+         `cpaLC,₽`,
+         `crFC,%`,
+         `crLC,%`,
+         wImp,
+         Clicks,
+         `CPC,₽`,
+         `wCTR,%`,
+         `BR,%`) %>% 
+  arrange(Campaign, desc(Cost))
+
+# задаем стиль выбранных колонок с помощью библиотеки kableExtra
+camp_groups[, c(3,4,5)] <- lapply(camp_groups[, c(3,4,5)], 
+                                 function(x) {
+                                   cell_spec(x, 
+                                             color = "black", 
+                                             bold = F,
+                                             background = spec_color(x, 
+                                                                     end = 0.9, 
+                                                                     option = "C", 
+                                                                     direction = -1,
+                                                                     alpha = 0.4))
+                                   })
+
+# создаем таблицу с помощью библиотеке DT
+DT::datatable(camp_groups,
+              extensions = c('Buttons',
+                             'ColReorder',
+                             'FixedHeader',
+                             'RowGroup'),
+              escape  = FALSE,
+              class   = 'display compact nowrap',
+              caption = htmltools::tags$caption(style = 'caption-side: top; text-align: left; color: gray;',
+                                                htmltools::h4('Таблица: Данные по группам и кампаниям')),
+              options = list(columnDefs = list(list(className = 'dt-right', 
+                                                    targets = 3:5)),
+                             pageLength = 10,
+                             dom        = "Btpli",
+                             language   = list(url = '//cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json'),
+                             buttons    = c('csv', 'excel', 'pdf'),
+                             colReorder = TRUE,
+                             fixedHeader = TRUE,
+                             rowGroup = list(dataSrc = 1),
+                             selection = 'none')) %>%
+  formatStyle('Clicks',
+              background = styleColorBar(camp_groups$Clicks, '#C4D8F3'),
+              backgroundSize = '100% 90%',
+              backgroundRepeat = 'no-repeat',
+              backgroundPosition = 'center' ) %>% 
+  formatStyle(columns            = 'wImp',
+              background         = styleColorBar(camp_month$wImp, '#C4D8F3'),
+              backgroundSize     = '100% 90%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'center' )
+
+```
+
+
+
+### Кампании 30 дней
+
+```{r}
+
+camp_30 <- account %>% 
+  filter(Date >= Sys.Date()-31) %>% 
+  reframe(round(across(where(is.numeric), sum)), 
+          .by = CampaignName) %>%
+  mutate(Campaign  = CampaignName,
+         Cost      = round(Cost),
+         wImp      = round(WeightedImpressions),
+         `BR,%`    = if_else(Bounces == 0| Sessions == 0, 0, 
+                              round(Bounces / Sessions * 100)),
+         `wCTR,%`  = if_else(Clicks == 0| WeightedImpressions == 0, 0, 
+                                 round(Clicks / WeightedImpressions * 100, 2)),
+         `cpaFC,₽` = if_else(Cost == 0| GoalsFC == 0, 0,
+                                 round(Cost / GoalsFC)),
+         `cpaLC,₽` = if_else(Cost == 0| GoalsLC == 0, 0,
+                                 round(Cost / GoalsLC)),
+         `CPC,₽`   = if_else(Cost == 0| Clicks == 0, 0,
+                                 round(Cost / Clicks)),
+         `crFC,%`  = if_else(Clicks == 0| GoalsFC == 0, 0,
+                                 round(GoalsFC/ Clicks * 100, 2)),
+         `crLC,%`  = if_else(Clicks == 0| GoalsLC == 0, 0,
+                             round(GoalsLC / Clicks * 100, 2))) %>% 
+  select(Campaign,
+         Cost,
+         GoalsFC,
+         GoalsLC,
+         `cpaFC,₽`,
+         `cpaLC,₽`,
+         `crFC,%`,
+         `crLC,%`,
+         wImp,
+         Clicks,
+         `CPC,₽`,
+         `wCTR,%`,
+         `BR,%`) %>% 
+  arrange(desc(Cost))
+
+# задаем стиль выбранных колонок
+camp_30[, c(2,3,4)] <- lapply(camp_30[, c(2,3,4)], 
+                                 function(x) {
+                                   cell_spec(x, 
+                                             color = "black", 
+                                             bold = F,
+                                             background = spec_color(x, 
+                                                                     end = 0.9, 
+                                                                     option = "C", 
+                                                                     direction = -1,
+                                                                     alpha = 0.4))
+                                   })
+
+# создаем таблицу с помощью библиотеке DT
+datatable(camp_30,
+          extensions = c('Buttons',
+                         'ColReorder',
+                         'FixedHeader',
+                         'FixedColumns'),
+              escape  = FALSE,
+              class   = 'display compact nowrap',
+              caption = htmltools::tags$caption(style = 'caption-side: top; text-align: left; color: gray;',
+                                                htmltools::h4('Таблица: Данные по РК за 30 дней')),
+              options = list(columnDefs = list(list(className = 'dt-right', targets = 2:4)),
+                             pageLength = 10,
+                             dom        = "Btpli",
+                             language   = list(url = '//cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json'),
+                             buttons    = c('csv', 'excel', 'pdf'),
+                             colReorder = TRUE,
+                             fixedHeader = TRUE,
+                             fixedColumns = list(leftColumns = 2))) %>%
+  formatStyle(columns            = 'Clicks',
+              background         = styleColorBar(camp_30$Clicks, '#C4D8F3'),
+              backgroundSize     = '100% 90%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'center' ) %>% 
+  formatStyle(columns            = 'wImp',
+              background         = styleColorBar(camp_month$wImp, '#C4D8F3'),
+              backgroundSize     = '100% 90%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'center' )
+
+```
+
+
+### Группы 30 дней
+
+```{r}
+
+groups_30 <- account %>% 
+  filter(Date >= Sys.Date()-31) %>%
+  reframe(round(across(where(is.numeric), sum)), 
+          .by = c(CampaignName, AdGroupName)) %>%
+  mutate(Campaign  = CampaignName,
+         Group     = AdGroupName,
+         Cost      = round(Cost),
+         wImp      = round(WeightedImpressions),
+         `BR,%`    = if_else(Bounces == 0| Sessions == 0, 0, 
+                              round(Bounces / Sessions * 100)),
+         `wCTR,%`  = if_else(Clicks == 0| WeightedImpressions == 0, 0, 
+                                 round(Clicks / WeightedImpressions * 100, 2)),
+         `cpaFC,₽` = if_else(Cost == 0| GoalsFC == 0, 0,
+                                 round(Cost / GoalsFC)),
+         `cpaLC,₽` = if_else(Cost == 0| GoalsLC == 0, 0,
+                                 round(Cost / GoalsLC)),
+         `CPC,₽`   = if_else(Cost == 0| Clicks == 0, 0,
+                                 round(Cost / Clicks)),
+         `crFC,%`  = if_else(Clicks == 0| GoalsFC == 0, 0,
+                                 round(GoalsFC/ Clicks * 100, 2)),
+         `crLC,%`  = if_else(Clicks == 0| GoalsLC == 0, 0,
+                             round(GoalsLC / Clicks * 100, 2))) %>% 
+  select(Campaign,
+         Group,
+         Cost,
+         GoalsFC,
+         GoalsLC,
+         `cpaFC,₽`,
+         `cpaLC,₽`,
+         `crFC,%`,
+         `crLC,%`,
+         wImp,
+         Clicks,
+         `CPC,₽`,
+         `wCTR,%`,
+         `BR,%`) %>% 
+  arrange(Campaign, desc(Cost)) %>% 
+  filter(Cost > 0)
+
+# задаем стиль выбранных колонок
+groups_30[, c(3,4,5)] <- lapply(groups_30[, c(3,4,5)], 
+                                 function(x) {
+                                   cell_spec(x, 
+                                             color = "black", 
+                                             bold = F,
+                                             background = spec_color(x, 
+                                                                     end = 0.9, 
+                                                                     option = "C", 
+                                                                     direction = -1,
+                                                                     alpha = 0.4))
+                                   })
+
+
+# создаем таблицу с помощью библиотеке DT
+DT::datatable(camp_groups,
+              extensions = c('Buttons',
+                             'ColReorder',
+                             'RowGroup',
+                             'FixedHeader'),
+              escape  = FALSE,
+              class   = 'display compact nowrap',
+              caption = htmltools::tags$caption(style = 'caption-side: top; text-align: left; color: gray;',
+                                                htmltools::h4('Таблица: Данные по группам и кампаниям')),
+              options = list(columnDefs = list(list(className = 'dt-right', 
+                                                    targets = 3:5)),
+                             pageLength = 10,
+                             dom        = "Btpli",
+                             language   = list(url = '//cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json'),
+                             buttons    = c('csv', 'excel', 'pdf'),
+                             colReorder = TRUE,
+                             fixedHeader = TRUE,
+                             rowGroup = list(dataSrc = 1),
+                             selection = 'none')) %>%
+  formatStyle(columns            = 'Clicks',
+              background         = styleColorBar(camp_groups$Clicks, '#C4D8F3'),
+              backgroundSize     = '100% 90%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'center' ) %>% 
+  formatStyle(columns            = 'wImp',
+              background         = styleColorBar(camp_month$wImp, '#C4D8F3'),
+              backgroundSize     = '100% 90%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'center' )
+
+
+```
+
+
+### Группы 7 дней
+
+```{r}
+# создаем таблицу
+groups_7 <- account |> 
+  filter(Date >= Sys.Date()-8) |> 
+  reframe(
+    round(across(where(is.numeric), sum)),
+    .by = c(CampaignName, AdGroupName)
+    ) |> 
+  mutate(
+    Campaign  = CampaignName,
+    Group     = AdGroupName,
+    Cost      = round(Cost),
+    wImp      = round(WeightedImpressions),
+    BR    = if_else(Bounces == 0| Sessions == 0, 0, round(Bounces / Sessions * 100)),
+    wCTR  = if_else(Clicks == 0| WeightedImpressions == 0, 0,round(Clicks / WeightedImpressions * 100, 2)),
+    cpaFC = if_else(Cost == 0| GoalsFC == 0, 0, round(Cost / GoalsFC)),
+    cpaLC = if_else(Cost == 0| GoalsLC == 0, 0, round(Cost / GoalsLC)),
+    CPC   = if_else(Cost == 0| Clicks == 0, 0, round(Cost / Clicks)),
+    crFC  = if_else(Clicks == 0| GoalsFC == 0, 0, round(GoalsFC/ Clicks * 100, 2)),
+    crLC  = if_else(Clicks == 0| GoalsLC == 0, 0, round(GoalsLC / Clicks * 100, 2))
+    ) |>  
+  select(
+    Campaign,
+    Group,
+    Cost,
+    GoalsFC,
+    GoalsLC,
+    cpaFC,
+    cpaLC,
+    crFC,
+    crLC,
+    wImp,
+    Clicks,
+    CPC,
+    wCTR,
+    BR
+    ) |>  
+  arrange(Campaign, desc(Cost)) |> 
+  filter(Cost > 0)
+```
+
+
+```{r}
+# задаем стиль выбранных колонок
+groups_7[, c(3,4,5)] <- lapply(groups_7[, c(3,4,5)], 
+                                 function(x) {
+                                   cell_spec(x, 
+                                             color = "black", 
+                                             bold = F,
+                                             background = spec_color(x, 
+                                                                     end = 0.9, 
+                                                                     option = "C", 
+                                                                     direction = -1,
+                                                                     alpha = 0.4))
+                                   })
+
+
+# создаем таблицу с помощью библиотеке DT
+datatable(groups_7,
+          extensions = c('Buttons',
+                         'ColReorder',
+                         'RowGroup',
+                         'FixedHeader'),
+          escape  = FALSE,
+          class   = 'display compact nowrap',
+          caption = htmltools::tags$caption(style = 'caption-side: top; 
+                                            text-align: left; 
+                                            color: gray;',
+                                            htmltools::h4('Таблица: Данные по группам и кампаниям')),
+          options = list(columnDefs = list(list(className = 'dt-right', 
+                                                targets = 3:5)),
+                         pageLength = 10,
+                         dom        = "Btpli",
+                         language   = list(url = '//cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json'),
+                         buttons    = c('csv', 'excel', 'pdf'),
+                         colReorder = TRUE,
+                         fixedHeader = TRUE,
+                         rowGroup = list(dataSrc = 1),
+                         selection = 'none')) %>%
+  formatStyle(columns            = 'Clicks',
+              background         = styleColorBar(groups_7$Clicks, '#C4D8F3'),
+              backgroundSize     = '100% 90%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'center' ) %>% 
+  formatStyle(columns            = 'wImp',
+              background         = styleColorBar(groups_7$wImp, '#C4D8F3'),
+              backgroundSize     = '100% 90%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'center' )
+```
+
+
+### Полярный график по РК
+
+Полярный график достижения целей в разрезе РК за весь период.
+
+```{r}
+account |> 
+  reframe(
+    across(where(is.numeric), sum), 
+    .by = CampaignName) |>  
+  ggplot(
+    aes(
+      x = reorder(CampaignName, -GoalsLC),
+      y = GoalsLC,
+      color = CampaignName
+      )) +
+  geom_point() +
+  geom_text(
+    aes(label = GoalsLC),
+    nudge_y = 0.5
+    ) +
+  theme_minimal() +
+  labs(
+    x = NULL,
+    y = NULL) +
+  theme(legend.position = "none") +
+  coord_polar()
+```
+
+:::
+
+
+
+## Объявления
+
+Рассмотрим данные по объявлениям из действующий РК.
+
+:::: {.panel-tabset}
+
+```{r temp4}
+
+# загрузка данных
+ads_raw_data <- vroom::vroom(file = "~/GitHub/BI/data/ads.txt")
+
+```
+
+
+```{r}
+
+# подготовим данные к анализу
+## задаем вектор имен
+mc_names <- c("Calls_F", 
+              "Calls_A", 
+              "B24_F", 
+              "B24_A", 
+              "Forms_F", 
+              "Forms_A", 
+              "EMails_F", 
+              "EMails_A")
+
+## обработаем данные по целям
+ads <- ads_raw_data %>%
+  mutate(across(c(12:ncol(.)), ~ ifelse(. == "--", 0, .)),
+         across(c(12:ncol(.)), as.numeric)) %>%
+  rename_at(vars(12:ncol(.)), ~ mc_names) %>%
+  mutate(GoalsFC = rowSums(across(ends_with("_F"), ~abs(.x))),
+         GoalsLC = rowSums(across(ends_with("_A"), ~abs(.x))))
+
+```
+
+
+### Форматы
+
+::: {layout-ncol=2}
+
+```{r}
+#| fig-cap: "Показы по типу формата объявлений за последние 30 дней"
+
+ads %>% 
+  filter(Date >= Sys.Date()-31) %>% 
+  reframe(round(across(where(is.numeric), sum)), 
+          .by =c(CampaignName, AdFormat)) %>%
+  ggplot()+
+  geom_col(aes(x = CampaignName, 
+               y = WeightedImpressions, 
+               fill = AdFormat),
+           position = "dodge")+
+  scale_y_log10()+
+  theme_minimal()+
+  theme(legend.position = "top",
+        legend.title = element_text(size = 12, color = "gray50"),
+        legend.text = element_text(size = 10, color = "gray50"),
+        axis.title = element_text(size = 10, color = "gray40"),
+        axis.text  = element_text(size = 10, color = "gray40"),
+        axis.text.x = element_text(angle = 90))+
+  labs(x = NULL,
+       y = "Показы")
+
+```
+
+
+```{r}
+#| fig-cap: "Клики по типу формата за последние 30 дней"
+
+ads %>% 
+  filter(Date >= Sys.Date()-31) %>% 
+  reframe(round(across(where(is.numeric), sum)), .by =c(CampaignName, AdFormat)) %>%
+  ggplot()+
+  geom_col(aes(x = CampaignName, y = Clicks, fill = AdFormat),
+           position = "dodge")+
+  theme_minimal()+
+  theme(legend.position = "top",
+        legend.title = element_text(size = 12, color = "gray50"),
+        legend.text = element_text(size = 10, color = "gray50"),
+        axis.title = element_text(size = 10, color = "gray40"),
+        axis.text  = element_text(size = 10, color = "gray40"),
+        axis.text.x = element_text(angle = 90))+
+  labs(x = NULL,
+       y = "Клики")
+
+```
+
+:::
+
+```{r}
+
+formats <- ads %>% 
+  reframe(round(across(where(is.numeric), sum)), 
+          .by = c(AdNetworkType, CampaignName, AdFormat)) %>%
+  mutate(Cost      = round(Cost),
+         wImp      = round(WeightedImpressions),
+         `BR,%`    = if_else(Bounces == 0| Sessions == 0, 0, 
+                              round(Bounces / Sessions * 100)),
+         `wCTR,%`  = if_else(Clicks == 0| WeightedImpressions == 0, 0, 
+                                 round(Clicks / WeightedImpressions * 100, 2)),
+         `cpaFC,₽` = if_else(Cost == 0| GoalsFC == 0, 0,
+                                 round(Cost / GoalsFC)),
+         `cpaLC,₽` = if_else(Cost == 0| GoalsLC == 0, 0,
+                                 round(Cost / GoalsLC)),
+         `CPC,₽`   = if_else(Cost == 0| Clicks == 0, 0,
+                                 round(Cost / Clicks)),
+         `crFC,%`  = if_else(Clicks == 0| GoalsFC == 0, 0,
+                                 round(GoalsFC/ Clicks * 100, 2)),
+         `crLC,%`  = if_else(Clicks == 0| GoalsLC == 0, 0,
+                             round(GoalsLC / Clicks * 100, 2))) %>% 
+  select(CampaignName,
+         AdNetworkType,
+         AdFormat,
+         Cost,
+         GoalsFC,
+         GoalsLC,
+         `cpaFC,₽`,
+         `cpaLC,₽`,
+         `crFC,%`,
+         `crLC,%`,
+         wImp,
+         Clicks,
+         `CPC,₽`,
+         `wCTR,%`,
+         `BR,%`) %>% 
+  arrange(CampaignName, desc(Cost)) 
+
+# задаем стиль выбранных колонок
+formats[, c(4,5,6)] <- lapply(formats[, c(4,5,6)], 
+                                 function(x) {
+                                   cell_spec(x, 
+                                             color = "black", 
+                                             bold = F,
+                                             background = spec_color(x, 
+                                                                     end = 0.9, 
+                                                                     option = "C", 
+                                                                     direction = -1,
+                                                                     alpha = 0.4))
+                                   })
+
+formats %>% 
+  kbl(format = "html",
+      caption = "Метрики по РК, площадкам и форматам",
+      escape = F) %>% 
+  kable_paper() %>% 
+  kable_styling(bootstrap_options = c("hover", "condensed", "responsive"), 
+                fixed_thead = TRUE) %>% 
+  row_spec(0, 
+           background = "#DBB9FA", 
+           color = "#5A5A5A", 
+           font_size = 16) %>% 
+  row_spec(1:length(formats$CampaignName),
+           align = "r",
+           font_size = 14) %>%
+  column_spec(c(3, 6),
+              border_right = T)
+  
+```
+
+
+### Слоты
+
+::: {layout-ncol=2}
+
+```{r}
+#| fig-cap: "Показы объявлений в блоках"
+
+ads %>% 
+  filter(Date >= Sys.Date()-31) %>% 
+  reframe(round(across(where(is.numeric), sum)), 
+          .by =c(CampaignName, Slot)) %>%
+  ggplot()+
+  geom_col(aes(x = CampaignName, 
+               y = WeightedImpressions, 
+               fill = Slot),
+           position = "dodge")+
+  scale_fill_manual(values = c("#19a6b3",
+                               "#f26c0d",
+                               "#5e3894",
+                               "#FF00FF",
+                               "#8F989B"))+
+  scale_y_log10()+
+  theme_minimal()+
+  theme(legend.position = "top",
+        legend.title    = element_text(size = 12, color = "gray50"),
+        legend.text     = element_text(size = 10, color = "gray50"),
+        axis.title      = element_text(size = 10, color = "gray40"),
+        axis.text       = element_text(size = 10, color = "gray40"),
+        axis.text.x     = element_text(angle = 90))+
+  labs(x = NULL,
+       y = "Показы")
+
+```
+
+
+```{r}
+#| fig-cap: "Клики по объявлениям в блоках"
+
+ads %>% 
+  filter(Date >= Sys.Date()-31) %>% 
+  reframe(round(across(where(is.numeric), sum)), .by =c(CampaignName, Slot)) %>%
+ 
+  ggplot()+
+  geom_col(aes(x = CampaignName, y = Clicks, fill = Slot),
+           position = "dodge")+
+  scale_fill_manual(values = c("#19a6b3","#f26c0d","#5e3894", "#FF00FF", "#8F989B"))+
+  labs(x = NULL,
+       y = "Clicks")+
+  theme_minimal()+
+  theme(legend.position = "top",
+        legend.title = element_text(size = 12, color = "gray50"),
+        legend.text = element_text(size = 10, color = "gray50"),
+        axis.title = element_text(size = 10, color = "gray40"),
+        axis.text  = element_text(size = 10, color = "gray40"),
+        axis.text.x = element_text(angle = 90))+
+  labs(x = "Кампании",
+       y = "Клики")
+
+```
+
+
+:::
+
+
+```{r}
+
+slots <- ads %>% 
+  reframe(round(across(where(is.numeric), sum)), 
+          .by = c(AdNetworkType, CampaignName, Slot)) %>%
+  mutate(Cost      = round(Cost),
+         wImp      = round(WeightedImpressions),
+         `BR,%`    = if_else(Bounces == 0| Sessions == 0, 0, 
+                              round(Bounces / Sessions * 100)),
+         `wCTR,%`  = if_else(Clicks == 0| WeightedImpressions == 0, 0, 
+                                 round(Clicks / WeightedImpressions * 100, 2)),
+         `cpaFC,₽` = if_else(Cost == 0| GoalsFC == 0, 0,
+                                 round(Cost / GoalsFC)),
+         `cpaLC,₽` = if_else(Cost == 0| GoalsLC == 0, 0,
+                                 round(Cost / GoalsLC)),
+         `CPC,₽`   = if_else(Cost == 0| Clicks == 0, 0,
+                                 round(Cost / Clicks)),
+         `crFC,%`  = if_else(Clicks == 0| GoalsFC == 0, 0,
+                                 round(GoalsFC/ Clicks * 100, 2)),
+         `crLC,%`  = if_else(Clicks == 0| GoalsLC == 0, 0,
+                             round(GoalsLC / Clicks * 100, 2))) %>% 
+  select(CampaignName,
+         AdNetworkType,
+         Slot,
+         Cost,
+         GoalsFC,
+         GoalsLC,
+         `cpaFC,₽`,
+         `cpaLC,₽`,
+         `crFC,%`,
+         `crLC,%`,
+         wImp,
+         Clicks,
+         `CPC,₽`,
+         `wCTR,%`,
+         `BR,%`) %>% 
+  arrange(CampaignName, desc(Cost))
+
+# задаем стиль выбранных колонок
+slots[, c(4,5,6)] <- lapply(slots[, c(4,5,6)], 
+                                 function(x) {
+                                   cell_spec(x, 
+                                             color = "black", 
+                                             bold = F,
+                                             background = spec_color(x, 
+                                                                     end = 0.9, 
+                                                                     option = "C", 
+                                                                     direction = -1,
+                                                                     alpha = 0.4))
+                                   })
+
+slots %>% 
+  kbl(format = "html", 
+      caption = "Метрики по РК, типу площадки и блоку показа объявления", 
+      escape = F) %>% 
+  kable_paper() %>% 
+  kable_styling(bootstrap_options = c("hover", "condensed", "responsive"), 
+                fixed_thead = TRUE) %>% 
+  row_spec(0, 
+           background = "#DBB9FA", 
+           color = "#5A5A5A", 
+           font_size = 16) %>% 
+  row_spec(1:length(slots$CampaignName),
+           align = "r",
+           font_size = 14) %>%
+  column_spec(c(3, 6),
+              border_right = T) %>%
+  scroll_box(height = "500px", 
+             fixed_thead = T)
+  
+
+```
+
+
+### Объявления
+
+```{r get data ads text, include = FALSE, eval = FALSE}
+# запрос текстов объявлений
+## запрос запущенных ТГ кампаний
+mc_camp <- yadirGetCampaign(AgencyAccount     = "platzkart.ru-e2",
+                             Login             = "e-17332282",
+                             TokenPath         = "direct_token",
+                             States            = "ON")
+
+
+# запрос данных по объявлениям
+mc_ads_raw <- yadirGetAds(CampaignIds   = mc_camp$Id,
+                          AgencyAccount = "platzkart.ru-e2",
+                          Login         = "e-17332282",
+                          TokenPath     = "direct_token",
+                          States        = "ON") 
+
+# формируем таблицу 
+mc_ads <- mc_ads_raw %>%
+  mutate(Id = as.character(Id),
+         TextAdHref = str_replace_all(.$TextAdHref,
+                                      '(\\?.*)',
+                                      '')) %>% 
+  select(Id,
+         TextAdTitle, 
+         TextAdTitle2, 
+         TextAdText, 
+         TextAdHref)
+```
+
+
+```{r temp5, include = FALSE, eval = FALSE}
+
+# временный код для сокращения времени рендера
+vroom::vroom_write(x      = mc_ads, 
+                   file   = "~/GitHub/BI/data/mc_ads.txt", 
+                   delim  = ",",
+                   append = FALSE)
+
+```
+
+
+```{r temp6}
+
+# загрузка данных
+mc_ads <- vroom::vroom(file = "~/GitHub/BI/data/mc_ads.txt") %>% 
+  mutate(Id = as.character(Id))
+
+```
+
+
+```{r}
+
+ads_jouin <- full_join(ads, mc_ads, by = c(AdId = "Id"))
+
+ads_df <- ads_jouin %>% 
+  reframe(round(across(where(is.numeric), sum)), 
+          .by = c(CampaignName, 
+                  AdId,
+                  TextAdTitle,
+                  TextAdTitle2,
+                  TextAdText,
+                  TextAdHref)) %>%
+  filter(Clicks > 29) %>% 
+  mutate(Cost      = round(Cost),
+         wImp      = round(WeightedImpressions),
+         `BR,%`    = if_else(Bounces == 0| Sessions == 0, 0, 
+                              round(Bounces / Sessions * 100)),
+         `wCTR,%`  = if_else(Clicks == 0| WeightedImpressions == 0, 0, 
+                                 round(Clicks / WeightedImpressions * 100, 2)),
+         `cpaFC,₽` = if_else(Cost == 0| GoalsFC == 0, 0,
+                                 round(Cost / GoalsFC)),
+         `cpaLC,₽` = if_else(Cost == 0| GoalsLC == 0, 0,
+                                 round(Cost / GoalsLC)),
+         `CPC,₽`   = if_else(Cost == 0| Clicks == 0, 0,
+                                 round(Cost / Clicks)),
+         `crFC,%`  = if_else(Clicks == 0| GoalsFC == 0, 0,
+                                 round(GoalsFC/ Clicks * 100, 2)),
+         `crLC,%`  = if_else(Clicks == 0| GoalsLC == 0, 0,
+                             round(GoalsLC / Clicks * 100, 2))) %>% 
+  select(CampaignName, 
+         AdId,
+         TextAdTitle,
+         TextAdTitle2,
+         TextAdText,
+         TextAdHref,
+         Cost,
+         GoalsFC,
+         GoalsLC,
+         `cpaFC,₽`,
+         `cpaLC,₽`,
+         `crFC,%`,
+         `crLC,%`,
+         wImp,
+         Clicks,
+         `CPC,₽`,
+         `wCTR,%`,
+         `BR,%`) %>% 
+  arrange(desc(Cost))
+
+
+# создаем таблицу с помощью библиотеке DT
+datatable(ads_df,
+          extensions = c('Buttons',
+                         'ColReorder',
+                         'FixedHeader'),
+          escape  = FALSE,
+          class   = 'display compact nowrap',
+          caption = htmltools::tags$caption(style = 'caption-side: top; 
+                                            text-align: left; 
+                                            color: gray;',
+                                            htmltools::h4('Таблица: Текстовые объявления')),
+          options = list(columnDefs = list(list(className = 'dt-left', 
+                                                targets = 1:6)),
+                         pageLength = 10,
+                         dom        = "Btpli",
+                         language   = list(url = '//cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json'),
+                         buttons    = c('csv', 'excel', 'pdf'),
+                         colReorder = TRUE,
+                         fixedHeader = TRUE)) %>%
+  formatStyle(columns            = 'Clicks',
+              background         = styleColorBar(ads_df$Clicks, '#C4D8F3'),
+              backgroundSize     = '100% 90%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'center' ) %>% 
+  formatStyle(columns            = 'wImp',
+              background         = styleColorBar(ads_df$wImp, '#C4D8F3'),
+              backgroundSize     = '100% 90%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'center' )
+
+```
+
+
+
+
+### Тип клика
+
+По какой части объявления кликнул пользователь:
+
+- TITLE — заголовок объявления. Клик по отображаемой ссылке считается кликом по заголовку
+- SITELINK1, SITELINK2, ..., SITELINK8 — быстрые ссылки
+- VCARD — визитка
+- CHAT — чат с оператором
+- PHONE — номер телефона
+- MOBILE_APP_ICON — иконка приложения (для рекламы мобильных приложений)
+- BUTTON — кнопка загрузки/установки (для рекламы мобильных приложений)
+- PRODUCT_EXTENSIONS — товарные дополнения
+- MARKET — Маркет
+
+::: {.callout-caution}
+
+## Примечание
+
+Для графических объявлений, смарт-баннеров, медийных баннеров и баннеров на поиске любой клик по объявлению считается кликом по заголовку.
+
+:::
+
+```{r temp8}
+
+# загрузка данных
+click_type_raw <- vroom::vroom(file = "~/GitHub/BI/data/mc_click_type_raw.txt")
+
+```
+
+
+```{r}
+
+# сводка по типам кликов
+click_type_raw %>% 
+  count(ClickType) %>%
+  filter(!ClickType %in% "UNKNOWN") %>% 
+  mutate(ClickType = fct_reorder(ClickType, -n)) %>% 
+  ggplot(aes(x = ClickType, y = n, fill = ClickType))+
+  geom_col()+
+  theme_minimal()+
+  labs(title = "График: Кол-во кликов по элементам объявления",
+       x     = "Тип клика",
+       y     = "Кол-во кликов")+
+  theme(title = element_text(size = 12, color = "gray50"),
+        legend.position = "null",
+        axis.title      = element_text(size = 10, color = "gray40"),
+        axis.title.x    = element_text(hjust = 0.1),
+        axis.text       = element_text(size = 10, color = "gray40"),
+        axis.text.x     = element_text(angle = 90),
+        panel.grid      = element_blank())
+
+```
+
+::::
+
+
+
+
+## Сегменты
+
+Анализ сегментов.
+
+:::: {.panel-tabset}
+
+```{r temp10}
+
+# загрузка данных по сегментам
+segments <- vroom::vroom(file = "~/GitHub/BI/data/mc_segments.txt")
+
+```
+
+
+### Регионы
+
+```{r}
+reg <- segments %>% 
+  reframe(across(where(is.numeric), sum), 
+          .by = LocationOfPresenceName) %>%
+  mutate(Cost      = round(Cost),
+         wImp      = round(WeightedImpressions),
+         `BR,%`    = if_else(Bounces == 0| Sessions == 0, 0, 
+                              round(Bounces / Sessions * 100)),
+         `wCTR,%`  = if_else(Clicks == 0| WeightedImpressions == 0, 0, 
+                                 round(Clicks / WeightedImpressions * 100, 2)),
+         `cpaFC,₽` = if_else(Cost == 0| GoalsFC == 0, 0,
+                                 round(Cost / GoalsFC)),
+         `cpaLC,₽` = if_else(Cost == 0| GoalsLC == 0, 0,
+                                 round(Cost / GoalsLC)),
+         `CPC,₽`   = if_else(Cost == 0| Clicks == 0, 0,
+                                 round(Cost / Clicks)),
+         `crFC,%`  = if_else(Clicks == 0| GoalsFC == 0, 0,
+                                 round(GoalsFC/ Clicks * 100, 2)),
+         `crLC,%`  = if_else(Clicks == 0| GoalsLC == 0, 0,
+                             round(GoalsLC / Clicks * 100, 2))) %>% 
+  select(LocationOfPresenceName,
+         Cost,
+         GoalsFC,
+         GoalsLC,
+         `cpaFC,₽`,
+         `cpaLC,₽`,
+         `crFC,%`,
+         `crLC,%`,
+         wImp,
+         Clicks,
+         `CPC,₽`,
+         `wCTR,%`,
+         `BR,%`) %>% 
+  arrange(desc(Cost)) %>% 
+  filter(Cost > 0)
+
+# создаем таблицу с помощью библиотеке DT
+datatable(reg,
+          extensions = c('Buttons',
+                         'ColReorder',
+                         'FixedHeader'),
+          escape  = FALSE,
+          class   = 'display compact nowrap',
+          caption = htmltools::tags$caption(style = 'caption-side: top; 
+                                            text-align: left; 
+                                            color: gray;',
+                                            htmltools::h4('Таблица: Регионы')),
+          options = list(pageLength = 10,
+                         dom        = "Btpli",
+                         language   = list(url = '//cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json'),
+                         buttons    = c('csv', 'excel', 'pdf'),
+                         colReorder = TRUE,
+                         fixedHeader = TRUE)) %>%
+  formatStyle(columns            = 'Clicks',
+              background         = styleColorBar(reg$Clicks, '#C4D8F3'),
+              backgroundSize     = '100% 90%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'center' ) %>% 
+  formatStyle(columns            = 'wImp',
+              background         = styleColorBar(reg$wImp, '#C4D8F3'),
+              backgroundSize     = '100% 90%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'center' )
+```
+
+
+```{r}
+
+reg %>% 
+  select(LocationOfPresenceName, GoalsLC) %>%
+  reframe(across(where(is.numeric), sum), 
+          .by = c(LocationOfPresenceName)) %>%
+  arrange(desc(GoalsLC)) %>% 
+  mutate(Location = if_else(row_number() <= 3, 
+                            LocationOfPresenceName, 
+                            "Остальные")) %>%
+  reframe(GoalsLC = sum(GoalsLC), 
+          .by = Location) %>%
+  mutate(Percent = GoalsLC / sum(GoalsLC)) %>% 
+  ggplot(aes(x = "", y = GoalsLC, fill = Location)) +
+  geom_bar(width = 1, stat = "identity") +
+  geom_text(aes(label = paste0(round(Percent * 100, 1), "%")), 
+            position = position_stack(vjust = 0.5),
+            color = "white") +
+  coord_polar("y", start = 0) +
+  scale_fill_brewer(palette = "Set2") +
+  labs(title = "Доля регионов по достижению целей",
+       subtitle = "Директ",
+       x = NULL, 
+       y = NULL, 
+       fill = NULL) +
+  theme_void() +
+  theme(plot.title    = element_text(size = 12, color = "gray40"),
+        plot.subtitle = element_text(size = 10, color = "gray40"),
+        legend.position = "top",
+        legend.text   = element_text(size = 10, color = "gray40"),
+        legend.title  = element_text(size = 11, color = "gray40"))
+
+  
+```
+
+
+- Устройства
+- РК и Устройства
+
+
+
+::::
+
+
+
+## Таргеты
+
+```{r download comp}
+# загрузка данных
+places_processed <- vroom::vroom(file = "~/GitHub/BI/data/processed/mc_yd_places.txt")
+```
+
+
+## Площадки
+:::: {.panel-tabset}
+
+```{r}
+places <- places_processed %>%
+  reframe(across(where(is.numeric), sum),
+    .by = Placement
+  ) %>%
+  mutate(
+    Cost = round(Cost),
+    BR = if_else(Bounces == 0 | Sessions == 0, 0, round(Bounces / Sessions * 100)),
+    CTR = if_else(Clicks == 0 | Impressions == 0, 0, round(Clicks / Impressions * 100, 2)),
+    cpaFC = if_else(Cost == 0 | GoalsFC == 0, 0, round(Cost / GoalsFC)),
+    cpaLC = if_else(Cost == 0 | GoalsLC == 0, 0, round(Cost / GoalsLC)),
+    CPC = if_else(Cost == 0 | Clicks == 0, 0, round(Cost / Clicks)),
+    crFC = if_else(Clicks == 0 | GoalsFC == 0, 0, round(GoalsFC / Clicks * 100, 2)),
+    crLC = if_else(Clicks == 0 | GoalsLC == 0, 0, round(GoalsLC / Clicks * 100, 2))
+  ) |>
+  select(
+    Placement,
+    Cost,
+    GoalsFC,
+    GoalsLC,
+    cpaFC,
+    cpaLC,
+    crFC,
+    crLC,
+    Impressions,
+    Clicks,
+    Sessions,
+    CPC,
+    CTR,
+    BR
+    )
+```
+
+
+### Лиды
+
+```{r}
+# создаем таблицу с площадками достигнувшие цели
+plc_lids <- places |>
+  filter(GoalsFC > 0 | GoalsLC > 0) |>
+  arrange(desc(Cost))
+```
+
+
+```{r}
+# создаем таблицу с помощью библиотеке DT
+datatable(plc_lids,
+          extensions = c('Buttons',
+                         'ColReorder',
+                         'FixedHeader'),
+          escape  = FALSE,
+          class   = 'display compact nowrap',
+          caption = htmltools::tags$caption(style = 'caption-side: top; 
+                                            text-align: left; 
+                                            color: gray;',
+                                            htmltools::h5('Таблица: Площадки с лидами')),
+          options = list(pageLength = 10,
+                         dom        = "Btpli",
+                         language   = list(url = '//cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json'),
+                         buttons    = c('csv', 'excel', 'pdf'),
+                         colReorder = TRUE,
+                         fixedHeader = TRUE)) %>%
+  formatStyle(columns            = 'Clicks',
+              background         = styleColorBar(plc_lids$Clicks, '#C4D8F3'),
+              backgroundSize     = '100% 90%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'center' ) %>% 
+  formatStyle(columns            = 'Impressions',
+              background         = styleColorBar(plc_lids$Impressions, '#C4D8F3'),
+              backgroundSize     = '100% 90%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'center' )
+```
+
+
+### Расходы
+
+В таблице указаны площадки с расходом от 100₽ за весь период.
+
+```{r}
+# создаем таблицу по расходам
+plc_cost <- places |> 
+  filter(Cost > 100) %>% 
+  arrange(desc(Cost))
+```
+
+
+```{r}
+# создаем интерактивную таблицу с помощью библиотеке DT
+
+datatable(plc_cost,
+          extensions = c('Buttons',
+                         'ColReorder',
+                         'FixedHeader'),
+          escape  = FALSE,
+          class   = 'display compact nowrap',
+          caption = htmltools::tags$caption(style = 'caption-side: top; 
+                                            text-align: left; 
+                                            color: gray;',
+                                            htmltools::h5('Таблица: Расходы за весь период')),
+          options = list(pageLength = 10,
+                         dom        = "Btpli",
+                         language   = list(url = '//cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json'),
+                         buttons    = c('csv', 'excel', 'pdf'),
+                         colReorder = TRUE,
+                         fixedHeader = TRUE)) %>%
+  formatStyle(columns            = 'Clicks',
+              background         = styleColorBar(plc_cost$Clicks, '#C4D8F3'),
+              backgroundSize     = '100% 90%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'center' ) %>% 
+  formatStyle(columns            = 'Impressions',
+              background         = styleColorBar(plc_cost$Impressions, '#C4D8F3'),
+              backgroundSize     = '100% 90%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'center' )
+```
+
+
+### Расходы 30
+
+В таблице указаны площадки с расходом от 500₽ за последние 30 дней.
+
+```{r}
+# создаем таблицу по расходам
+
+plc_cost30 <- places_processed  |> 
+  filter(Date >= Sys.Date() - 31)  |> 
+  reframe(
+    across(where(is.numeric), sum),
+    .by = Placement
+    ) |> 
+  mutate(
+    Cost = round(Cost),
+    BR = if_else(Bounces == 0 | Sessions == 0, 0, round(Bounces / Sessions * 100)),
+    CTR = if_else(Clicks == 0 | Impressions == 0, 0, round(Clicks / Impressions * 100, 2)),
+    cpaFC = if_else(Cost == 0 | GoalsFC == 0, 0, round(Cost / GoalsFC)),
+    cpaLC = if_else(Cost == 0 | GoalsLC == 0, 0, round(Cost / GoalsLC)),
+    CPC = if_else(Cost == 0 | Clicks == 0, 0, round(Cost / Clicks)),
+    crFC = if_else(Clicks == 0 | GoalsFC == 0, 0, round(GoalsFC / Clicks * 100, 2)),
+    crLC = if_else(Clicks == 0 | GoalsLC == 0, 0, round(GoalsLC / Clicks * 100, 2))
+  ) |>
+  select(
+    Placement,
+    Cost,
+    GoalsFC,
+    GoalsLC,
+    cpaFC,
+    cpaLC,
+    crFC,
+    crLC,
+    Impressions,
+    Clicks,
+    Sessions,
+    CPC,
+    CTR,
+    BR
+  ) |>
+  filter(Cost >= 500) %>%
+  arrange(desc(Cost))
+```
+
+
+```{r}
+# создаем таблицу с помощью библиотеке DT
+
+datatable(plc_cost30,
+          extensions = c('Buttons',
+                         'ColReorder',
+                         'FixedHeader'),
+          escape  = FALSE,
+          class   = 'display compact nowrap',
+          caption = htmltools::tags$caption(style = 'caption-side: top; 
+                                            text-align: left; 
+                                            color: gray;',
+                                            htmltools::h5('Таблица: Расходы за 30 дней')),
+          options = list(pageLength = 10,
+                         dom        = "Btpli",
+                         language   = list(url = '//cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json'),
+                         buttons    = c('csv', 'excel', 'pdf'),
+                         colReorder = TRUE,
+                         fixedHeader = TRUE)) %>%
+  formatStyle(columns            = 'Clicks',
+              background         = styleColorBar(plc_cost30$Clicks, '#C4D8F3'),
+              backgroundSize     = '100% 90%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'center' ) %>% 
+  formatStyle(columns            = 'Impressions',
+              background         = styleColorBar(plc_cost30$Impressions, '#C4D8F3'),
+              backgroundSize     = '100% 90%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'center' )
+```
+
+
+### Минус
+
+```{r}
+# Вводим минус-слова
+
+stop.words <- 'tank|destroy|sniper|simulator|kozel|tanks|battle|war|car|durak|hero|monster|mafia|race|fight|sudok|^com\\.|gdz|otvet|deti|igry|igri|stealth|zoo|kids|mods|craft|money|zaim|vzaem|bitcoin|igra|igro|steam|minecraft|android|^asia\\.|fugo|anime|centr-massage|binbank|ficbook|znakomstva|shooter|drug|dominoes|game|images|relax|puzzle|\\.ua$|images|sex|manga|jewels|horoscopes|horoscop'
+
+```
+
+
+```{r}
+# подготовка данных
+
+minus_pl <- places |>
+  filter(
+    Cost > 0,
+    grepl(stop.words, Placement)
+    ) |> 
+  arrange(desc(Cost))
+```
+
+
+```{r}
+# создаем таблицу с помощью библиотеке DT
+
+datatable(minus_pl,
+          extensions = c('Buttons',
+                         'ColReorder',
+                         'FixedHeader'),
+          escape  = FALSE,
+          class   = 'display compact nowrap',
+          caption = htmltools::tags$caption(style = 'caption-side: top; 
+                                            text-align: left; 
+                                            color: gray;',
+                                            htmltools::h5('Таблица: Минус площадки')),
+          options = list(pageLength = 10,
+                         dom        = "Btpli",
+                         language   = list(url = '//cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json'),
+                         buttons    = c('csv', 'excel', 'pdf'),
+                         colReorder = TRUE,
+                         fixedHeader = TRUE)) %>%
+  formatStyle(columns            = 'Cost',
+              background         = styleColorBar(minus_pl$Cost, '#EEC9E5'),
+              backgroundSize     = '100% 80%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'center' ) %>%
+  formatStyle(columns            = 'Clicks',
+              background         = styleColorBar(minus_pl$Clicks, '#EEC9E5'),
+              backgroundSize     = '100% 80%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'center' ) %>% 
+  formatStyle(columns            = 'Impressions',
+              background         = styleColorBar(minus_pl$Impressions, '#EEC9E5'),
+              backgroundSize     = '100% 80%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'center' )
+
+```
+
+
+### Сеансы
+
+Площадки без конверсий, на которых теряется более 40% сеансов.
+
+```{r}
+clicks_pl <- places |>
+  filter(
+    GoalsFC == 0 | GoalsLC == 0,
+    Sessions / Clicks < 0.6,
+    Clicks > 1
+    ) |> 
+  arrange(desc(Cost))
+```
+
+
+
+```{r}
+# создаем таблицу с помощью библиотеке DT
+
+datatable(clicks_pl,
+          filter = 'top',
+          extensions = c('Buttons',
+                         'ColReorder',
+                         'FixedHeader'),
+          escape  = FALSE,
+          class   = 'display compact nowrap',
+          caption = htmltools::tags$caption(
+            style = 'caption-side: top;
+            text-align: left; 
+            color: gray;',
+            htmltools::h5('Таблица: Потерянные клики')),
+          options = list(
+            pageLength = 10,
+            dom        = "Btpli",
+            language   = list(url = '//cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json'),
+            buttons    = c('csv', 'excel', 'pdf'),
+            colReorder = TRUE,
+            fixedHeader = TRUE)) |> 
+  formatStyle(columns            = 'Cost',
+              background         = styleColorBar(clicks_pl$Cost, '#EEC9E5'),
+              backgroundSize     = '100% 80%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'center' ) |> 
+  formatStyle(columns            = 'Clicks',
+              background         = styleColorBar(clicks_pl$Clicks, '#EEC9E5'),
+              backgroundSize     = '100% 80%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'center' ) |>  
+  formatStyle(columns            = 'Impressions',
+              background         = styleColorBar(clicks_pl$Impressions, '#EEC9E5'),
+              backgroundSize     = '100% 80%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'center' )
+```
+
+
+### Отказы
+
+Площадки без конверсий с высоким показателем отказов.
+
+```{r}
+br_pl <- places |>
+  filter(
+    GoalsFC == 0 | GoalsLC == 0,
+    BR >= 60,
+    Cost >= 100
+    ) |> 
+  arrange(desc(Cost))
+```
+
+
+```{r}
+# создаем таблицу с помощью библиотеке DT
+datatable(br_pl,
+  extensions = c(
+    "Buttons",
+    "ColReorder",
+    "FixedHeader"
+  ),
+  escape = FALSE,
+  class = "display compact nowrap",
+  caption = htmltools::tags$caption(
+    style = "caption-side: top; 
+                                            text-align: left; 
+                                            color: gray;",
+    htmltools::h5("Таблица: Отказы")
+  ),
+  options = list(
+    pageLength = 10,
+    dom = "Btpli",
+    language = list(url = "//cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json"),
+    buttons = c("csv", "excel", "pdf"),
+    colReorder = TRUE,
+    fixedHeader = TRUE
+  )
+) %>%
+  formatStyle(
+    columns = "Cost",
+    background = styleColorBar(br_pl$Cost, "#EEC9E5"),
+    backgroundSize = "100% 80%",
+    backgroundRepeat = "no-repeat",
+    backgroundPosition = "center"
+  ) %>%
+  formatStyle(
+    columns = "Clicks",
+    background = styleColorBar(br_pl$Clicks, "#EEC9E5"),
+    backgroundSize = "100% 80%",
+    backgroundRepeat = "no-repeat",
+    backgroundPosition = "center"
+  ) %>%
+  formatStyle(
+    columns = "Impressions",
+    background = styleColorBar(br_pl$Impressions, "#EEC9E5"),
+    backgroundSize = "100% 80%",
+    backgroundRepeat = "no-repeat",
+    backgroundPosition = "center"
+  )
+```
+
+
+
+### Расходы
+
+Площадки без конверсий с высоким расходом.
+
+```{r}
+cost_pl <- places |> 
+  filter(
+    GoalsFC == 0 & GoalsLC == 0,
+    Cost > 1000
+    ) |>
+  arrange(desc(Cost))
+```
+
+
+```{r}
+# создаем таблицу с помощью библиотеке DT
+
+datatable(cost_pl,
+          extensions = c('Buttons',
+                         'ColReorder',
+                         'FixedHeader'),
+          escape  = FALSE,
+          class   = 'display compact nowrap',
+          caption = htmltools::tags$caption(style = 'caption-side: top; 
+                                            text-align: left; 
+                                            color: gray;',
+                                            htmltools::h5('Таблица: Расходы')),
+          options = list(pageLength = 10,
+                         dom        = "Btpli",
+                         language   = list(url = '//cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json'),
+                         buttons    = c('csv', 'excel', 'pdf'),
+                         colReorder = TRUE,
+                         fixedHeader = TRUE)) %>%
+  formatStyle(columns            = 'Cost',
+              background         = styleColorBar(cost_pl$Cost, '#EEC9E5'),
+              backgroundSize     = '100% 80%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'center' ) %>%
+  formatStyle(columns            = 'Clicks',
+              background         = styleColorBar(cost_pl$Clicks, '#EEC9E5'),
+              backgroundSize     = '100% 80%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'center' ) %>% 
+  formatStyle(columns            = 'Impressions',
+              background         = styleColorBar(cost_pl$Impressions, '#EEC9E5'),
+              backgroundSize     = '100% 80%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'center' )
+```
+
+
+::::
+
+
+
+
