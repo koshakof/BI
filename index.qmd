@@ -4,11 +4,8 @@ editor_options:
   chunk_output_type: console
 ---
 
-Прототип сайт онлайн отчетности.
+## Проекты
 
-
-Термин и определения.
-
-Модели атрибуции
-
+* [МастерСлух](/clients/mc/masterslych.html)
+* [ПАТОР](/clients/pator/pator_bi.qmd)
 
