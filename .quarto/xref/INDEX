@@ -25,5 +25,8 @@
   },
   "reports/reports.qmd": {
     "reports.html": "07e0621c"
+  },
+  "clients/mc/02_masterslych.qmd": {
+    "02_masterslych.html": "1191272b"
   }
 }

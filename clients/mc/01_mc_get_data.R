@@ -24,7 +24,7 @@ client_login <- "e-17332282"
 
 
 # путь для записи обработанных данных
-file_path <- "~/GitHub/BI/clients/mc/data"
+file_path <- "~/GitHub/BI/clients/mc/data/"
 
 
 
@@ -77,14 +77,10 @@ account <- acc_raw  |>
 
 
 # запись обработанных данных на диск
-vroom::vroom_write(
-  x = account,
-  file = file_path,
-  delim = ",",
-  append = FALSE
+data.table::fwrite(
+  x = account, 
+  file = paste0(file_path, "account.txt")
   )
-
-
 
 
 # Объявления --------------------------------------------------------------
@@ -98,6 +94,7 @@ ads_raw <- yadirGetReport(
     "Date",
     "AdNetworkType",
     "CampaignName",
+    "AdGroupName",
     "AdFormat",
     "AdId",
     "Slot",
@@ -126,10 +123,10 @@ ads_raw <- yadirGetReport(
 ## обработаем данные по целям
 ads_temp <- ads_raw |>
   mutate(
-    across(c(12:ncol(ads_raw)), ~ ifelse(. == "--", 0, .)),
-    across(c(12:ncol(ads_raw)), as.numeric)
+    across(c(13:ncol(ads_raw)), ~ ifelse(. == "--", 0, .)),
+    across(c(13:ncol(ads_raw)), as.numeric)
   ) |> 
-  rename_at(vars(12:ncol(ads_raw)), ~names) |> 
+  rename_at(vars(13:ncol(ads_raw)), ~names) |> 
   mutate(
     GoalsFC = rowSums(across(ends_with("_F"), ~ abs(.x))),
     GoalsLC = rowSums(across(ends_with("_A"), ~ abs(.x)))
@@ -172,19 +169,11 @@ ads_text <- tibble(
 ads <- left_join(x = ads_temp, y = ads_text, by = c("AdId" = "Id"))
 
 
-
 # записываем данные по объявлениям
-vroom::vroom_write(
-  x = ads,
-  file = "~/GitHub/BI/clients/mc/data",
-  delim = ",",
-  append = FALSE
-)
-
-data.table::fwrite(x = ads, file = "~/GitHub/BI/clients/mc/data")
-
-
-
+data.table::fwrite(
+  x = ads, 
+  file = paste0(file_path, "ads.txt")
+  )
 
 
 
@@ -209,13 +198,10 @@ click_type_raw <- yadirGetReport(
 
 
 # запись данных по типу клика
-vroom::vroom_write(
-  x = click_type_raw,
-  file = file_path,
-  delim = ",",
-  append = FALSE
+data.table::fwrite(
+  x = click_type_raw, 
+  file = paste0(file_path, "click_type_raw.txt")
 )
-
 
 
 
@@ -271,13 +257,10 @@ segments <- segments_raw %>%
 
 
 # запись данных по сегментам
-vroom::vroom_write(
-  x = segments,
-  file = file_path,
-  delim = ",",
-  append = FALSE
-)
-
+data.table::fwrite(
+  x = segments, 
+  file = paste0(file_path, "segments.txt")
+  )
 
 
 # Площадки ----------------------------------------------------------------
@@ -330,10 +313,7 @@ places <- places_raw |>
   )
 
 # запись обработанных данных на диск
-vroom::vroom_write(
-  x = places,
-  file = file_path,
-  delim = ",",
-  append = FALSE
+data.table::fwrite(
+  x = places, 
+  file = paste0(file_path, "places.txt")
 )
-
