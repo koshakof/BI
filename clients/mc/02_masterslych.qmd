@@ -1875,26 +1875,37 @@ click_type_raw <- data.table::fread(file = "~/GitHub/BI/clients/mc/data/click_ty
 ```{r}
 # сводка по типам кликов
 click_type_raw  |>  
-  count(ClickType) |> 
+  count(AdNetworkType, ClickType) |> 
   filter(!ClickType %in% "UNKNOWN") |>  
-  mutate(ClickType = fct_reorder(ClickType, -n)) |> 
-  ggplot(aes(x = ClickType, y = n, fill = ClickType)) +
-  geom_col() +
+  mutate(ClickType = tidytext::reorder_within(
+    x = ClickType, 
+    by = -n, 
+    within = AdNetworkType)
+    ) |> 
+  ggplot(aes(x = ClickType, y = n)) +
+  geom_col(aes(fill = AdNetworkType)) +
   theme_minimal() +
   labs(
     title = "График: Кол-во кликов по элементам объявления",
     x     = "Тип клика",
     y     = "Кол-во кликов"
-    )+
+    ) +
   theme(
-    title = element_text(size = 12, color = "gray50"),
+    title           = element_text(size = 12, color = "gray50"),
     legend.position = "null",
     axis.title      = element_text(size = 10, color = "gray40"),
     axis.title.x    = element_text(hjust = 0.1),
     axis.text       = element_text(size = 10, color = "gray40"),
     axis.text.x     = element_text(angle = 90),
+    strip.text      = element_text(color = "gray40"),
     panel.grid      = element_blank()
-    )
+    ) +
+  facet_wrap(
+    ~ AdNetworkType,
+    scales = "free_x"
+    ) +
+  tidytext::scale_x_reordered()
+  
 ```
 
 ::::
@@ -2059,14 +2070,38 @@ reg |>
 
 ## Таргеты
 
+
+## Поисковые запросы
+:::: {.panel-tabset}
+```{r}
+# загрузка данных
+query <- data.table::fread(file = "~/GitHub/BI/clients/mc/data/query.txt")
+```
+
+
+
+### Таргеты
+
+```{r}
+query |> 
+  count(CriterionType, MatchType) |> 
+  arrange(CriterionType, -n)
+  
+```
+
+
+::::
+
+
+
+## Площадки
+:::: {.panel-tabset}
+
 ```{r}
 # загрузка данных
 places_processed <- data.table::fread(file = "~/GitHub/BI/clients/mc/data/places.txt")
 ```
 
-
-## Площадки
-:::: {.panel-tabset}
 
 ```{r}
 places <- places_processed %>%

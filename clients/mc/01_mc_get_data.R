@@ -186,9 +186,10 @@ click_type_raw <- yadirGetReport(
   DateFrom = "2023-06-01",
   DateTo = Sys.Date() - 1,
   FieldNames = c(
+    "AdNetworkType",
     "AdId",
     "ClickType"
-  ),
+    ),
   IncludeVAT = "NO",
   IncludeDiscount = "NO",
   AgencyAccount = agency_account,
@@ -201,7 +202,7 @@ click_type_raw <- yadirGetReport(
 data.table::fwrite(
   x = click_type_raw, 
   file = paste0(file_path, "click_type_raw.txt")
-)
+  )
 
 
 
@@ -317,3 +318,64 @@ data.table::fwrite(
   x = places, 
   file = paste0(file_path, "places.txt")
 )
+
+
+
+
+
+# Таргеты и ключевые слова ------------------------------------------------
+# запрос данных
+query_raw <- yadirGetReport(
+  ReportType = "SEARCH_QUERY_PERFORMANCE_REPORT",
+  DateRangeType = "CUSTOM_DATE",
+  DateFrom = "2023-06-01",
+  DateTo = Sys.Date() - 1,
+  FieldNames = c(
+    "Date",
+    "CampaignId",
+    "CampaignName",
+    "AdGroupName",
+    "CriterionType",
+    "MatchType",
+    "TargetingCategory",
+    "Criterion",
+    "Query",
+    "Cost",
+    "WeightedImpressions",
+    "Clicks",
+    "Bounces",
+    "Conversions"
+    ),
+  Goals = c(
+    301649121,
+    301314275,
+    301313194,
+    301315472
+    ),
+  AttributionModels = c("FCCD", "AUTO"),
+  IncludeVAT = "NO",
+  IncludeDiscount = "NO",
+  AgencyAccount = agency_account,
+  Login = client_login,
+  TokenPath = token
+)
+
+# исправляем данные в столбцах по достигнутым целям
+query <- query_raw |> 
+  mutate(
+    across(c(14:ncol(places_raw)), ~ ifelse(. == "--", 0, .)),
+    across(c(14:ncol(places_raw)), as.numeric)
+  )  |> 
+  rename_at(vars(14:ncol(places_raw)), ~names) %>%
+  mutate(
+    GoalsFC = rowSums(across(ends_with("_F"), ~ abs(.x))),
+    GoalsLC = rowSums(across(ends_with("_A"), ~ abs(.x)))
+  )
+
+
+# запись обработанных данных на диск
+data.table::fwrite(
+  x = query, 
+  file = paste0(file_path, "query.txt")
+  )
+
