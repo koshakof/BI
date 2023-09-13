@@ -2022,8 +2022,12 @@ datatable(
 ```
 
 
+Столбчатый график сравнения.
+
 ```{r}
-reg |>
+
+# подготавливаем данные к сравнению
+reg_plot <- reg |>
   reframe(
     across(where(is.numeric), sum),
     .by = c(LocationOfPresenceName)
@@ -2035,26 +2039,34 @@ reg |>
   reframe(
     GoalsLC = sum(GoalsLC), 
     .by = Location
-    ) |>
-  # с помощью факторов переопределяем порядок столбцов
+    )
+
+reg_plot <- reg_plot |>
   mutate(Percent = GoalsLC / sum(GoalsLC),
          Location = factor(
            Location, 
            levels = c(
-             "Краснодар",
-             "Краснодарский край",
-             "Республика Адыгея",
+             reg_plot$Location[1],
+             reg_plot$Location[2],
+             reg_plot$Location[3],
              "Остальные"
              )
            )
-         ) |> 
-  
-  ggplot(
-    aes(
-      x = Location, 
-      y = Percent, 
-      fill = Location
-      )) +
+         )
+```
+
+
+Столбчатый график сравнения ТОП-3 регионов с остальными.
+
+```{r}
+
+ggplot(
+  reg_plot,
+  aes(
+    x = Location, 
+    y = Percent, 
+    fill = Location
+    )) +
   geom_col(position = "dodge") +
   geom_text(
     aes(
@@ -2081,7 +2093,46 @@ reg |>
     legend.title  = element_text(size = 11, color = "gray40"),
     panel.grid = element_blank()
     )
+
 ```
+
+
+График сравнения части от целого по регионам.
+
+```{r}
+
+  ggplot(
+    reg_plot, 
+    aes(x = "", y = Percent, fill = Location)
+    ) +
+  geom_col(width = 0.3) +
+  geom_text(
+    aes(label = paste(round(Percent * 100), "%")),
+    position = position_stack(vjust = 0.5),
+    color = "white"
+    ) +
+  scale_y_continuous(labels = label_percent()) +
+  scale_fill_brewer(palette = "Set2") +
+  labs(
+    title = "Доля регионов по достижению целей",
+    subtitle = "Директ",
+    caption = "по данным Яндекс Директ",
+    x = NULL, 
+    y = NULL, 
+    fill = NULL
+    ) +
+  theme_minimal() +
+  theme(
+    plot.title    = element_text(size = 12, color = "gray40"),
+    plot.subtitle = element_text(size = 10, color = "gray40"),
+    legend.position = "top",
+    legend.text   = element_text(size = 10, color = "gray40"),
+    legend.title  = element_text(size = 11, color = "gray40"),
+    panel.grid = element_blank()
+    )
+   
+```
+
 
 
 
@@ -2270,19 +2321,17 @@ datatable(
 
 
 
-## Gender
+### Gender
 
 
 
 ::::
 
 
-
-## Таргеты
-
-
-## Поисковые запросы
+## Таргеты и Поисковые запросы
 :::: {.panel-tabset}
+
+
 ```{r}
 # загрузка данных
 query <- data.table::fread(file = "~/GitHub/BI/clients/mc/data/query.txt")
@@ -2290,15 +2339,14 @@ query <- data.table::fread(file = "~/GitHub/BI/clients/mc/data/query.txt")
 
 
 
-### Таргеты
+### Виды таргетов
 
 ```{r}
-query |> 
-  count(CriterionType, MatchType) |> 
-  arrange(CriterionType, -n)
-  
+
 ```
 
+
+### Поисковые запросы
 
 ::::
 
