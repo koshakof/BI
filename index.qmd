@@ -6,6 +6,6 @@ editor_options:
 
 ## Проекты
 
-* [МастерСлух](/clients/mc/masterslych.html)
-* [ПАТОР](/clients/pator/pator_bi.qmd)
+* [МастерСлух](/clients/mc/02_masterslych.qmd)
+* [ПАТОР](/clients/pator/pator.qmd)
 

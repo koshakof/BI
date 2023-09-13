@@ -1938,8 +1938,8 @@ reg <- segments |>
     .by = LocationOfPresenceName
     ) |> 
   mutate(
-    Cost      = round(Cost),
-    wImp      = round(WeightedImpressions),
+    Cost  = round(Cost),
+    wImp  = round(WeightedImpressions),
     BR    = if_else(Bounces == 0| Sessions == 0, 0, round(Bounces / Sessions * 100)),
     wCTR  = if_else(Clicks == 0| wImp == 0, 0, round(Clicks / wImp * 100, 2)),
     cpaFC = if_else(Cost == 0| GoalsFC == 0, 0, round(Cost / GoalsFC)),
@@ -1972,13 +1972,18 @@ reg <- segments |>
 # создаем таблицу с помощью библиотеке DT
 datatable(
   reg,
+  rownames = FALSE,
+  colnames = c(
+    'Location' = 1),
   extensions = c(
     'Buttons',
     'ColReorder',
-    'FixedHeader'
+    'FixedHeader',
+    'FixedColumns',
+    'KeyTable'
     ),
   escape  = FALSE,
-  class   = 'display compact nowrap',
+  class   = 'compact nowrap hover',
   caption = htmltools::tags$caption(
     style = 'caption-side: top; text-align: left; color: gray;',
     htmltools::h4('Таблица: Регионы')
@@ -1989,57 +1994,76 @@ datatable(
     language   = list(url = '//cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json'),
     buttons    = c('csv', 'excel', 'pdf'),
     colReorder = TRUE,
-    fixedHeader = TRUE)
+    fixedHeader = TRUE,
+    fixedColumns = TRUE,
+    scrollX = TRUE,
+    keys = TRUE)
   ) |> 
-  formatStyle(columns            = 'Clicks',
-              background         = styleColorBar(reg$Clicks, '#C4D8F3'),
-              backgroundSize     = '100% 90%',
-              backgroundRepeat   = 'no-repeat',
-              backgroundPosition = 'center' ) |> 
-  formatStyle(columns            = 'wImp',
-              background         = styleColorBar(reg$wImp, '#C4D8F3'),
-              backgroundSize     = '100% 90%',
-              backgroundRepeat   = 'no-repeat',
-              backgroundPosition = 'center' ) |> 
   formatStyle(columns            = 'Cost',
-              background         = styleColorBar(reg$Cost, '#C4D8F3'),
-              backgroundSize     = '100% 90%',
+              background         = styleColorBar(reg$Cost, '#EEC9E5'),
+              backgroundSize     = '80% 70%',
               backgroundRepeat   = 'no-repeat',
-              backgroundPosition = 'center' )
+              backgroundPosition = 'right' ) |> 
+  formatStyle(columns            = 'GoalsLC',
+              background         = styleColorBar(reg$GoalsLC, '#EEC9E5'),
+              backgroundSize     = '80% 70%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'right' ) |> 
+  formatStyle(columns            = 'cpaLC',
+              background         = styleColorBar(reg$cpaLC, '#EEC9E5'),
+              backgroundSize     = '80% 70%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'right' ) |> 
+  formatStyle(columns            = 'crLC',
+              background         = styleColorBar(reg$crLC, '#EEC9E5'),
+              backgroundSize     = '80% 70%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'right' )
 ```
 
 
 ```{r}
-reg |>  
-  select(
-    LocationOfPresenceName, 
-    GoalsLC
-    ) |> 
+reg |>
   reframe(
     across(where(is.numeric), sum),
-    .by = c(LocationOfPresenceName)) |> 
+    .by = c(LocationOfPresenceName)
+    ) |> 
   arrange(desc(GoalsLC)) |> 
+  # выберем три региона, а остальным дадим метку «Остальные» 
   mutate(
     Location = if_else(row_number() <= 3, LocationOfPresenceName, "Остальные")) |> 
   reframe(
     GoalsLC = sum(GoalsLC), 
-    .by = Location) |> 
-  mutate(Percent = GoalsLC / sum(GoalsLC)) |> 
+    .by = Location
+    ) |>
+  # с помощью факторов переопределяем порядок столбцов
+  mutate(Percent = GoalsLC / sum(GoalsLC),
+         Location = factor(
+           Location, 
+           levels = c(
+             "Краснодар",
+             "Краснодарский край",
+             "Республика Адыгея",
+             "Остальные"
+             )
+           )
+         ) |> 
+  
   ggplot(
     aes(
-      x = "", 
-      y = GoalsLC, 
+      x = Location, 
+      y = Percent, 
       fill = Location
       )) +
-  geom_bar(
-    width = 1, 
-    stat = "identity"
-    ) +
+  geom_col(position = "dodge") +
   geom_text(
-    aes(label = paste0(round(Percent * 100, 1), "%")), 
-    position = position_stack(vjust = 0.5),
-    color = "white") +
-  coord_polar("y", start = 0) +
+    aes(
+    label = paste0(round(Percent * 100), "%")),
+    # позицию также можно определить через position = position_stuck(vjust = 3)
+    vjust = 3,
+    color = "white"
+    ) +
+  scale_y_continuous(labels = label_percent()) +
   scale_fill_brewer(palette = "Set2") +
   labs(
     title = "Доля регионов по достижению целей",
@@ -2048,19 +2072,205 @@ reg |>
     y = NULL, 
     fill = NULL
     ) +
-  theme_void() +
+  theme_minimal() +
   theme(
     plot.title    = element_text(size = 12, color = "gray40"),
     plot.subtitle = element_text(size = 10, color = "gray40"),
-    legend.position = "top",
+    legend.position = "none",
     legend.text   = element_text(size = 10, color = "gray40"),
-    legend.title  = element_text(size = 11, color = "gray40")
+    legend.title  = element_text(size = 11, color = "gray40"),
+    panel.grid = element_blank()
     )
 ```
 
 
-- Устройства
-- РК и Устройства
+
+### Устройства
+
+```{r}
+# создаем таблицу по РК и устройствам
+device <- segments |>  
+  reframe(
+    across(where(is.numeric), sum), 
+    .by = Device
+    ) |> 
+  mutate(
+    Cost  = round(Cost),
+    wImp  = round(WeightedImpressions),
+    BR    = if_else(Bounces == 0| Sessions == 0, 0, round(Bounces / Sessions * 100)),
+    wCTR  = if_else(Clicks == 0| wImp == 0, 0, round(Clicks / wImp * 100, 2)),
+    cpaFC = if_else(Cost == 0| GoalsFC == 0, 0, round(Cost / GoalsFC)),
+    cpaLC = if_else(Cost == 0| GoalsLC == 0, 0, round(Cost / GoalsLC)),
+    CPC   = if_else(Cost == 0| Clicks == 0, 0, round(Cost / Clicks)),
+    crFC  = if_else(Clicks == 0| GoalsFC == 0, 0, round(GoalsFC/ Clicks * 100, 2)),
+    crLC  = if_else(Clicks == 0| GoalsLC == 0, 0, round(GoalsLC / Clicks * 100, 2))
+    ) |> 
+  select(
+    Device,
+    Cost,
+    GoalsFC,
+    GoalsLC,
+    cpaFC,
+    cpaLC,
+    crFC,
+    crLC,
+    wImp,
+    Clicks,
+    CPC,
+    wCTR,
+    BR
+    ) |> 
+  arrange(desc(Cost))
+```
+
+
+```{r}
+# создаем html таблицу с помощью библиотеке DT
+datatable(
+  device,
+  rownames = FALSE,
+  extensions = c(
+    'Buttons',
+    'ColReorder',
+    'FixedHeader',
+    'FixedColumns',
+    'KeyTable'
+    ),
+  escape  = FALSE,
+  class   = 'compact nowrap hover',
+  caption = htmltools::tags$caption(
+    style = 'caption-side: top; text-align: left; color: gray;',
+    htmltools::h4('Таблица: Устройства')
+    ),
+  options = list(
+    pageLength = 10,
+    dom        = "Btpli",
+    language   = list(url = '//cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json'),
+    buttons    = c('csv', 'excel', 'pdf'),
+    colReorder = TRUE,
+    fixedHeader = TRUE,
+    fixedColumns = TRUE,
+    scrollX = TRUE,
+    keys = TRUE)
+  ) |> 
+  formatStyle(columns            = 'Cost',
+              background         = styleColorBar(device$Cost, '#EEC9E5'),
+              backgroundSize     = '80% 70%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'right' ) |> 
+  formatStyle(columns            = 'GoalsLC',
+              background         = styleColorBar(device$GoalsLC, '#EEC9E5'),
+              backgroundSize     = '80% 70%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'right' ) |> 
+  formatStyle(columns            = 'cpaLC',
+              background         = styleColorBar(device$cpaLC, '#EEC9E5'),
+              backgroundSize     = '80% 70%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'right' ) |> 
+  formatStyle(columns            = 'crLC',
+              background         = styleColorBar(device$crLC, '#EEC9E5'),
+              backgroundSize     = '80% 70%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'right' )
+```
+
+
+
+```{r}
+# создаем таблицу по РК и устройствам
+device_camp <- segments |>  
+  reframe(
+    across(where(is.numeric), sum), 
+    .by = c(Device, CampaignName)
+    ) |> 
+  mutate(
+    Cost  = round(Cost),
+    wImp  = round(WeightedImpressions),
+    BR    = if_else(Bounces == 0| Sessions == 0, 0, round(Bounces / Sessions * 100)),
+    wCTR  = if_else(Clicks == 0| wImp == 0, 0, round(Clicks / wImp * 100, 2)),
+    cpaFC = if_else(Cost == 0| GoalsFC == 0, 0, round(Cost / GoalsFC)),
+    cpaLC = if_else(Cost == 0| GoalsLC == 0, 0, round(Cost / GoalsLC)),
+    CPC   = if_else(Cost == 0| Clicks == 0, 0, round(Cost / Clicks)),
+    crFC  = if_else(Clicks == 0| GoalsFC == 0, 0, round(GoalsFC/ Clicks * 100, 2)),
+    crLC  = if_else(Clicks == 0| GoalsLC == 0, 0, round(GoalsLC / Clicks * 100, 2))
+    ) |> 
+  select(
+    CampaignName,
+    Device,
+    Cost,
+    GoalsFC,
+    GoalsLC,
+    cpaFC,
+    cpaLC,
+    crFC,
+    crLC,
+    wImp,
+    Clicks,
+    CPC,
+    wCTR,
+    BR
+    ) |> 
+  arrange(CampaignName,desc(Cost))
+```
+
+
+```{r}
+# создаем html таблицу с помощью библиотеке DT
+datatable(
+  device_camp,
+  rownames = FALSE,
+  colnames = c(
+    'Campaign' = 1),
+  extensions = c(
+    'Buttons',
+    'ColReorder',
+    'FixedHeader',
+    'FixedColumns',
+    'KeyTable'
+    ),
+  escape  = FALSE,
+  class   = 'compact nowrap hover',
+  caption = htmltools::tags$caption(
+    style = 'caption-side: top; text-align: left; color: gray;',
+    htmltools::h4('Таблица: Устройства')
+    ),
+  options = list(
+    pageLength = 10,
+    dom        = "Btpli",
+    language   = list(url = '//cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json'),
+    buttons    = c('csv', 'excel', 'pdf'),
+    colReorder = TRUE,
+    fixedHeader = TRUE,
+    fixedColumns = TRUE,
+    scrollX = TRUE,
+    keys = TRUE)
+  ) |> 
+  formatStyle(columns            = 'Cost',
+              background         = styleColorBar(device_camp$Cost, '#EEC9E5'),
+              backgroundSize     = '80% 70%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'right' ) |> 
+  formatStyle(columns            = 'GoalsLC',
+              background         = styleColorBar(device_camp$GoalsLC, '#EEC9E5'),
+              backgroundSize     = '80% 70%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'right' ) |> 
+  formatStyle(columns            = 'cpaLC',
+              background         = styleColorBar(device_camp$cpaLC, '#EEC9E5'),
+              backgroundSize     = '80% 70%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'right' ) |> 
+  formatStyle(columns            = 'crLC',
+              background         = styleColorBar(device_camp$crLC, '#EEC9E5'),
+              backgroundSize     = '80% 70%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'right' )
+```
+
+
+
+## Gender
 
 
 
@@ -2166,12 +2376,12 @@ datatable(plc_lids,
                          colReorder = TRUE,
                          fixedHeader = TRUE)) %>%
   formatStyle(columns            = 'Clicks',
-              background         = styleColorBar(plc_lids$Clicks, '#C4D8F3'),
+              background         = styleColorBar(plc_lids$Clicks, '#EEC9E5'),
               backgroundSize     = '100% 90%',
               backgroundRepeat   = 'no-repeat',
               backgroundPosition = 'center' ) %>% 
   formatStyle(columns            = 'Impressions',
-              background         = styleColorBar(plc_lids$Impressions, '#C4D8F3'),
+              background         = styleColorBar(plc_lids$Impressions, '#EEC9E5'),
               backgroundSize     = '100% 90%',
               backgroundRepeat   = 'no-repeat',
               backgroundPosition = 'center' )
@@ -2210,12 +2420,12 @@ datatable(plc_cost,
                          colReorder = TRUE,
                          fixedHeader = TRUE)) %>%
   formatStyle(columns            = 'Clicks',
-              background         = styleColorBar(plc_cost$Clicks, '#C4D8F3'),
+              background         = styleColorBar(plc_cost$Clicks, '#EEC9E5'),
               backgroundSize     = '100% 90%',
               backgroundRepeat   = 'no-repeat',
               backgroundPosition = 'center' ) %>% 
   formatStyle(columns            = 'Impressions',
-              background         = styleColorBar(plc_cost$Impressions, '#C4D8F3'),
+              background         = styleColorBar(plc_cost$Impressions, '#EEC9E5'),
               backgroundSize     = '100% 90%',
               backgroundRepeat   = 'no-repeat',
               backgroundPosition = 'center' )
@@ -2285,12 +2495,12 @@ datatable(plc_cost30,
                          colReorder = TRUE,
                          fixedHeader = TRUE)) %>%
   formatStyle(columns            = 'Clicks',
-              background         = styleColorBar(plc_cost30$Clicks, '#C4D8F3'),
+              background         = styleColorBar(plc_cost30$Clicks, '#EEC9E5'),
               backgroundSize     = '100% 90%',
               backgroundRepeat   = 'no-repeat',
               backgroundPosition = 'center' ) %>% 
   formatStyle(columns            = 'Impressions',
-              background         = styleColorBar(plc_cost30$Impressions, '#C4D8F3'),
+              background         = styleColorBar(plc_cost30$Impressions, '#EEC9E5'),
               backgroundSize     = '100% 90%',
               backgroundRepeat   = 'no-repeat',
               backgroundPosition = 'center' )

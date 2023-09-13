@@ -4,9 +4,9 @@ project:
   type: website
   output-dir: docs
   render:
-    - "*.qmd"
     - "!reports/pator/"
-
+    - "*.qmd"
+    
 
 website:
   title: "PLATZKART BI"
@@ -15,7 +15,6 @@ website:
     left:
       - href: index.qmd
         text: "О проекте"
-      - reports/reports.qmd
 
 format:
   html:
