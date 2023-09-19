@@ -336,14 +336,12 @@ query_raw <- yadirGetReport(
     "CampaignName",
     "AdGroupName",
     "CriterionType",
-    "MatchType",
     "TargetingCategory",
     "Criterion",
     "Query",
     "Cost",
     "WeightedImpressions",
     "Clicks",
-    "Bounces",
     "Conversions"
     ),
   Goals = c(
@@ -363,10 +361,10 @@ query_raw <- yadirGetReport(
 # исправляем данные в столбцах по достигнутым целям
 query <- query_raw |> 
   mutate(
-    across(c(14:ncol(places_raw)), ~ ifelse(. == "--", 0, .)),
-    across(c(14:ncol(places_raw)), as.numeric)
+    across(c(12:ncol(places_raw)), ~ ifelse(. == "--", 0, .)),
+    across(c(12:ncol(places_raw)), as.numeric)
   )  |> 
-  rename_at(vars(14:ncol(places_raw)), ~names) %>%
+  rename_at(vars(12:ncol(places_raw)), ~names) %>%
   mutate(
     GoalsFC = rowSums(across(ends_with("_F"), ~ abs(.x))),
     GoalsLC = rowSums(across(ends_with("_A"), ~ abs(.x)))

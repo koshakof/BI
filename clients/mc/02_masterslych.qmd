@@ -2334,7 +2334,8 @@ datatable(
 
 ```{r}
 # загрузка данных
-query <- data.table::fread(file = "~/GitHub/BI/clients/mc/data/query.txt")
+query <- data.table::fread(file = "~/GitHub/BI/clients/mc/data/query.txt") |> 
+  mutate(CampaignId = as.character(CampaignId))
 ```
 
 
@@ -2342,11 +2343,277 @@ query <- data.table::fread(file = "~/GitHub/BI/clients/mc/data/query.txt")
 ### Виды таргетов
 
 ```{r}
-
+key_target <- query |> 
+  reframe(
+    across(where(is.numeric), sum), 
+    .by = c(CriterionType, TargetingCategory)
+    ) |> 
+  mutate(
+    Cost  = round(Cost),
+    wImp  = round(WeightedImpressions),
+    wCTR  = if_else(Clicks == 0| wImp == 0, 0, round(Clicks / wImp * 100, 2)),
+    cpaFC = if_else(Cost == 0| GoalsFC == 0, 0, round(Cost / GoalsFC)),
+    cpaLC = if_else(Cost == 0| GoalsLC == 0, 0, round(Cost / GoalsLC)),
+    CPC   = if_else(Cost == 0| Clicks == 0, 0, round(Cost / Clicks)),
+    crFC  = if_else(Clicks == 0| GoalsFC == 0, 0, round(GoalsFC/ Clicks * 100, 2)),
+    crLC  = if_else(Clicks == 0| GoalsLC == 0, 0, round(GoalsLC / Clicks * 100, 2))
+    ) |> 
+  select(
+    CriterionType,
+    TargetingCategory,
+    Cost,
+    GoalsFC,
+    GoalsLC,
+    cpaFC,
+    cpaLC,
+    crFC,
+    crLC,
+    wImp,
+    Clicks,
+    CPC,
+    wCTR
+    ) |> 
+  arrange(CriterionType,desc(Cost))
 ```
 
 
+```{r}
+# создаем html таблицу с помощью библиотеке DT
+datatable(
+  key_target,
+  rownames = FALSE,
+  colnames = c(
+    'Campaign' = 1),
+  extensions = c(
+    'Buttons',
+    'ColReorder',
+    'FixedHeader',
+    'FixedColumns',
+    'KeyTable'
+    ),
+  escape  = FALSE,
+  class   = 'compact nowrap hover',
+  caption = htmltools::tags$caption(
+    style = 'caption-side: top; text-align: left; color: gray;',
+    htmltools::h4('Таблица: Таргеты по ключевым словам')
+    ),
+  options = list(
+    pageLength = 10,
+    dom        = "Btpli",
+    language   = list(url = '//cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json'),
+    buttons    = c('csv', 'excel', 'pdf'),
+    colReorder = TRUE,
+    fixedHeader = TRUE,
+    fixedColumns = TRUE,
+    scrollX = TRUE,
+    keys = TRUE)
+  ) |> 
+  formatStyle(columns            = 'Cost',
+              background         = styleColorBar(key_target$Cost, '#EEC9E5'),
+              backgroundSize     = '80% 70%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'right' ) |> 
+  formatStyle(columns            = 'GoalsLC',
+              background         = styleColorBar(key_target$GoalsLC, '#EEC9E5'),
+              backgroundSize     = '80% 70%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'right' ) |> 
+  formatStyle(columns            = 'cpaLC',
+              background         = styleColorBar(key_target$cpaLC, '#EEC9E5'),
+              backgroundSize     = '80% 70%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'right' ) |> 
+  formatStyle(columns            = 'crLC',
+              background         = styleColorBar(key_target$crLC, '#EEC9E5'),
+              backgroundSize     = '80% 70%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'right' )
+```
+
+
+
+### Виды таргетов по РК
+
+```{r}
+key_target_camp <- query |> 
+  reframe(
+    across(where(is.numeric), sum), 
+    .by = c(CampaignName, CriterionType, TargetingCategory)
+    ) |> 
+  mutate(
+    Cost  = round(Cost),
+    wImp  = round(WeightedImpressions),
+    wCTR  = if_else(Clicks == 0| wImp == 0, 0, round(Clicks / wImp * 100, 2)),
+    cpaFC = if_else(Cost == 0| GoalsFC == 0, 0, round(Cost / GoalsFC)),
+    cpaLC = if_else(Cost == 0| GoalsLC == 0, 0, round(Cost / GoalsLC)),
+    CPC   = if_else(Cost == 0| Clicks == 0, 0, round(Cost / Clicks)),
+    crFC  = if_else(Clicks == 0| GoalsFC == 0, 0, round(GoalsFC/ Clicks * 100, 2)),
+    crLC  = if_else(Clicks == 0| GoalsLC == 0, 0, round(GoalsLC / Clicks * 100, 2))
+    ) |> 
+  select(
+    CampaignName,
+    CriterionType,
+    TargetingCategory,
+    Cost,
+    GoalsFC,
+    GoalsLC,
+    cpaFC,
+    cpaLC,
+    crFC,
+    crLC,
+    wImp,
+    Clicks,
+    CPC,
+    wCTR
+    ) |> 
+  arrange(CampaignName,CriterionType, desc(Cost))
+```
+
+```{r}
+# создаем html таблицу с помощью библиотеке DT
+datatable(
+  key_target_camp,
+  rownames = FALSE,
+  colnames = c(
+    'Campaign' = 1),
+  extensions = c(
+    'Buttons',
+    'ColReorder',
+    'FixedHeader',
+    'FixedColumns',
+    'KeyTable'
+    ),
+  escape  = FALSE,
+  class   = 'compact nowrap hover',
+  caption = htmltools::tags$caption(
+    style = 'caption-side: top; text-align: left; color: gray;',
+    htmltools::h4('Таблица: Таргеты по ключевым словам')
+    ),
+  options = list(
+    pageLength = 10,
+    dom        = "Btpli",
+    language   = list(url = '//cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json'),
+    buttons    = c('csv', 'excel', 'pdf'),
+    colReorder = TRUE,
+    fixedHeader = TRUE,
+    fixedColumns = TRUE,
+    scrollX = TRUE,
+    keys = TRUE)
+  ) |> 
+  formatStyle(columns            = 'Cost',
+              background         = styleColorBar(key_target_camp$Cost, '#EEC9E5'),
+              backgroundSize     = '80% 70%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'right' ) |> 
+  formatStyle(columns            = 'GoalsLC',
+              background         = styleColorBar(key_target_camp$GoalsLC, '#EEC9E5'),
+              backgroundSize     = '80% 70%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'right' ) |> 
+  formatStyle(columns            = 'cpaLC',
+              background         = styleColorBar(key_target_camp$cpaLC, '#EEC9E5'),
+              backgroundSize     = '80% 70%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'right' ) |> 
+  formatStyle(columns            = 'crLC',
+              background         = styleColorBar(key_target_camp$crLC, '#EEC9E5'),
+              backgroundSize     = '80% 70%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'right' )
+```
+
+
+
 ### Поисковые запросы
+
+```{r}
+query_camp <- query |> 
+  filter(Date > Sys.Date()-15) |> 
+  reframe(
+    across(where(is.numeric), sum), 
+    .by = c(CampaignName, Query)
+    ) |> 
+  mutate(
+    Cost  = round(Cost),
+    wImp  = round(WeightedImpressions),
+    wCTR  = if_else(Clicks == 0| wImp == 0, 0, round(Clicks / wImp * 100, 2)),
+    cpaFC = if_else(Cost == 0| GoalsFC == 0, 0, round(Cost / GoalsFC)),
+    cpaLC = if_else(Cost == 0| GoalsLC == 0, 0, round(Cost / GoalsLC)),
+    CPC   = if_else(Cost == 0| Clicks == 0, 0, round(Cost / Clicks)),
+    crFC  = if_else(Clicks == 0| GoalsFC == 0, 0, round(GoalsFC/ Clicks * 100, 2)),
+    crLC  = if_else(Clicks == 0| GoalsLC == 0, 0, round(GoalsLC / Clicks * 100, 2))
+    ) |> 
+  select(
+    CampaignName,
+    Query,
+    Cost,
+    GoalsFC,
+    GoalsLC,
+    cpaFC,
+    cpaLC,
+    crFC,
+    crLC,
+    wImp,
+    Clicks,
+    CPC,
+    wCTR
+    ) |> 
+  filter(Cost > 0) |> 
+  arrange(CampaignName, desc(Cost))
+```
+
+```{r}
+# создаем html таблицу с помощью библиотеке DT
+datatable(
+  query_camp,
+  rownames = FALSE,
+  colnames = c(
+    'Campaign' = 1),
+  extensions = c(
+    'Buttons',
+    'ColReorder',
+    'FixedHeader',
+    'FixedColumns',
+    'KeyTable'
+    ),
+  escape  = FALSE,
+  class   = 'compact nowrap hover',
+  caption = htmltools::tags$caption(
+    style = 'caption-side: top; text-align: left; color: gray;',
+    htmltools::h4('Таблица: Таргеты по ключевым словам')
+    ),
+  options = list(
+    pageLength = 10,
+    dom        = "Bftpli",
+    language   = list(url = '//cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json'),
+    buttons    = c('csv', 'excel', 'pdf'),
+    colReorder = TRUE,
+    fixedHeader = TRUE,
+    fixedColumns = TRUE,
+    scrollX = TRUE,
+    keys = TRUE)
+  ) |> 
+  formatStyle(columns            = 'Cost',
+              background         = styleColorBar(query_camp$Cost, '#EEC9E5'),
+              backgroundSize     = '80% 70%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'right' ) |> 
+  formatStyle(columns            = 'GoalsLC',
+              background         = styleColorBar(query_camp$GoalsLC, '#EEC9E5'),
+              backgroundSize     = '80% 70%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'right' ) |> 
+  formatStyle(columns            = 'cpaLC',
+              background         = styleColorBar(query_camp$cpaLC, '#EEC9E5'),
+              backgroundSize     = '80% 70%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'right' ) |> 
+  formatStyle(columns            = 'crLC',
+              background         = styleColorBar(query_camp$crLC, '#EEC9E5'),
+              backgroundSize     = '80% 70%',
+              backgroundRepeat   = 'no-repeat',
+              backgroundPosition = 'right' )
+```
 
 ::::
 
