@@ -31,5 +31,8 @@
   },
   "clients/pator/pator_bi.qmd": {
     "pator_bi.html": "330afb98"
+  },
+  "clients/pator/pator.qmd": {
+    "pator.html": "d11f5587"
   }
 }

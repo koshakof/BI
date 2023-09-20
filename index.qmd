@@ -7,5 +7,5 @@ editor_options:
 ## Проекты
 
 * [МастерСлух](/clients/mc/02_masterslych.qmd)
-* [ПАТОР](/clients/pator/pator.qmd)
+
 

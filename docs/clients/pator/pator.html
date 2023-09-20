@@ -1,0 +1,1848 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru" xml:lang="ru"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>PLATZKART BI - ПАТОР</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "Поиск не дал результатов",
+    "search-matching-documents-text": "Результаты поиска",
+    "search-copy-link-title": "Скопировать ссылку",
+    "search-hide-matches-text": "Скрыть дополнительные результаты",
+    "search-more-match-text": "дополнительный результат в этом документе",
+    "search-more-matches-text": "дополнительных результата(-ов) в этом документе",
+    "search-clear-button-title": "Очистить",
+    "search-detached-cancel-button-title": "Отменить",
+    "search-submit-button-title": "Найти",
+    "search-label": "Поиск"
+  }
+}</script>
+
+<script src="../../site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="../../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">PLATZKART BI</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Поиск"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Переключить навигацию" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html" rel="" target="">
+ <span class="menu-text">О проекте</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools ms-auto">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Содержание</h2>
+   
+  <ul>
+  <li><a href="#аккаунт" id="toc-аккаунт" class="nav-link active" data-scroll-target="#аккаунт">Аккаунт</a></li>
+  <li><a href="#рекламные-кампаний" id="toc-рекламные-кампаний" class="nav-link" data-scroll-target="#рекламные-кампаний">Рекламные кампаний</a></li>
+  <li><a href="#объявления" id="toc-объявления" class="nav-link" data-scroll-target="#объявления">Объявления</a></li>
+  <li><a href="#таргеты" id="toc-таргеты" class="nav-link" data-scroll-target="#таргеты">Таргеты</a></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
+<!-- main -->
+<main class="content column-page-right" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">ПАТОР</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Дата публикации</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">20 среда сент. 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="аккаунт" class="level2">
+<h2 class="anchored" data-anchor-id="аккаунт">Аккаунт</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true">Таблицы</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false">Графики</a></li></ul>
+<div class="tab-content">
+<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Сводка</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Места</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">Месяцы</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false">Network</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-5-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-5" role="tab" aria-controls="tabset-1-5" aria-selected="false">Search</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div class="cell-output-display">
+<div class="table-responsive">
+<table class="lightable-paper table table-hover table-condensed" data-quarto-postprocess="true">
+<caption>Таблица: Сводка по всему аккаунту</caption>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th" style="text-align: center; position: sticky; top: 0; background-color: #FFFFFF; color: #5A5A5A !important; background-color: #DBB9FA !important;">Cost</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; position: sticky; top: 0; background-color: #FFFFFF; color: #5A5A5A !important; background-color: #DBB9FA !important;">GoalsFC</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; position: sticky; top: 0; background-color: #FFFFFF; color: #5A5A5A !important; background-color: #DBB9FA !important;">GoalsLC</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; position: sticky; top: 0; background-color: #FFFFFF; color: #5A5A5A !important; background-color: #DBB9FA !important;">cpaFC,₽</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; position: sticky; top: 0; background-color: #FFFFFF; color: #5A5A5A !important; background-color: #DBB9FA !important;">cpaLC,₽</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; position: sticky; top: 0; background-color: #FFFFFF; color: #5A5A5A !important; background-color: #DBB9FA !important;">crFC,%</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; position: sticky; top: 0; background-color: #FFFFFF; color: #5A5A5A !important; background-color: #DBB9FA !important;">crLC,%</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; position: sticky; top: 0; background-color: #FFFFFF; color: #5A5A5A !important; background-color: #DBB9FA !important;">Clicks</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; position: sticky; top: 0; background-color: #FFFFFF; color: #5A5A5A !important; background-color: #DBB9FA !important;">CPC,₽</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; position: sticky; top: 0; background-color: #FFFFFF; color: #5A5A5A !important; background-color: #DBB9FA !important;">wCTR,%</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; position: sticky; top: 0; background-color: #FFFFFF; color: #5A5A5A !important; background-color: #DBB9FA !important;">BR,%</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">181214</td>
+<td style="text-align: center;">139</td>
+<td style="text-align: center;">145</td>
+<td style="text-align: center;">1304</td>
+<td style="text-align: center;">1250</td>
+<td style="text-align: center;">2.37</td>
+<td style="text-align: center;">2.48</td>
+<td style="text-align: center;">5857</td>
+<td style="text-align: center;">31</td>
+<td style="text-align: center;">0.46</td>
+<td style="text-align: center;">36</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+</div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<ul>
+<li>AD_… — показы баннеров с нашим предложением на сайтах, где был пользователь</li>
+<li>SEARCH — показы в поисковой сети</li>
+</ul>
+<div class="cell-output-display">
+<div class="table-responsive">
+<table class="lightable-paper table table-hover table-condensed" data-quarto-postprocess="true">
+<caption>Табилца: Сводка по всему аккаунту в разрезе мест показа</caption>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th" style="text-align: left; color: #5A5A5A !important; background-color: #DBB9FA !important;">AdNetworkType</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; color: #5A5A5A !important; background-color: #DBB9FA !important;">Cost</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; color: #5A5A5A !important; background-color: #DBB9FA !important;">GoalsFC</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; color: #5A5A5A !important; background-color: #DBB9FA !important;">GoalsLC</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; color: #5A5A5A !important; background-color: #DBB9FA !important;">cpaFC,₽</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; color: #5A5A5A !important; background-color: #DBB9FA !important;">cpaLC,₽</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; color: #5A5A5A !important; background-color: #DBB9FA !important;">crFC,%</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; color: #5A5A5A !important; background-color: #DBB9FA !important;">crLC,%</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; color: #5A5A5A !important; background-color: #DBB9FA !important;">Clicks</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; color: #5A5A5A !important; background-color: #DBB9FA !important;">CPC,₽</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; color: #5A5A5A !important; background-color: #DBB9FA !important;">wCTR,%</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; color: #5A5A5A !important; background-color: #DBB9FA !important;">BR,%</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left; border-right: 1px solid;">AD_NETWORK</td>
+<td style="text-align: right;">110982</td>
+<td style="text-align: right;">66</td>
+<td style="text-align: right;">74</td>
+<td style="text-align: right;">1682</td>
+<td style="text-align: right;">1500</td>
+<td style="text-align: right;">1.76</td>
+<td style="text-align: right;">1.97</td>
+<td style="text-align: right;">3755</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">0.3</td>
+<td style="text-align: right;">31</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; border-right: 1px solid;">SEARCH</td>
+<td style="text-align: right;">70232</td>
+<td style="text-align: right;">73</td>
+<td style="text-align: right;">71</td>
+<td style="text-align: right;">962</td>
+<td style="text-align: right;">989</td>
+<td style="text-align: right;">3.47</td>
+<td style="text-align: right;">3.38</td>
+<td style="text-align: right;">2102</td>
+<td style="text-align: right;">33</td>
+<td style="text-align: right;">7.0</td>
+<td style="text-align: right;">45</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+</div>
+</div>
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+<div class="cell-output-display">
+<div class="table-responsive">
+<table class="lightable-paper table table-hover table-condensed" data-quarto-postprocess="true">
+<caption>Таблица: Сводка по месяцам</caption>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th" style="text-align: center; color: #5A5A5A !important; background-color: #DBB9FA !important;">Month</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; color: #5A5A5A !important; background-color: #DBB9FA !important;">Days</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; color: #5A5A5A !important; background-color: #DBB9FA !important;">Cost</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; color: #5A5A5A !important; background-color: #DBB9FA !important;">GoalsFC</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; color: #5A5A5A !important; background-color: #DBB9FA !important;">GoalsLC</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; color: #5A5A5A !important; background-color: #DBB9FA !important;">cpaFC,₽</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; color: #5A5A5A !important; background-color: #DBB9FA !important;">cpaLC,₽</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; color: #5A5A5A !important; background-color: #DBB9FA !important;">crFC,%</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; color: #5A5A5A !important; background-color: #DBB9FA !important;">crLC,%</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; color: #5A5A5A !important; background-color: #DBB9FA !important;">wImp</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; color: #5A5A5A !important; background-color: #DBB9FA !important;">Clicks</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; color: #5A5A5A !important; background-color: #DBB9FA !important;">CPC,₽</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; color: #5A5A5A !important; background-color: #DBB9FA !important;">wCTR,%</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; color: #5A5A5A !important; background-color: #DBB9FA !important;">BR,%</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">01-23</td>
+<td style="text-align: center; border-right: 1px solid;">23</td>
+<td style="text-align: center;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(111, 0, 168, 0.4) !important;">24978</span></td>
+<td style="text-align: center;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(132, 5, 167, 0.4) !important;">24</span></td>
+<td style="text-align: center; border-right: 1px solid;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(72, 3, 159, 0.4) !important;">28</span></td>
+<td style="text-align: center;">1041</td>
+<td style="text-align: center;">892</td>
+<td style="text-align: center;">2.10</td>
+<td style="text-align: center;">2.45</td>
+<td style="text-align: center;">323391</td>
+<td style="text-align: center;">1141</td>
+<td style="text-align: center;">22</td>
+<td style="text-align: center;">0.35</td>
+<td style="text-align: center;">41</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">02-23</td>
+<td style="text-align: center; border-right: 1px solid;">28</td>
+<td style="text-align: center;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(115, 1, 168, 0.4) !important;">24592</span></td>
+<td style="text-align: center;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(210, 79, 113, 0.4) !important;">14</span></td>
+<td style="text-align: center; border-right: 1px solid;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(204, 72, 119, 0.4) !important;">14</span></td>
+<td style="text-align: center;">1757</td>
+<td style="text-align: center;">1757</td>
+<td style="text-align: center;">1.23</td>
+<td style="text-align: center;">1.23</td>
+<td style="text-align: center;">352571</td>
+<td style="text-align: center;">1139</td>
+<td style="text-align: center;">22</td>
+<td style="text-align: center;">0.32</td>
+<td style="text-align: center;">36</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">03-23</td>
+<td style="text-align: center; border-right: 1px solid;">30</td>
+<td style="text-align: center;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(13, 8, 135, 0.4) !important;">31081</span></td>
+<td style="text-align: center;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(13, 8, 135, 0.4) !important;">34</span></td>
+<td style="text-align: center; border-right: 1px solid;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(13, 8, 135, 0.4) !important;">32</span></td>
+<td style="text-align: center;">914</td>
+<td style="text-align: center;">971</td>
+<td style="text-align: center;">3.08</td>
+<td style="text-align: center;">2.90</td>
+<td style="text-align: center;">265455</td>
+<td style="text-align: center;">1104</td>
+<td style="text-align: center;">28</td>
+<td style="text-align: center;">0.42</td>
+<td style="text-align: center;">34</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">04-23</td>
+<td style="text-align: center; border-right: 1px solid;">30</td>
+<td style="text-align: center;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(174, 40, 146, 0.4) !important;">19682</span></td>
+<td style="text-align: center;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(176, 41, 145, 0.4) !important;">19</span></td>
+<td style="text-align: center; border-right: 1px solid;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(157, 24, 157, 0.4) !important;">20</span></td>
+<td style="text-align: center;">1036</td>
+<td style="text-align: center;">984</td>
+<td style="text-align: center;">2.12</td>
+<td style="text-align: center;">2.23</td>
+<td style="text-align: center;">118910</td>
+<td style="text-align: center;">897</td>
+<td style="text-align: center;">22</td>
+<td style="text-align: center;">0.75</td>
+<td style="text-align: center;">33</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">05-23</td>
+<td style="text-align: center; border-right: 1px solid;">29</td>
+<td style="text-align: center;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(53, 4, 152, 0.4) !important;">29055</span></td>
+<td style="text-align: center;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(100, 0, 167, 0.4) !important;">27</span></td>
+<td style="text-align: center; border-right: 1px solid;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(83, 2, 163, 0.4) !important;">27</span></td>
+<td style="text-align: center;">1076</td>
+<td style="text-align: center;">1076</td>
+<td style="text-align: center;">3.68</td>
+<td style="text-align: center;">3.68</td>
+<td style="text-align: center;">89567</td>
+<td style="text-align: center;">733</td>
+<td style="text-align: center;">40</td>
+<td style="text-align: center;">0.82</td>
+<td style="text-align: center;">34</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">06-23</td>
+<td style="text-align: center; border-right: 1px solid;">29</td>
+<td style="text-align: center;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(128, 4, 168, 0.4) !important;">23694</span></td>
+<td style="text-align: center;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(216, 87, 107, 0.4) !important;">13</span></td>
+<td style="text-align: center; border-right: 1px solid;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(211, 81, 113, 0.4) !important;">13</span></td>
+<td style="text-align: center;">1823</td>
+<td style="text-align: center;">1823</td>
+<td style="text-align: center;">3.16</td>
+<td style="text-align: center;">3.16</td>
+<td style="text-align: center;">39675</td>
+<td style="text-align: center;">411</td>
+<td style="text-align: center;">58</td>
+<td style="text-align: center;">1.04</td>
+<td style="text-align: center;">39</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">07-23</td>
+<td style="text-align: center; border-right: 1px solid;">27</td>
+<td style="text-align: center;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(134, 6, 166, 0.4) !important;">23199</span></td>
+<td style="text-align: center;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(240, 128, 79, 0.4) !important;">8</span></td>
+<td style="text-align: center; border-right: 1px solid;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(222, 97, 100, 0.4) !important;">11</span></td>
+<td style="text-align: center;">2900</td>
+<td style="text-align: center;">2109</td>
+<td style="text-align: center;">2.15</td>
+<td style="text-align: center;">2.96</td>
+<td style="text-align: center;">62584</td>
+<td style="text-align: center;">372</td>
+<td style="text-align: center;">62</td>
+<td style="text-align: center;">0.59</td>
+<td style="text-align: center;">38</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">08-23</td>
+<td style="text-align: center; border-right: 1px solid;">7</td>
+<td style="text-align: center;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(252, 206, 37, 0.4) !important;">4934</span></td>
+<td style="text-align: center;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(252, 206, 37, 0.4) !important;">0</span></td>
+<td style="text-align: center; border-right: 1px solid;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(252, 206, 37, 0.4) !important;">0</span></td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0.00</td>
+<td style="text-align: center;">0.00</td>
+<td style="text-align: center;">12794</td>
+<td style="text-align: center;">60</td>
+<td style="text-align: center;">82</td>
+<td style="text-align: center;">0.47</td>
+<td style="text-align: center;">37</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+</div>
+</div>
+<div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
+<div class="cell-output-display">
+<div class="table-responsive">
+<table class="lightable-paper table table-hover table-condensed" data-quarto-postprocess="true">
+<caption>Таблица: Сводка по месяцам только в сетях (AD_NETWORK)</caption>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th" style="text-align: center; color: #5A5A5A !important; background-color: #DBB9FA !important;">Month</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; color: #5A5A5A !important; background-color: #DBB9FA !important;">NetType</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; color: #5A5A5A !important; background-color: #DBB9FA !important;">Days</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; color: #5A5A5A !important; background-color: #DBB9FA !important;">Cost</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; color: #5A5A5A !important; background-color: #DBB9FA !important;">GoalsFC</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; color: #5A5A5A !important; background-color: #DBB9FA !important;">GoalsLC</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; color: #5A5A5A !important; background-color: #DBB9FA !important;">cpaFC,₽</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; color: #5A5A5A !important; background-color: #DBB9FA !important;">cpaLC,₽</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; color: #5A5A5A !important; background-color: #DBB9FA !important;">crFC,%</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; color: #5A5A5A !important; background-color: #DBB9FA !important;">crLC,%</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; color: #5A5A5A !important; background-color: #DBB9FA !important;">wImp</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; color: #5A5A5A !important; background-color: #DBB9FA !important;">Clicks</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; color: #5A5A5A !important; background-color: #DBB9FA !important;">CPC,₽</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; color: #5A5A5A !important; background-color: #DBB9FA !important;">wCTR,%</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; color: #5A5A5A !important; background-color: #DBB9FA !important;">BR,%</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">01-23</td>
+<td style="text-align: center;">AD_NETWORK</td>
+<td style="text-align: center; border-right: 1px solid;">21</td>
+<td style="text-align: center;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(85, 2, 164, 0.4) !important;">16727</span></td>
+<td style="text-align: center;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(217, 88, 106, 0.4) !important;">6</span></td>
+<td style="text-align: center; border-right: 1px solid;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(161, 27, 155, 0.4) !important;">11</span></td>
+<td style="text-align: center;">2788</td>
+<td style="text-align: center;">1521</td>
+<td style="text-align: center;">0.72</td>
+<td style="text-align: center;">1.32</td>
+<td style="text-align: center;">318478</td>
+<td style="text-align: center;">831</td>
+<td style="text-align: center;">20</td>
+<td style="text-align: center;">0.26</td>
+<td style="text-align: center;">39</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">02-23</td>
+<td style="text-align: center;">AD_NETWORK</td>
+<td style="text-align: center; border-right: 1px solid;">23</td>
+<td style="text-align: center;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(99, 0, 167, 0.4) !important;">16013</span></td>
+<td style="text-align: center;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(251, 162, 56, 0.4) !important;">2</span></td>
+<td style="text-align: center; border-right: 1px solid;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(248, 148, 65, 0.4) !important;">3</span></td>
+<td style="text-align: center;">8006</td>
+<td style="text-align: center;">5338</td>
+<td style="text-align: center;">0.23</td>
+<td style="text-align: center;">0.35</td>
+<td style="text-align: center;">348550</td>
+<td style="text-align: center;">856</td>
+<td style="text-align: center;">19</td>
+<td style="text-align: center;">0.25</td>
+<td style="text-align: center;">37</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">03-23</td>
+<td style="text-align: center;">AD_NETWORK</td>
+<td style="text-align: center; border-right: 1px solid;">27</td>
+<td style="text-align: center;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(118, 1, 168, 0.4) !important;">15034</span></td>
+<td style="text-align: center;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(72, 3, 159, 0.4) !important;">14</span></td>
+<td style="text-align: center; border-right: 1px solid;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(126, 3, 168, 0.4) !important;">13</span></td>
+<td style="text-align: center;">1074</td>
+<td style="text-align: center;">1156</td>
+<td style="text-align: center;">2.06</td>
+<td style="text-align: center;">1.91</td>
+<td style="text-align: center;">260210</td>
+<td style="text-align: center;">681</td>
+<td style="text-align: center;">22</td>
+<td style="text-align: center;">0.26</td>
+<td style="text-align: center;">30</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">04-23</td>
+<td style="text-align: center;">AD_NETWORK</td>
+<td style="text-align: center; border-right: 1px solid;">30</td>
+<td style="text-align: center;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(167, 33, 151, 0.4) !important;">12286</span></td>
+<td style="text-align: center;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(117, 1, 168, 0.4) !important;">12</span></td>
+<td style="text-align: center; border-right: 1px solid;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(144, 13, 164, 0.4) !important;">12</span></td>
+<td style="text-align: center;">1024</td>
+<td style="text-align: center;">1024</td>
+<td style="text-align: center;">2.00</td>
+<td style="text-align: center;">2.00</td>
+<td style="text-align: center;">115322</td>
+<td style="text-align: center;">601</td>
+<td style="text-align: center;">20</td>
+<td style="text-align: center;">0.52</td>
+<td style="text-align: center;">26</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">05-23</td>
+<td style="text-align: center;">AD_NETWORK</td>
+<td style="text-align: center; border-right: 1px solid;">29</td>
+<td style="text-align: center;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(13, 8, 135, 0.4) !important;">19572</span></td>
+<td style="text-align: center;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(13, 8, 135, 0.4) !important;">16</span></td>
+<td style="text-align: center; border-right: 1px solid;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(13, 8, 135, 0.4) !important;">18</span></td>
+<td style="text-align: center;">1223</td>
+<td style="text-align: center;">1087</td>
+<td style="text-align: center;">3.64</td>
+<td style="text-align: center;">4.09</td>
+<td style="text-align: center;">85103</td>
+<td style="text-align: center;">440</td>
+<td style="text-align: center;">44</td>
+<td style="text-align: center;">0.52</td>
+<td style="text-align: center;">23</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">06-23</td>
+<td style="text-align: center;">AD_NETWORK</td>
+<td style="text-align: center; border-right: 1px solid;">29</td>
+<td style="text-align: center;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(139, 10, 165, 0.4) !important;">13907</span></td>
+<td style="text-align: center;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(157, 24, 157, 0.4) !important;">10</span></td>
+<td style="text-align: center; border-right: 1px solid;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(177, 42, 144, 0.4) !important;">10</span></td>
+<td style="text-align: center;">1391</td>
+<td style="text-align: center;">1391</td>
+<td style="text-align: center;">6.76</td>
+<td style="text-align: center;">6.76</td>
+<td style="text-align: center;">35575</td>
+<td style="text-align: center;">148</td>
+<td style="text-align: center;">94</td>
+<td style="text-align: center;">0.42</td>
+<td style="text-align: center;">24</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">07-23</td>
+<td style="text-align: center;">AD_NETWORK</td>
+<td style="text-align: center; border-right: 1px solid;">27</td>
+<td style="text-align: center;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(105, 0, 168, 0.4) !important;">15670</span></td>
+<td style="text-align: center;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(217, 88, 106, 0.4) !important;">6</span></td>
+<td style="text-align: center; border-right: 1px solid;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(214, 85, 109, 0.4) !important;">7</span></td>
+<td style="text-align: center;">2612</td>
+<td style="text-align: center;">2239</td>
+<td style="text-align: center;">3.43</td>
+<td style="text-align: center;">4.00</td>
+<td style="text-align: center;">59310</td>
+<td style="text-align: center;">175</td>
+<td style="text-align: center;">90</td>
+<td style="text-align: center;">0.30</td>
+<td style="text-align: center;">23</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">08-23</td>
+<td style="text-align: center;">AD_NETWORK</td>
+<td style="text-align: center; border-right: 1px solid;">6</td>
+<td style="text-align: center;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(252, 206, 37, 0.4) !important;">1773</span></td>
+<td style="text-align: center;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(252, 206, 37, 0.4) !important;">0</span></td>
+<td style="text-align: center; border-right: 1px solid;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(252, 206, 37, 0.4) !important;">0</span></td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0.00</td>
+<td style="text-align: center;">0.00</td>
+<td style="text-align: center;">12366</td>
+<td style="text-align: center;">23</td>
+<td style="text-align: center;">77</td>
+<td style="text-align: center;">0.19</td>
+<td style="text-align: center;">29</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+</div>
+</div>
+<div id="tabset-1-5" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-5-tab">
+<div class="cell-output-display">
+<div class="table-responsive">
+<table class="lightable-paper table table-hover table-condensed" data-quarto-postprocess="true">
+<caption>Таблица: Сводка по месяцам только на поиске (SEARCH)</caption>
+<colgroup>
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+</colgroup>
+<thead>
+<tr class="header">
+<th colspan="3" data-quarto-table-cell-role="th" style="text-align: center; empty-cells: hide;"></th>
+<th colspan="7" data-quarto-table-cell-role="th" style="text-align: center; padding-bottom: 0; padding-left: 3px; padding-right: 3px; color: gray !important; padding-right: 4px; padding-left: 4px; background-color: #EDC8F5 !important;"><div style="">
+Важные
+</div></th>
+<th colspan="5" data-quarto-table-cell-role="th" style="text-align: center; padding-bottom: 0; padding-left: 3px; padding-right: 3px; color: gray !important; padding-right: 4px; padding-left: 4px; background-color: #A4DDEF !important;"><div style="">
+Синтетика
+</div></th>
+</tr>
+<tr class="odd">
+<th colspan="2" data-quarto-table-cell-role="th" style="text-align: center; empty-cells: hide;"></th>
+<th colspan="13" data-quarto-table-cell-role="th" style="text-align: center; padding-bottom: 0; padding-left: 3px; padding-right: 3px; color: gray !important; padding-right: 4px; padding-left: 4px; background-color: #E1EBF9 !important;"><div style="">
+Метрики
+</div></th>
+</tr>
+<tr class="header">
+<th data-quarto-table-cell-role="th" style="text-align: center; color: #5A5A5A !important; background-color: #DBB9FA !important;">Month</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; color: #5A5A5A !important; background-color: #DBB9FA !important;">NetType</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; color: #5A5A5A !important; background-color: #DBB9FA !important;">Days</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; color: #5A5A5A !important; background-color: #DBB9FA !important;">Cost</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; color: #5A5A5A !important; background-color: #DBB9FA !important;">GoalsFC</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; color: #5A5A5A !important; background-color: #DBB9FA !important;">GoalsLC</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; color: #5A5A5A !important; background-color: #DBB9FA !important;">cpaFC,₽</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; color: #5A5A5A !important; background-color: #DBB9FA !important;">cpaLC,₽</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; color: #5A5A5A !important; background-color: #DBB9FA !important;">crFC,%</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; color: #5A5A5A !important; background-color: #DBB9FA !important;">crLC,%</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; color: #5A5A5A !important; background-color: #DBB9FA !important;">wImp</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; color: #5A5A5A !important; background-color: #DBB9FA !important;">Clicks</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; color: #5A5A5A !important; background-color: #DBB9FA !important;">CPC,₽</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; color: #5A5A5A !important; background-color: #DBB9FA !important;">wCTR,%</th>
+<th data-quarto-table-cell-role="th" style="text-align: center; color: #5A5A5A !important; background-color: #DBB9FA !important;">BR,%</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">01-23</td>
+<td style="text-align: center;">SEARCH</td>
+<td style="text-align: center; border-right: 1px solid;">21</td>
+<td style="text-align: center;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(213, 84, 110, 0.4) !important;">8252</span></td>
+<td style="text-align: center;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(62, 4, 156, 0.4) !important;">18</span></td>
+<td style="text-align: center; border-right: 1px solid;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(63, 4, 156, 0.4) !important;">17</span></td>
+<td style="text-align: center;">458</td>
+<td style="text-align: center;">485</td>
+<td style="text-align: center;">5.81</td>
+<td style="text-align: center;">5.48</td>
+<td style="text-align: center;">4913</td>
+<td style="text-align: center;">310</td>
+<td style="text-align: center;">27</td>
+<td style="text-align: center;">6.31</td>
+<td style="text-align: center;">45</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">02-23</td>
+<td style="text-align: center;">SEARCH</td>
+<td style="text-align: center; border-right: 1px solid;">27</td>
+<td style="text-align: center;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(208, 77, 115, 0.4) !important;">8579</span></td>
+<td style="text-align: center;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(165, 31, 153, 0.4) !important;">12</span></td>
+<td style="text-align: center; border-right: 1px solid;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(170, 35, 149, 0.4) !important;">11</span></td>
+<td style="text-align: center;">715</td>
+<td style="text-align: center;">780</td>
+<td style="text-align: center;">4.24</td>
+<td style="text-align: center;">3.89</td>
+<td style="text-align: center;">4021</td>
+<td style="text-align: center;">283</td>
+<td style="text-align: center;">30</td>
+<td style="text-align: center;">7.04</td>
+<td style="text-align: center;">36</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">03-23</td>
+<td style="text-align: center;">SEARCH</td>
+<td style="text-align: center; border-right: 1px solid;">29</td>
+<td style="text-align: center;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(13, 8, 135, 0.4) !important;">16048</span></td>
+<td style="text-align: center;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(13, 8, 135, 0.4) !important;">20</span></td>
+<td style="text-align: center; border-right: 1px solid;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(13, 8, 135, 0.4) !important;">19</span></td>
+<td style="text-align: center;">802</td>
+<td style="text-align: center;">845</td>
+<td style="text-align: center;">4.73</td>
+<td style="text-align: center;">4.49</td>
+<td style="text-align: center;">5245</td>
+<td style="text-align: center;">423</td>
+<td style="text-align: center;">38</td>
+<td style="text-align: center;">8.06</td>
+<td style="text-align: center;">40</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">04-23</td>
+<td style="text-align: center;">SEARCH</td>
+<td style="text-align: center; border-right: 1px solid;">30</td>
+<td style="text-align: center;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(226, 101, 97, 0.4) !important;">7398</span></td>
+<td style="text-align: center;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(222, 96, 101, 0.4) !important;">7</span></td>
+<td style="text-align: center; border-right: 1px solid;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(208, 77, 115, 0.4) !important;">8</span></td>
+<td style="text-align: center;">1057</td>
+<td style="text-align: center;">925</td>
+<td style="text-align: center;">2.36</td>
+<td style="text-align: center;">2.70</td>
+<td style="text-align: center;">3588</td>
+<td style="text-align: center;">296</td>
+<td style="text-align: center;">25</td>
+<td style="text-align: center;">8.25</td>
+<td style="text-align: center;">47</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">05-23</td>
+<td style="text-align: center;">SEARCH</td>
+<td style="text-align: center; border-right: 1px solid;">29</td>
+<td style="text-align: center;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(193, 59, 130, 0.4) !important;">9485</span></td>
+<td style="text-align: center;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(179, 43, 142, 0.4) !important;">11</span></td>
+<td style="text-align: center; border-right: 1px solid;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(197, 63, 126, 0.4) !important;">9</span></td>
+<td style="text-align: center;">862</td>
+<td style="text-align: center;">1054</td>
+<td style="text-align: center;">3.75</td>
+<td style="text-align: center;">3.07</td>
+<td style="text-align: center;">4464</td>
+<td style="text-align: center;">293</td>
+<td style="text-align: center;">32</td>
+<td style="text-align: center;">6.56</td>
+<td style="text-align: center;">51</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">06-23</td>
+<td style="text-align: center;">SEARCH</td>
+<td style="text-align: center; border-right: 1px solid;">29</td>
+<td style="text-align: center;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(188, 52, 135, 0.4) !important;">9788</span></td>
+<td style="text-align: center;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(249, 154, 62, 0.4) !important;">3</span></td>
+<td style="text-align: center; border-right: 1px solid;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(249, 152, 62, 0.4) !important;">3</span></td>
+<td style="text-align: center;">3263</td>
+<td style="text-align: center;">3263</td>
+<td style="text-align: center;">1.14</td>
+<td style="text-align: center;">1.14</td>
+<td style="text-align: center;">4100</td>
+<td style="text-align: center;">263</td>
+<td style="text-align: center;">37</td>
+<td style="text-align: center;">6.41</td>
+<td style="text-align: center;">46</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">07-23</td>
+<td style="text-align: center;">SEARCH</td>
+<td style="text-align: center; border-right: 1px solid;">25</td>
+<td style="text-align: center;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(224, 99, 99, 0.4) !important;">7530</span></td>
+<td style="text-align: center;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(253, 171, 51, 0.4) !important;">2</span></td>
+<td style="text-align: center; border-right: 1px solid;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(243, 135, 74, 0.4) !important;">4</span></td>
+<td style="text-align: center;">3765</td>
+<td style="text-align: center;">1882</td>
+<td style="text-align: center;">1.02</td>
+<td style="text-align: center;">2.03</td>
+<td style="text-align: center;">3274</td>
+<td style="text-align: center;">197</td>
+<td style="text-align: center;">38</td>
+<td style="text-align: center;">6.02</td>
+<td style="text-align: center;">52</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">08-23</td>
+<td style="text-align: center;">SEARCH</td>
+<td style="text-align: center; border-right: 1px solid;">7</td>
+<td style="text-align: center;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(252, 206, 37, 0.4) !important;">3161</span></td>
+<td style="text-align: center;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(252, 206, 37, 0.4) !important;">0</span></td>
+<td style="text-align: center; border-right: 1px solid;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(252, 206, 37, 0.4) !important;">0</span></td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0.00</td>
+<td style="text-align: center;">0.00</td>
+<td style="text-align: center;">428</td>
+<td style="text-align: center;">37</td>
+<td style="text-align: center;">85</td>
+<td style="text-align: center;">8.64</td>
+<td style="text-align: center;">42</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">Месяцы</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">Недели</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-3" role="tab" aria-controls="tabset-2-3" aria-selected="false">Дни</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-4" role="tab" aria-controls="tabset-2-4" aria-selected="false">Bar chart</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-5-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-5" role="tab" aria-controls="tabset-2-5" aria-selected="false">7 дней</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-6-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-6" role="tab" aria-controls="tabset-2-6" aria-selected="false">30 дней</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="pator_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">График показов, кликов и целей в лог шкале по месяцам</figcaption>
+</figure>
+</div>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="pator_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">График показов, кликов и целей в лог шкале по неделям</figcaption>
+</figure>
+</div>
+</div>
+<div id="tabset-2-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-3-tab">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="pator_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Тренд показов, кликов и целей в лог шкале по дням</figcaption>
+</figure>
+</div>
+</div>
+<div id="tabset-2-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-4-tab">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="pator_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">График: показы, клики и целей в столбчатой диаграмме по неделям</figcaption>
+</figure>
+</div>
+</div>
+<div id="tabset-2-5" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-5-tab">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="pator_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">График показов, кликов и целей за последние 7 дней</figcaption>
+</figure>
+</div>
+</div>
+<div id="tabset-2-6" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-6-tab">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="pator_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">График показов, кликов и целей за последние 30 дней</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="рекламные-кампаний" class="level2">
+<h2 class="anchored" data-anchor-id="рекламные-кампаний">Рекламные кампаний</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true">РК</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false">Месяцы</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-3" role="tab" aria-controls="tabset-4-3" aria-selected="false">Группы</a></li></ul>
+<div class="tab-content">
+<div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
+<div class="cell-output-display">
+<div class="table-responsive">
+<table class="lightable-paper table table-hover table-condensed" data-quarto-postprocess="true">
+<caption>Таблица: Срез по РК с начала года</caption>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th" style="text-align: left; color: #5A5A5A !important; background-color: #DBB9FA !important;">CampaignType</th>
+<th data-quarto-table-cell-role="th" style="text-align: left; color: #5A5A5A !important; background-color: #DBB9FA !important;">CampaignName</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; color: #5A5A5A !important; background-color: #DBB9FA !important;">Cost</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; color: #5A5A5A !important; background-color: #DBB9FA !important;">GoalsFC</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; color: #5A5A5A !important; background-color: #DBB9FA !important;">GoalsLC</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; color: #5A5A5A !important; background-color: #DBB9FA !important;">cpaFC,₽</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; color: #5A5A5A !important; background-color: #DBB9FA !important;">cpaLC,₽</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; color: #5A5A5A !important; background-color: #DBB9FA !important;">crFC,%</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; color: #5A5A5A !important; background-color: #DBB9FA !important;">crLC,%</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; color: #5A5A5A !important; background-color: #DBB9FA !important;">wImp</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; color: #5A5A5A !important; background-color: #DBB9FA !important;">Clicks</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; color: #5A5A5A !important; background-color: #DBB9FA !important;">CPC,₽</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; color: #5A5A5A !important; background-color: #DBB9FA !important;">wCTR,%</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; color: #5A5A5A !important; background-color: #DBB9FA !important;">BR,%</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">TEXT_CAMPAIGN</td>
+<td style="text-align: left;">[master] pator</td>
+<td style="text-align: right;">144249</td>
+<td style="text-align: right;">137</td>
+<td style="text-align: right;">134</td>
+<td style="text-align: right;">1053</td>
+<td style="text-align: right;">1076</td>
+<td style="text-align: right;">3.35</td>
+<td style="text-align: right;">3.27</td>
+<td style="text-align: right;">564192</td>
+<td style="text-align: right;">4093</td>
+<td style="text-align: right;">35</td>
+<td style="text-align: right;">0.73</td>
+<td style="text-align: right;">35</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">TEXT_CAMPAIGN</td>
+<td style="text-align: left;">[патор] ремаркетинг</td>
+<td style="text-align: right;">36965</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">18482</td>
+<td style="text-align: right;">3360</td>
+<td style="text-align: right;">0.11</td>
+<td style="text-align: right;">0.62</td>
+<td style="text-align: right;">700750</td>
+<td style="text-align: right;">1764</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: right;">0.25</td>
+<td style="text-align: right;">39</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+</div>
+</div>
+<div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
+<div class="cell-output-display">
+<div class="table-responsive">
+<table class="lightable-paper table table-hover table-condensed" data-quarto-postprocess="true">
+<caption>Таблица: Сводка по месяцам только на поиске (SEARCH)</caption>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th" style="text-align: left; color: #5A5A5A !important; background-color: #DBB9FA !important;">Month</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; color: #5A5A5A !important; background-color: #DBB9FA !important;">Days</th>
+<th data-quarto-table-cell-role="th" style="text-align: left; color: #5A5A5A !important; background-color: #DBB9FA !important;">Campaign</th>
+<th data-quarto-table-cell-role="th" style="text-align: left; color: #5A5A5A !important; background-color: #DBB9FA !important;">Cost</th>
+<th data-quarto-table-cell-role="th" style="text-align: left; color: #5A5A5A !important; background-color: #DBB9FA !important;">GoalsFC</th>
+<th data-quarto-table-cell-role="th" style="text-align: left; color: #5A5A5A !important; background-color: #DBB9FA !important;">GoalsLC</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; color: #5A5A5A !important; background-color: #DBB9FA !important;">cpaFC,₽</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; color: #5A5A5A !important; background-color: #DBB9FA !important;">cpaLC,₽</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; color: #5A5A5A !important; background-color: #DBB9FA !important;">crFC,%</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; color: #5A5A5A !important; background-color: #DBB9FA !important;">crLC,%</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; color: #5A5A5A !important; background-color: #DBB9FA !important;">wImp</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; color: #5A5A5A !important; background-color: #DBB9FA !important;">Clicks</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; color: #5A5A5A !important; background-color: #DBB9FA !important;">CPC,₽</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; color: #5A5A5A !important; background-color: #DBB9FA !important;">wCTR,%</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; color: #5A5A5A !important; background-color: #DBB9FA !important;">BR,%</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">01-23</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: left; border-right: 1px solid;">[патор] ремаркетинг</td>
+<td style="text-align: left;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(192, 58, 131, 0.4) !important;">14388</span></td>
+<td style="text-align: left;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(254, 184, 44, 0.4) !important;">2</span></td>
+<td style="text-align: left; border-right: 1px solid;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(240, 128, 78, 0.4) !important;">7</span></td>
+<td style="text-align: right;">7194</td>
+<td style="text-align: right;">2055</td>
+<td style="text-align: right;">0.29</td>
+<td style="text-align: right;">1.03</td>
+<td style="text-align: right;">269704</td>
+<td style="text-align: right;">678</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: right;">0.25</td>
+<td style="text-align: right;">42</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">01-23</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: left; border-right: 1px solid;">[master] pator</td>
+<td style="text-align: left;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(219, 92, 104, 0.4) !important;">10590</span></td>
+<td style="text-align: left;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(150, 19, 161, 0.4) !important;">22</span></td>
+<td style="text-align: left; border-right: 1px solid;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(133, 5, 167, 0.4) !important;">21</span></td>
+<td style="text-align: right;">481</td>
+<td style="text-align: right;">504</td>
+<td style="text-align: right;">4.75</td>
+<td style="text-align: right;">4.54</td>
+<td style="text-align: right;">53687</td>
+<td style="text-align: right;">463</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">0.86</td>
+<td style="text-align: right;">40</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">02-23</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: left; border-right: 1px solid;">[патор] ремаркетинг</td>
+<td style="text-align: left;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(184, 50, 137, 0.4) !important;">15233</span></td>
+<td style="text-align: left;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(252, 206, 37, 0.4) !important;">0</span></td>
+<td style="text-align: left; border-right: 1px solid;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(253, 181, 46, 0.4) !important;">2</span></td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">7616</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.29</td>
+<td style="text-align: right;">298647</td>
+<td style="text-align: right;">689</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">0.23</td>
+<td style="text-align: right;">39</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">02-23</td>
+<td style="text-align: right;">28</td>
+<td style="text-align: left; border-right: 1px solid;">[master] pator</td>
+<td style="text-align: left;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(227, 103, 95, 0.4) !important;">9359</span></td>
+<td style="text-align: left;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(210, 79, 113, 0.4) !important;">14</span></td>
+<td style="text-align: left; border-right: 1px solid;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(213, 83, 111, 0.4) !important;">12</span></td>
+<td style="text-align: right;">668</td>
+<td style="text-align: right;">780</td>
+<td style="text-align: right;">3.11</td>
+<td style="text-align: right;">2.67</td>
+<td style="text-align: right;">53924</td>
+<td style="text-align: right;">450</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: right;">0.83</td>
+<td style="text-align: right;">33</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">03-23</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: left; border-right: 1px solid;">[патор] ремаркетинг</td>
+<td style="text-align: left;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(238, 123, 81, 0.4) !important;">7340</span></td>
+<td style="text-align: left;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(252, 206, 37, 0.4) !important;">0</span></td>
+<td style="text-align: left; border-right: 1px solid;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(253, 181, 46, 0.4) !important;">2</span></td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">3670</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">132384</td>
+<td style="text-align: right;">397</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">0.30</td>
+<td style="text-align: right;">35</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">03-23</td>
+<td style="text-align: right;">29</td>
+<td style="text-align: left; border-right: 1px solid;">[master] pator</td>
+<td style="text-align: left;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(92, 1, 166, 0.4) !important;">23742</span></td>
+<td style="text-align: left;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(13, 8, 135, 0.4) !important;">34</span></td>
+<td style="text-align: left; border-right: 1px solid;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(13, 8, 135, 0.4) !important;">30</span></td>
+<td style="text-align: right;">698</td>
+<td style="text-align: right;">791</td>
+<td style="text-align: right;">4.81</td>
+<td style="text-align: right;">4.24</td>
+<td style="text-align: right;">133071</td>
+<td style="text-align: right;">707</td>
+<td style="text-align: right;">34</td>
+<td style="text-align: right;">0.53</td>
+<td style="text-align: right;">34</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">04-23</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: left; border-right: 1px solid;">[master] pator</td>
+<td style="text-align: left;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(141, 11, 165, 0.4) !important;">19682</span></td>
+<td style="text-align: left;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(176, 41, 145, 0.4) !important;">19</span></td>
+<td style="text-align: left; border-right: 1px solid;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(144, 13, 164, 0.4) !important;">20</span></td>
+<td style="text-align: right;">1036</td>
+<td style="text-align: right;">984</td>
+<td style="text-align: right;">2.12</td>
+<td style="text-align: right;">2.23</td>
+<td style="text-align: right;">118910</td>
+<td style="text-align: right;">897</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">0.75</td>
+<td style="text-align: right;">33</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">05-23</td>
+<td style="text-align: right;">29</td>
+<td style="text-align: left; border-right: 1px solid;">[master] pator</td>
+<td style="text-align: left;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(13, 8, 135, 0.4) !important;">29055</span></td>
+<td style="text-align: left;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(100, 0, 167, 0.4) !important;">27</span></td>
+<td style="text-align: left; border-right: 1px solid;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(62, 4, 156, 0.4) !important;">27</span></td>
+<td style="text-align: right;">1076</td>
+<td style="text-align: right;">1076</td>
+<td style="text-align: right;">3.68</td>
+<td style="text-align: right;">3.68</td>
+<td style="text-align: right;">89552</td>
+<td style="text-align: right;">733</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">0.82</td>
+<td style="text-align: right;">34</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">05-23</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left; border-right: 1px solid;">[патор] ремаркетинг</td>
+<td style="text-align: left;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(252, 206, 37, 0.4) !important;">0</span></td>
+<td style="text-align: left;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(252, 206, 37, 0.4) !important;">0</span></td>
+<td style="text-align: left; border-right: 1px solid;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(252, 206, 37, 0.4) !important;">0</span></td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">06-23</td>
+<td style="text-align: right;">29</td>
+<td style="text-align: left; border-right: 1px solid;">[master] pator</td>
+<td style="text-align: left;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(92, 1, 166, 0.4) !important;">23694</span></td>
+<td style="text-align: left;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(216, 87, 107, 0.4) !important;">13</span></td>
+<td style="text-align: left; border-right: 1px solid;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(205, 74, 118, 0.4) !important;">13</span></td>
+<td style="text-align: right;">1823</td>
+<td style="text-align: right;">1823</td>
+<td style="text-align: right;">3.16</td>
+<td style="text-align: right;">3.16</td>
+<td style="text-align: right;">39675</td>
+<td style="text-align: right;">411</td>
+<td style="text-align: right;">58</td>
+<td style="text-align: right;">1.04</td>
+<td style="text-align: right;">39</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">07-23</td>
+<td style="text-align: right;">27</td>
+<td style="text-align: left; border-right: 1px solid;">[master] pator</td>
+<td style="text-align: left;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(99, 0, 167, 0.4) !important;">23199</span></td>
+<td style="text-align: left;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(240, 128, 79, 0.4) !important;">8</span></td>
+<td style="text-align: left; border-right: 1px solid;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(219, 92, 104, 0.4) !important;">11</span></td>
+<td style="text-align: right;">2900</td>
+<td style="text-align: right;">2109</td>
+<td style="text-align: right;">2.15</td>
+<td style="text-align: right;">2.96</td>
+<td style="text-align: right;">62584</td>
+<td style="text-align: right;">372</td>
+<td style="text-align: right;">62</td>
+<td style="text-align: right;">0.59</td>
+<td style="text-align: right;">38</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">08-23</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: left; border-right: 1px solid;">[master] pator</td>
+<td style="text-align: left;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(248, 148, 65, 0.4) !important;">4934</span></td>
+<td style="text-align: left;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(252, 206, 37, 0.4) !important;">0</span></td>
+<td style="text-align: left; border-right: 1px solid;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(252, 206, 37, 0.4) !important;">0</span></td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">12794</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">82</td>
+<td style="text-align: right;">0.47</td>
+<td style="text-align: right;">37</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+</div>
+</div>
+<div id="tabset-4-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-3-tab">
+<div class="cell-output-display">
+<div class="table-responsive">
+<table class="lightable-paper table table-hover table-condensed" data-quarto-postprocess="true">
+<caption>Метрики по РК, группам, типу площадки</caption>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th" style="text-align: left; color: #5A5A5A !important; background-color: #DBB9FA !important; font-size: 16px;">Campaign</th>
+<th data-quarto-table-cell-role="th" style="text-align: left; color: #5A5A5A !important; background-color: #DBB9FA !important; font-size: 16px;">Group</th>
+<th data-quarto-table-cell-role="th" style="text-align: left; color: #5A5A5A !important; background-color: #DBB9FA !important; font-size: 16px;">NetType</th>
+<th data-quarto-table-cell-role="th" style="text-align: left; color: #5A5A5A !important; background-color: #DBB9FA !important; font-size: 16px;">Cost</th>
+<th data-quarto-table-cell-role="th" style="text-align: left; color: #5A5A5A !important; background-color: #DBB9FA !important; font-size: 16px;">GoalsFC</th>
+<th data-quarto-table-cell-role="th" style="text-align: left; color: #5A5A5A !important; background-color: #DBB9FA !important; font-size: 16px;">GoalsLC</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; color: #5A5A5A !important; background-color: #DBB9FA !important; font-size: 16px;">cpaFC,₽</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; color: #5A5A5A !important; background-color: #DBB9FA !important; font-size: 16px;">cpaLC,₽</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; color: #5A5A5A !important; background-color: #DBB9FA !important; font-size: 16px;">crFC,%</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; color: #5A5A5A !important; background-color: #DBB9FA !important; font-size: 16px;">crLC,%</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; color: #5A5A5A !important; background-color: #DBB9FA !important; font-size: 16px;">wImp</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; color: #5A5A5A !important; background-color: #DBB9FA !important; font-size: 16px;">Clicks</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; color: #5A5A5A !important; background-color: #DBB9FA !important; font-size: 16px;">CPC,₽</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; color: #5A5A5A !important; background-color: #DBB9FA !important; font-size: 16px;">wCTR,%</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; color: #5A5A5A !important; background-color: #DBB9FA !important; font-size: 16px;">BR,%</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left; font-size: 14px;">[патор] ремаркетинг</td>
+<td style="text-align: left; font-size: 14px;">[S-2] Remarketing: step 1</td>
+<td style="text-align: left; font-size: 14px; border-right: 1px solid;">AD_NETWORK</td>
+<td style="text-align: left; font-size: 14px;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(216, 87, 107, 0.4) !important;">28735</span></td>
+<td style="text-align: left; font-size: 14px;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(253, 195, 40, 0.4) !important;">2</span></td>
+<td style="text-align: left; font-size: 14px; border-right: 1px solid;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(250, 156, 60, 0.4) !important;">10</span></td>
+<td style="text-align: right; font-size: 14px;">14368</td>
+<td style="text-align: right; font-size: 14px;">2874</td>
+<td style="text-align: right; font-size: 14px;">0.15</td>
+<td style="text-align: right; font-size: 14px;">0.74</td>
+<td style="text-align: right; font-size: 14px;">555910</td>
+<td style="text-align: right; font-size: 14px;">1360</td>
+<td style="text-align: right; font-size: 14px;">21</td>
+<td style="text-align: right; font-size: 14px;">0.24</td>
+<td style="text-align: right; font-size: 14px;">40</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; font-size: 14px;">[патор] ремаркетинг</td>
+<td style="text-align: left; font-size: 14px;">[S-3] Remarketing: step 2</td>
+<td style="text-align: left; font-size: 14px; border-right: 1px solid;">AD_NETWORK</td>
+<td style="text-align: left; font-size: 14px;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(252, 206, 37, 0.4) !important;">931</span></td>
+<td style="text-align: left; font-size: 14px;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(252, 206, 37, 0.4) !important;">0</span></td>
+<td style="text-align: left; font-size: 14px; border-right: 1px solid;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(252, 206, 37, 0.4) !important;">0</span></td>
+<td style="text-align: right; font-size: 14px;">0</td>
+<td style="text-align: right; font-size: 14px;">0</td>
+<td style="text-align: right; font-size: 14px;">0.00</td>
+<td style="text-align: right; font-size: 14px;">0.00</td>
+<td style="text-align: right; font-size: 14px;">27042</td>
+<td style="text-align: right; font-size: 14px;">78</td>
+<td style="text-align: right; font-size: 14px;">12</td>
+<td style="text-align: right; font-size: 14px;">0.29</td>
+<td style="text-align: right; font-size: 14px;">44</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; font-size: 14px;">[патор] ремаркетинг</td>
+<td style="text-align: left; font-size: 14px;">[S-12] anova: sec60:pPrice</td>
+<td style="text-align: left; font-size: 14px; border-right: 1px solid;">AD_NETWORK</td>
+<td style="text-align: left; font-size: 14px;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(253, 175, 49, 0.4) !important;">7298</span></td>
+<td style="text-align: left; font-size: 14px;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(252, 206, 37, 0.4) !important;">0</span></td>
+<td style="text-align: left; font-size: 14px; border-right: 1px solid;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(253, 200, 39, 0.4) !important;">1</span></td>
+<td style="text-align: right; font-size: 14px;">0</td>
+<td style="text-align: right; font-size: 14px;">7298</td>
+<td style="text-align: right; font-size: 14px;">0.00</td>
+<td style="text-align: right; font-size: 14px;">0.31</td>
+<td style="text-align: right; font-size: 14px;">117798</td>
+<td style="text-align: right; font-size: 14px;">326</td>
+<td style="text-align: right; font-size: 14px;">22</td>
+<td style="text-align: right; font-size: 14px;">0.28</td>
+<td style="text-align: right; font-size: 14px;">34</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; font-size: 14px;">[master] pator</td>
+<td style="text-align: left; font-size: 14px;">--</td>
+<td style="text-align: left; font-size: 14px; border-right: 1px solid;">AD_NETWORK</td>
+<td style="text-align: left; font-size: 14px;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(13, 8, 135, 0.4) !important;">74017</span></td>
+<td style="text-align: left; font-size: 14px;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(70, 3, 159, 0.4) !important;">64</span></td>
+<td style="text-align: left; font-size: 14px; border-right: 1px solid;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(67, 3, 158, 0.4) !important;">63</span></td>
+<td style="text-align: right; font-size: 14px;">1157</td>
+<td style="text-align: right; font-size: 14px;">1175</td>
+<td style="text-align: right; font-size: 14px;">3.21</td>
+<td style="text-align: right; font-size: 14px;">3.16</td>
+<td style="text-align: right; font-size: 14px;">534164</td>
+<td style="text-align: right; font-size: 14px;">1991</td>
+<td style="text-align: right; font-size: 14px;">37</td>
+<td style="text-align: right; font-size: 14px;">0.37</td>
+<td style="text-align: right; font-size: 14px;">26</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; font-size: 14px;">[master] pator</td>
+<td style="text-align: left; font-size: 14px;">--</td>
+<td style="text-align: left; font-size: 14px; border-right: 1px solid;">SEARCH</td>
+<td style="text-align: left; font-size: 14px;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(41, 5, 147, 0.4) !important;">70232</span></td>
+<td style="text-align: left; font-size: 14px;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(13, 8, 135, 0.4) !important;">73</span></td>
+<td style="text-align: left; font-size: 14px; border-right: 1px solid;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: rgba(13, 8, 135, 0.4) !important;">71</span></td>
+<td style="text-align: right; font-size: 14px;">962</td>
+<td style="text-align: right; font-size: 14px;">989</td>
+<td style="text-align: right; font-size: 14px;">3.47</td>
+<td style="text-align: right; font-size: 14px;">3.38</td>
+<td style="text-align: right; font-size: 14px;">30028</td>
+<td style="text-align: right; font-size: 14px;">2102</td>
+<td style="text-align: right; font-size: 14px;">33</td>
+<td style="text-align: right; font-size: 14px;">7.00</td>
+<td style="text-align: right; font-size: 14px;">45</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="объявления" class="level2">
+<h2 class="anchored" data-anchor-id="объявления">Объявления</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-5-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-1" role="tab" aria-controls="tabset-5-1" aria-selected="true">Форматы</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-2" role="tab" aria-controls="tabset-5-2" aria-selected="false">Слоты</a></li></ul>
+<div class="tab-content">
+<div id="tabset-5-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-5-1-tab">
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="pator_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Показы по типу формата объявлений за последние 30 дней</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="pator_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Клики по типу формата за последние 30 дней</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="table-responsive">
+<table class="lightable-paper table table-hover table-condensed" data-quarto-postprocess="true">
+<caption>Метрики по РК, площадкам и форматам</caption>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th" style="text-align: left; position: sticky; top: 0; background-color: #FFFFFF; color: #5A5A5A !important; background-color: #DBB9FA !important; font-size: 13px;">CampaignName</th>
+<th data-quarto-table-cell-role="th" style="text-align: left; position: sticky; top: 0; background-color: #FFFFFF; color: #5A5A5A !important; background-color: #DBB9FA !important; font-size: 13px;">AdNetworkType</th>
+<th data-quarto-table-cell-role="th" style="text-align: left; position: sticky; top: 0; background-color: #FFFFFF; color: #5A5A5A !important; background-color: #DBB9FA !important; font-size: 13px;">AdFormat</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF; color: #5A5A5A !important; background-color: #DBB9FA !important; font-size: 13px;">Cost</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF; color: #5A5A5A !important; background-color: #DBB9FA !important; font-size: 13px;">GoalsFC</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF; color: #5A5A5A !important; background-color: #DBB9FA !important; font-size: 13px;">GoalsLC</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF; color: #5A5A5A !important; background-color: #DBB9FA !important; font-size: 13px;">cpaFC,₽</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF; color: #5A5A5A !important; background-color: #DBB9FA !important; font-size: 13px;">cpaLC,₽</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF; color: #5A5A5A !important; background-color: #DBB9FA !important; font-size: 13px;">crFC,%</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF; color: #5A5A5A !important; background-color: #DBB9FA !important; font-size: 13px;">crLC,%</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF; color: #5A5A5A !important; background-color: #DBB9FA !important; font-size: 13px;">wImp</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF; color: #5A5A5A !important; background-color: #DBB9FA !important; font-size: 13px;">Clicks</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF; color: #5A5A5A !important; background-color: #DBB9FA !important; font-size: 13px;">CPC,₽</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF; color: #5A5A5A !important; background-color: #DBB9FA !important; font-size: 13px;">wCTR,%</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF; color: #5A5A5A !important; background-color: #DBB9FA !important; font-size: 13px;">BR,%</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">[master] pator</td>
+<td style="text-align: left;">AD_NETWORK</td>
+<td style="text-align: left;">IMAGE</td>
+<td style="text-align: right;">72749</td>
+<td style="text-align: right;">63</td>
+<td style="text-align: right;">61</td>
+<td style="text-align: right;">1155</td>
+<td style="text-align: right;">1193</td>
+<td style="text-align: right;">3.20</td>
+<td style="text-align: right;">3.10</td>
+<td style="text-align: right;">529604</td>
+<td style="text-align: right;">1970</td>
+<td style="text-align: right;">37</td>
+<td style="text-align: right;">0.37</td>
+<td style="text-align: right;">26</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">[master] pator</td>
+<td style="text-align: left;">SEARCH</td>
+<td style="text-align: left;">IMAGE</td>
+<td style="text-align: right;">53724</td>
+<td style="text-align: right;">57</td>
+<td style="text-align: right;">55</td>
+<td style="text-align: right;">943</td>
+<td style="text-align: right;">977</td>
+<td style="text-align: right;">3.90</td>
+<td style="text-align: right;">3.77</td>
+<td style="text-align: right;">17849</td>
+<td style="text-align: right;">1460</td>
+<td style="text-align: right;">37</td>
+<td style="text-align: right;">8.18</td>
+<td style="text-align: right;">43</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">[master] pator</td>
+<td style="text-align: left;">SEARCH</td>
+<td style="text-align: left;">TEXT</td>
+<td style="text-align: right;">16508</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">1032</td>
+<td style="text-align: right;">1032</td>
+<td style="text-align: right;">2.49</td>
+<td style="text-align: right;">2.49</td>
+<td style="text-align: right;">12179</td>
+<td style="text-align: right;">642</td>
+<td style="text-align: right;">26</td>
+<td style="text-align: right;">5.27</td>
+<td style="text-align: right;">49</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">[master] pator</td>
+<td style="text-align: left;">AD_NETWORK</td>
+<td style="text-align: left;">VIDEO</td>
+<td style="text-align: right;">1268</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">1268</td>
+<td style="text-align: right;">634</td>
+<td style="text-align: right;">4.76</td>
+<td style="text-align: right;">9.52</td>
+<td style="text-align: right;">4042</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">0.52</td>
+<td style="text-align: right;">24</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">[master] pator</td>
+<td style="text-align: left;">AD_NETWORK</td>
+<td style="text-align: left;">TEXT</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">518</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">[патор] ремаркетинг</td>
+<td style="text-align: left;">AD_NETWORK</td>
+<td style="text-align: left;">IMAGE</td>
+<td style="text-align: right;">36925</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">18462</td>
+<td style="text-align: right;">3357</td>
+<td style="text-align: right;">0.11</td>
+<td style="text-align: right;">0.62</td>
+<td style="text-align: right;">700389</td>
+<td style="text-align: right;">1763</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: right;">0.25</td>
+<td style="text-align: right;">39</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">[патор] ремаркетинг</td>
+<td style="text-align: left;">AD_NETWORK</td>
+<td style="text-align: left;">TEXT</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">361</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">0.28</td>
+<td style="text-align: right;">100</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+</div>
+</div>
+<div id="tabset-5-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-5-2-tab">
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="pator_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Показы объявлений в блоках</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="pator_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Клики по объявлениям в блоках</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="table-responsive">
+<table class="lightable-paper table table-hover table-condensed" data-quarto-postprocess="true">
+<caption>Метрики по РК, типу площадки и блоку показа объявления</caption>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th" style="text-align: left; position: sticky; top: 0; background-color: #FFFFFF; color: #5A5A5A !important; background-color: #DBB9FA !important; font-size: 13px;">CampaignName</th>
+<th data-quarto-table-cell-role="th" style="text-align: left; position: sticky; top: 0; background-color: #FFFFFF; color: #5A5A5A !important; background-color: #DBB9FA !important; font-size: 13px;">AdNetworkType</th>
+<th data-quarto-table-cell-role="th" style="text-align: left; position: sticky; top: 0; background-color: #FFFFFF; color: #5A5A5A !important; background-color: #DBB9FA !important; font-size: 13px;">Slot</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF; color: #5A5A5A !important; background-color: #DBB9FA !important; font-size: 13px;">Cost</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF; color: #5A5A5A !important; background-color: #DBB9FA !important; font-size: 13px;">GoalsFC</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF; color: #5A5A5A !important; background-color: #DBB9FA !important; font-size: 13px;">GoalsLC</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF; color: #5A5A5A !important; background-color: #DBB9FA !important; font-size: 13px;">cpaFC,₽</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF; color: #5A5A5A !important; background-color: #DBB9FA !important; font-size: 13px;">cpaLC,₽</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF; color: #5A5A5A !important; background-color: #DBB9FA !important; font-size: 13px;">crFC,%</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF; color: #5A5A5A !important; background-color: #DBB9FA !important; font-size: 13px;">crLC,%</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF; color: #5A5A5A !important; background-color: #DBB9FA !important; font-size: 13px;">wImp</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF; color: #5A5A5A !important; background-color: #DBB9FA !important; font-size: 13px;">Clicks</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF; color: #5A5A5A !important; background-color: #DBB9FA !important; font-size: 13px;">CPC,₽</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF; color: #5A5A5A !important; background-color: #DBB9FA !important; font-size: 13px;">wCTR,%</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF; color: #5A5A5A !important; background-color: #DBB9FA !important; font-size: 13px;">BR,%</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">[master] pator</td>
+<td style="text-align: left;">AD_NETWORK</td>
+<td style="text-align: left;">OTHER</td>
+<td style="text-align: right;">74017</td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">63</td>
+<td style="text-align: right;">1157</td>
+<td style="text-align: right;">1175</td>
+<td style="text-align: right;">3.21</td>
+<td style="text-align: right;">3.16</td>
+<td style="text-align: right;">534164</td>
+<td style="text-align: right;">1991</td>
+<td style="text-align: right;">37</td>
+<td style="text-align: right;">0.37</td>
+<td style="text-align: right;">26</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">[master] pator</td>
+<td style="text-align: left;">SEARCH</td>
+<td style="text-align: left;">PREMIUMBLOCK</td>
+<td style="text-align: right;">65075</td>
+<td style="text-align: right;">68</td>
+<td style="text-align: right;">67</td>
+<td style="text-align: right;">957</td>
+<td style="text-align: right;">971</td>
+<td style="text-align: right;">3.73</td>
+<td style="text-align: right;">3.67</td>
+<td style="text-align: right;">25885</td>
+<td style="text-align: right;">1825</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: right;">7.05</td>
+<td style="text-align: right;">45</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">[master] pator</td>
+<td style="text-align: left;">SEARCH</td>
+<td style="text-align: left;">OTHER</td>
+<td style="text-align: right;">5158</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">1032</td>
+<td style="text-align: right;">1290</td>
+<td style="text-align: right;">1.87</td>
+<td style="text-align: right;">1.49</td>
+<td style="text-align: right;">3765</td>
+<td style="text-align: right;">268</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">7.12</td>
+<td style="text-align: right;">44</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">[master] pator</td>
+<td style="text-align: left;">SEARCH</td>
+<td style="text-align: left;">SUGGEST</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">338</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.30</td>
+<td style="text-align: right;">100</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">[master] pator</td>
+<td style="text-align: left;">SEARCH</td>
+<td style="text-align: left;">ALONE</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">20.00</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">[патор] ремаркетинг</td>
+<td style="text-align: left;">AD_NETWORK</td>
+<td style="text-align: left;">OTHER</td>
+<td style="text-align: right;">36965</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">18482</td>
+<td style="text-align: right;">3360</td>
+<td style="text-align: right;">0.11</td>
+<td style="text-align: right;">0.62</td>
+<td style="text-align: right;">700750</td>
+<td style="text-align: right;">1764</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: right;">0.25</td>
+<td style="text-align: right;">39</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="таргеты" class="level2">
+<h2 class="anchored" data-anchor-id="таргеты">Таргеты</h2>
+<p>Для поисковых РК Скачать список кампаний Отфильтровать те, которые имеют статус search Применить фильтр к данным и вывести данные по поисковым запросам.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Скопировано");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Скопировано");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
