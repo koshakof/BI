@@ -4,17 +4,18 @@ project:
   type: website
   output-dir: docs
   render:
-    - "!reports/pator/"
+    - "!clients/pator/"
+    - "!clients/mc/"
     - "*.qmd"
     
 
 website:
-  title: "PLATZKART BI"
-  description: "Система отслеживания результатов ведения проектов"
+  title: "Korshakov Consulting"
+  description: "Консалтинговые услуги в сфере маркетинга и рекламы"
   navbar:
     left:
       - href: index.qmd
-        text: "О проекте"
+        text: "Главная"
 
 format:
   html:

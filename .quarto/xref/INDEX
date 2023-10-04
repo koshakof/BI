@@ -34,5 +34,14 @@
   },
   "clients/pator/pator.qmd": {
     "pator.html": "d11f5587"
+  },
+  "clients/mc/01_masterslych.qmd": {
+    "01_masterslych.html": "c96f46b5"
+  },
+  "pres/consulting.qmd": {
+    "consulting.html": "7bc362e5"
+  },
+  "pres/mark_consulting.qmd": {
+    "mark_consulting.html": "a4399814"
   }
 }

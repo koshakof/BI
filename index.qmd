@@ -1,11 +1,13 @@
 ---
-title: "PLATZKART BI"
+title: "Консалтинг в сфере маркетинга и рекламы"
 editor_options: 
   chunk_output_type: console
 ---
 
-## Проекты
+## Ссылки
 
-* [МастерСлух](/clients/mc/02_masterslych.qmd)
+* [Презентация: Маркетинговый консалтинг](/pres/mark_consulting.qmd)
+* [Презентация: Рекламный консалтинг]()
+* [Презентация: О себе]()
 
 
