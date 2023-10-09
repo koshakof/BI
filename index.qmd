@@ -6,6 +6,8 @@ editor_options:
 
 ## Презентации
 
+### Korshakoff
+
 * [Презентация: Маркетинговый консалтинг (для спикера)](/pres/mark_consulting_speaker.qmd)
 * [Презентация: Маркетинговый консалтинг (раздаточная)](/pres/mark_consulting_mailing.qmd)
 * [Презентация: Рекламный консалтинг (для спикера)]()
@@ -13,3 +15,8 @@ editor_options:
 * [Презентация: О себе]()
 
 
+
+### PLATZKART
+
+* [Презентация: Маркетинговый консалтинг (для спикера)](/pres/mark_consulting_speaker_pl.qmd)
+* [Презентация: Маркетинговый консалтинг (раздаточная)](/pres/mark_consulting_mailing_pl.qmd)
