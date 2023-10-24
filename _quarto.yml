@@ -23,4 +23,6 @@ format:
     toc-location: left
     page-layout: full
     css: styles.css
+    link-external-newwindow: true
+
 

@@ -1,11 +1,11 @@
 ---
 title: "Маркетинговый консалтинг"
 title-slide-attributes:
-    data-background-color: "#43464B"
     data-background-iframe: "iframe/index.html"
 subtitle: "Основанный на данных"
 format:
   revealjs:
+    controls: true
     # embed-resources: true
     theme: [default, custom.scss]
     css: styles.css
@@ -395,6 +395,29 @@ CJM это не очередная забава.
 
 
 
+## Аналитический этап {transition="zoom" .smaller}
+
+### [Приоритетность изменений]{.text_select}
+
+<br/>
+
+Результатом аналитического этапа будет документ «Приоритетность изменений», в котором указаны точки на которые нужно воздействовать в первую очередь.
+
+<br/>
+
+::: {.fragment .fade-up}
+Данные документ — это фундамент для стратегии в которой даётся ответ на вопрос: «А как именно мы это будем делать и на основании чего»?
+:::
+
+<br/>
+
+::: {.fragment .fade-up}
+Создание стратегии — это следующий важный этап в реализации маркетинговой услуги.
+:::
+
+
+
+
 # Создание стратегии {background-iframe="iframe/index.html"}
 
 
@@ -660,3 +683,5 @@ CJM это не очередная забава.
 e-mail: <i@akorshakov.ru>
 
 telegram: <https://t.me/akorshakoff>
+
+Скачать презентацию в формате [PDF]()
