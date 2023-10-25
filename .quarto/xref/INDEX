@@ -58,5 +58,8 @@
   },
   "about/pres_about.qmd": {
     "pres_about.html": "51db0223"
+  },
+  "pres/mark_consulting_mailing_pl_v2.qmd": {
+    "mark_consulting_mailing_pl_v2.html": "331998ba"
   }
 }

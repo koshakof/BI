@@ -24,3 +24,4 @@ editor_options:
 
 * [Презентация: Маркетинговый консалтинг (для спикера)](/pres/mark_consulting_speaker_pl.qmd)
 * [Презентация: Маркетинговый консалтинг (раздаточная)](/pres/mark_consulting_mailing_pl.qmd)
+* [Презентация: Маркетинговый консалтинг (раздаточная ver. 2)](/pres/mark_consulting_mailing_pl_v2.qmd)

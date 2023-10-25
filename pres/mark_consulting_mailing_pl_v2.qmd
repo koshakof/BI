@@ -1,5 +1,5 @@
 ---
-title: "Маркетинговый консалтинг"
+title: "Маркетинг"
 title-slide-attributes:
     data-background-iframe: "iframe/index.html"
 subtitle: "Основанный на данных"
@@ -664,24 +664,20 @@ CJM это не очередная забава.
 ::: {.fragment .fade-in-then-semi-out}
 - [Реальное планирование]{.text_select}. Корректнее планировать время на отдельные этапы реализации, чем на весь проект сразу.
 :::
+	
 
 
+# Заказать {transition="zoom" background-iframe="iframe/index.html" .smaller}
 
-
-# Заказать услугу {transition="zoom" background-iframe="iframe/index.html"}
-
-Консалтинг в области маркетинга и рекламы
-
-<br/>
-
-Пишите, если видите пользу в услуге.
+Макетинг основанный на данных
 
 <br/>
 
-Александр Коршаков
+- +7 (861) 212 36 99
+- +7 (903) 411 04 24 // WhatsApp, Telegram, Viber
 
-e-mail: <i@akorshakov.ru>
+e-mail: <order@platzkart.ru>
 
-telegram: <https://t.me/akorshakoff>
+<br/>
 
 Скачать презентацию в формате [PDF]()
