@@ -15,7 +15,7 @@ website:
     left:
       - href: index.qmd
         text: "Главная"
-      - href: case/cases.qmd
+      - href: cases.qmd
         text: "Кейсы"
 
 format:
@@ -26,5 +26,7 @@ format:
     css: styles.css
     link-external-newwindow: true
     theme: minty
+
+    
 
 

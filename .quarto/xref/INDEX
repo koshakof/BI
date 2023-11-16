@@ -70,5 +70,11 @@
   },
   "case/ds-call-analysis/call_analysis.qmd": {
     "call_analysis.html": "a108d47f"
+  },
+  "cases.qmd": {
+    "cases.html": "ff0bad7d"
+  },
+  "cases/ds-call-analysis/call_analysis.qmd": {
+    "call_analysis.html": "e2b8592b"
   }
 }
