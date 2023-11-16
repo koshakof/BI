@@ -1,0 +1,9 @@
+---
+title: "Примеры работ"
+editor_options: 
+  chunk_output_type: console
+---
+
+## Примеры работ
+
+* [Data science анализ входящих звонков](/case/ds-call-analysis/call_analysis.qmd)

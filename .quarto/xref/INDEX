@@ -64,5 +64,11 @@
   },
   "pres/mark_consulting_mailing_pl_v3.qmd": {
     "mark_consulting_mailing_pl_v3.html": "b615eb5b"
+  },
+  "case/cases.qmd": {
+    "cases.html": "e55c673a"
+  },
+  "case/ds-call-analysis/call_analysis.qmd": {
+    "call_analysis.html": "a108d47f"
   }
 }

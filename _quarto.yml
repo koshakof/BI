@@ -4,8 +4,7 @@ project:
   type: website
   output-dir: docs
   render:
-    - "!clients/pator/"
-    - "!clients/mc/"
+    - "!clients/"
     - "*.qmd"
     
 
@@ -16,6 +15,8 @@ website:
     left:
       - href: index.qmd
         text: "Главная"
+      - href: case/cases.qmd
+        text: "Кейсы"
 
 format:
   html:
@@ -24,5 +25,6 @@ format:
     page-layout: full
     css: styles.css
     link-external-newwindow: true
+    theme: minty
 
 
