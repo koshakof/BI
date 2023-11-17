@@ -2,7 +2,9 @@
 title: "Консалтинг в сфере маркетинга и рекламы"
 editor_options: 
   chunk_output_type: console
-
+format:
+  html:
+    link-external-newwindow: true
 ---
 
 ## Презентации

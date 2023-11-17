@@ -9,7 +9,7 @@ project:
     
 
 website:
-  title: "Korshakov Consulting"
+  title: "Korshakoff Consulting"
   description: "Консалтинговые услуги в сфере маркетинга и рекламы"
   navbar:
     left:
@@ -22,7 +22,6 @@ format:
   html:
     toc: true
     toc-location: left
-    page-layout: full
     css: styles.css
     link-external-newwindow: true
     theme: minty
