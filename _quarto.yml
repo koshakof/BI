@@ -26,6 +26,8 @@ format:
     link-external-newwindow: true
     theme: minty
 
+execute: 
+  freeze: auto
     
 
 
