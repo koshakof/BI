@@ -1,0 +1,12 @@
+---
+title: "Примеры работ"
+format:
+  html:
+    link-external-newwindow: true
+editor_options: 
+  chunk_output_type: console
+---
+
+
+* [Data Science анализ входящих звонков](/wiki/call_analysis.qmd)
+* [Как провести DS анализ рекламных площадок в Директ](/wiki/ds_places_analysis.qmd)

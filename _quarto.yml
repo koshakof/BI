@@ -4,19 +4,19 @@ project:
   type: website
   output-dir: docs
   render:
-    - "!clients/"
+
     - "*.qmd"
     
 
 website:
-  title: "Korshakoff Consulting"
+  title: "Korshakoff Data Driven Marketing"
   description: "Консалтинговые услуги в сфере маркетинга и рекламы"
   navbar:
     left:
       - href: index.qmd
         text: "Главная"
-      - href: cases.qmd
-        text: "Кейсы"
+      - href: wiki.qmd
+        text: "Wiki"
 
 format:
   html:

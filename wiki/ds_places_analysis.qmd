@@ -1,0 +1,767 @@
+---
+lang: ru
+title: 'Data Science анализ площадок в Директ'
+date: today
+date-format:  D dddd MMM YYYY
+format:
+  html:
+    toc: true
+    toc-location: left
+    cap-location: top
+editor_options: 
+  chunk_output_type: console
+execute:
+  warning: false
+  message: false
+  error: false
+  echo: false
+---
+
+<!-- Подготовка к анализу -->
+
+```{r}
+# загрузка библиотек 
+library(DT)
+library(tidyverse)
+library(kableExtra)
+library(googlesheets4)
+library(grDevices)
+library(cluster)
+library(factoextra)
+library(NbClust)
+```
+
+
+```{r}
+# путь
+file_path <- '~/GitHub/BI/wiki/data/'
+```
+
+
+```{r}
+# загрузка данных по площадкам
+data_proc <- data.table::fread(
+  file = paste0(file_path, 'places_data_proc.txt')
+  ) |> 
+  mutate(CampaignId = as.character(CampaignId))
+```
+
+
+```{r}
+# загружаем список символов для фильтрации площадок
+stop_place <- data.table::fread(
+  file = paste0(file_path, 'minus_places.txt')
+  )
+
+## создаем вектор
+stop_place_v <- paste(stop_place$minus, collapse = '|')
+```
+
+<!-- END -->
+
+
+
+## Кластерный анализ
+
+Кластерный анализ позволит выявить группы (кластеры) площадок с различными характеристиками, при этом не дожидаясь набора статистически значимых данных. Например, с помощью кластерного анализа мы сможем выявить группу неэффективных площадок и запретить показы на них.
+
+Кластерный анализ проводится в несколько этапов:
+
+* подготовка данных
+* поиск оптимального числа кластеров
+* кластеризация
+* анализ результатов
+
+Рассмотрим каждый этап подробнее.
+
+<br/>
+
+
+### Подготовим данные
+
+Подготовим данные для кластеризации. Оставим площадки:
+
+- по которым были затраты
+- уберем минус площадки (площадки, которые были отминусованы в ходе оптимизации проекта)
+
+Кластеризацию проведем по параметрам:
+
+- Cost — затраты на площадку
+- Goals — кол-во достигнутых целей на площадку
+- Imp — кол-во показов
+- Clicls — кол-во переходов (кликов)
+- Bounces — кол-во отказов
+- Session — кол-во сессий
+- CPA — стоимость обращения
+- CPC — стоимость клика
+- SR — коэф. сеанса, отношение сессии к кликам
+- BR - коэф. отказов
+
+Данные параметры наиболее важны для анализа качества площадки, на которой происходит показ объявления.
+
+В итоге всех преобразований получаем таблицу для кластерного анализа.
+
+```{r}
+#| echo: true
+#| code-fold: true
+
+df <- data_proc |>  
+  filter(CampaignId %in% "99895250") |> 
+  reframe(
+    across(where(is.numeric), sum), 
+    .by = Placement
+    ) |> 
+  mutate(
+    Cost = round(Cost),
+    Imp = round(Impressions),
+    BR = if_else(Bounces == 0 | Sessions == 0, 0, round(Bounces / Sessions, 1)),
+    SR = if_else(Clicks == 0 | Sessions == 0, 0, round(Sessions / Clicks, 1)),
+    CPA = if_else(Cost == 0 | Goals == 0, 0, round(Cost / Goals)),
+    CPC = if_else(Cost == 0 | Clicks == 0, 0, round(Cost / Clicks))
+    ) |>  
+  select(
+    Placement,
+    Cost,
+    Goals,
+    Imp,
+    Clicks,
+    Bounces,
+    Sessions,
+    CPA,
+    CPC,
+    SR,
+    BR
+    ) |> 
+  filter(
+    Cost > 0,
+    !grepl(stop_place_v, Placement)
+    )
+```
+
+
+```{r}
+# сделаем столбец Query названием строк
+rownames(df) <- df$Placement
+
+# yдаляем столбец Query
+df$Placement <- NULL
+```
+
+
+> **Таблица: Данные для анализа**
+
+```{r}
+#| output: asis
+
+# выводим таблицу
+head(df) |> 
+  kbl() |>
+  kable_minimal()
+```
+
+<br/>
+
+Проведем стандартизацию данных для повышения качества анализа.
+
+> **Таблица: Стандартизированная таблица**
+
+```{r}
+#| output: asis
+
+# стандартизируем данные
+df_st <- as.data.frame(scale(df))
+
+# выводим таблицу
+head(df_st) |> 
+  kbl() |>
+  kable_minimal()
+```
+
+<br/>
+
+
+
+### Поиск оптимального числа кластеров
+
+- Автоматический подбор номеров кластера по 30 индексам. 
+- Метод кластеризации k-means.
+- Используем «манхетенское» расстояние для расчётов.
+
+```{r}
+#| include: false
+
+# используем библиотеку NbClust
+nb <- NbClust(
+  df_st, 
+  distance = 'manhattan', 
+  min.nc = 2,
+  max.nc = 10, 
+  method = 'kmeans', 
+  index = 'all',
+  )
+```
+
+
+```{r}
+# чиним функцию «fviz_nbclust»
+
+fviz_nbclust <- function(
+    x, FUNcluster = NULL, method = c(
+      "silhouette", "wss",
+      "gap_stat"
+    ), diss = NULL, k.max = 10, nboot = 100, verbose = interactive(),
+    barfill = "steelblue", barcolor = "steelblue", linecolor = "steelblue",
+    print.summary = TRUE, ...) {
+  set.seed(123)
+  if (k.max < 2) {
+    stop("k.max must bet > = 2")
+  }
+  method <- match.arg(method)
+  if (!inherits(x, c("data.frame", "matrix")) & !("Best.nc" %in%
+    names(x))) {
+    stop(
+      "x should be an object of class matrix/data.frame or ",
+      "an object created by the function NbClust() [NbClust package]."
+    )
+  }
+  if (inherits(x, "list") & "Best.nc" %in% names(x)) {
+    best_nc <- x$Best.nc
+    if (any(class(best_nc) == "numeric")) {
+      print(best_nc)
+    } else if (any(class(best_nc) == "matrix")) {
+      .viz_NbClust(x, print.summary, barfill, barcolor)
+    }
+  } else if (is.null(FUNcluster)) {
+    stop("The argument FUNcluster is required. ", "Possible values are kmeans, pam, hcut, clara, ...")
+  } else if (!is.function(FUNcluster)) {
+    stop(
+      "The argument FUNcluster should be a function. ",
+      "Check if you're not overriding the specified function name somewhere."
+    )
+  } else if (method %in% c("silhouette", "wss")) {
+    if (is.data.frame(x)) {
+      x <- as.matrix(x)
+    }
+    if (is.null(diss)) {
+      diss <- stats::dist(x)
+    }
+    v <- rep(0, k.max)
+    if (method == "silhouette") {
+      for (i in 2:k.max) {
+        clust <- FUNcluster(x, i, ...)
+        v[i] <- .get_ave_sil_width(diss, clust$cluster)
+      }
+    } else if (method == "wss") {
+      for (i in 1:k.max) {
+        clust <- FUNcluster(x, i, ...)
+        v[i] <- .get_withinSS(diss, clust$cluster)
+      }
+    }
+    df <- data.frame(
+      clusters = as.factor(1:k.max), y = v,
+      stringsAsFactors = TRUE
+    )
+    ylab <- "Total Within Sum of Square"
+    if (method == "silhouette") {
+      ylab <- "Average silhouette width"
+    }
+    p <- ggpubr::ggline(df,
+      x = "clusters", y = "y", group = 1,
+      color = linecolor, ylab = ylab, xlab = "Number of clusters k",
+      main = "Optimal number of clusters"
+    )
+    if (method == "silhouette") {
+      p <- p + geom_vline(
+        xintercept = which.max(v), linetype = 2,
+        color = linecolor
+      )
+    }
+    return(p)
+  } else if (method == "gap_stat") {
+    extra_args <- list(...)
+    gap_stat <- cluster::clusGap(x, FUNcluster,
+      K.max = k.max,
+      B = nboot, verbose = verbose, ...
+    )
+    if (!is.null(extra_args$maxSE)) {
+      maxSE <- extra_args$maxSE
+    } else {
+      maxSE <- list(method = "firstSEmax", SE.factor = 1)
+    }
+    p <- fviz_gap_stat(gap_stat,
+      linecolor = linecolor,
+      maxSE = maxSE
+    )
+    return(p)
+  }
+}
+
+.viz_NbClust <- function(x, print.summary = TRUE, barfill = "steelblue",
+                         barcolor = "steelblue") {
+  best_nc <- x$Best.nc
+  if (any(class(best_nc) == "numeric")) {
+    print(best_nc)
+  } else if (any(class(best_nc) == "matrix")) {
+    best_nc <- as.data.frame(t(best_nc), stringsAsFactors = TRUE)
+    best_nc$Number_clusters <- as.factor(best_nc$Number_clusters)
+    if (print.summary) {
+      ss <- summary(best_nc$Number_clusters)
+      cat("Among all indices: \n===================\n")
+      for (i in 1:length(ss)) {
+        cat(
+          "*", ss[i], "proposed ", names(ss)[i],
+          "as the best number of clusters\n"
+        )
+      }
+      cat("\nConclusion\n=========================\n")
+      cat(
+        "* According to the majority rule, the best number of clusters is ",
+        names(which.max(ss)), ".\n\n"
+      )
+    }
+    df <- data.frame(
+      Number_clusters = names(ss), freq = ss,
+      stringsAsFactors = TRUE
+    )
+    p <- ggpubr::ggbarplot(df,
+      x = "Number_clusters",
+      y = "freq", fill = barfill, color = barcolor
+    ) +
+      labs(
+        x = "Number of clusters k", y = "Frequency among all indices",
+        title = paste0(
+          "Optimal number of clusters - k = ",
+          names(which.max(ss))
+        )
+      )
+    return(p)
+  }
+}
+# assign them to the factoextra namespace
+environment(fviz_nbclust) <- asNamespace("factoextra")
+assignInNamespace("fviz_nbclust", fviz_nbclust, "factoextra")
+environment(.viz_NbClust) <- asNamespace("factoextra")
+assignInNamespace(".viz_NbClust", .viz_NbClust, "factoextra")
+
+
+```
+
+
+```{r}
+# визуализируем результаты проверки
+fviz_nbclust(nb) +
+  theme_minimal()
+```
+
+
+**Вывод**
+
+Методом голосования по 30 индексам алгоритм предлагает использовать 3 или 5 кластеров.
+
+<br/>
+
+
+
+### Кластеризация методом k-means
+
+> **График: Визуальный анализ кластеризации**
+
+```{r}
+set.seed(42)
+
+# k-means cluster
+fit <- kmeans(df_st, 5, nstart = 25)
+```
+
+
+```{r}
+#| fig-height: 8
+#| fig-width: 8
+#| echo: true
+#| code-fold: true
+
+# визуализация
+fviz_cluster(
+  fit,
+  stand = FALSE,
+  data = df_st, 
+  geom = c('point', 'text'),
+  labelsize = 5
+  ) +
+  theme_minimal() +
+  labs(title = NULL) +
+  theme(
+    legend.position = "top",
+    legend.title = element_text(size = 10, color = "gray40"),
+    legend.text = element_text(size = 10, color = "gray40"),
+    axis.title = element_text(size = 8, color = "gray40"),
+    axis.text = element_text(size = 8, color = "gray50")
+    )
+```
+
+
+**Вывод**
+
+Видим сильно отличающийся кластер №1, в который вошел один сайт. В левом углу графика сосредоточены остальные кластеры. 
+
+Данный график лучше рассматривать вместе с табличными данными результата кластеризации.
+
+<br/>
+
+
+
+### Анализ результатов
+
+Смотрим характеристики кластеров.
+
+> **Таблица: Кластеры**
+
+```{r}
+#| echo: true
+#| code-fold: true
+
+# присвоим метки набору данных и выведем значения по кластерам
+df$Cluster <- as.character(fit$cluster)
+
+# cоздаем новый столбец из названия строк
+df$Placement <- rownames(df)  
+
+# сбрасываем названия строк
+rownames(df) <- NULL
+
+# создадим таблицу данных
+view_clust <- df |> 
+  reframe(
+    across(c(1:6), sum),
+    n = n(),
+    .by = Cluster
+    ) |> 
+  mutate(
+    BR = if_else(Bounces == 0 | Sessions == 0, 0, round(Bounces / Sessions, 1)),
+    SR = if_else(Clicks == 0 | Sessions == 0, 0, round(Sessions / Clicks, 1)),
+    CTR = if_else(Clicks == 0 | Imp == 0, 0, round(Clicks / Imp * 100, 2)),
+    CPA = if_else(Cost == 0 | Goals == 0, 0, round(Cost / Goals)),
+    CPC = if_else(Cost == 0 | Clicks == 0, 0, round(Cost / Clicks)),
+    CR = if_else(Clicks == 0 | Goals == 0, 0, round(Goals / Clicks * 100, 2))
+    ) |> 
+  select(
+    Cluster,
+    n,
+    Cost,
+    Goals,
+    Imp,
+    Clicks,
+    Sessions,
+    CPC,
+    CPA,
+    CTR,
+    CR,
+    BR,
+    SR
+  )
+
+# создаем таблицу с помощью библиотеке DT
+datatable(
+  view_clust,
+  rownames = FALSE,
+  extensions = c(
+    'Buttons',
+    'ColReorder',
+    'FixedHeader'),
+  escape  = FALSE,
+  class   = 'compact nowrap',
+  options = list(
+    pageLength = 10,
+    dom        = 'Btpli',
+    language   = list(url = '//cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json'),
+    buttons    = c('csv', 'excel'),
+    colReorder = TRUE,
+    fixedHeader = TRUE)
+  )
+```
+
+
+<br/>
+
+**Вывод**
+
+В кластер №1 вошла одна площадка, которая больше всех расходует бюджет и имеет приемлемые характеристики.
+
+Кластер №2 содержит площадки с повышенным коэф. отказов. Необходимо рассмотреть данный кластер подробнее.
+
+Кластеры №3 и №5 содержат площадки с хорошими характеристиками.
+
+Площадки в кластере №4 можно смело минусовать, так как на них теряются клики, т.е. скорее всего с этих площадок идет бот-трафик.
+
+
+>С помощью таблицы ниже можно подробнее рассмотреть каждый кластер и площадки входящие в него. Указываем в соответствуещем поле номер кластера. Также есть возможность выгрузить результаты в табличном формате, при этом, выгрузка учитывает выбранные фильтры и выгрузит отфильтрованные данные.
+
+
+<br/>
+
+
+> **Таблица для ручного анализа кластеров**
+
+```{r}
+df_tbl <- df |> 
+  select(
+     Cluster,
+     Placement,
+     Cost,
+     Goals,
+     Imp,
+     Clicks,
+     Sessions,
+     SR,
+     CPC,
+     CPA,
+     BR
+     )
+```
+
+
+```{r}
+# создаем таблицу с помощью библиотеке DT
+datatable(
+  df_tbl,
+  rownames = FALSE,
+  filter = 'top',
+  extensions = c(
+    'Buttons',
+    'ColReorder',
+    'FixedHeader'),
+  escape  = FALSE,
+  class   = 'compact nowrap',
+  options = list(
+    pageLength = 10,
+    dom        = 'Btpli',
+    language   = list(url = '//cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json'),
+    buttons    = c('csv', 'excel'),
+    colReorder = TRUE,
+    fixedHeader = TRUE)
+  ) |> 
+  formatStyle(
+  columns = 'Cost',
+  background = styleColorBar(df_tbl$Cost, '#EEC9E5'),
+  backgroundSize = '100% 80%',
+  backgroundRepeat = 'no-repeat',
+  backgroundPosition = 'center'
+  ) |>
+  formatStyle(
+    columns = 'Clicks',
+    background = styleColorBar(df_tbl$Clicks, '#EEC9E5'),
+    backgroundSize = '100% 80%',
+    backgroundRepeat = 'no-repeat',
+    backgroundPosition = 'center'
+  ) |>
+  formatStyle(
+    columns = 'Sessions',
+    background = styleColorBar(df_tbl$Sessions, '#EEC9E5'),
+    backgroundSize = '100% 80%',
+    backgroundRepeat = 'no-repeat',
+    backgroundPosition = 'center'
+  )
+```
+
+
+<br/>
+
+**Таблица содержит столбцы:**
+
+- Cluster — номер кластера
+- Placement — название площадки
+- n — кол-во площадок в кластере
+- Cost — потрачено денег на площадку
+- Goals — кол-во достигнутых целей на площадке
+- Imp — кол-во показов на площадке
+- Clicks — кол-во переходов с площадки
+- Session — кол-во сеансов с площадки
+- CPC — стоимость клика 
+- CPA — стоимость конверсии
+- CTR — коэффициента кликабельности объявлений
+- CR — коэффициент конверсии из клика в достигнутую цель
+- BR — коэффициенто отказа
+- SR — коэффициент сеанса (Session / Clicks). Показывает потерю клику на площадках. Если значение ниже 0.6, что означает потерю 40% кликов, то площадку можно минусовать.
+
+<br/>
+
+
+
+## Поиск минус площадок.
+
+Минус-площадки — площадки которые не подходят для проекта, например, приложения. 
+
+С помощью данного анализа можно быстро найти минус-площадки и запретить по ним показы, чтобы не слить бюджет.
+
+```{r}
+#| echo: true
+#| code-fold: true
+
+# подготовка данных для дальнейшего анализа
+data <- data_proc |>
+  filter(CampaignId %in% "99895250") |> 
+  reframe(
+    across(where(is.numeric), sum), 
+          .by = c(CampaignName, Placement)
+          )  |> 
+  mutate(
+    Cost = round(Cost),
+    Imp = round(Impressions),
+    SR = if_else(Clicks == 0 | Sessions == 0, 0, round(Sessions / Clicks, 1)),
+    BR = if_else(Bounces == 0 | Sessions == 0, 0, round(Bounces / Sessions * 100)),
+    CTR = if_else(Clicks == 0 | Impressions == 0, 0, round(Clicks / Impressions * 100, 2)),
+    CPA = if_else(Cost == 0 | Goals == 0, 0, round(Cost / Goals)),
+    CPC = if_else(Cost == 0 | Clicks == 0, 0, round(Cost / Clicks)),
+    CR = if_else(Clicks == 0 | Goals == 0, 0, round(Goals / Clicks * 100, 2))
+    ) |>  
+  select(
+    CampaignName,
+    Placement,
+    Cost,
+    Goals,
+    CPA,
+    CR,
+    Imp,
+    Clicks,
+    Sessions,
+    SR,
+    CPC,
+    CTR,
+    BR
+    ) |> 
+  arrange(
+    CampaignName, 
+    Placement
+    )
+
+# подготовка данных
+minus_pl <- data |>
+  filter(
+    Cost > 0,
+    grepl(stop_place_v, Placement)
+  ) |> 
+  arrange(Placement)
+
+# создаем таблицу с помощью библиотеке DT
+datatable(
+  minus_pl,
+  rownames = FALSE,
+  filter = 'top',
+  extensions = c(
+    'Buttons',
+    'ColReorder',
+    'FixedHeader'),
+  escape  = FALSE,
+  class   = 'display compact nowrap',
+  caption = htmltools::tags$caption(
+    style = 'caption-side: top; text-align: left; color: gray;', 
+    htmltools::h4('Таблица: Минус площадки за весь период')),
+  options = list(
+    pageLength = 10,
+    dom        = 'Btpli',
+    language   = list(url = '//cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json'),
+    buttons    = c('csv', 'excel'),
+    colReorder = TRUE,
+    fixedHeader = TRUE)
+  ) |> 
+  formatStyle(
+    columns = 'Cost',
+    background = styleColorBar(minus_pl$Cost, '#EEC9E5'),
+    backgroundSize = '100% 80%',
+    backgroundRepeat = 'no-repeat',
+    backgroundPosition = 'center'
+  ) |>
+  formatStyle(
+      columns = 'Clicks',
+      background = styleColorBar(minus_pl$Clicks, '#EEC9E5'),
+      backgroundSize = '100% 80%',
+      backgroundRepeat = 'no-repeat',
+      backgroundPosition = 'center'
+    ) |>
+  formatStyle(
+      columns = 'Imp',
+      background = styleColorBar(minus_pl$Imp, '#EEC9E5'),
+      backgroundSize = '100% 80%',
+      backgroundRepeat = 'no-repeat',
+      backgroundPosition = 'center'
+    )
+```
+
+<br/>
+
+
+
+## Потерянные клики
+
+Найдем площадки на которых теряется более 40% сеансов. Такое поведение похоже на бот трафик.
+
+Фильтрация:
+
+- за весь период
+- из данных исключены минус площадки
+- кол-во переходов с площадки от 5
+
+```{r}
+#| echo: true
+#| code-fold: true
+
+clicks_pl <- data  |>
+  filter(
+    !grepl(stop_place_v, Placement),
+    SR < 0.6,
+    Clicks >= 5
+    ) |> 
+  arrange(Placement)
+
+# создаем таблицу с помощью библиотеке DT
+datatable(
+  clicks_pl,
+  rownames = FALSE,
+  filter = 'top',
+  extensions = c(
+    'Buttons',
+    'ColReorder',
+    'FixedHeader'
+  ),
+  escape = FALSE,
+  class = 'display compact nowrap',
+  caption = htmltools::tags$caption(
+    style = 'caption-side: top;
+            text-align: left; 
+            color: gray;',
+    htmltools::h4('Таблица: Потерянные клики')
+  ),
+  options = list(
+    pageLength = 10,
+    dom = 'Btpli',
+    language = list(url = '//cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json'),
+    buttons = c('csv', 'excel'),
+    colReorder = TRUE,
+    fixedHeader = TRUE
+  )
+) |>
+  formatStyle(
+    columns = 'Cost',
+    background = styleColorBar(clicks_pl$Cost, '#EEC9E5'),
+    backgroundSize = '100% 80%',
+    backgroundRepeat = 'no-repeat',
+    backgroundPosition = 'center'
+  ) |>
+  formatStyle(
+    columns = 'Clicks',
+    background = styleColorBar(clicks_pl$Clicks, '#EEC9E5'),
+    backgroundSize = '100% 80%',
+    backgroundRepeat = 'no-repeat',
+    backgroundPosition = 'center'
+  ) |>
+  formatStyle(
+    columns = 'Sessions',
+    background = styleColorBar(clicks_pl$Sessions, '#EEC9E5'),
+    backgroundSize = '100% 80%',
+    backgroundRepeat = 'no-repeat',
+    backgroundPosition = 'center'
+  )
+```
+
+
+

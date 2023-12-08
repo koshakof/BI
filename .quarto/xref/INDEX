@@ -76,5 +76,14 @@
   },
   "cases/ds-call-analysis/call_analysis.qmd": {
     "call_analysis.html": "e2b8592b"
+  },
+  "wiki/ds_places_analysis.qmd": {
+    "ds_places_analysis.html": "91024062"
+  },
+  "wiki.qmd": {
+    "wiki.html": "970ce8f1"
+  },
+  "wiki/call_analysis.qmd": {
+    "call_analysis.html": "14ed7567"
   }
 }
