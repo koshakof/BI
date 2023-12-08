@@ -3,6 +3,18 @@
 // colors
 $body-bg: #43464B;
 $body-color: #fff;
+$link-color: #80a9d7;
+
+
+// fonts
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+
+
+
+$font-family-sans-serif: 'Roboto', sans-serif;
+$presentation-title-slide-text-align: "left";
+$presentation-font-size-root: 36px;
+
 
 
 
@@ -10,4 +22,16 @@ $body-color: #fff;
 
 .reveal .slide .text_select {
   color: #ffa07a;
+}
+
+.small {
+  font-size: 0.75em;
+}
+
+.larger {
+  font-size: 1.5em;
+}
+
+.largest {
+  font-size: 3em;
 }
