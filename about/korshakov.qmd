@@ -20,7 +20,7 @@ format:
     
 ---
 
-##  [Data Driven Marketin, анализ данных, реклама]{.text_select} {.smaller transition="zoom"}
+##  [Маркетинг, основанный на данных. Реклама. Аналитика]{.text_select} {.smaller transition="zoom"}
 
 <br/>
 
@@ -31,7 +31,7 @@ format:
 
 <br/>
 
-Предоставляю услуги в области маркетинга, анализа данных и рекламы. Общий стаж работы в сфере 8 лет. Последние 5 лет работаю как самозанятый.
+Предоставляю услуги в области маркетинга, рекламы и аналитики. Общий стаж работы в сфере 8 лет. Последние 5 лет работаю как самозанятый.
 :::
 
 ::: {.column width='40%'}
@@ -58,19 +58,15 @@ format:
 
 <br/>
 
-:::{.fragment .fade-left}
-- Разрабатываю методы сбора и анализа данных для проекта.
-:::
-:::{.fragment .fade-right}
-- Анализ данных на языке программирования «R» с применением статистических и вероятностных методов.
-:::
-:::{.fragment .fade-down}
-- Нахожу точки приложения минимальных усилий в бизнесе для получения максимальных результатов.
-:::
 :::{.fragment .fade-up}
+- Разрабатываю методы сбора и анализа данных для проекта.
+
+- Анализ данных на языке программирования «R» с применением статистических и вероятностных методов.
+
+- Нахожу точки приложения минимальных усилий в бизнесе для получения максимальных результатов.
+
 - Создаю маркетинговые стратегии методом 6P и Data Science аналитики.
-:::
-:::{.fragment .fade-down}
+
 - Контроль внедрения стратегии.
 :::
 
@@ -80,36 +76,33 @@ format:
 
 <br/>
 
-:::{.fragment .fade-in-then-semi-out}
+:::{.fragment .fade-down}
 - Запуск рекламных кампаний методом «SOSTAC» в Директ, Google Ads, VK Реклама, MyTarget...
-:::
-:::{.fragment .fade-in-then-semi-out}
+
 - Настройка аналитических систем: Метрика, GA4, GTM, CoolTouch...
-:::
-:::{.fragment .fade-in-then-semi-out}
+
 - Data Science анализ систем привлечения трафика.
-:::
-:::{.fragment .fade-in-then-semi-out}
+
 - Создание автоматических отчетов на языке R с отправкой данных в Телеграм, Google Таблицы, e-mail, Power BI.
-:::
-:::{.fragment .fade-in-then-semi-out}
+
 - Настройка платформ для eCRM‑маркетинга (типа «Carrot quest»).
 :::
 
 
 
 
-# Достижения {background-iframe="iframe_ambient/index.html"}
+# Сотрудничество {background-iframe="iframe_ambient/index.html"}
 
 ## [Задачи как партнера]{.text_select}{transition="concave"}
 
 <br/>
 
-В задачи входит разработка и внедрение услуг в области маркетинга. На данный момент оказываю услуги:
+Разрабатываю и внедряю услуг в области маркетинга. На данный момент оказываю услуги:
 
-- Консалтинг в области маркетинга ([ссылка на презентацию услуги](https://koshakof.github.io/BI/pres/mark_consulting_mailing.html#/title-slide)).
-- Запуск рекламных систем методом SOSTAC ([ссылка на описание метода](https://docs.google.com/document/d/1UjumYOvNIMbGwebXzrcZ_E42swPqdbN4gvLpWMQQvTs/edit?usp=sharing)).
-- Data Science аудит систем привлечения трафика.
+- Консалтинг в области маркетинга ([ссылка на презентацию услуги](https://koshakof.github.io/BI/pres/mark_consulting_mailing.html#/title-slide))
+- Запуск рекламных систем методом SOSTAC ([ссылка на описание метода](https://docs.google.com/document/d/1UjumYOvNIMbGwebXzrcZ_E42swPqdbN4gvLpWMQQvTs/edit?usp=sharing))
+- Data Science аудит систем привлечения трафика
+- Ситуационный маркетинговый анализ
 
 
 
@@ -137,7 +130,7 @@ format:
 <br/>
 
 - [Ситуационный анализ и сратегическая канва в недвижимости](https://platzkart.ru/portfolio/case-nedvizhimost-krasnodar/)
-- [Запуск рекламной кампании в нише сельхозтехники методом SOSTAC](https://platzkart.ru/portfolio/case-mtz/)
+- [Запуск рекламной кампании в Директ методом SOSTAC по направлению «сельхозтехника»](https://platzkart.ru/portfolio/case-mtz/)
 - [Data Science анализ качества входящих звонков](https://koshakof.github.io/BI/wiki/call_analysis.html)
 - [Как провести DS анализ рекламных площадок в Директ](https://koshakof.github.io/BI/wiki/ds_places_analysis.html)
 
@@ -173,19 +166,19 @@ format:
 <br/>
 Александр Коршаков
 
-Data Driven Marketin, анализ данных, реклама
+Data Driven Marketing и реклама
 
 <br/>
 
-Пишите для продолжения знакомства.
+<font color="#ffa07a">По вопросам сотрудничества пишите на:</font>
 
-E-Mail: <i@akorshakov.ru>
+- <font color="#ffa07a">e-mail:</font> <i@akorshakov.ru>
 
-Telegram: <https://t.me/akorshakoff>
+- <font color="#ffa07a">Telegram:</font> <https://t.me/akorshakoff>
 
 <br/>
 
-Скачать презентацию в формате [PDF](https://drive.google.com/file/d/1hVETfMQuaeDdvJnzM61h-x7t_o_0WHj1/view?usp=sharing)
 
+Скачать презентацию в формате [PDF](https://drive.google.com/file/d/13bMee53iquuPKNT63QUQJliYxcPpLuSB/view?usp=sharing)
 
 

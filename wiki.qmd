@@ -1,5 +1,5 @@
 ---
-title: "Примеры работ"
+title: "Wiki"
 format:
   html:
     link-external-newwindow: true
@@ -8,5 +8,5 @@ editor_options:
 ---
 
 
-* [Data Science анализ входящих звонков](/wiki/call_analysis.qmd)
-* [Как провести DS анализ рекламных площадок в Директ](/wiki/ds_places_analysis.qmd)
+* [Data Science анализ входящих звонков](/wiki/call_analysis.html)
+* [Как провести DS анализ рекламных площадок в Директ](/wiki/ds_places_analysis.html)

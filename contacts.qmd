@@ -1,0 +1,23 @@
+---
+title: "Контакты"
+format:
+  html:
+    link-external-newwindow: true
+editor_options: 
+  chunk_output_type: console
+---
+
+Александр Коршаков
+
+По вопросам сотрудничества пишите на:
+
+- e-mail: <i@akorshakov.ru>
+
+- Telegram: <https://t.me/akorshakoff>
+
+<br/>
+
+Социальные сети
+
+- [VK](https://vk.com/akorshakoff)
+- Телеграм канал «DS Ads»

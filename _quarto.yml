@@ -8,14 +8,19 @@ project:
     
 
 website:
-  title: "Korshakoff Data Driven Marketing"
-  description: "Консалтинговые услуги в сфере маркетинга и рекламы"
+  title: "Data Driven Marketing"
+  description: "Маркетинг, основанный на данных. Реклама и аналитика в интернете"
   navbar:
     left:
       - href: index.qmd
         text: "Главная"
+      - href: about/korshakov.qmd
+        text: "О себе" 
       - href: wiki.qmd
         text: "Wiki"
+      - href: contacts.qmd
+        text: "Контакты"
+       
 
 format:
   html:

@@ -88,5 +88,11 @@
   },
   "about/ddm_korshakov.qmd": {
     "ddm_korshakov.html": "0dcd0ed5"
+  },
+  "about/korshakov.qmd": {
+    "korshakov.html": "fc55beb6"
+  },
+  "contacts.qmd": {
+    "contacts.html": "f2f5ed83"
   }
 }

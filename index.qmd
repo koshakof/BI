@@ -1,29 +1,30 @@
 ---
-title: "Консалтинг в сфере маркетинга и рекламы"
-editor_options: 
-  chunk_output_type: console
+title: "Маркетинг, основанный на данных. Реклама. Аналитика"
 format:
   html:
     link-external-newwindow: true
+editor_options: 
+  chunk_output_type: console
 ---
 
-## Презентации
+<br/>
 
-### Korshakoff
+* [Презентация: Маркетинговый консалтинг](/pres/mark_consulting_mailing.qmd)
+* [Презентация: О себе](/about/korshakov.qmd)
 
-* [Презентация: Маркетинговый консалтинг (раздаточная)](/pres/mark_consulting_mailing.qmd)
-* [Презентация: О себе](/about/ddm_korshakov.qmd)
+
+
 
 ::: {.hidden}
 * [Презентация: Рекламный консалтинг (для спикера)]()
 * [Презентация: Рекламный консалтинг (раздаточная)]()
 * [Презентация: Маркетинговый консалтинг (для спикера)](/pres/mark_consulting_speaker.qmd)
-:::
 
 
-### PLATZKART
+### Презентации для PLATZKART
 
 * [Презентация: Маркетинговый консалтинг (для спикера)](/pres/mark_consulting_speaker_pl.qmd)
 * [Презентация: Маркетинговый консалтинг (раздаточная)](/pres/mark_consulting_mailing_pl.qmd)
 * [Презентация: Маркетинговый консалтинг (раздаточная ver. 2)](/pres/mark_consulting_mailing_pl_v2.qmd)
 * [Презентация: Маркетинговый консалтинг (раздаточная ver. 3)](/pres/mark_consulting_mailing_pl_v3.qmd)
+:::
