@@ -58,23 +58,23 @@ format:
 
 # Как делаю {background-iframe="iframe_ambient/index.html"}
 
-## [Ключевые навыки на этапе создания маркетинговой стратегии]{.text_select} {transition="concave" .small}
+## [На этапе создания маркетинговой стратегии]{.text_select} {transition="concave" .small}
 
 <br/>
 
 :::{.fragment .fade-up}
 - Провожу сбор, подготовку и анализ данных для проекта с помощью языков программирования «R» и «Python» с применением статистических и вероятностных методов.
-- Нахожу точки приложения минимальных усилий в бизнесе для получения максимальных результатов методами:
+- Нахожу точки приложения минимальных усилий в бизнесе на основе обработанных данных для получения максимальных результатов методами:
   - картирования соответствия точек контакта бизнеса с потребностям клиента
   - Revenue Breakdown
   - 6 Сигм
 - Создаю маркетинговые стратегии методом «6P» и Data Driven подходом.
-- Контролирую внедрение стратегии на всех этапах.
+- Контролирую внедрение и сопровождение стратегии на всех уровнях.
 :::
 
 
 
-## [Ключевые навыки на этапе продвижения]{.text_select} {transition="concave" .small}
+## [На этапе продвижения]{.text_select} {transition="concave" .small}
 
 <br/>
 
@@ -99,10 +99,11 @@ format:
 
 <br/>
 
-- Консалтинг в области маркетинга ([ссылка на презентацию услуги](https://koshakof.github.io/BI/pres/mark_consulting_mailing.html#/title-slide))
-- Запуск рекламных систем методом SOSTAC ([ссылка на описание метода](https://docs.google.com/document/d/1UjumYOvNIMbGwebXzrcZ_E42swPqdbN4gvLpWMQQvTs/edit?usp=sharing))
+- Консалтинг в области маркетинга ([презентация услуги](https://koshakof.github.io/BI/pres/mark_consulting_mailing.html#/title-slide))
+- Запуск рекламных систем методом «SOSTAC» ([описание услуги](https://docs.google.com/document/d/1UjumYOvNIMbGwebXzrcZ_E42swPqdbN4gvLpWMQQvTs/edit?usp=sharing))
 - Data Driven аудит систем привлечения трафика
 - Ситуационный маркетинговый анализ
+- Консультации по маркетингу
 
 
 
@@ -117,8 +118,6 @@ format:
 - Реляционные базы данных
 - Медицинские услуги
 - Перевозка опасных грузов
-
-Реализовано более 30 проектов разной степени сложности.
 
 
 
@@ -159,12 +158,9 @@ format:
 
 # Контакты {transition="zoom" background-iframe="iframe_ambient/index.html"}
 
-<br/>
 Александр Коршаков
 
 Data Driven Marketing и реклама
-
-<br/>
 
 <font color="#ffa07a">По вопросам сотрудничества пишите на:</font>
 
@@ -172,9 +168,6 @@ Data Driven Marketing и реклама
 
 - <font color="#ffa07a">Telegram:</font> <https://t.me/akorshakoff>
 
-<br/>
+Скачать презентацию в формате [PDF](https://drive.google.com/file/d/12O2V9Iu_ZJ0yIaQWJtROe16Q1CMacR8R/view?usp=sharing)
 
-
-Скачать презентацию в формате [PDF](https://drive.google.com/file/d/13bMee53iquuPKNT63QUQJliYxcPpLuSB/view?usp=sharing)
-
-
+[ihourglass.ru](https://ihourglass.ru/)
