@@ -8,6 +8,9 @@ project:
     
 
 website:
+  google-analytics:
+    tracking-id: "GTM-KB6J3FZF"
+    
   title: "Data Driven Marketing"
   description: "Маркетинг, основанный на данных. Реклама и аналитика в интернете"
   navbar:
@@ -20,7 +23,6 @@ website:
         text: "Wiki"
       - href: contacts.qmd
         text: "Контакты"
-       
 
 format:
   html:

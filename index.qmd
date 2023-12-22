@@ -1,5 +1,5 @@
 ---
-title: "Маркетинг, основанный на данных. Реклама. Аналитика"
+title: "Маркетинг, основанный на данных"
 format:
   html:
     link-external-newwindow: true
