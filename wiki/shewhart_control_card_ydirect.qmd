@@ -1,0 +1,28 @@
+---
+lang: ru
+title: 'Применяем ГОСТ стандарт РФ «Контрольные карты Шухарта» для оптимизация рекламных кампаний и других источников трафика'
+date: today
+date-format:  D dddd MMM YYYY
+format:
+  html:
+    toc: true
+    toc-location: left
+    cap-location: top
+editor_options: 
+  chunk_output_type: console
+execute:
+  warning: false
+  message: false
+  error: false
+  echo: false
+---
+
+<!-- Подготовка к анализу -->
+
+```{r}
+# путь
+file_path <- '~/GitHub/BI/wiki/data/'
+```
+
+
+<!-- END -->

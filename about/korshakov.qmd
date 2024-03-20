@@ -1,6 +1,6 @@
 ---
 title: "Коршаков Александр"
-subtitle: "Маркетинг, основанный на данных. Реклама. Аналитика"
+subtitle: "Маркетинг и реклама на основе данных"
 title-slide-attributes:
     data-background-iframe: "iframe_ambient/index.html"
 format:
@@ -20,25 +20,22 @@ format:
     
 ---
 
-## [Data Driven Marketing]{.text_select} {.smaller transition="zoom"}
+## [Маркетолог из Краснодара]{.text_select} {.smaller transition="zoom"}
 
 <br/>
 
 :::: {.columns}
 
 ::: {.column width="50%"}
-Меня зовут Александр, я из Краснодара. Работаю в сфере маркетинга и рекламы 8 лет.
+Меня зовут Александр, я из Краснодара. 
 
-Далее опишу более подробно, чем именно я занимаюсь и как могу быть полезен.
+Работаю в сфере маркетинга и рекламы с 2017 года.
 
-<font color="#ffa07a">По вопросам сотрудничества пишите на:</font>
+Привожу новых клиентов и работаю с текущими через внедрение маркетинговых стратегий и настройку рекламных кампаний на основе данных.
 
-- <font color="#ffa07a">e-mail:</font> <i@akorshakov.ru>
+С 2021 года работаю как самозанятый. 
 
-- <font color="#ffa07a">Telegram:</font> <https://t.me/akorshakoff>
-
-<font size="5px">Скачать презентацию в формате [PDF](https://drive.google.com/file/d/15OGSwP5f6RjihhJVJhcpAb_xjU0A7PtJ/view?usp=sharing)</font>
-
+Сотрудничаю с маркетинговыми и рекламными агентствами, специалистами, бизнесами в сфере В2В и В2С.
 :::
 
 ::: {.column width='50%'}
@@ -48,14 +45,20 @@ format:
 
 
 
+
 # Что делаю {background-iframe="iframe_ambient/index.html"}
 
 ## {.larger}
 
 <br/>
 
-[Увеличиваю выручку]{.text_select} компаний микро-, малого и среднего бизнеса [минимум на 20%]{.text_select} за счет [разработки и внедрения маркетинговых стратегий]{.text_select}, основанных на данных. Также запускаю рекламные кампании в 10+ сервисах методом "SOSTAC".
+[Увеличиваю выручку]{.text_select} компаний микро-, малого и среднего бизнеса [минимум на 10%-20%]{.text_select} за счет [разработки и внедрения маркетинговых стратегий]{.text_select}, основанных на данных.
 
+
+
+
+
+# Как делаю {background-iframe="iframe_ambient/index.html"}
 
 ## {.larger}
 
@@ -64,29 +67,49 @@ format:
 В работе использую [подход, основанный на управлении данными]{.text_select} (Data-Driven). Это значит, что я делаю выводы и даю рекомендации исключительно на основе данных, а не на основе ощущений и интуиции.
 
 
-## {.larger}
-
-За время работы [накоплен опыт]{.text_select} в нишах:
-
-- Недвижимость
-- Сельхозтехника
-- Видеоконференцсвязь
-- Реляционные базы данных
-- Медицинские услуги
-- Перевозка опасных грузов
-...
 
 
+# Опыт {background-iframe="iframe_ambient/index.html"}
+
+## Кейсы {transition="zoom" .small}
+
+За время работы накоплен опыт в нишах: недвижимость, сельхозтехника, видеоконференцсвязь, реляционные базы данных, медицинские услуги и товары, перевозка опасных грузов и другие. 
+
+Примеры некоторых работ.
+
+- [Ситуационный анализ и сратегическая канва в недвижимости](https://platzkart.ru/portfolio/case-nedvizhimost-krasnodar/)
+- [Применяем ГОСТ стандарт РФ «Контрольные карты Шухарта» для оптимизация рекламных кампаний и других источников трафика](https://koshakof.github.io/BI/wiki/shewhart_control_card_ydirect.html)
+- [Как продавать сложные продукты через рекламные каналы в В2В в условиях кризиса с минимальным бюджетом](https://platzkart.ru/portfolio/case-mtz/)
+- [Как проверить качество входящих звонков из рекламных кампаний, если нет CRM-системы и времени прослушивать каждый звонок](https://koshakof.github.io/BI/wiki/call_analysis.html)
+- [Экономим рекламный бюджет с помощью кластерного анализа площадок в рекламных сетях Яндекса](https://koshakof.github.io/BI/wiki/ds_places_analysis.html)
 
 
-# Как делаю {background-iframe="iframe_ambient/index.html"}
+
+
+# Сотрудничество {background-iframe="iframe_ambient/index.html"}
+
+## {transition="concave"}
+
+В зависимости от [уровня аналитической культуры]{.text_select} компании сотрудничаю по направлениям:
+<br/>
+
+- Создание маркетинговых стратегий на основе данных ([большая презентация услуги](https://koshakof.github.io/BI/pres/mark_consulting_mailing.html#/title-slide))
+- Запуск рекламных систем методом «SOSTAC» ([описание услуги](https://docs.google.com/document/d/1UjumYOvNIMbGwebXzrcZ_E42swPqdbN4gvLpWMQQvTs/edit?usp=sharing))
+- Data Driven аудит систем привлечения трафика ([описание услуги](https://docs.google.com/document/d/140e-pYzTlbKnMEi35MG0xoM95F-um6nCP2MIpSNEQ8o/edit?usp=sharing))
+- Ситуационный маркетинговый анализ
+- Маркетинговое сопровождение
+
+
+
+
+# Этапы оказания услуг {background-iframe="iframe_ambient/index.html"}
 
 ## [Этапы создания маркетинговой стратегии]{.text_select} {transition="concave" .small}
 
 <br/>
 
 :::{.fragment .fade-up}
-1. Провожу сбор, подготовку и анализ данных для проекта с помощью языков программирования «R» и «Python» с применением статистических и вероятностных методов.
+1. Провожу финансовый и поведенческий анализ данных компании с помощью языка программирования «R» с применением статистических и вероятностных методов. Собираем и анализируем данные на уровне продукта, целевой аудитории, продвижения, позиционирования, коммерческих политик, каналах дистрибуции.
 
 2. Нахожу точки приложения минимальных усилий в бизнесе на основе обработанных данных на этапе 1 для получения максимальных результатов методами:
 
@@ -94,7 +117,7 @@ format:
    - анализ данных методом «Revenue Breakdown»
    - составление контрольных карт Шухарта (метод «6 Сигм»)
    
-3. Создаю маркетинговые стратегии методом «6P» и Data Driven подходом исходя из найденных точек приложения усилий.
+3. Создаю маркетинговые стратегии методом «6P» и «Data Driven» подходом.
 
 4. Контролирую внедрение и сопровождение стратегии.
 :::
@@ -112,15 +135,17 @@ format:
 <br/>
 
 :::{.fragment .fade-down}
-- Запуск рекламных кампаний методом «SOSTAC» в 10+ источниках. Директ, Google Ads, VK Реклама, Telegram Ads, Telega.in, 2ГИС...
+- Запуск рекламных кампаний методом «SOSTAC» в Директ, Google Ads, VK Реклама...
 
 - Настройка аналитических систем: Метрика, GA4, GTM, CoolTouch...
+
+- Настройка платформ для eCRM‑маркетинга (повышаем выручку за счет сегментированных коммуникаций с клиентами и неклиентами вашей компании).
 
 - Оптимизация систем привлечения трафика используя Data Driven подход.
 
 - Создание автоматических отчетов на языке R с отправкой данных в Телеграм, Google Таблицы, e-mail, Power BI.
 
-- Настройка платформ для eCRM‑маркетинга (повышаем выручку за счет сегментированных коммуникаций с клиентами и неклиентами вашей компании).
+
 :::
 
 
@@ -131,49 +156,21 @@ format:
 
 
 
-# Сотрудничество {background-iframe="iframe_ambient/index.html"}
-
-## {transition="concave"}
-
-В зависимости от [уровня аналитической культуры]{.text_select} в вашей компании возможно сотруденичество по направлениями:
-<br/>
-
-- Создание маркетинговых стратегий на основе данных ([презентация услуги](https://koshakof.github.io/BI/pres/mark_consulting_mailing.html#/title-slide))
-- Запуск рекламных систем методом «SOSTAC» ([описание услуги](https://docs.google.com/document/d/1UjumYOvNIMbGwebXzrcZ_E42swPqdbN4gvLpWMQQvTs/edit?usp=sharing))
-- Data Driven аудит систем привлечения трафика
-- Ситуационный маркетинговый анализ
-- Консультации по маркетингу
-- Маркетинговое сопровождение
-
-
-
-
-# Кейсы {background-iframe="iframe_ambient/index.html"}
-
-## {transition="zoom"}
-
-<br/>
-
-- [Ситуационный анализ и сратегическая канва в недвижимости](https://platzkart.ru/portfolio/case-nedvizhimost-krasnodar/)
-- [Запуск рекламной кампании в Директ методом SOSTAC по направлению «сельхозтехника»](https://platzkart.ru/portfolio/case-mtz/)
-- [Анализ качества входящих звонков из платного источника](https://koshakof.github.io/BI/wiki/call_analysis.html)
-- [Экономим рекламный бюджет через кластерный анализ площадок в рекламных сетях Яндекса](https://koshakof.github.io/BI/wiki/ds_places_analysis.html)
-
-
-
-
 # Контакты {transition="zoom" background-iframe="iframe_ambient/index.html"}
 
 Александр Коршаков
 
-Маркетинг, основанный на данных и реклама
+Маркетинг и реклама на основе данных.
 
-<font color="#ffa07a">По вопросам сотрудничества пишите на:</font>
+<font color="#ffa07a">По вопросам сотрудничества пишите:</font>
 
-- <font color="#ffa07a">e-mail:</font> <i@akorshakov.ru>
+- <font color="#ffa07a">в Telegram:</font> <https://t.me/akorshakoff>
 
-- <font color="#ffa07a">Telegram:</font> <https://t.me/akorshakoff>
+- <font color="#ffa07a">на e-mail:</font> <i@akorshakov.ru>
+
 
 <font size="5px">Скачать презентацию в формате [PDF](https://drive.google.com/file/d/15OGSwP5f6RjihhJVJhcpAb_xjU0A7PtJ/view?usp=sharing)</font>
 
 <font size="5px">[ihourglass.ru](https://ihourglass.ru/)</font>
+
+<font size="5px">[Телеграм канал «Data Driven Marketing & Ads»](https://t.me/+t9bxO1rX74JlMWFi)</font>

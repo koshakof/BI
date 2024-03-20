@@ -1,0 +1,14 @@
+{
+  "hash": "e5db2d58529e806c099c73cd5af2dadc",
+  "result": {
+    "markdown": "---\nlang: ru\ntitle: 'Применяем ГОСТ стандарт РФ «Контрольные карты Шухарта» для оптимизация рекламных кампаний и других источников трафика'\ndate: today\ndate-format:  D dddd MMM YYYY\nformat:\n  html:\n    toc: true\n    toc-location: left\n    cap-location: top\neditor_options: \n  chunk_output_type: console\nexecute:\n  warning: false\n  message: false\n  error: false\n  echo: false\n---\n\n\n<!-- Подготовка к анализу -->\n\n\n::: {.cell}\n\n:::\n\n\n\n<!-- END -->",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

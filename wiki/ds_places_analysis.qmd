@@ -1,6 +1,6 @@
 ---
 lang: ru
-title: 'Data Science анализ площадок в Директ'
+title: 'Экономим рекламный бюджет с помощью кластерного анализа площадок в рекламных сетях Яндекса'
 date: today
 date-format:  D dddd MMM YYYY
 format:
