@@ -20,7 +20,7 @@ format:
     
 ---
 
-## [Маркетолог из Краснодара]{.text_select} {.smaller transition="zoom"}
+## [Data Driven Маркетолог]{.text_select} {.smaller transition="zoom"}
 
 <br/>
 
