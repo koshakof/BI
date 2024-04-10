@@ -169,7 +169,7 @@ format:
 - <font color="#ffa07a">на e-mail:</font> <i@akorshakov.ru>
 
 
-<font size="5px">Скачать презентацию в формате [PDF](https://drive.google.com/file/d/15OGSwP5f6RjihhJVJhcpAb_xjU0A7PtJ/view?usp=sharing)</font>
+<font size="5px">Скачать презентацию в формате [PDF](https://drive.google.com/file/d/1eR5Fr39UU2RxqVA_Mwrrt_nap6-xIZfA/view?usp=sharing)</font>
 
 <font size="5px">[ihourglass.ru](https://ihourglass.ru/)</font>
 
