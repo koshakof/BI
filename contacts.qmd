@@ -19,14 +19,10 @@ editor_options:
 ## Часы работы
 
 - Будни: 9:00 — 18:00 (по Москве, GMT +3).
-- Заявки и обращения на сайте принимаются 24/7. Обрабатываются в рабочее время.
+- Заявки и обращения принимаются 24/7. Обрабатываются в рабочее время.
 
 
 ## Социальные сети
 
-- [VK](https://vk.com/akorshakoff)
-- [Телеграм канал «Data Driven Marketing & Ads»](https://t.me/data_driven_ads)
-
-
-
+- [Телеграм канал Data Driven Marketing & Ads (DDM & Ads)](https://t.me/data_driven_ads)
 

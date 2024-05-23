@@ -8,7 +8,7 @@ project:
     
 
 website:
-  title: "Data Driven Marketing"
+  title: "DDM & Ads"
   description: "Маркетинг, основанный на данных. Реклама и аналитика в интернете"
   navbar:
     left:
@@ -25,6 +25,7 @@ format:
   html:
     toc: true
     toc-location: left
+    cap-location: top
     css: styles.css
     link-external-newwindow: true
     theme: minty
