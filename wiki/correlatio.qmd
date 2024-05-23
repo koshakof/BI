@@ -10,7 +10,6 @@ format:
     fig-width: 10
     fig-height: 8
     code-fold: true
-    link-external-newwindow: true
     other-links:
      - text: Код JS цели «dl*»
        href: "https://disk.yandex.ru/d/qjabnXIB_qafig"
@@ -18,9 +17,6 @@ execute:
   warning: false
   message: false
   error: false
-  cache: false
-editor_options: 
-  chunk_output_type: console
 ---
 
 ```{r}

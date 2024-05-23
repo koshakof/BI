@@ -7,9 +7,6 @@ date: today
 date-format:  D dddd MMM YYYY
 format:
   html:
-    toc: true
-    toc-location: left
-    cap-location: top
     fig-width: 10
     fig-height: 7
     code-fold: true
@@ -20,13 +17,10 @@ format:
         href: "https://en.wikipedia.org/wiki/Western_Electric_rules"
       - text: "Nelson rules"
         href: "https://en.wikipedia.org/wiki/Nelson_rules"
-editor_options: 
-  chunk_output_type: console
 execute:
   warning: false
   message: false
   error: false
-  cache: false
 ---
 
 
