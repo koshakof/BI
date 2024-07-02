@@ -2,14 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ru" xml:lang="ru"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.551">
+<meta name="generator" content="quarto-1.5.41">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Александр Коршаков">
 <meta name="description" content="Оптимизация рекламных кампаний, SEO трафика и любых других источников с помощью метода шести сигм (контрольных карт Шухарта)">
 
-<title>DDM &amp; Ads - Применяем ГОСТ стандарт РФ «Контрольные карты Шухарта» для оптимизация рекламных кампаний и других источников трафика</title>
+<title>ihourglass – Применяем ГОСТ стандарт РФ «Контрольные карты Шухарта» для оптимизация рекламных кампаний и других источников трафика</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -35,7 +35,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -66,6 +66,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<link href="..//favicon/favicon_ihourglass.jpg" rel="icon" type="image/jpeg">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -75,6 +76,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -121,7 +124,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
 
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
@@ -162,25 +165,22 @@ window.Quarto = {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../index.html">
-    <span class="navbar-title">DDM &amp; Ads</span>
+    <span class="navbar-title">ihourglass</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Поиск"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Переключить навигацию" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Переключить навигацию" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html"> 
+    <a class="nav-link" href="../index.html"> <i class="bi bi-house" role="img">
+</i> 
 <span class="menu-text">Главная</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../about/korshakov.html"> 
-<span class="menu-text">О себе</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../wiki.html"> 
+    <a class="nav-link" href="../wiki.html" target="_blank"> 
 <span class="menu-text">Wiki</span></a>
   </li>  
   <li class="nav-item">
@@ -189,7 +189,7 @@ window.Quarto = {
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
+            <div class="quarto-navbar-tools">
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -218,7 +218,7 @@ window.Quarto = {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
 <main class="content page-columns page-full" id="quarto-document-content">
@@ -242,7 +242,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Дата публикации</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">23 четверг май 2024</p>
+      <p class="date">2 вторник июль 2024</p>
     </div>
   </div>
   
@@ -339,8 +339,8 @@ window.Quarto = {
 <span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>plotly<span class="sc">::</span><span class="fu">ggplotly</span>(acc_plot)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display column-page">
-<div class="plotly html-widget html-fill-item" id="htmlwidget-73c6d24ce13a6024a0d1" style="width:100%;height:454px;"></div>
-<script type="application/json" data-for="htmlwidget-73c6d24ce13a6024a0d1">{"x":{"data":[{"orientation":"v","width":[0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519],"base":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"x":[19731,19732,19733,19734,19735,19736,19737,19738,19739,19740,19741,19742,19743,19744,19745,19746,19747,19748,19749,19750,19751,19752,19753,19754,19755,19756,19757,19758,19759,19760,19761,19762,19763,19764,19765,19766,19767,19768,19769,19770,19771,19772,19773,19774,19775,19776,19777,19778,19779,19780,19781,19782,19783,19784,19785,19786,19787,19788,19789,19790,19791,19792,19793,19794,19795,19796,19797,19798,19799,19800,19801,19802,19803,19804,19805,19806,19807,19808,19809,19810],"y":[75,148,108,82,31,15,144,184,170,45,16,15,17,148,117,109,22,39,18,3,130,115,106,22,19,20,14,279,543,202,294,263,343,356,167,142,134,132,95,63,13,146,243,187,110,200,169,136,181,99,122,113,133,123,104,138,93,95,97,33,29,34,108,114,100,131,109,93,43,154,136,139,123,110,100,67,147,161,140,122],"text":["Date: 2024-01-09<br />Sessions:  75","Date: 2024-01-10<br />Sessions: 148","Date: 2024-01-11<br />Sessions: 108","Date: 2024-01-12<br />Sessions:  82","Date: 2024-01-13<br />Sessions:  31","Date: 2024-01-14<br />Sessions:  15","Date: 2024-01-15<br />Sessions: 144","Date: 2024-01-16<br />Sessions: 184","Date: 2024-01-17<br />Sessions: 170","Date: 2024-01-18<br />Sessions:  45","Date: 2024-01-19<br />Sessions:  16","Date: 2024-01-20<br />Sessions:  15","Date: 2024-01-21<br />Sessions:  17","Date: 2024-01-22<br />Sessions: 148","Date: 2024-01-23<br />Sessions: 117","Date: 2024-01-24<br />Sessions: 109","Date: 2024-01-25<br />Sessions:  22","Date: 2024-01-26<br />Sessions:  39","Date: 2024-01-27<br />Sessions:  18","Date: 2024-01-28<br />Sessions:   3","Date: 2024-01-29<br />Sessions: 130","Date: 2024-01-30<br />Sessions: 115","Date: 2024-01-31<br />Sessions: 106","Date: 2024-02-01<br />Sessions:  22","Date: 2024-02-02<br />Sessions:  19","Date: 2024-02-03<br />Sessions:  20","Date: 2024-02-04<br />Sessions:  14","Date: 2024-02-05<br />Sessions: 279","Date: 2024-02-06<br />Sessions: 543","Date: 2024-02-07<br />Sessions: 202","Date: 2024-02-08<br />Sessions: 294","Date: 2024-02-09<br />Sessions: 263","Date: 2024-02-10<br />Sessions: 343","Date: 2024-02-11<br />Sessions: 356","Date: 2024-02-12<br />Sessions: 167","Date: 2024-02-13<br />Sessions: 142","Date: 2024-02-14<br />Sessions: 134","Date: 2024-02-15<br />Sessions: 132","Date: 2024-02-16<br />Sessions:  95","Date: 2024-02-17<br />Sessions:  63","Date: 2024-02-18<br />Sessions:  13","Date: 2024-02-19<br />Sessions: 146","Date: 2024-02-20<br />Sessions: 243","Date: 2024-02-21<br />Sessions: 187","Date: 2024-02-22<br />Sessions: 110","Date: 2024-02-23<br />Sessions: 200","Date: 2024-02-24<br />Sessions: 169","Date: 2024-02-25<br />Sessions: 136","Date: 2024-02-26<br />Sessions: 181","Date: 2024-02-27<br />Sessions:  99","Date: 2024-02-28<br />Sessions: 122","Date: 2024-02-29<br />Sessions: 113","Date: 2024-03-01<br />Sessions: 133","Date: 2024-03-02<br />Sessions: 123","Date: 2024-03-03<br />Sessions: 104","Date: 2024-03-04<br />Sessions: 138","Date: 2024-03-05<br />Sessions:  93","Date: 2024-03-06<br />Sessions:  95","Date: 2024-03-07<br />Sessions:  97","Date: 2024-03-08<br />Sessions:  33","Date: 2024-03-09<br />Sessions:  29","Date: 2024-03-10<br />Sessions:  34","Date: 2024-03-11<br />Sessions: 108","Date: 2024-03-12<br />Sessions: 114","Date: 2024-03-13<br />Sessions: 100","Date: 2024-03-14<br />Sessions: 131","Date: 2024-03-15<br />Sessions: 109","Date: 2024-03-16<br />Sessions:  93","Date: 2024-03-17<br />Sessions:  43","Date: 2024-03-18<br />Sessions: 154","Date: 2024-03-19<br />Sessions: 136","Date: 2024-03-20<br />Sessions: 139","Date: 2024-03-21<br />Sessions: 123","Date: 2024-03-22<br />Sessions: 110","Date: 2024-03-23<br />Sessions: 100","Date: 2024-03-24<br />Sessions:  67","Date: 2024-03-25<br />Sessions: 147","Date: 2024-03-26<br />Sessions: 161","Date: 2024-03-27<br />Sessions: 140","Date: 2024-03-28<br />Sessions: 122"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(255,121,198,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":48.138199412495609,"r":11.338582677165356,"b":46.417983555293446,"l":44.215295005932475},"font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724},"title":{"text":"Визиты","font":{"color":"rgba(102,102,102,1)","family":"","size":15.940224159402243},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[19726.555,19814.445],"tickmode":"array","ticktext":["06.01","08.01","10.01","12.01","14.01","16.01","18.01","20.01","22.01","24.01","26.01","28.01","30.01","01.02","03.02","05.02","07.02","09.02","11.02","13.02","15.02","17.02","19.02","21.02","23.02","25.02","27.02","29.02","02.03","04.03","06.03","08.03","10.03","12.03","14.03","16.03","18.03","20.03","22.03","24.03","26.03","28.03","30.03","01.04"],"tickvals":[19728,19730,19732,19734,19736,19738,19740,19742,19744,19746,19748,19750,19752,19754,19756,19758,19760,19762,19764,19766,19768,19770,19772,19774,19776,19778,19780,19782,19784,19786,19788,19790,19792,19794,19796,19798,19800,19802,19804,19806,19808,19810,19812,19814],"categoryorder":"array","categoryarray":["06.01","08.01","10.01","12.01","14.01","16.01","18.01","20.01","22.01","24.01","26.01","28.01","30.01","01.02","03.02","05.02","07.02","09.02","11.02","13.02","15.02","17.02","19.02","21.02","23.02","25.02","27.02","29.02","02.03","04.03","06.03","08.03","10.03","12.03","14.03","16.03","18.03","20.03","22.03","24.03","26.03","28.03","30.03","01.04"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(127,127,127,1)","family":"","size":10.62681610626816},"tickangle":-90,"showline":false,"linecolor":null,"linewidth":0,"showgrid":false,"gridcolor":null,"gridwidth":0,"zeroline":false,"anchor":"y","title":{"text":"","font":{"color":"rgba(127,127,127,1)","family":"","size":13.283520132835205}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-27.150000000000002,570.14999999999998],"tickmode":"array","ticktext":["0","200","400"],"tickvals":[0,200,400],"categoryorder":"array","categoryarray":["0","200","400"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(127,127,127,1)","family":"","size":10.62681610626816},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":false,"gridcolor":null,"gridwidth":0,"zeroline":false,"anchor":"x","title":{"text":"Визиты","font":{"color":"rgba(127,127,127,1)","family":"","size":13.283520132835205}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":false,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(127,127,127,1)","family":"","size":10.62681610626816}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"4cec3bbf3f6f":{"x":{},"y":{},"type":"bar"}},"cur_data":"4cec3bbf3f6f","visdat":{"4cec3bbf3f6f":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div class="plotly html-widget html-fill-item" id="htmlwidget-9f85c64bde44551da7e0" style="width:100%;height:454px;"></div>
+<script type="application/json" data-for="htmlwidget-9f85c64bde44551da7e0">{"x":{"data":[{"orientation":"v","width":[0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519],"base":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"x":[19731,19732,19733,19734,19735,19736,19737,19738,19739,19740,19741,19742,19743,19744,19745,19746,19747,19748,19749,19750,19751,19752,19753,19754,19755,19756,19757,19758,19759,19760,19761,19762,19763,19764,19765,19766,19767,19768,19769,19770,19771,19772,19773,19774,19775,19776,19777,19778,19779,19780,19781,19782,19783,19784,19785,19786,19787,19788,19789,19790,19791,19792,19793,19794,19795,19796,19797,19798,19799,19800,19801,19802,19803,19804,19805,19806,19807,19808,19809,19810],"y":[75,148,108,82,31,15,144,184,170,45,16,15,17,148,117,109,22,39,18,3,130,115,106,22,19,20,14,279,543,202,294,263,343,356,167,142,134,132,95,63,13,146,243,187,110,200,169,136,181,99,122,113,133,123,104,138,93,95,97,33,29,34,108,114,100,131,109,93,43,154,136,139,123,110,100,67,147,161,140,122],"text":["Date: 2024-01-09<br />Sessions:  75","Date: 2024-01-10<br />Sessions: 148","Date: 2024-01-11<br />Sessions: 108","Date: 2024-01-12<br />Sessions:  82","Date: 2024-01-13<br />Sessions:  31","Date: 2024-01-14<br />Sessions:  15","Date: 2024-01-15<br />Sessions: 144","Date: 2024-01-16<br />Sessions: 184","Date: 2024-01-17<br />Sessions: 170","Date: 2024-01-18<br />Sessions:  45","Date: 2024-01-19<br />Sessions:  16","Date: 2024-01-20<br />Sessions:  15","Date: 2024-01-21<br />Sessions:  17","Date: 2024-01-22<br />Sessions: 148","Date: 2024-01-23<br />Sessions: 117","Date: 2024-01-24<br />Sessions: 109","Date: 2024-01-25<br />Sessions:  22","Date: 2024-01-26<br />Sessions:  39","Date: 2024-01-27<br />Sessions:  18","Date: 2024-01-28<br />Sessions:   3","Date: 2024-01-29<br />Sessions: 130","Date: 2024-01-30<br />Sessions: 115","Date: 2024-01-31<br />Sessions: 106","Date: 2024-02-01<br />Sessions:  22","Date: 2024-02-02<br />Sessions:  19","Date: 2024-02-03<br />Sessions:  20","Date: 2024-02-04<br />Sessions:  14","Date: 2024-02-05<br />Sessions: 279","Date: 2024-02-06<br />Sessions: 543","Date: 2024-02-07<br />Sessions: 202","Date: 2024-02-08<br />Sessions: 294","Date: 2024-02-09<br />Sessions: 263","Date: 2024-02-10<br />Sessions: 343","Date: 2024-02-11<br />Sessions: 356","Date: 2024-02-12<br />Sessions: 167","Date: 2024-02-13<br />Sessions: 142","Date: 2024-02-14<br />Sessions: 134","Date: 2024-02-15<br />Sessions: 132","Date: 2024-02-16<br />Sessions:  95","Date: 2024-02-17<br />Sessions:  63","Date: 2024-02-18<br />Sessions:  13","Date: 2024-02-19<br />Sessions: 146","Date: 2024-02-20<br />Sessions: 243","Date: 2024-02-21<br />Sessions: 187","Date: 2024-02-22<br />Sessions: 110","Date: 2024-02-23<br />Sessions: 200","Date: 2024-02-24<br />Sessions: 169","Date: 2024-02-25<br />Sessions: 136","Date: 2024-02-26<br />Sessions: 181","Date: 2024-02-27<br />Sessions:  99","Date: 2024-02-28<br />Sessions: 122","Date: 2024-02-29<br />Sessions: 113","Date: 2024-03-01<br />Sessions: 133","Date: 2024-03-02<br />Sessions: 123","Date: 2024-03-03<br />Sessions: 104","Date: 2024-03-04<br />Sessions: 138","Date: 2024-03-05<br />Sessions:  93","Date: 2024-03-06<br />Sessions:  95","Date: 2024-03-07<br />Sessions:  97","Date: 2024-03-08<br />Sessions:  33","Date: 2024-03-09<br />Sessions:  29","Date: 2024-03-10<br />Sessions:  34","Date: 2024-03-11<br />Sessions: 108","Date: 2024-03-12<br />Sessions: 114","Date: 2024-03-13<br />Sessions: 100","Date: 2024-03-14<br />Sessions: 131","Date: 2024-03-15<br />Sessions: 109","Date: 2024-03-16<br />Sessions:  93","Date: 2024-03-17<br />Sessions:  43","Date: 2024-03-18<br />Sessions: 154","Date: 2024-03-19<br />Sessions: 136","Date: 2024-03-20<br />Sessions: 139","Date: 2024-03-21<br />Sessions: 123","Date: 2024-03-22<br />Sessions: 110","Date: 2024-03-23<br />Sessions: 100","Date: 2024-03-24<br />Sessions:  67","Date: 2024-03-25<br />Sessions: 147","Date: 2024-03-26<br />Sessions: 161","Date: 2024-03-27<br />Sessions: 140","Date: 2024-03-28<br />Sessions: 122"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(255,121,198,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":48.138199412495609,"r":11.338582677165356,"b":46.417983555293446,"l":44.215295005932475},"font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724},"title":{"text":"Визиты","font":{"color":"rgba(102,102,102,1)","family":"","size":15.940224159402243},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[19726.555,19814.445],"tickmode":"array","ticktext":["06.01","08.01","10.01","12.01","14.01","16.01","18.01","20.01","22.01","24.01","26.01","28.01","30.01","01.02","03.02","05.02","07.02","09.02","11.02","13.02","15.02","17.02","19.02","21.02","23.02","25.02","27.02","29.02","02.03","04.03","06.03","08.03","10.03","12.03","14.03","16.03","18.03","20.03","22.03","24.03","26.03","28.03","30.03","01.04"],"tickvals":[19728,19730,19732,19734,19736,19738,19740,19742,19744,19746,19748,19750,19752,19754,19756,19758,19760,19762,19764,19766,19768,19770,19772,19774,19776,19778,19780,19782,19784,19786,19788,19790,19792,19794,19796,19798,19800,19802,19804,19806,19808,19810,19812,19814],"categoryorder":"array","categoryarray":["06.01","08.01","10.01","12.01","14.01","16.01","18.01","20.01","22.01","24.01","26.01","28.01","30.01","01.02","03.02","05.02","07.02","09.02","11.02","13.02","15.02","17.02","19.02","21.02","23.02","25.02","27.02","29.02","02.03","04.03","06.03","08.03","10.03","12.03","14.03","16.03","18.03","20.03","22.03","24.03","26.03","28.03","30.03","01.04"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(127,127,127,1)","family":"","size":10.62681610626816},"tickangle":-90,"showline":false,"linecolor":null,"linewidth":0,"showgrid":false,"gridcolor":null,"gridwidth":0,"zeroline":false,"anchor":"y","title":{"text":"","font":{"color":"rgba(127,127,127,1)","family":"","size":13.283520132835205}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-27.150000000000002,570.14999999999998],"tickmode":"array","ticktext":["0","200","400"],"tickvals":[0,200,400],"categoryorder":"array","categoryarray":["0","200","400"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(127,127,127,1)","family":"","size":10.62681610626816},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":false,"gridcolor":null,"gridwidth":0,"zeroline":false,"anchor":"x","title":{"text":"Визиты","font":{"color":"rgba(127,127,127,1)","family":"","size":13.283520132835205}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":false,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(127,127,127,1)","family":"","size":10.62681610626816}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"6bb0f2a46c6":{"x":{},"y":{},"type":"bar"}},"cur_data":"6bb0f2a46c6","visdat":{"6bb0f2a46c6":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p>Или вот такой график.</p>
@@ -464,24 +464,23 @@ window.Quarto = {
 <span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>acc_gt_tbl</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display column-body-outset">
-<div>
-<div id="tgsmbaeare" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#tgsmbaeare table {
+<div id="fglevhaoyq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#fglevhaoyq table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#tgsmbaeare thead, #tgsmbaeare tbody, #tgsmbaeare tfoot, #tgsmbaeare tr, #tgsmbaeare td, #tgsmbaeare th {
+#fglevhaoyq thead, #fglevhaoyq tbody, #fglevhaoyq tfoot, #fglevhaoyq tr, #fglevhaoyq td, #fglevhaoyq th {
   border-style: none;
 }
 
-#tgsmbaeare p {
+#fglevhaoyq p {
   margin: 0;
   padding: 0;
 }
 
-#tgsmbaeare .gt_table {
+#fglevhaoyq .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -507,12 +506,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#tgsmbaeare .gt_caption {
+#fglevhaoyq .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#tgsmbaeare .gt_title {
+#fglevhaoyq .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -524,7 +523,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#tgsmbaeare .gt_subtitle {
+#fglevhaoyq .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -536,7 +535,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#tgsmbaeare .gt_heading {
+#fglevhaoyq .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -548,13 +547,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#tgsmbaeare .gt_bottom_border {
+#fglevhaoyq .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#tgsmbaeare .gt_col_headings {
+#fglevhaoyq .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -569,7 +568,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#tgsmbaeare .gt_col_heading {
+#fglevhaoyq .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -589,7 +588,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#tgsmbaeare .gt_column_spanner_outer {
+#fglevhaoyq .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -601,15 +600,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#tgsmbaeare .gt_column_spanner_outer:first-child {
+#fglevhaoyq .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#tgsmbaeare .gt_column_spanner_outer:last-child {
+#fglevhaoyq .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#tgsmbaeare .gt_column_spanner {
+#fglevhaoyq .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -621,11 +620,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#tgsmbaeare .gt_spanner_row {
+#fglevhaoyq .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#tgsmbaeare .gt_group_heading {
+#fglevhaoyq .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -651,7 +650,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#tgsmbaeare .gt_empty_group_heading {
+#fglevhaoyq .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -666,15 +665,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#tgsmbaeare .gt_from_md > :first-child {
+#fglevhaoyq .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#tgsmbaeare .gt_from_md > :last-child {
+#fglevhaoyq .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#tgsmbaeare .gt_row {
+#fglevhaoyq .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -693,7 +692,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#tgsmbaeare .gt_stub {
+#fglevhaoyq .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -706,7 +705,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#tgsmbaeare .gt_stub_row_group {
+#fglevhaoyq .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -720,15 +719,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#tgsmbaeare .gt_row_group_first td {
+#fglevhaoyq .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#tgsmbaeare .gt_row_group_first th {
+#fglevhaoyq .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#tgsmbaeare .gt_summary_row {
+#fglevhaoyq .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -738,16 +737,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#tgsmbaeare .gt_first_summary_row {
+#fglevhaoyq .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#tgsmbaeare .gt_first_summary_row.thick {
+#fglevhaoyq .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#tgsmbaeare .gt_last_summary_row {
+#fglevhaoyq .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -757,7 +756,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#tgsmbaeare .gt_grand_summary_row {
+#fglevhaoyq .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -767,7 +766,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#tgsmbaeare .gt_first_grand_summary_row {
+#fglevhaoyq .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -777,7 +776,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#tgsmbaeare .gt_last_grand_summary_row_top {
+#fglevhaoyq .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -787,11 +786,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#tgsmbaeare .gt_striped {
+#fglevhaoyq .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#tgsmbaeare .gt_table_body {
+#fglevhaoyq .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -800,7 +799,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#tgsmbaeare .gt_footnotes {
+#fglevhaoyq .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -814,7 +813,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#tgsmbaeare .gt_footnote {
+#fglevhaoyq .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -823,7 +822,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#tgsmbaeare .gt_sourcenotes {
+#fglevhaoyq .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -837,7 +836,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#tgsmbaeare .gt_sourcenote {
+#fglevhaoyq .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -845,68 +844,68 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#tgsmbaeare .gt_left {
+#fglevhaoyq .gt_left {
   text-align: left;
 }
 
-#tgsmbaeare .gt_center {
+#fglevhaoyq .gt_center {
   text-align: center;
 }
 
-#tgsmbaeare .gt_right {
+#fglevhaoyq .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#tgsmbaeare .gt_font_normal {
+#fglevhaoyq .gt_font_normal {
   font-weight: normal;
 }
 
-#tgsmbaeare .gt_font_bold {
+#fglevhaoyq .gt_font_bold {
   font-weight: bold;
 }
 
-#tgsmbaeare .gt_font_italic {
+#fglevhaoyq .gt_font_italic {
   font-style: italic;
 }
 
-#tgsmbaeare .gt_super {
+#fglevhaoyq .gt_super {
   font-size: 65%;
 }
 
-#tgsmbaeare .gt_footnote_marks {
+#fglevhaoyq .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#tgsmbaeare .gt_asterisk {
+#fglevhaoyq .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#tgsmbaeare .gt_indent_1 {
+#fglevhaoyq .gt_indent_1 {
   text-indent: 5px;
 }
 
-#tgsmbaeare .gt_indent_2 {
+#fglevhaoyq .gt_indent_2 {
   text-indent: 10px;
 }
 
-#tgsmbaeare .gt_indent_3 {
+#fglevhaoyq .gt_indent_3 {
   text-indent: 15px;
 }
 
-#tgsmbaeare .gt_indent_4 {
+#fglevhaoyq .gt_indent_4 {
   text-indent: 20px;
 }
 
-#tgsmbaeare .gt_indent_5 {
+#fglevhaoyq .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
 
-<table class="gt_table table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
 <tr class="header gt_heading">
 <th colspan="13" class="gt_heading gt_title gt_font_normal">Метрики по аккаунту</th>
@@ -1084,7 +1083,6 @@ window.Quarto = {
 </tbody>
 </table>
 
-</div>
 </div>
 </div>
 </div>
@@ -1324,8 +1322,8 @@ window.Quarto = {
 <span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a>plotly<span class="sc">::</span><span class="fu">ggplotly</span>(ads_df_plot,<span class="at">tooltip =</span> <span class="fu">c</span>(<span class="st">"x"</span>,<span class="st">"y"</span>,<span class="st">"group"</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display column-page">
-<div class="plotly html-widget html-fill-item" id="htmlwidget-e495e7281118716c98fe" style="width:100%;height:454px;"></div>
-<script type="application/json" data-for="htmlwidget-e495e7281118716c98fe">{"x":{"data":[{"orientation":"v","width":[0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519],"base":[0,208.57999999999998,0,0,0,0,52.310000000000002,92.459999999999994,26.25,12.619999999999999,472.89999999999998,373.94,478.44,186.75999999999999,323.85000000000002,115.44,48.07,149.56999999999999,570.91999999999996,433.59999999999997,94.200000000000003,108.17,74.019999999999996,114.44,187.56,194.94,150.06999999999999,18.460000000000001],"x":[19780,19781,19782,19783,19784,19785,19786,19787,19788,19789,19793,19794,19795,19796,19797,19798,19799,19800,19801,19802,19803,19804,19805,19806,19807,19808,19809,19810],"y":[148.81,641.88000000000011,212.21000000000001,274.07999999999998,303.58999999999997,0,407.54000000000002,705.80000000000007,438.39999999999998,239.22000000000003,353.82000000000005,402.98999999999995,229.26000000000005,89.350000000000023,83.009999999999991,14.370000000000005,9.9200000000000017,223.96999999999997,88.529999999999973,144.17000000000002,132.18000000000001,98.739999999999995,174.44999999999999,51.5,401.59000000000009,503.72000000000008,210.46999999999997,273.79000000000002],"text":["Date: 2024-02-27<br />Cost: 148.81<br />AdId: 15883344950","Date: 2024-02-28<br />Cost: 641.88<br />AdId: 15883344950","Date: 2024-02-29<br />Cost: 212.21<br />AdId: 15883344950","Date: 2024-03-01<br />Cost: 274.08<br />AdId: 15883344950","Date: 2024-03-02<br />Cost: 303.59<br />AdId: 15883344950","Date: 2024-03-03<br />Cost:   0.00<br />AdId: 15883344950","Date: 2024-03-04<br />Cost: 407.54<br />AdId: 15883344950","Date: 2024-03-05<br />Cost: 705.80<br />AdId: 15883344950","Date: 2024-03-06<br />Cost: 438.40<br />AdId: 15883344950","Date: 2024-03-07<br />Cost: 239.22<br />AdId: 15883344950","Date: 2024-03-11<br />Cost: 353.82<br />AdId: 15883344950","Date: 2024-03-12<br />Cost: 402.99<br />AdId: 15883344950","Date: 2024-03-13<br />Cost: 229.26<br />AdId: 15883344950","Date: 2024-03-14<br />Cost:  89.35<br />AdId: 15883344950","Date: 2024-03-15<br />Cost:  83.01<br />AdId: 15883344950","Date: 2024-03-16<br />Cost:  14.37<br />AdId: 15883344950","Date: 2024-03-17<br />Cost:   9.92<br />AdId: 15883344950","Date: 2024-03-18<br />Cost: 223.97<br />AdId: 15883344950","Date: 2024-03-19<br />Cost:  88.53<br />AdId: 15883344950","Date: 2024-03-20<br />Cost: 144.17<br />AdId: 15883344950","Date: 2024-03-21<br />Cost: 132.18<br />AdId: 15883344950","Date: 2024-03-22<br />Cost:  98.74<br />AdId: 15883344950","Date: 2024-03-23<br />Cost: 174.45<br />AdId: 15883344950","Date: 2024-03-24<br />Cost:  51.50<br />AdId: 15883344950","Date: 2024-03-25<br />Cost: 401.59<br />AdId: 15883344950","Date: 2024-03-26<br />Cost: 503.72<br />AdId: 15883344950","Date: 2024-03-27<br />Cost: 210.47<br />AdId: 15883344950","Date: 2024-03-28<br />Cost: 273.79<br />AdId: 15883344950"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"15883344950","legendgroup":"15883344950","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519],"base":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"x":[19780,19781,19782,19783,19784,19785,19786,19787,19788,19789,19793,19794,19795,19796,19797,19798,19799,19800,19801,19802,19803,19804,19805,19806,19807,19808,19809,19810],"y":[0,208.57999999999998,0,0,0,0,52.310000000000002,92.459999999999994,26.25,12.619999999999999,472.89999999999998,373.94,478.44,186.75999999999999,323.85000000000002,115.44,48.07,149.56999999999999,570.91999999999996,433.59999999999997,94.200000000000003,108.17,74.019999999999996,114.44,187.56,194.94,150.06999999999999,18.460000000000001],"text":["Date: 2024-02-27<br />Cost:   0.00<br />AdId: 15883344951","Date: 2024-02-28<br />Cost: 208.58<br />AdId: 15883344951","Date: 2024-02-29<br />Cost:   0.00<br />AdId: 15883344951","Date: 2024-03-01<br />Cost:   0.00<br />AdId: 15883344951","Date: 2024-03-02<br />Cost:   0.00<br />AdId: 15883344951","Date: 2024-03-03<br />Cost:   0.00<br />AdId: 15883344951","Date: 2024-03-04<br />Cost:  52.31<br />AdId: 15883344951","Date: 2024-03-05<br />Cost:  92.46<br />AdId: 15883344951","Date: 2024-03-06<br />Cost:  26.25<br />AdId: 15883344951","Date: 2024-03-07<br />Cost:  12.62<br />AdId: 15883344951","Date: 2024-03-11<br />Cost: 472.90<br />AdId: 15883344951","Date: 2024-03-12<br />Cost: 373.94<br />AdId: 15883344951","Date: 2024-03-13<br />Cost: 478.44<br />AdId: 15883344951","Date: 2024-03-14<br />Cost: 186.76<br />AdId: 15883344951","Date: 2024-03-15<br />Cost: 323.85<br />AdId: 15883344951","Date: 2024-03-16<br />Cost: 115.44<br />AdId: 15883344951","Date: 2024-03-17<br />Cost:  48.07<br />AdId: 15883344951","Date: 2024-03-18<br />Cost: 149.57<br />AdId: 15883344951","Date: 2024-03-19<br />Cost: 570.92<br />AdId: 15883344951","Date: 2024-03-20<br />Cost: 433.60<br />AdId: 15883344951","Date: 2024-03-21<br />Cost:  94.20<br />AdId: 15883344951","Date: 2024-03-22<br />Cost: 108.17<br />AdId: 15883344951","Date: 2024-03-23<br />Cost:  74.02<br />AdId: 15883344951","Date: 2024-03-24<br />Cost: 114.44<br />AdId: 15883344951","Date: 2024-03-25<br />Cost: 187.56<br />AdId: 15883344951","Date: 2024-03-26<br />Cost: 194.94<br />AdId: 15883344951","Date: 2024-03-27<br />Cost: 150.07<br />AdId: 15883344951","Date: 2024-03-28<br />Cost:  18.46<br />AdId: 15883344951"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(0,191,196,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"15883344951","legendgroup":"15883344951","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":42.738874328131153,"r":7.559055118110237,"b":41.018658470928997,"l":40.435767446877357},"font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724},"title":{"text":"Расходы","font":{"color":"rgba(102,102,102,1)","family":"","size":15.940224159402243},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[19778.004999999997,19811.995000000003],"tickmode":"array","ticktext":["26.02","27.02","28.02","29.02","01.03","02.03","03.03","04.03","05.03","06.03","07.03","08.03","09.03","10.03","11.03","12.03","13.03","14.03","15.03","16.03","17.03","18.03","19.03","20.03","21.03","22.03","23.03","24.03","25.03","26.03","27.03","28.03","29.03"],"tickvals":[19779,19780,19781,19782,19783,19784,19785,19786,19787,19788,19789,19790,19791,19792,19793,19794,19795,19796,19797,19798,19799,19800,19801,19802,19803,19804,19805,19806,19807,19808,19809,19810,19811],"categoryorder":"array","categoryarray":["26.02","27.02","28.02","29.02","01.03","02.03","03.03","04.03","05.03","06.03","07.03","08.03","09.03","10.03","11.03","12.03","13.03","14.03","15.03","16.03","17.03","18.03","19.03","20.03","21.03","22.03","23.03","24.03","25.03","26.03","27.03","28.03","29.03"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(127,127,127,1)","family":"","size":10.62681610626816},"tickangle":-90,"showline":false,"linecolor":null,"linewidth":0,"showgrid":false,"gridcolor":null,"gridwidth":0,"zeroline":false,"anchor":"y","title":{"text":"","font":{"color":"rgba(127,127,127,1)","family":"","size":13.283520132835205}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-42.523000000000003,892.98300000000006],"tickmode":"array","ticktext":["0","200","400","600","800"],"tickvals":[0,200.00000000000003,400,600,800],"categoryorder":"array","categoryarray":["0","200","400","600","800"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(127,127,127,1)","family":"","size":10.62681610626816},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":false,"gridcolor":null,"gridwidth":0,"zeroline":false,"anchor":"x","title":{"text":"Расходы, ₽","font":{"color":"rgba(127,127,127,1)","family":"","size":13.283520132835205}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(127,127,127,1)","family":"","size":10.62681610626816},"title":{"text":"","font":{"color":"rgba(127,127,127,1)","family":"","size":13.283520132835205}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"4cec366d3bd9":{"x":{},"y":{},"fill":{},"type":"bar"}},"cur_data":"4cec366d3bd9","visdat":{"4cec366d3bd9":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div class="plotly html-widget html-fill-item" id="htmlwidget-6ed8105055abb5cfe97c" style="width:100%;height:454px;"></div>
+<script type="application/json" data-for="htmlwidget-6ed8105055abb5cfe97c">{"x":{"data":[{"orientation":"v","width":[0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519],"base":[0,208.57999999999998,0,0,0,0,52.310000000000002,92.459999999999994,26.25,12.619999999999999,472.89999999999998,373.94,478.44,186.75999999999999,323.85000000000002,115.44,48.07,149.56999999999999,570.91999999999996,433.59999999999997,94.200000000000003,108.17,74.019999999999996,114.44,187.56,194.94,150.06999999999999,18.460000000000001],"x":[19780,19781,19782,19783,19784,19785,19786,19787,19788,19789,19793,19794,19795,19796,19797,19798,19799,19800,19801,19802,19803,19804,19805,19806,19807,19808,19809,19810],"y":[148.81,641.88000000000011,212.21000000000001,274.07999999999998,303.58999999999997,0,407.54000000000002,705.80000000000007,438.39999999999998,239.22000000000003,353.82000000000005,402.98999999999995,229.26000000000005,89.350000000000023,83.009999999999991,14.370000000000005,9.9200000000000017,223.96999999999997,88.529999999999973,144.17000000000002,132.18000000000001,98.739999999999995,174.44999999999999,51.5,401.59000000000009,503.72000000000008,210.46999999999997,273.79000000000002],"text":["Date: 2024-02-27<br />Cost: 148.81<br />AdId: 15883344950","Date: 2024-02-28<br />Cost: 641.88<br />AdId: 15883344950","Date: 2024-02-29<br />Cost: 212.21<br />AdId: 15883344950","Date: 2024-03-01<br />Cost: 274.08<br />AdId: 15883344950","Date: 2024-03-02<br />Cost: 303.59<br />AdId: 15883344950","Date: 2024-03-03<br />Cost:   0.00<br />AdId: 15883344950","Date: 2024-03-04<br />Cost: 407.54<br />AdId: 15883344950","Date: 2024-03-05<br />Cost: 705.80<br />AdId: 15883344950","Date: 2024-03-06<br />Cost: 438.40<br />AdId: 15883344950","Date: 2024-03-07<br />Cost: 239.22<br />AdId: 15883344950","Date: 2024-03-11<br />Cost: 353.82<br />AdId: 15883344950","Date: 2024-03-12<br />Cost: 402.99<br />AdId: 15883344950","Date: 2024-03-13<br />Cost: 229.26<br />AdId: 15883344950","Date: 2024-03-14<br />Cost:  89.35<br />AdId: 15883344950","Date: 2024-03-15<br />Cost:  83.01<br />AdId: 15883344950","Date: 2024-03-16<br />Cost:  14.37<br />AdId: 15883344950","Date: 2024-03-17<br />Cost:   9.92<br />AdId: 15883344950","Date: 2024-03-18<br />Cost: 223.97<br />AdId: 15883344950","Date: 2024-03-19<br />Cost:  88.53<br />AdId: 15883344950","Date: 2024-03-20<br />Cost: 144.17<br />AdId: 15883344950","Date: 2024-03-21<br />Cost: 132.18<br />AdId: 15883344950","Date: 2024-03-22<br />Cost:  98.74<br />AdId: 15883344950","Date: 2024-03-23<br />Cost: 174.45<br />AdId: 15883344950","Date: 2024-03-24<br />Cost:  51.50<br />AdId: 15883344950","Date: 2024-03-25<br />Cost: 401.59<br />AdId: 15883344950","Date: 2024-03-26<br />Cost: 503.72<br />AdId: 15883344950","Date: 2024-03-27<br />Cost: 210.47<br />AdId: 15883344950","Date: 2024-03-28<br />Cost: 273.79<br />AdId: 15883344950"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"15883344950","legendgroup":"15883344950","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519,0.90000000000145519],"base":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"x":[19780,19781,19782,19783,19784,19785,19786,19787,19788,19789,19793,19794,19795,19796,19797,19798,19799,19800,19801,19802,19803,19804,19805,19806,19807,19808,19809,19810],"y":[0,208.57999999999998,0,0,0,0,52.310000000000002,92.459999999999994,26.25,12.619999999999999,472.89999999999998,373.94,478.44,186.75999999999999,323.85000000000002,115.44,48.07,149.56999999999999,570.91999999999996,433.59999999999997,94.200000000000003,108.17,74.019999999999996,114.44,187.56,194.94,150.06999999999999,18.460000000000001],"text":["Date: 2024-02-27<br />Cost:   0.00<br />AdId: 15883344951","Date: 2024-02-28<br />Cost: 208.58<br />AdId: 15883344951","Date: 2024-02-29<br />Cost:   0.00<br />AdId: 15883344951","Date: 2024-03-01<br />Cost:   0.00<br />AdId: 15883344951","Date: 2024-03-02<br />Cost:   0.00<br />AdId: 15883344951","Date: 2024-03-03<br />Cost:   0.00<br />AdId: 15883344951","Date: 2024-03-04<br />Cost:  52.31<br />AdId: 15883344951","Date: 2024-03-05<br />Cost:  92.46<br />AdId: 15883344951","Date: 2024-03-06<br />Cost:  26.25<br />AdId: 15883344951","Date: 2024-03-07<br />Cost:  12.62<br />AdId: 15883344951","Date: 2024-03-11<br />Cost: 472.90<br />AdId: 15883344951","Date: 2024-03-12<br />Cost: 373.94<br />AdId: 15883344951","Date: 2024-03-13<br />Cost: 478.44<br />AdId: 15883344951","Date: 2024-03-14<br />Cost: 186.76<br />AdId: 15883344951","Date: 2024-03-15<br />Cost: 323.85<br />AdId: 15883344951","Date: 2024-03-16<br />Cost: 115.44<br />AdId: 15883344951","Date: 2024-03-17<br />Cost:  48.07<br />AdId: 15883344951","Date: 2024-03-18<br />Cost: 149.57<br />AdId: 15883344951","Date: 2024-03-19<br />Cost: 570.92<br />AdId: 15883344951","Date: 2024-03-20<br />Cost: 433.60<br />AdId: 15883344951","Date: 2024-03-21<br />Cost:  94.20<br />AdId: 15883344951","Date: 2024-03-22<br />Cost: 108.17<br />AdId: 15883344951","Date: 2024-03-23<br />Cost:  74.02<br />AdId: 15883344951","Date: 2024-03-24<br />Cost: 114.44<br />AdId: 15883344951","Date: 2024-03-25<br />Cost: 187.56<br />AdId: 15883344951","Date: 2024-03-26<br />Cost: 194.94<br />AdId: 15883344951","Date: 2024-03-27<br />Cost: 150.07<br />AdId: 15883344951","Date: 2024-03-28<br />Cost:  18.46<br />AdId: 15883344951"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(0,191,196,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"15883344951","legendgroup":"15883344951","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":42.738874328131153,"r":7.559055118110237,"b":41.018658470928997,"l":40.435767446877357},"font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724},"title":{"text":"Расходы","font":{"color":"rgba(102,102,102,1)","family":"","size":15.940224159402243},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[19778.004999999997,19811.995000000003],"tickmode":"array","ticktext":["26.02","27.02","28.02","29.02","01.03","02.03","03.03","04.03","05.03","06.03","07.03","08.03","09.03","10.03","11.03","12.03","13.03","14.03","15.03","16.03","17.03","18.03","19.03","20.03","21.03","22.03","23.03","24.03","25.03","26.03","27.03","28.03","29.03"],"tickvals":[19779,19780,19781,19782,19783,19784,19785,19786,19787,19788,19789,19790,19791,19792,19793,19794,19795,19796,19797,19798,19799,19800,19801,19802,19803,19804,19805,19806,19807,19808,19809,19810,19811],"categoryorder":"array","categoryarray":["26.02","27.02","28.02","29.02","01.03","02.03","03.03","04.03","05.03","06.03","07.03","08.03","09.03","10.03","11.03","12.03","13.03","14.03","15.03","16.03","17.03","18.03","19.03","20.03","21.03","22.03","23.03","24.03","25.03","26.03","27.03","28.03","29.03"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(127,127,127,1)","family":"","size":10.62681610626816},"tickangle":-90,"showline":false,"linecolor":null,"linewidth":0,"showgrid":false,"gridcolor":null,"gridwidth":0,"zeroline":false,"anchor":"y","title":{"text":"","font":{"color":"rgba(127,127,127,1)","family":"","size":13.283520132835205}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-42.523000000000003,892.98300000000006],"tickmode":"array","ticktext":["0","200","400","600","800"],"tickvals":[0,200.00000000000003,400,600,800],"categoryorder":"array","categoryarray":["0","200","400","600","800"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(127,127,127,1)","family":"","size":10.62681610626816},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":false,"gridcolor":null,"gridwidth":0,"zeroline":false,"anchor":"x","title":{"text":"Расходы, ₽","font":{"color":"rgba(127,127,127,1)","family":"","size":13.283520132835205}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(127,127,127,1)","family":"","size":10.62681610626816},"title":{"text":"","font":{"color":"rgba(127,127,127,1)","family":"","size":13.283520132835205}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"6bb07c5f2da8":{"x":{},"y":{},"fill":{},"type":"bar"}},"cur_data":"6bb07c5f2da8","visdat":{"6bb07c5f2da8":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p><br></p>
@@ -1590,8 +1588,8 @@ window.Quarto = {
 <span id="cb12-49"><a href="#cb12-49" aria-hidden="true" tabindex="-1"></a>plotly<span class="sc">::</span><span class="fu">ggplotly</span>(goal_plot)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display column-body-outset">
-<div class="plotly html-widget html-fill-item" id="htmlwidget-a0cb997eb89792c2e142" style="width:100%;height:454px;"></div>
-<script type="application/json" data-for="htmlwidget-a0cb997eb89792c2e142">{"x":{"data":[{"orientation":"v","width":[0.89999999999999991,0.90000000000000013,0.90000000000000036,0.90000000000000036,0.90000000000000036,0.90000000000000036,0.90000000000000036,0.89999999999999947,0.89999999999999858,0.89999999999999858,0.89999999999999858,0.89999999999999858],"base":[0,0,0,0,0,0,0,0,0,0,0,0],"x":[1,2,3,4,5,6,7,8,9,10,11,12],"y":[7,9,2,6,11,15,6,5,5,6,8,11],"text":["Week: 02<br />Goals:  7","Week: 03<br />Goals:  9","Week: 04<br />Goals:  2","Week: 05<br />Goals:  6","Week: 06<br />Goals: 11","Week: 07<br />Goals: 15","Week: 08<br />Goals:  6","Week: 09<br />Goals:  5","Week: 10<br />Goals:  5","Week: 11<br />Goals:  6","Week: 12<br />Goals:  8","Week: 13<br />Goals: 11"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(255,121,198,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":48.138199412495609,"r":11.338582677165356,"b":43.761279528726419,"l":38.901886952798399},"font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724},"title":{"text":"Цели на поиске сгруппированные по неделям","font":{"color":"rgba(102,102,102,1)","family":"","size":15.940224159402243},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.40000000000000002,12.6],"tickmode":"array","ticktext":["02","03","04","05","06","07","08","09","10","11","12","13"],"tickvals":[1,2,3,4.0000000000000009,5,6,7.0000000000000009,8,9,10,11,12],"categoryorder":"array","categoryarray":["02","03","04","05","06","07","08","09","10","11","12","13"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(127,127,127,1)","family":"","size":10.62681610626816},"tickangle":-90,"showline":false,"linecolor":null,"linewidth":0,"showgrid":false,"gridcolor":null,"gridwidth":0,"zeroline":false,"anchor":"y","title":{"text":"Неделя","font":{"color":"rgba(127,127,127,1)","family":"","size":13.283520132835205}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-0.75,15.75],"tickmode":"array","ticktext":["0","5","10","15"],"tickvals":[0,5,10,15],"categoryorder":"array","categoryarray":["0","5","10","15"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(127,127,127,1)","family":"","size":10.62681610626816},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":false,"gridcolor":null,"gridwidth":0,"zeroline":false,"anchor":"x","title":{"text":"Кол-во целей","font":{"color":"rgba(127,127,127,1)","family":"","size":13.283520132835205}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":false,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(127,127,127,1)","family":"","size":10.62681610626816}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"4cec5bb14753":{"x":{},"y":{},"type":"bar"}},"cur_data":"4cec5bb14753","visdat":{"4cec5bb14753":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div class="plotly html-widget html-fill-item" id="htmlwidget-d6c3fdbfd9963ffc5e67" style="width:100%;height:454px;"></div>
+<script type="application/json" data-for="htmlwidget-d6c3fdbfd9963ffc5e67">{"x":{"data":[{"orientation":"v","width":[0.89999999999999991,0.90000000000000013,0.90000000000000036,0.90000000000000036,0.90000000000000036,0.90000000000000036,0.90000000000000036,0.89999999999999947,0.89999999999999858,0.89999999999999858,0.89999999999999858,0.89999999999999858],"base":[0,0,0,0,0,0,0,0,0,0,0,0],"x":[1,2,3,4,5,6,7,8,9,10,11,12],"y":[7,9,2,6,11,15,6,5,5,6,8,11],"text":["Week: 02<br />Goals:  7","Week: 03<br />Goals:  9","Week: 04<br />Goals:  2","Week: 05<br />Goals:  6","Week: 06<br />Goals: 11","Week: 07<br />Goals: 15","Week: 08<br />Goals:  6","Week: 09<br />Goals:  5","Week: 10<br />Goals:  5","Week: 11<br />Goals:  6","Week: 12<br />Goals:  8","Week: 13<br />Goals: 11"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(255,121,198,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":48.138199412495609,"r":11.338582677165356,"b":43.761279528726419,"l":38.901886952798399},"font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724},"title":{"text":"Цели на поиске сгруппированные по неделям","font":{"color":"rgba(102,102,102,1)","family":"","size":15.940224159402243},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.40000000000000002,12.6],"tickmode":"array","ticktext":["02","03","04","05","06","07","08","09","10","11","12","13"],"tickvals":[1,2,3,4.0000000000000009,5,6,7.0000000000000009,8,9,10,11,12],"categoryorder":"array","categoryarray":["02","03","04","05","06","07","08","09","10","11","12","13"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(127,127,127,1)","family":"","size":10.62681610626816},"tickangle":-90,"showline":false,"linecolor":null,"linewidth":0,"showgrid":false,"gridcolor":null,"gridwidth":0,"zeroline":false,"anchor":"y","title":{"text":"Неделя","font":{"color":"rgba(127,127,127,1)","family":"","size":13.283520132835205}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-0.75,15.75],"tickmode":"array","ticktext":["0","5","10","15"],"tickvals":[0,5,10,15],"categoryorder":"array","categoryarray":["0","5","10","15"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(127,127,127,1)","family":"","size":10.62681610626816},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":false,"gridcolor":null,"gridwidth":0,"zeroline":false,"anchor":"x","title":{"text":"Кол-во целей","font":{"color":"rgba(127,127,127,1)","family":"","size":13.283520132835205}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":false,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(127,127,127,1)","family":"","size":10.62681610626816}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"6bb04e402395":{"x":{},"y":{},"type":"bar"}},"cur_data":"6bb04e402395","visdat":{"6bb04e402395":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p><br></p>
@@ -1760,24 +1758,23 @@ window.Quarto = {
 <span id="cb15-41"><a href="#cb15-41" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display column-page">
-<div>
-<div id="vhiryrmyal" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#vhiryrmyal table {
+<div id="qvlvpjwdzw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#qvlvpjwdzw table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#vhiryrmyal thead, #vhiryrmyal tbody, #vhiryrmyal tfoot, #vhiryrmyal tr, #vhiryrmyal td, #vhiryrmyal th {
+#qvlvpjwdzw thead, #qvlvpjwdzw tbody, #qvlvpjwdzw tfoot, #qvlvpjwdzw tr, #qvlvpjwdzw td, #qvlvpjwdzw th {
   border-style: none;
 }
 
-#vhiryrmyal p {
+#qvlvpjwdzw p {
   margin: 0;
   padding: 0;
 }
 
-#vhiryrmyal .gt_table {
+#qvlvpjwdzw .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1803,12 +1800,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#vhiryrmyal .gt_caption {
+#qvlvpjwdzw .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#vhiryrmyal .gt_title {
+#qvlvpjwdzw .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1820,7 +1817,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#vhiryrmyal .gt_subtitle {
+#qvlvpjwdzw .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1832,7 +1829,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#vhiryrmyal .gt_heading {
+#qvlvpjwdzw .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1844,13 +1841,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#vhiryrmyal .gt_bottom_border {
+#qvlvpjwdzw .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#vhiryrmyal .gt_col_headings {
+#qvlvpjwdzw .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1865,7 +1862,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#vhiryrmyal .gt_col_heading {
+#qvlvpjwdzw .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1885,7 +1882,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#vhiryrmyal .gt_column_spanner_outer {
+#qvlvpjwdzw .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1897,15 +1894,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#vhiryrmyal .gt_column_spanner_outer:first-child {
+#qvlvpjwdzw .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#vhiryrmyal .gt_column_spanner_outer:last-child {
+#qvlvpjwdzw .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#vhiryrmyal .gt_column_spanner {
+#qvlvpjwdzw .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1917,11 +1914,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#vhiryrmyal .gt_spanner_row {
+#qvlvpjwdzw .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#vhiryrmyal .gt_group_heading {
+#qvlvpjwdzw .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1947,7 +1944,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#vhiryrmyal .gt_empty_group_heading {
+#qvlvpjwdzw .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1962,15 +1959,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#vhiryrmyal .gt_from_md > :first-child {
+#qvlvpjwdzw .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#vhiryrmyal .gt_from_md > :last-child {
+#qvlvpjwdzw .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#vhiryrmyal .gt_row {
+#qvlvpjwdzw .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1989,7 +1986,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#vhiryrmyal .gt_stub {
+#qvlvpjwdzw .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2002,7 +1999,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#vhiryrmyal .gt_stub_row_group {
+#qvlvpjwdzw .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2016,15 +2013,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#vhiryrmyal .gt_row_group_first td {
+#qvlvpjwdzw .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#vhiryrmyal .gt_row_group_first th {
+#qvlvpjwdzw .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#vhiryrmyal .gt_summary_row {
+#qvlvpjwdzw .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2034,16 +2031,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#vhiryrmyal .gt_first_summary_row {
+#qvlvpjwdzw .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#vhiryrmyal .gt_first_summary_row.thick {
+#qvlvpjwdzw .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#vhiryrmyal .gt_last_summary_row {
+#qvlvpjwdzw .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2053,7 +2050,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#vhiryrmyal .gt_grand_summary_row {
+#qvlvpjwdzw .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2063,7 +2060,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#vhiryrmyal .gt_first_grand_summary_row {
+#qvlvpjwdzw .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2073,7 +2070,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#vhiryrmyal .gt_last_grand_summary_row_top {
+#qvlvpjwdzw .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2083,11 +2080,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#vhiryrmyal .gt_striped {
+#qvlvpjwdzw .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#vhiryrmyal .gt_table_body {
+#qvlvpjwdzw .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2096,7 +2093,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#vhiryrmyal .gt_footnotes {
+#qvlvpjwdzw .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2110,7 +2107,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#vhiryrmyal .gt_footnote {
+#qvlvpjwdzw .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2119,7 +2116,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#vhiryrmyal .gt_sourcenotes {
+#qvlvpjwdzw .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2133,7 +2130,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#vhiryrmyal .gt_sourcenote {
+#qvlvpjwdzw .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2141,68 +2138,68 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#vhiryrmyal .gt_left {
+#qvlvpjwdzw .gt_left {
   text-align: left;
 }
 
-#vhiryrmyal .gt_center {
+#qvlvpjwdzw .gt_center {
   text-align: center;
 }
 
-#vhiryrmyal .gt_right {
+#qvlvpjwdzw .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#vhiryrmyal .gt_font_normal {
+#qvlvpjwdzw .gt_font_normal {
   font-weight: normal;
 }
 
-#vhiryrmyal .gt_font_bold {
+#qvlvpjwdzw .gt_font_bold {
   font-weight: bold;
 }
 
-#vhiryrmyal .gt_font_italic {
+#qvlvpjwdzw .gt_font_italic {
   font-style: italic;
 }
 
-#vhiryrmyal .gt_super {
+#qvlvpjwdzw .gt_super {
   font-size: 65%;
 }
 
-#vhiryrmyal .gt_footnote_marks {
+#qvlvpjwdzw .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#vhiryrmyal .gt_asterisk {
+#qvlvpjwdzw .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#vhiryrmyal .gt_indent_1 {
+#qvlvpjwdzw .gt_indent_1 {
   text-indent: 5px;
 }
 
-#vhiryrmyal .gt_indent_2 {
+#qvlvpjwdzw .gt_indent_2 {
   text-indent: 10px;
 }
 
-#vhiryrmyal .gt_indent_3 {
+#qvlvpjwdzw .gt_indent_3 {
   text-indent: 15px;
 }
 
-#vhiryrmyal .gt_indent_4 {
+#qvlvpjwdzw .gt_indent_4 {
   text-indent: 20px;
 }
 
-#vhiryrmyal .gt_indent_5 {
+#qvlvpjwdzw .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
 
-<table class="gt_table table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
 <tr class="header gt_heading">
 <th colspan="3" class="gt_heading gt_title gt_font_normal">Данные по целям</th>
@@ -2327,7 +2324,6 @@ window.Quarto = {
 </div>
 </div>
 </div>
-</div>
 <p>Как видно из таблицы, по сравнению с предыдущей и следующей неделями на седьмой неделе распределение целей и их кол-во отличаются. Остается выяснить, в каких кампаниях, группах, объявлениях что послужило причиной таких аномалий, и рассматриваем возможность масштабирования.</p>
 <p>Конкретно в нашем случаи были запущены новые тестовые кампании, что повлияло на кол-во целей, но далее РК не запускались.</p>
 </section>
@@ -2369,24 +2365,23 @@ window.Quarto = {
 <p>Допустим, мы хотим прирасти на 15% по кол-ву обращений в каждый месяц. Как нам это сделать? Построим таблицу, где мы воздействуем на параметры: показы, CTR, CR с усилием по 15% на каждый параметр. Произведем расчеты, основываясь на средних значениях за последние три месяца.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<div id="zyxscbcvaf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#zyxscbcvaf table {
+<div id="hskejztngo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#hskejztngo table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#zyxscbcvaf thead, #zyxscbcvaf tbody, #zyxscbcvaf tfoot, #zyxscbcvaf tr, #zyxscbcvaf td, #zyxscbcvaf th {
+#hskejztngo thead, #hskejztngo tbody, #hskejztngo tfoot, #hskejztngo tr, #hskejztngo td, #hskejztngo th {
   border-style: none;
 }
 
-#zyxscbcvaf p {
+#hskejztngo p {
   margin: 0;
   padding: 0;
 }
 
-#zyxscbcvaf .gt_table {
+#hskejztngo .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2412,12 +2407,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#zyxscbcvaf .gt_caption {
+#hskejztngo .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#zyxscbcvaf .gt_title {
+#hskejztngo .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2429,7 +2424,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#zyxscbcvaf .gt_subtitle {
+#hskejztngo .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2441,7 +2436,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#zyxscbcvaf .gt_heading {
+#hskejztngo .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2453,13 +2448,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#zyxscbcvaf .gt_bottom_border {
+#hskejztngo .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#zyxscbcvaf .gt_col_headings {
+#hskejztngo .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2474,7 +2469,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#zyxscbcvaf .gt_col_heading {
+#hskejztngo .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2494,7 +2489,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#zyxscbcvaf .gt_column_spanner_outer {
+#hskejztngo .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2506,15 +2501,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#zyxscbcvaf .gt_column_spanner_outer:first-child {
+#hskejztngo .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#zyxscbcvaf .gt_column_spanner_outer:last-child {
+#hskejztngo .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#zyxscbcvaf .gt_column_spanner {
+#hskejztngo .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2526,11 +2521,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#zyxscbcvaf .gt_spanner_row {
+#hskejztngo .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#zyxscbcvaf .gt_group_heading {
+#hskejztngo .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2556,7 +2551,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#zyxscbcvaf .gt_empty_group_heading {
+#hskejztngo .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2571,15 +2566,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#zyxscbcvaf .gt_from_md > :first-child {
+#hskejztngo .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#zyxscbcvaf .gt_from_md > :last-child {
+#hskejztngo .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#zyxscbcvaf .gt_row {
+#hskejztngo .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2598,7 +2593,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#zyxscbcvaf .gt_stub {
+#hskejztngo .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2611,7 +2606,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#zyxscbcvaf .gt_stub_row_group {
+#hskejztngo .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2625,15 +2620,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#zyxscbcvaf .gt_row_group_first td {
+#hskejztngo .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#zyxscbcvaf .gt_row_group_first th {
+#hskejztngo .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#zyxscbcvaf .gt_summary_row {
+#hskejztngo .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2643,16 +2638,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#zyxscbcvaf .gt_first_summary_row {
+#hskejztngo .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#zyxscbcvaf .gt_first_summary_row.thick {
+#hskejztngo .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#zyxscbcvaf .gt_last_summary_row {
+#hskejztngo .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2662,7 +2657,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#zyxscbcvaf .gt_grand_summary_row {
+#hskejztngo .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2672,7 +2667,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#zyxscbcvaf .gt_first_grand_summary_row {
+#hskejztngo .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2682,7 +2677,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#zyxscbcvaf .gt_last_grand_summary_row_top {
+#hskejztngo .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2692,11 +2687,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#zyxscbcvaf .gt_striped {
+#hskejztngo .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#zyxscbcvaf .gt_table_body {
+#hskejztngo .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2705,7 +2700,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#zyxscbcvaf .gt_footnotes {
+#hskejztngo .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2719,7 +2714,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#zyxscbcvaf .gt_footnote {
+#hskejztngo .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2728,7 +2723,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#zyxscbcvaf .gt_sourcenotes {
+#hskejztngo .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2742,7 +2737,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#zyxscbcvaf .gt_sourcenote {
+#hskejztngo .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2750,68 +2745,68 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#zyxscbcvaf .gt_left {
+#hskejztngo .gt_left {
   text-align: left;
 }
 
-#zyxscbcvaf .gt_center {
+#hskejztngo .gt_center {
   text-align: center;
 }
 
-#zyxscbcvaf .gt_right {
+#hskejztngo .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#zyxscbcvaf .gt_font_normal {
+#hskejztngo .gt_font_normal {
   font-weight: normal;
 }
 
-#zyxscbcvaf .gt_font_bold {
+#hskejztngo .gt_font_bold {
   font-weight: bold;
 }
 
-#zyxscbcvaf .gt_font_italic {
+#hskejztngo .gt_font_italic {
   font-style: italic;
 }
 
-#zyxscbcvaf .gt_super {
+#hskejztngo .gt_super {
   font-size: 65%;
 }
 
-#zyxscbcvaf .gt_footnote_marks {
+#hskejztngo .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#zyxscbcvaf .gt_asterisk {
+#hskejztngo .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#zyxscbcvaf .gt_indent_1 {
+#hskejztngo .gt_indent_1 {
   text-indent: 5px;
 }
 
-#zyxscbcvaf .gt_indent_2 {
+#hskejztngo .gt_indent_2 {
   text-indent: 10px;
 }
 
-#zyxscbcvaf .gt_indent_3 {
+#hskejztngo .gt_indent_3 {
   text-indent: 15px;
 }
 
-#zyxscbcvaf .gt_indent_4 {
+#hskejztngo .gt_indent_4 {
   text-indent: 20px;
 }
 
-#zyxscbcvaf .gt_indent_5 {
+#hskejztngo .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
 
-<table class="gt_table table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
 <tr class="header gt_heading">
 <th colspan="5" class="gt_heading gt_title gt_font_normal">52% ежемесячный прирост по лидам</th>
@@ -2852,7 +2847,6 @@ window.Quarto = {
 </tbody>
 </table>
 
-</div>
 </div>
 </div>
 </div>
@@ -2909,18 +2903,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -2952,7 +2935,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -2960,7 +2965,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
@@ -3289,6 +3294,19 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Copyright 2024, Коршаков Александр</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>Сайт создан с помощью <a href="https://www.r-project.org/about.html" target="_blank"><i class="fa-brands fa-r-project" title="R Project" aria-label="r-project"></i></a> and <a href="https://quarto.org/" target="_blank">Quarto</a></p>
+</div>
+  </div>
+</footer>
 
 
 

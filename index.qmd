@@ -1,31 +1,34 @@
 ---
-title: "Маркетинг, основанный на данных"
-format:
-  html:
-    link-external-newwindow: true
+title: "Маркетинг и реклама, основанные на данных"
+image: img/me.jpg
+toc: false
+about: 
+  template: trestles 
+  image-shape: round
+  image-width: 20em
+  links: 
+    - icon: telegram
+      text: Telegram
+      href: https://t.me/a_korshakov
+      target: _blank
+    - icon: envelope-fill
+      text: Email
+      href: mailto:i@akorshakov.ru
+      target: _blank
 editor_options: 
   chunk_output_type: console
 ---
 
-<br/>
+Меня зовут Александр, я из Краснодара. Работаю в сфере маркетинга и рекламы с 2017 года.
+
+Специализируюсь на привлечении новых клиентов для вашего бизнеса. Для этого я использую маркетинговые стратегии и настраиваю рекламные кампании на основе данных.
+
+С 2021 года работаю как самозанятый. Сотрудничаю с маркетинговыми и рекламными агентствами, а также со специалистами и бизнесами в сфере B2B и B2C.
+
+Если вам интересно узнать больше о моих услугах и подходе, смотрите подробную презентацию.
+
+[Презентация: Коршаков Александр](/about/korshakov.qmd){target="_blank"}
 
 
-* [Презентация: О себе](/about/korshakov.qmd)
 
 
-
-
-::: {.hidden}
-* [Презентация: Рекламный консалтинг (для спикера)]()
-* [Презентация: Рекламный консалтинг (раздаточная)]()
-* [Презентация: Маркетинговый консалтинг (для спикера)](/pres/mark_consulting_speaker.qmd)
-* [Презентация: Маркетинговый консалтинг](/pres/mark_consulting_mailing.qmd)
-
-
-### Презентации для PLATZKART
-
-* [Презентация: Маркетинговый консалтинг (для спикера)](/pres/mark_consulting_speaker_pl.qmd)
-* [Презентация: Маркетинговый консалтинг (раздаточная)](/pres/mark_consulting_mailing_pl.qmd)
-* [Презентация: Маркетинговый консалтинг (раздаточная ver. 2)](/pres/mark_consulting_mailing_pl_v2.qmd)
-* [Презентация: Маркетинговый консалтинг (раздаточная ver. 3)](/pres/mark_consulting_mailing_pl_v3.qmd)
-:::

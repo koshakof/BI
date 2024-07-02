@@ -8,18 +8,23 @@ project:
     
 
 website:
-  title: "DDM & Ads"
+  favicon: /favicon/favicon_ihourglass.jpg
+  title: "ihourglass"
   description: "Маркетинг, основанный на данных. Реклама и аналитика в интернете"
   navbar:
     left:
-      - href: index.qmd
+      - icon: house
+        href: index.qmd
         text: "Главная"
-      - href: about/korshakov.qmd
-        text: "О себе" 
       - href: wiki.qmd
         text: "Wiki"
+        target: _blank
       - href: contacts.qmd
         text: "Контакты"
+  page-footer:
+    background: light # or `dark`
+    left: Copyright 2024, Коршаков Александр
+    right: Сайт создан с помощью [{{< fa brands r-project title="R Project" >}}](https://www.r-project.org/about.html){target=_blank} and [Quarto](https://quarto.org/){target=_blank}
 
 format:
   html:
