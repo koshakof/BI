@@ -29,9 +29,6 @@ website:
     type: implied
     style: simple
     palette: light
-  google-analytics:
-    tracking-id: "GTM-KB6J3FZF"
-    anonymize-ip: false
 
 format:
   html:
@@ -41,6 +38,8 @@ format:
     css: styles.css
     link-external-newwindow: true
     theme: minty
+    include-in-header: scripts/gtm_head.html
+    include-after-body: scripts/gtm_body.html
 
 execute: 
   freeze: auto
