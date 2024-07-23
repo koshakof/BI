@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>ihourglass – Маркетинг и реклама, основанные на данных</title>
+<title>ihourglass – Услуги</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -36,6 +36,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
@@ -102,7 +103,7 @@ cookieconsent.run({
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-fixed fullcontent">
+<body class="floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -120,12 +121,12 @@ cookieconsent.run({
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> <i class="bi bi-house" role="img">
+    <a class="nav-link" href="./index.html"> <i class="bi bi-house" role="img">
 </i> 
 <span class="menu-text"> </span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./services.html"> 
+    <a class="nav-link active" href="./services.html" aria-current="page"> 
 <span class="menu-text">Услуги</span></a>
   </li>  
   <li class="nav-item">
@@ -146,38 +147,47 @@ cookieconsent.run({
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-<!-- margin-sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
 <!-- main -->
-<div class="quarto-about-trestles">
-  <div class="about-entity">
-    <img src="img/me.jpg" class="about-image
-  round " style="height: 20em; width: 20em;">
+<main class="content" id="quarto-document-content">
+
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Маркетинг и реклама, основанные на данных</h1>
+<h1 class="title">Услуги</h1>
 </div>
+
+
+
 <div class="quarto-title-meta">
+
+    
+  
+    
   </div>
+  
+
+
 </header>
-    <div class="about-links">
-  <a href="https://t.me/a_korshakov" class="about-link" rel="" target="_blank">
-    <i class="bi bi-telegram"></i>
-     <span class="about-link-text">Telegram</span>
-  </a>
-</div>
-  </div>
-  <div class="about-contents"><main class="content" id="quarto-document-content">
-<p>Меня зовут Александр, я из Краснодара. Работаю в сфере маркетинга и рекламы с 2017 года.</p>
-<p>Специализируюсь на привлечении новых клиентов для вашего бизнеса. Для этого я использую маркетинговые стратегии и настраиваю рекламные кампании на основе данных.</p>
-<p>С 2021 года работаю как самозанятый. Сотрудничаю с маркетинговыми и рекламными агентствами, а также со специалистами и бизнесами в сфере B2B и B2C.</p>
-<p>Если вам интересно узнать больше о моих услугах и подходе, смотрите подробную презентацию.</p>
-<p><a href="./about/korshakov.html" target="_blank">Презентация: Коршаков Александр</a></p>
 
 
-</main></div>
-</div>
- <!-- /main -->
+<p>Cотрудничаю по направлениям:</p>
+<ul>
+<li><p>Создание маркетинговых стратегий на основе данных (<a href="https://koshakof.github.io/BI/pres/mark_consulting_mailing.html#/title-slide">презентация услуги</a>)</p></li>
+<li><p>Запуск рекламных систем методом «SOSTAC» (<a href="https://docs.google.com/document/d/1UjumYOvNIMbGwebXzrcZ_E42swPqdbN4gvLpWMQQvTs/edit?usp=sharing">описание услуги</a>)</p></li>
+<li><p>Data Driven аудит систем привлечения трафика (<a href="https://docs.google.com/document/d/140e-pYzTlbKnMEi35MG0xoM95F-um6nCP2MIpSNEQ8o/edit?usp=sharing">описание услуги</a>)</p></li>
+<li><p>Ситуационный маркетинговый анализ</p></li>
+<li><p>Маркетинговое сопровождение</p></li>
+</ul>
+
+
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -198,6 +208,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
   const isCodeAnnotation = (el) => {
     for (const clz of el.classList) {
       if (clz.startsWith('code-annotation-')) {                     

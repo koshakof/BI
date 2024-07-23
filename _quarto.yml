@@ -5,7 +5,6 @@ project:
   output-dir: docs
   render:
     - "*.qmd"
-    
 
 website:
   favicon: /favicon/favicon_ihourglass.jpg
@@ -15,16 +14,24 @@ website:
     left:
       - icon: house
         href: index.qmd
-        text: "Главная"
+        text: " "
+      - href: services.qmd
+        text: "Услуги"
       - href: wiki.qmd
         text: "Wiki"
-        target: _blank
       - href: contacts.qmd
         text: "Контакты"
   page-footer:
     background: light # or `dark`
     left: Copyright 2024, Коршаков Александр
     right: Сайт создан с помощью [{{< fa brands r-project title="R Project" >}}](https://www.r-project.org/about.html){target=_blank} and [Quarto](https://quarto.org/){target=_blank}
+  cookie-consent:
+    type: implied
+    style: simple
+    palette: light
+  google-analytics:
+    tracking-id: "GTM-KB6J3FZF"
+    anonymize-ip: false
 
 format:
   html:
@@ -37,6 +44,3 @@ format:
 
 execute: 
   freeze: auto
-    
-
-

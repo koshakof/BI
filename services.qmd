@@ -1,0 +1,20 @@
+---
+title: "Услуги"
+editor_options: 
+  chunk_output_type: console
+---
+
+Cотрудничаю по направлениям:
+
+- Создание маркетинговых стратегий на основе данных ([презентация услуги](https://koshakof.github.io/BI/pres/mark_consulting_mailing.html#/title-slide))
+
+- Запуск рекламных систем методом «SOSTAC» ([описание услуги](https://docs.google.com/document/d/1UjumYOvNIMbGwebXzrcZ_E42swPqdbN4gvLpWMQQvTs/edit?usp=sharing))
+
+- Data Driven аудит систем привлечения трафика ([описание услуги](https://docs.google.com/document/d/140e-pYzTlbKnMEi35MG0xoM95F-um6nCP2MIpSNEQ8o/edit?usp=sharing))
+
+- Ситуационный маркетинговый анализ
+
+- Маркетинговое сопровождение
+
+
+

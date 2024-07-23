@@ -164,7 +164,7 @@ format:
 
 <font color="#ffa07a">По вопросам сотрудничества пишите:</font>
 
-- <font color="#ffa07a">в Telegram:</font> <https://t.me/akorshakoff>
+- <font color="#ffa07a">в Telegram:</font> <https://t.me/a_korshakov>
 
 - <font color="#ffa07a">на e-mail:</font> <i@akorshakov.ru>
 

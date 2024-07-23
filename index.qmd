@@ -11,10 +11,6 @@ about:
       text: Telegram
       href: https://t.me/a_korshakov
       target: _blank
-    - icon: envelope-fill
-      text: Email
-      href: mailto:i@akorshakov.ru
-      target: _blank
 editor_options: 
   chunk_output_type: console
 ---
