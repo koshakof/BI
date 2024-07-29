@@ -1,15 +1,21 @@
 ---
-lang: ru
 title: 'Экономим рекламный бюджет с помощью кластерного анализа площадок в рекламных сетях Яндекса'
-date: today
-date-format:  D dddd MMM YYYY
+author: "Александр Коршаков"
+
+date: "2024-03-29"
+date-format: long
+
 format:
   html:
+    page-layout: article
     toc: true
-    toc-location: left
-    cap-location: top
+    toc-location: right
+    fig-width: 10
+    fig-height: 8
+
 editor_options: 
   chunk_output_type: console
+
 execute:
   warning: false
   message: false

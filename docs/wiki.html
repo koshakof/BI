@@ -107,7 +107,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="floating nav-fixed">
+<body class="nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -151,21 +151,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Содержание</h2>
-   
-  <ul>
-  <li><a href="#реклама" id="toc-реклама" class="nav-link active" data-scroll-target="#реклама">Реклама</a></li>
-  <li><a href="#маркетинг" id="toc-маркетинг" class="nav-link" data-scroll-target="#маркетинг">Маркетинг</a></li>
-  <li><a href="#анализ-данных" id="toc-анализ-данных" class="nav-link" data-scroll-target="#анализ-данных">Анализ данных</a></li>
-  </ul>
-</nav>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-    </div>
+    
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -193,8 +180,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <ul>
 <li><p><a href="https://platzkart.ru/portfolio/case-mtz/">Как продавать сложные продукты в В2В в условиях кризиса с минимальным бюджетом</a></p></li>
 <li><p><a href=".\wiki/ds_places_analysis.html">Экономим рекламный бюджет с помощью кластерного анализа площадок в рекламных сетях Яндекса</a></p></li>
-<li><p><a href=".\wiki/shewhart_control_card_ydirect.html">Применяем ГОСТ стандарт РФ «Контрольные карты Шухарта» для оптимизация рекламных кампаний и других источников трафика</a></p></li>
+<li><p><a href=".\wiki/shewhart_control_card.html">Применяем ГОСТ стандарт РФ «Контрольные карты Шухарта» для оптимизация рекламных кампаний и других источников трафика</a></p></li>
 <li><p><a href=".\wiki/correlatio.html">Как выбрать микроцель для обучения стратегии показов объявлений в любой рекламной системе. Часть 1. Корреляция и регрессия. Подробный разбор методологии с примерами</a></p></li>
+<li><p><a href=".\wiki/correlatio_part_2_new_statistics.html">Как выбрать микроцель для обучения стратегии показов объявлений в любой рекламной системе. Часть 2. Статистика оценок или почему не надо испольлзовать только метод проверки значимости нулевой гипотезы, основанный на p-value.</a></p></li>
 </ul>
 </section>
 <section id="маркетинг" class="level2">
@@ -329,6 +317,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
           if (link.getAttribute("rel") === null) {
             link.setAttribute("rel", "noopener");
           }
+          // default icon
+          link.classList.add("external");
       }
     }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {

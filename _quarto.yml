@@ -32,14 +32,13 @@ website:
 
 format:
   html:
-    toc: true
-    toc-location: left
     cap-location: top
     css: styles.css
     link-external-newwindow: true
+    link-external-icon: true
     theme: minty
     include-in-header: scripts/gtm_head.html
     include-after-body: scripts/gtm_body.html
 
-execute: 
+execute:
   freeze: auto
