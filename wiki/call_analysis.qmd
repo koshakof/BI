@@ -1,25 +1,41 @@
 ---
-lang: ru
 title: 'Как проверить качество входящих звонков из рекламных кампаний, если нет CRM-системы и времени прослушивать каждый звонок'
-date: today
-date-format:  D dddd MMM YYYY
+
+author: "Александр Коршаков"
+
+categories: [Анализ данных]
+
+date: "2024-03-20"
+date-format: long
+
 format:
   html:
+    page-layout: article
     toc: true
-    toc-location: left
-    # page-layout: full
-    cap-location: top
-editor_options:
-  chunk_output_type: console
+    toc-location: right
+    fig-width: 10
+    fig-height: 8
+    title-prefix: "ihourglass"
+    pagetitle: "Как проверить качество входящих звонков из рекламных кампаний"
+    description-meta: "Применяем метод статистической оценки для анализа эффективности входящиз звонков в компанию, если нет CRM-системы."
+    author-meta: "Коршаков Александр"
+
+  
 execute:
   warning: false
   message: false
   error: false
   echo: false
-  output: asis
+  
+editor_options:
+  chunk_output_type: console
 ---
 
 ```{r}
+#| label: setup
+#| cache: false
+
+
 # загрузка библиотек 
 library(DT)
 library(tidyverse)
@@ -39,8 +55,17 @@ library(scales)
 # Пред. установки
 
 ## путь загрузки данных
-file_path <- '~/GitHub/BI/wiki/data/'
+file_path <- '~/BI/wiki/data/'
 ```
+
+
+```{r}
+# настройки для отображения текста на кирилице
+library(showtext)
+showtext_opts(dpi = 200)
+showtext_auto()
+```
+
 
 <!-- END -->
 
@@ -93,7 +118,7 @@ datatable(
   options = list(
     pageLength = 10,
     dom        = 'Btpli',
-    language   = list(url = '//cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json')
+    language   = list(url = 'https:://cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json')
     )
   )
 ```
@@ -137,7 +162,7 @@ datatable(
   options = list(
     pageLength = 10,
     dom        = 'Btpli',
-    language   = list(url = '//cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json')
+    language   = list(url = 'https:://cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json')
     )
   )
 ```
@@ -257,7 +282,7 @@ text_df |>
     y = "Кол-во слов"
   ) +
   theme(
-    axis.title = element_text(size = 10, family = "Times", color = "gray40"),
+    axis.title = element_text(size = 10, color = "gray40"),
     panel.grid = element_blank()
   )
 ```
@@ -294,10 +319,8 @@ text_df |>
   theme_minimal() +
   labs(x = NULL,
        y = "Кол-во слов") +
-  theme(axis.title = element_text(size = 10, family = "Times", color = "gray40"),
+  theme(axis.title = element_text(size = 10, family = "roboto", color = "gray40"),
         panel.grid = element_blank())
-
-
 ```
 
 
@@ -319,6 +342,7 @@ text_df |>
 >**График: сегменты в разрезе оператор / клиент**
 
 ```{r}
+
 # график в разрезе оператор клиент
 text_df |>
   count(Канал) |>
@@ -336,7 +360,7 @@ text_df |>
     y = "Кол-во слов"
   ) +
   theme(
-    axis.title = element_text(size = 10, family = "Times", color = "gray40"),
+    axis.title = element_text(size = 10, family = "roboto", color = "gray40"),
     panel.grid = element_blank()
   )
 ```
@@ -767,10 +791,13 @@ frequency <- text_correct  |>
 #| fig-height: 10
 
 # построим график
-ggplot(frequency, aes(
-  x = organic, y = cpc,
-  color = abs(cpc - organic)
-)) +
+ggplot(
+  frequency, 
+  aes(
+    x = organic, 
+    y = cpc,
+    color = abs(cpc - organic)
+    )) +
   geom_abline(color = "gray40", lty = 2) +
   geom_jitter(alpha = 0.1, size = 2.5, width = 0.3, height = 0.3) +
   geom_text(aes(label = Слово), check_overlap = TRUE, vjust = 1.5) +
@@ -781,10 +808,13 @@ ggplot(frequency, aes(
     low = "darkslategray4", high = "gray75"
   ) +
   theme_minimal() +
-  labs(y = "CPC", x = "Organic") +
+  labs(
+    y = "CPC", 
+    x = "Organic"
+    ) +
   theme(
     legend.position = "none",
-    axis.title = element_text(size = 10, color = "gray40"),
+    axis.title = element_text(size = 10, color = "gray40", family = "roboto"),
     panel.grid = element_blank()
   )
 

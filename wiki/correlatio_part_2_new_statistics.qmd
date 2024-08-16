@@ -1,10 +1,15 @@
 ---
 title: "Как выбрать микроцель для обучения стратегии показов объявлений в любой рекламной системе"
+
 subtitle: "Часть 2. Статистика оценок или почему не надо испольлзовать только метод проверки значимости нулевой гипотезы, основанный на p-value."
+
 author: "Александр Коршаков"
+
+categories: [Реклама, Анализ данных]
 
 date: "2024-07-29"
 date-format: long
+
 
 format:
   html:
@@ -22,10 +27,15 @@ format:
      - text: "Wikipedia: Estimation statistics"
        href: "https://en.wikipedia.org/wiki/Estimation_statistics"
 
+  
 execute:
   warning: false
   message: false
   error: false
+
+
+editor_options:
+  chunk_output_type: console
 ---
 
 Напомню, что в [первой части](/wiki/correlatio.html) статьи мы прошли шаги:
@@ -137,7 +147,7 @@ library(dabestr)
 #| echo: false
 
 # загрузка данных
-dt <- fread("~/GitHub/BI/wiki/data/ccsh.csv")
+dt <- fread("~/BI/wiki/data/ccsh.csv")
 ```
 
 
@@ -380,6 +390,9 @@ ggplot(
 ```{r}
 #| label: boxplot
 
+# включаем отображение текста на графике
+# showtext_auto()
+
 ggplot(
   data, 
   aes(
@@ -397,13 +410,13 @@ ggplot(
       )) +
   theme_minimal()+
   labs(
-    x = "Период",
+    x = "Group",
     color = NULL
     )+
   theme(
     legend.position = "none",
-    axis.title = element_text(size = 10, color = "gray50"),
-    axis.text = element_text(size = 9, color = "gray50"),
+    axis.title = element_text(size = 14, color = "gray50", family = "roboto"),
+    axis.text = element_text(size = 12, color = "gray50", family = "roboto"),
     plot.margin = ggplot2::margin(
       t = 0.3,
       r = 0.3, 
@@ -417,6 +430,10 @@ ggplot(
       c("Control", "Test 2")),
     map_signif_level = TRUE
     )
+
+
+# отключаем отображение текста на графике
+# showtext_auto(FALSE)
 ```
 
 Что мы видим на графике boxplot?
@@ -453,7 +470,7 @@ ggplot(
       )) +
   theme_minimal()+
   labs(
-    x = "Период",
+    x = "Group",
     color = NULL
     )+
   theme(

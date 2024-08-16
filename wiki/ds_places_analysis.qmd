@@ -5,6 +5,8 @@ author: "Александр Коршаков"
 date: "2024-03-29"
 date-format: long
 
+categories: [Реклама, Анализ данных]
+
 format:
   html:
     page-layout: article
@@ -26,6 +28,9 @@ execute:
 <!-- Подготовка к анализу -->
 
 ```{r}
+#| label: setup
+#| cache: false
+
 # загрузка библиотек 
 library(DT)
 library(tidyverse)
@@ -40,7 +45,7 @@ library(NbClust)
 
 ```{r}
 # путь
-file_path <- '~/GitHub/BI/wiki/data/'
+file_path <- '~/BI/wiki/data/'
 ```
 
 

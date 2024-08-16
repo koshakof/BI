@@ -32,7 +32,6 @@ website:
 
 format:
   html:
-    cap-location: top
     css: styles.css
     link-external-newwindow: true
     link-external-icon: true

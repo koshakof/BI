@@ -2,12 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ru" xml:lang="ru"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.41">
+<meta name="generator" content="quarto-1.4.555">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Коршаков Александр">
+<meta name="description" content="Раздел статей и примеры работ Коршакова Александра">
 
-<title>ihourglass – Wiki</title>
+<title>Статьи и примеры работы</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,6 +33,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href=".//favicon/favicon_ihourglass.jpg" rel="icon" type="image/jpeg">
+<script src="site_libs/quarto-listing/list.min.js"></script>
+<script src="site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="site_libs/cookie-consent/cookie-consent.js"></script>
 <link href="site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
 <script src="site_libs/quarto-html/quarto.js"></script>
@@ -71,6 +75,35 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Поиск"
   }
 }</script>
+<script>
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-listing .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-date','listing-title','listing-author','listing-subtitle','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      
+      searchColumns: ["listing-date","listing-title","listing-author","listing-subtitle","listing-image","listing-description","listing-categories"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
 
 <script type="text/javascript" charset="UTF-8">
 document.addEventListener('DOMContentLoaded', function () {
@@ -90,24 +123,47 @@ cookieconsent.run({
 </script> 
   
 <!-- Google Tag Manager -->
-
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-
 })(window,document,'script','dataLayer','GTM-KB6J3FZF');</script>
-
 <!-- End Google Tag Manager -->
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-fixed fullcontent">
+<body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -119,7 +175,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </a>
   </div>
             <div id="quarto-search" class="" title="Поиск"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Переключить навигацию" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Переключить навигацию" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -143,7 +199,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
-            <div class="quarto-navbar-tools">
+          <div class="quarto-navbar-tools">
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -152,7 +208,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        
+    <h5 class="quarto-listing-category-title">Категории</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">Все <span class="quarto-category-count">(5)</span></div><div class="category" data-category="Анализ данных">Анализ данных <span class="quarto-category-count">(5)</span></div><div class="category" data-category="Реклама">Реклама <span class="quarto-category-count">(4)</span></div></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -175,36 +233,196 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </header>
 
 
-<section id="реклама" class="level2">
-<h2 class="anchored" data-anchor-id="реклама">Реклама</h2>
-<ul>
-<li><p><a href="https://platzkart.ru/portfolio/case-mtz/">Как продавать сложные продукты в В2В в условиях кризиса с минимальным бюджетом</a></p></li>
-<li><p><a href=".\wiki/ds_places_analysis.html">Экономим рекламный бюджет с помощью кластерного анализа площадок в рекламных сетях Яндекса</a></p></li>
-<li><p><a href=".\wiki/shewhart_control_card.html">Применяем ГОСТ стандарт РФ «Контрольные карты Шухарта» для оптимизация рекламных кампаний и других источников трафика</a></p></li>
-<li><p><a href=".\wiki/correlatio.html">Как выбрать микроцель для обучения стратегии показов объявлений в любой рекламной системе. Часть 1. Корреляция и регрессия. Подробный разбор методологии с примерами</a></p></li>
-<li><p><a href=".\wiki/correlatio_part_2_new_statistics.html">Как выбрать микроцель для обучения стратегии показов объявлений в любой рекламной системе. Часть 2. Статистика оценок или почему не надо испольлзовать только метод проверки значимости нулевой гипотезы, основанный на p-value.</a></p></li>
-</ul>
-</section>
-<section id="маркетинг" class="level2">
-<h2 class="anchored" data-anchor-id="маркетинг">Маркетинг</h2>
-<ul>
-<li><a href="https://platzkart.ru/portfolio/case-nedvizhimost-krasnodar/">Ситуационный анализ и сратегическая канва в недвижимости</a></li>
-</ul>
-</section>
-<section id="анализ-данных" class="level2">
-<h2 class="anchored" data-anchor-id="анализ-данных">Анализ данных</h2>
-<ul>
-<li><a href=".\wiki/call_analysis.html">Как проверить качество входящих звонков из рекламных кампаний, если нет CRM-системы и времени прослушивать каждый звонок</a></li>
-</ul>
 
 
-</section>
 
-</main> <!-- /main -->
+
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-categories="Реклама,Анализ данных" data-listing-date-sort="1722211200000" data-listing-file-modified-sort="1723787818760" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="20" data-listing-word-count-sort="3925">
+<div class="thumbnail">
+<p><a href="./wiki/correlatio_part_2_new_statistics.html" class="no-external"></a></p><a href="./wiki/correlatio_part_2_new_statistics.html" class="no-external">
+<p class="card-img-top"><img src="wiki/correlatio_part_2_new_statistics_files/figure-html/barplot-1.png"  class="thumbnail-image card-img"/></p>
+</a><p><a href="./wiki/correlatio_part_2_new_statistics.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./wiki/correlatio_part_2_new_statistics.html" class="no-external">Как выбрать микроцель для обучения стратегии показов объявлений в любой рекламной системе</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./wiki/correlatio_part_2_new_statistics.html" class="no-external">Часть 2. Статистика оценок или почему не надо испольлзовать только метод проверки значимости нулевой гипотезы, основанный на p-value.</a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('Реклама'); return false;">
+Реклама
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Анализ данных'); return false;">
+Анализ данных
+</div>
+</div>
+<div class="listing-description">
+<a href="./wiki/correlatio_part_2_new_statistics.html" class="no-external">Напомню, что в первой части статьи мы прошли шаги:</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./wiki/correlatio_part_2_new_statistics.html" class="no-external">
+<div class="listing-date">
+29 июл. 2024 г.
+</div>
+<div class="listing-author">
+Александр Коршаков
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="Реклама,Анализ данных" data-listing-date-sort="1716422400000" data-listing-file-modified-sort="1723809982022" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="38" data-listing-word-count-sort="7524">
+<div class="thumbnail">
+<p><a href="./wiki/correlatio.html" class="no-external"></a></p><a href="./wiki/correlatio.html" class="no-external">
+<p class="card-img-top"><img src="wiki/correlatio_files/figure-html/plot goals-1.png"  class="thumbnail-image card-img"/></p>
+</a><p><a href="./wiki/correlatio.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./wiki/correlatio.html" class="no-external">Как выбрать микроцель для обучения стратегии показов объявлений в любой рекламной системе</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./wiki/correlatio.html" class="no-external">Часть 1. Корреляция и регрессия. Подробный разбор методологии с примерами</a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('Реклама'); return false;">
+Реклама
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Анализ данных'); return false;">
+Анализ данных
+</div>
+</div>
+<div class="listing-description">
+<a href="./wiki/correlatio.html" class="no-external"><strong>Для кого</strong></a>
+</div>
+</div>
+<div class="metadata">
+<a href="./wiki/correlatio.html" class="no-external">
+<div class="listing-date">
+23 мая 2024 г.
+</div>
+<div class="listing-author">
+Александр Коршаков
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="2" data-categories="Реклама,Анализ данных" data-listing-date-sort="1712620800000" data-listing-file-modified-sort="1723812304788" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="27" data-listing-word-count-sort="5344">
+<div class="thumbnail">
+<p><a href="./wiki/shewhart_control_card.html" class="no-external"></a></p><a href="./wiki/shewhart_control_card.html" class="no-external">
+<p class="card-img-top"><img src="wiki/shewhart_control_card_files/figure-html/line clicks plot-1.png"  class="thumbnail-image card-img"/></p>
+</a><p><a href="./wiki/shewhart_control_card.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./wiki/shewhart_control_card.html" class="no-external">Применяем ГОСТ стандарт РФ «Контрольные карты Шухарта» для оптимизация рекламных кампаний и других источников трафика</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./wiki/shewhart_control_card.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('Реклама'); return false;">
+Реклама
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Анализ данных'); return false;">
+Анализ данных
+</div>
+</div>
+<div class="listing-description">
+<a href="./wiki/shewhart_control_card.html" class="no-external">Запустив рекламные кампании, неизбежно наступает момент анализа эффективности. И вот специалист создает отчет, как на графиках ниже. И что он видит?</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./wiki/shewhart_control_card.html" class="no-external">
+<div class="listing-date">
+9 апр. 2024 г.
+</div>
+<div class="listing-author">
+Александр Коршаков
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="3" data-categories="Реклама,Анализ данных" data-listing-date-sort="1711670400000" data-listing-file-modified-sort="1723809629100" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="17" data-listing-word-count-sort="3384">
+<div class="thumbnail">
+<p><a href="./wiki/ds_places_analysis.html" class="no-external"></a></p><a href="./wiki/ds_places_analysis.html" class="no-external">
+<p class="card-img-top"><img src="wiki/ds_places_analysis_files/figure-html/unnamed-chunk-11-1.png"  class="thumbnail-image card-img"/></p>
+</a><p><a href="./wiki/ds_places_analysis.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./wiki/ds_places_analysis.html" class="no-external">Экономим рекламный бюджет с помощью кластерного анализа площадок в рекламных сетях Яндекса</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./wiki/ds_places_analysis.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('Реклама'); return false;">
+Реклама
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Анализ данных'); return false;">
+Анализ данных
+</div>
+</div>
+<div class="listing-description">
+<a href="./wiki/ds_places_analysis.html" class="no-external">Кластерный анализ позволит выявить группы (кластеры) площадок с различными характеристиками, при этом не дожидаясь набора статистически значимых данных. Например, с помощью…</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./wiki/ds_places_analysis.html" class="no-external">
+<div class="listing-date">
+29 мар. 2024 г.
+</div>
+<div class="listing-author">
+Александр Коршаков
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="4" data-categories="Анализ данных" data-listing-date-sort="1710892800000" data-listing-file-modified-sort="1723788634995" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="22" data-listing-word-count-sort="4220">
+<div class="thumbnail">
+<p><a href="./wiki/call_analysis.html" class="no-external"></a></p><a href="./wiki/call_analysis.html" class="no-external">
+<p class="card-img-top"><img src="wiki/call_analysis_files/figure-html/unnamed-chunk-9-1.png"  class="thumbnail-image card-img"/></p>
+</a><p><a href="./wiki/call_analysis.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./wiki/call_analysis.html" class="no-external">Как проверить качество входящих звонков из рекламных кампаний, если нет CRM-системы и времени прослушивать каждый звонок</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./wiki/call_analysis.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('Анализ данных'); return false;">
+Анализ данных
+</div>
+</div>
+<div class="listing-description">
+<a href="./wiki/call_analysis.html" class="no-external">Главная цель — понять качество входящих звонков из платной выдачи поисковых систем (рекламные кампании в Я.Директ) без привязки к CRM системе для косвенной оценки…</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./wiki/call_analysis.html" class="no-external">
+<div class="listing-date">
+20 мар. 2024 г.
+</div>
+<div class="listing-author">
+Александр Коршаков
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+Нет подходящих элементов
+</div>
+</div></main> <!-- /main -->
 <!-- Google Tag Manager (noscript) -->
-
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KB6J3FZF" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-
 <!-- End Google Tag Manager (noscript) -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -241,7 +459,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const onCopySuccess = function(e) {
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -273,29 +502,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
   });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
-    });
-    clipboardModal.on('success', onCopySuccess);
-  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -303,7 +510,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {

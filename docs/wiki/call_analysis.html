@@ -2,12 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ru" xml:lang="ru"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.4.555">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Коршаков Александр">
+<meta name="description" content="Применяем метод статистической оценки для анализа эффективности входящиз звонков в компанию, если нет CRM-системы.">
 
-<title>Data Driven Marketing - Как проверить качество входящих звонков из рекламных кампаний, если нет CRM-системы и времени прослушивать каждый звонок</title>
+<title>Как проверить качество входящих звонков из рекламных кампаний</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,6 +32,9 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<link href="..//favicon/favicon_ihourglass.jpg" rel="icon" type="image/jpeg">
+<script src="../site_libs/cookie-consent/cookie-consent.js"></script>
+<link href="../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -39,13 +44,21 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "Поиск не дал результатов",
     "search-matching-documents-text": "Результаты поиска",
@@ -54,15 +67,41 @@ ul.task-list li input[type="checkbox"] {
     "search-more-match-text": "дополнительный результат в этом документе",
     "search-more-matches-text": "дополнительных результата(-ов) в этом документе",
     "search-clear-button-title": "Очистить",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Отменить",
     "search-submit-button-title": "Найти",
     "search-label": "Поиск"
   }
 }</script>
 
+<script type="text/javascript" charset="UTF-8">
+document.addEventListener('DOMContentLoaded', function () {
+cookieconsent.run({
+  "notice_banner_type":"simple",
+  "consent_type":"implied",
+  "palette":"light",
+  "language":"en",
+  "page_load_consent_levels":["strictly-necessary","functionality","tracking","targeting"],
+  "notice_banner_reject_button_hide":false,
+  "preferences_center_close_button_hide":false,
+  "website_name":""
+  ,
+"language":"ru"
+  });
+});
+</script> 
+  
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-KB6J3FZF');</script>
+<!-- End Google Tag Manager -->
+<link href="../site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
 <script src="../site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
 <link href="../site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-<script src="../site_libs/datatables-binding-0.31/datatables.js"></script>
+<script src="../site_libs/datatables-binding-0.33/datatables.js"></script>
 <script src="../site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <link href="../site_libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
 <link href="../site_libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
@@ -75,18 +114,45 @@ ul.task-list li input[type="checkbox"] {
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="floating nav-fixed">
+<body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../index.html">
-    <span class="navbar-title">Data Driven Marketing</span>
+    <span class="navbar-title">ihourglass</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Поиск"></div>
@@ -96,33 +162,35 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html" rel="" target="">
- <span class="menu-text">Главная</span></a>
+    <a class="nav-link" href="../index.html"> <i class="bi bi-house" role="img">
+</i> 
+<span class="menu-text"> </span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../about/korshakov.html" rel="" target="">
- <span class="menu-text">О себе</span></a>
+    <a class="nav-link" href="../services.html"> 
+<span class="menu-text">Услуги</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../wiki.html" rel="" target="">
- <span class="menu-text">Wiki</span></a>
+    <a class="nav-link" href="../wiki.html"> 
+<span class="menu-text">Wiki</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../contacts.html" rel="" target="">
- <span class="menu-text">Контакты</span></a>
+    <a class="nav-link" href="../contacts.html"> 
+<span class="menu-text">Контакты</span></a>
   </li>  
 </ul>
-            <div class="quarto-navbar-tools ms-auto">
-</div>
           </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
-    <nav id="TOC" role="doc-toc" class="toc-active">
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Содержание</h2>
    
   <ul>
@@ -138,10 +206,6 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#вывод-по-текстовому-анализу" id="toc-вывод-по-текстовому-анализу" class="nav-link" data-scroll-target="#вывод-по-текстовому-анализу">Вывод по текстовому анализу</a></li>
   </ul>
 </nav>
-</nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -149,17 +213,26 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Как проверить качество входящих звонков из рекламных кампаний, если нет CRM-системы и времени прослушивать каждый звонок</h1>
-</div>
+  <div class="quarto-categories">
+    <div class="quarto-category">Анализ данных</div>
+  </div>
+  </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Автор</div>
+    <div class="quarto-title-meta-contents">
+             <p>Александр Коршаков </p>
+          </div>
+  </div>
     
     <div>
     <div class="quarto-title-meta-heading">Дата публикации</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">20 среда март 2024</p>
+      <p class="date">20 марта 2024 г.</p>
     </div>
   </div>
   
@@ -167,7 +240,9 @@ ul.task-list li input[type="checkbox"] {
   </div>
   
 
+
 </header>
+
 
 <!-- Чанк для пред. настроек -->
 <!-- END -->
@@ -195,10 +270,11 @@ ul.task-list li input[type="checkbox"] {
 <section id="загрузка-и-подготовка-данных" class="level2">
 <h2 class="anchored" data-anchor-id="загрузка-и-подготовка-данных">Загрузка и подготовка данных</h2>
 <p>Загрузим таблицу с данными, которая содержит транскрибацию входящих звонков.</p>
+<div class="cell">
 <div class="cell-output-display">
-
-<div class="datatables html-widget html-fill-item" id="htmlwidget-7413a79aa6d35499ac2c" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-7413a79aa6d35499ac2c">{"x":{"filter":"none","vertical":false,"data":[["organic","organic","organic","organic","organic"],["Все регионы","Все регионы","Все регионы","Все регионы","Все регионы"],["2023-04-12T14:55:02Z","2023-04-12T14:55:02Z","2023-04-12T14:55:02Z","2023-04-12T14:55:02Z","2023-04-12T14:55:02Z"],[18269572,18269572,18269572,18269572,18269572],["повторный","повторный","повторный","повторный","повторный"],["Клиент","Клиент","Оператор","Клиент","Оператор"],["05:40","05:43","05:45","05:52","05:56"],["Угу.","А почему?","Потому что мы территориально закреплены Краснодарскому краю и Республики Адыгея.","А мы в Крыму не можем купить почему то.","Давайте я запишу ваш номер телефона."]],"container":"<table class=\"compact nowrap\">\n  <thead>\n    <tr>\n      <th>Медиум<\/th>\n      <th>Город<\/th>\n      <th>Дата<\/th>\n      <th>ID звонка<\/th>\n      <th>Первичный звонок<\/th>\n      <th>Канал<\/th>\n      <th>Время<\/th>\n      <th>Фраза<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"dom":"Btpli","language":{"url":"//cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json"},"columnDefs":[{"className":"dt-right","targets":3},{"name":"Медиум","targets":0},{"name":"Город","targets":1},{"name":"Дата","targets":2},{"name":"ID звонка","targets":3},{"name":"Первичный звонок","targets":4},{"name":"Канал","targets":5},{"name":"Время","targets":6},{"name":"Фраза","targets":7}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-3302cff85bb19b321e17" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-3302cff85bb19b321e17">{"x":{"filter":"none","vertical":false,"data":[["organic","organic","organic","organic","organic"],["Все регионы","Все регионы","Все регионы","Все регионы","Все регионы"],["2023-04-12T14:55:02Z","2023-04-12T14:55:02Z","2023-04-12T14:55:02Z","2023-04-12T14:55:02Z","2023-04-12T14:55:02Z"],[18269572,18269572,18269572,18269572,18269572],["повторный","повторный","повторный","повторный","повторный"],["Клиент","Клиент","Оператор","Клиент","Оператор"],["05:40","05:43","05:45","05:52","05:56"],["Угу.","А почему?","Потому что мы территориально закреплены Краснодарскому краю и Республики Адыгея.","А мы в Крыму не можем купить почему то.","Давайте я запишу ваш номер телефона."]],"container":"<table class=\"compact nowrap\">\n  <thead>\n    <tr>\n      <th>Медиум<\/th>\n      <th>Город<\/th>\n      <th>Дата<\/th>\n      <th>ID звонка<\/th>\n      <th>Первичный звонок<\/th>\n      <th>Канал<\/th>\n      <th>Время<\/th>\n      <th>Фраза<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"dom":"Btpli","language":{"url":"https:://cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json"},"columnDefs":[{"className":"dt-right","targets":3},{"name":"Медиум","targets":0},{"name":"Город","targets":1},{"name":"Дата","targets":2},{"name":"ID звонка","targets":3},{"name":"Первичный звонок","targets":4},{"name":"Канал","targets":5},{"name":"Время","targets":6},{"name":"Фраза","targets":7}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
 </div>
 <p><br></p>
 <p>Далее преобразуем таблицу для дальнейшего анализа.</p>
@@ -207,10 +283,11 @@ ul.task-list li input[type="checkbox"] {
 <li>проведем токенизацию слов для дальнейшего анализа</li>
 <li>приведем столбцы в нужный формат</li>
 </ul>
+<div class="cell">
 <div class="cell-output-display">
-
-<div class="datatables html-widget html-fill-item" id="htmlwidget-a251224012dfb849206b" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-a251224012dfb849206b">{"x":{"filter":"none","vertical":false,"data":[["organic","organic","organic","organic","organic"],["Все регионы","Все регионы","Все регионы","Все регионы","Все регионы"],["2023-04-12","2023-04-12","2023-04-12","2023-04-12","2023-04-12"],[18269572,18269572,18269572,18269572,18269572],["повторный","повторный","повторный","повторный","повторный"],["Клиент","Оператор","Оператор","Оператор","Оператор"],["01:57","01:57","01:57","02:00","02:00"],["трактор","примеру","трактору","спереди","поставить"],["15 Apr","15 Apr","15 Apr","15 Apr","15 Apr"],["3 Wed","3 Wed","3 Wed","3 Wed","3 Wed"],["18269572","18269572","18269572","18269572","18269572"],[100,101,102,103,104]],"container":"<table class=\"compact nowrap\">\n  <thead>\n    <tr>\n      <th>Медиум<\/th>\n      <th>Город<\/th>\n      <th>Дата<\/th>\n      <th>ID звонка<\/th>\n      <th>Первичный звонок<\/th>\n      <th>Канал<\/th>\n      <th>Время<\/th>\n      <th>Слово<\/th>\n      <th>Неделя<\/th>\n      <th>День<\/th>\n      <th>ID<\/th>\n      <th>N<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"dom":"Btpli","language":{"url":"//cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json"},"columnDefs":[{"className":"dt-right","targets":[3,11]},{"name":"Медиум","targets":0},{"name":"Город","targets":1},{"name":"Дата","targets":2},{"name":"ID звонка","targets":3},{"name":"Первичный звонок","targets":4},{"name":"Канал","targets":5},{"name":"Время","targets":6},{"name":"Слово","targets":7},{"name":"Неделя","targets":8},{"name":"День","targets":9},{"name":"ID","targets":10},{"name":"N","targets":11}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-e41b17dff651e6a6c26e" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-e41b17dff651e6a6c26e">{"x":{"filter":"none","vertical":false,"data":[["organic","organic","organic","organic","organic"],["Все регионы","Все регионы","Все регионы","Все регионы","Все регионы"],["2023-04-12","2023-04-12","2023-04-12","2023-04-12","2023-04-12"],[18269572,18269572,18269572,18269572,18269572],["повторный","повторный","повторный","повторный","повторный"],["Клиент","Оператор","Оператор","Оператор","Оператор"],["01:57","01:57","01:57","02:00","02:00"],["трактор","примеру","трактору","спереди","поставить"],["15 Apr","15 Apr","15 Apr","15 Apr","15 Apr"],["3 Wed","3 Wed","3 Wed","3 Wed","3 Wed"],["18269572","18269572","18269572","18269572","18269572"],[100,101,102,103,104]],"container":"<table class=\"compact nowrap\">\n  <thead>\n    <tr>\n      <th>Медиум<\/th>\n      <th>Город<\/th>\n      <th>Дата<\/th>\n      <th>ID звонка<\/th>\n      <th>Первичный звонок<\/th>\n      <th>Канал<\/th>\n      <th>Время<\/th>\n      <th>Слово<\/th>\n      <th>Неделя<\/th>\n      <th>День<\/th>\n      <th>ID<\/th>\n      <th>N<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"dom":"Btpli","language":{"url":"https:://cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json"},"columnDefs":[{"className":"dt-right","targets":[3,11]},{"name":"Медиум","targets":0},{"name":"Город","targets":1},{"name":"Дата","targets":2},{"name":"ID звонка","targets":3},{"name":"Первичный звонок","targets":4},{"name":"Канал","targets":5},{"name":"Время","targets":6},{"name":"Слово","targets":7},{"name":"Неделя","targets":8},{"name":"День","targets":9},{"name":"ID","targets":10},{"name":"N","targets":11}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
 </div>
 <p><br></p>
 <p>В итоге получили фрейм данных в котором фразы были разбиты на слова, при этом очищенный от стоп слов (предлоги, союзы, знаки препинания и т.п.)</p>
@@ -221,10 +298,19 @@ ul.task-list li input[type="checkbox"] {
 <blockquote class="blockquote">
 <p><strong>График: Активность по дням</strong></p>
 </blockquote>
-<p><img src="call_analysis_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
-<p>Стат данные к графику.</p>
+<div class="cell">
 <div class="cell-output-display">
-<table class="lightable-paper lightable-hover table" data-quarto-postprocess="true">
+<div>
+<figure class="figure">
+<p><img src="call_analysis_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Стат данные к графику.</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="lightable-paper lightable-hover caption-top table table-sm table-striped small" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
 <th style="text-align: right;" data-quarto-table-cell-role="th">mn</th>
@@ -253,11 +339,20 @@ ul.task-list li input[type="checkbox"] {
 
 
 </div>
+</div>
 <p><br></p>
 <blockquote class="blockquote">
 <p><strong>График: Активность по неделям</strong></p>
 </blockquote>
-<p><img src="call_analysis_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="call_analysis_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
 <p><strong>Вывод</strong></p>
 <p>На графике видим волнообразную структуру данных, которая согласуется с днями недели. Виден четкий тренд на увеличение кол-ва слов (синяя линия), об этом также свидетельствует положительный коэффициент корреляции <span class="math inline">\(R=0.14\)</span>. Это может говорить о том, что кол-во звонков со временем поступает больше.</p>
 <p>Также по красной линии тренда видно, что пик по кол-ву слов пришёлся на март и на вторую неделю апреля.</p>
@@ -267,7 +362,15 @@ ul.task-list li input[type="checkbox"] {
 <blockquote class="blockquote">
 <p><strong>График: Самые активные дни недели</strong></p>
 </blockquote>
-<p><img src="call_analysis_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="call_analysis_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
 <p><strong>Вывод</strong></p>
 <p>Самые активные дни недели с точки зрения употребления слов со среды по пятницу. Что согласуется с кол-вом поступающих звонков на эти дни. Самые не активные дни суббота и воскресенье.</p>
 <p><br></p>
@@ -278,21 +381,45 @@ ul.task-list li input[type="checkbox"] {
 <blockquote class="blockquote">
 <p><strong>График: сегменты в разрезе оператор / клиент</strong></p>
 </blockquote>
-<p><img src="call_analysis_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="call_analysis_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
 <p><strong>Вывод</strong></p>
 <p>На графике видно, что оператор использует почти в два раза больше слов, чем клиент. Возможно разница связан с работой автоответчка, а также с использованием операторами уточняющих слов.</p>
 <p><br></p>
 <blockquote class="blockquote">
 <p><strong>График: Тренд по словам по оператору и клиенту</strong></p>
 </blockquote>
-<p><img src="call_analysis_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="call_analysis_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
 <p><strong>Вывод</strong></p>
 <p>Наблюдаем положительный рост по кол-ву слов у оператора. У клиентов кол-во слов практически не изменяется. С учетом роста повторных звонков, возможно, приходится уделять больше внимание клиенту, который находится ближе к этапу сделки.</p>
 <p><br></p>
 <blockquote class="blockquote">
 <p><strong>График: Кол-во слов в разрезе каналов по параметру «повторный»</strong></p>
 </blockquote>
-<p><img src="call_analysis_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="call_analysis_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
 <p><strong>Вывод</strong></p>
 <p>Видно, что кол-во слов при повторном и первичном звонке отличается. Клиент и оператор используют больше слов при первичном звонке, при этом это на зависит от канала из которого пришел клиент, пропорция соблюдается.</p>
 <p><br></p>
@@ -304,7 +431,15 @@ ul.task-list li input[type="checkbox"] {
 <blockquote class="blockquote">
 <p><strong>График: Частотность слов в разрезе оператор - клиент</strong></p>
 </blockquote>
-<p><img src="call_analysis_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="call_analysis_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
 <p><strong>Вывод</strong></p>
 <p>У оператора мы видим ответ автоответчика, что объясняет почему оператор употребляет в два раза больше слов чем клиент. У клиента видим слова связанные с деятельностью компании. Первый признак совпадения интента.</p>
 <p>Сравним ключевые слова у клиентов из органического и платного трафика. Сравниваем именно с органическим трафиком потому что считаем, что из данного канала приходят наиболее релевантные клиенты по отношению к деятельности компании.</p>
@@ -312,8 +447,9 @@ ul.task-list li input[type="checkbox"] {
 <blockquote class="blockquote">
 <p><strong>Таблица: Минус-слова</strong></p>
 </blockquote>
+<div class="cell">
 <div class="cell-output-display">
-<table class="lightable-paper lightable-hover table" data-quarto-postprocess="true">
+<table class="lightable-paper lightable-hover caption-top table table-sm table-striped small" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
 <th style="text-align: left;" data-quarto-table-cell-role="th">Слово</th>
@@ -340,11 +476,20 @@ ul.task-list li input[type="checkbox"] {
 
 
 </div>
+</div>
 <p><br></p>
 <blockquote class="blockquote">
 <p><strong>График: Частотность слов по клиентам в разрезе каналов</strong></p>
 </blockquote>
-<p><img src="call_analysis_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="call_analysis_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
 <p><strong>Вывод</strong></p>
 <p>Визуально можно увидеть, что по частотности слов у клиентов из органического и платного трафика слова практически совпадают. Интересуют в первую очередь трактора, при этом в платном канале также интересуют погрузчики и оборудование. Клиенты интересуются наличием и запрашивают коммерческое предложение. Также в платном канале интересуются лизингом.</p>
 <p><br></p>
@@ -355,7 +500,15 @@ ul.task-list li input[type="checkbox"] {
 <blockquote class="blockquote">
 <p><strong>График: Пример ассоциативности ключевых слов</strong></p>
 </blockquote>
-<p><img src="call_analysis_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid" width="672"></p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="call_analysis_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
 <p><br></p>
 <p>На графике мы видим ключевые слова и ассоциированные слова на оси <span class="math inline">\(y\)</span>, а также видна сила корреляции по оси <span class="math inline">\(x\)</span>. Таким образом можно провести анализ запросов входящих звонков и дополнительно проверить, чем интересуются клиенты. В данном случаи запросы клиентов полностью совпадают с деятельностью компании.</p>
 <p>Также можно построить граф, где будут отображены кластеры слов и их взаимосвязь, что позволит взглянуть на картину с еще большего масштаба.</p>
@@ -363,7 +516,15 @@ ul.task-list li input[type="checkbox"] {
 <blockquote class="blockquote">
 <p><strong>Граф: Кластеры и ассоциативность между словами</strong></p>
 </blockquote>
-<p><img src="call_analysis_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid" width="672"></p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="call_analysis_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
 <p><strong>Вывод</strong></p>
 <p>На графе отображены взаимосвязи с силой выше <span class="math inline">\(0,06\)</span> иначе граф получается не разборчив. На графе можно увидеть кластеры и наиболее сильные взаимосвязи. Например, пара «коммерческое предложение» соединена темной толстой линией. Это означает сильную ассоциативную взаимосвязь между словами.</p>
 <p>Используя графы и таблицы можно найти главные интересы клиентов, что будет полезно для маркетологов, менеджеров по продажам и трафик менеджеров.</p>
@@ -375,7 +536,15 @@ ul.task-list li input[type="checkbox"] {
 <blockquote class="blockquote">
 <p><strong>График: Сравнение частотности слов у клиентов в разрезе каналов</strong></p>
 </blockquote>
-<p><img src="call_analysis_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid" width="960"></p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="call_analysis_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
 <p><strong>Вывод</strong></p>
 <p>Слова, близкие к пунктирной линии на графиках, имеют сходные частоты в обоих наборах текстов, в то время как те, которые находятся далеко от линии, встречаются чаще в одном наборе текстов, чем в другом.</p>
 <p>Например, слова «банк», «инн», «краснодаре», «погрузчик» встречаются чаще в платном канале (СРС), тогда как слова «доставка», «беларус», «вал» встречаются чаще в органическом трафике.</p>
@@ -383,9 +552,17 @@ ul.task-list li input[type="checkbox"] {
 <p>Обратим внимание, что множество слов распространяются на более низкие частоты (облако точек сосредоточено в нижнем левом углу графика). Эта характеристика указывают на то, что клиенты из обеих каналов используют большой объём низкочастотных слов при общении.</p>
 <p>Количественно оценим, насколько похожи и различаются эти наборы частот слов, используя корреляционный тест.</p>
 <p>Значение корреляции</p>
-<p>[1] “corr: 0.891777092174326”</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "corr: 0.891777092174326"</code></pre>
+</div>
+</div>
 <p>Значение p-value</p>
-<p>[1] “p-value: 5.74199052548605e-254”</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "p-value: 5.74199052548605e-254"</code></pre>
+</div>
+</div>
 <p><strong>Вывод</strong></p>
 <p>Тест показывает, что частота употребления слов сильно коррелирует между каналами. На это указывает коэффициент корреляции <span class="math inline">\(cor≈0,9\)</span> (при норме <span class="math inline">\(0,6\)</span> и чем ближе к <span class="math inline">\(1\)</span>, тем выше корреляция). При этом уровень достоверности теста высокий и явно ниже <span class="math inline">\(0,05\)</span> на это указывает <span class="math inline">\(p-value\)</span> с <span class="math inline">\(16\)</span> знаками после запятой. Т.е. клиенты из данных каналов используют сопоставимый по объему и смыслу слова.</p>
 <p>Также мы можем доказать схожесть набора текстовых данных через Закон Ципфа.</p>
@@ -407,7 +584,15 @@ ul.task-list li input[type="checkbox"] {
 <blockquote class="blockquote">
 <p><strong>График: Распределение частотности слов в разрезе каналов</strong></p>
 </blockquote>
-<p><img src="call_analysis_files/figure-html/unnamed-chunk-39-1.png" class="img-fluid" width="672"></p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="call_analysis_files/figure-html/unnamed-chunk-40-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
 <p><strong>Вывод</strong></p>
 <p>На графике, в обоих наборах данных видим длинные хвосты т.е. чрезвычайно редкие слова. График демонстрирует схожее распределение для каналов, с большим количеством слов, которые встречаются редко, и меньшим количеством слов, которые встречаются часто.</p>
 <p>Закон Ципфа визуализируется путем построения ранга по оси <span class="math inline">\(x\)</span> и частоты членов по оси <span class="math inline">\(y\)</span> в логарифмических масштабах. При построении графика таким образом, обратно пропорциональная зависимость будет иметь постоянный отрицательный наклон.</p>
@@ -415,7 +600,15 @@ ul.task-list li input[type="checkbox"] {
 <blockquote class="blockquote">
 <p><strong>График: Закон Ципфа</strong></p>
 </blockquote>
-<p><img src="call_analysis_files/figure-html/unnamed-chunk-41-1.png" class="img-fluid" width="672"></p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="call_analysis_files/figure-html/unnamed-chunk-42-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
 <p><strong>Вывод</strong></p>
 <p>Видим на графике, что оба текстовых набора данных по каналам очень похожи между собой и что зависимость между рангом и частотой имеет отрицательный наклон (чем выше ранг, тем ниже частотность <span class="math inline">\(TF\)</span>).</p>
 <p>Особое внимание на пунктирную линию. Это значение степенного закона средней части набора данных для слов с рангом от <span class="math inline">\(10\)</span> до <span class="math inline">\(500\)</span>. Мы видим, что основная масса слов лежит на пунктирной линии, при этом обе линии накладываются друг на друга. Что говорит о высокой схожести набора данных. Это доказывает, что обращения из платного канала схожи с обращениями из органической выдачи.</p>
@@ -434,6 +627,9 @@ ul.task-list li input[type="checkbox"] {
 </section>
 
 </main> <!-- /main -->
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KB6J3FZF" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -513,10 +709,34 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+          // default icon
+          link.classList.add("external");
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -526,8 +746,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -539,7 +768,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -583,6 +935,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -608,6 +961,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -665,23 +1044,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       });
     }
   }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-          // target, if specified
-          link.setAttribute("target", "_blank");
-      }
-    }
 });
 </script>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Copyright 2024, Коршаков Александр</p>
+</div>   
+    <div class="nav-footer-center">
+
+<div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+    <div class="nav-footer-right">
+<p>Сайт создан с помощью <a href="https://www.r-project.org/about.html" target="_blank"><i class="fa-brands fa-r-project" title="R Project" aria-label="r-project"></i></a> and <a href="https://quarto.org/" target="_blank">Quarto</a></p>
+</div>
+  </div>
+</footer>
+
 
 
 

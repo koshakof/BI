@@ -2,6 +2,8 @@
 title: 'Применяем ГОСТ стандарт РФ «Контрольные карты Шухарта» для оптимизация рекламных кампаний и других источников трафика'
 author: "Александр Коршаков"
 
+categories: [Реклама, Анализ данных]
+
 date: "2024-04-09"
 date-format: long
 
@@ -30,6 +32,8 @@ execute:
   error: false
 ---
 
+<!-- Чанки для пред. настроек -->
+
 ```{r}
 #| label: setup
 #| cache: false
@@ -49,7 +53,7 @@ library(imputeTS)
 #| echo: false
 
 # путь
-file_path <- '~/GitHub/BI/wiki/data/'
+file_path <- '~/BI/wiki/data/'
 ```
 
 ```{r}
@@ -69,7 +73,17 @@ df <- vroom::vroom(
   select(Date:Bounces, Goals)
 ```
 
-</br>
+```{r include=FALSE}
+#|echo: false
+
+# настройки для отображения текста на кирилице
+library(showtext)
+showtext_opts(dpi = 200)
+showtext_auto()
+```
+
+<!-- END -->
+
 
 
 ## На что специалист смотрит в «Метрике»?
