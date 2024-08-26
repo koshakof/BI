@@ -1,18 +1,67 @@
 ---
 title: "Контакты"
-
+format:
+  html:
+    pagetitle: "Контакты | Hourglass"
+    description-meta: "Контакты специалиста в области маркетинга и рекламы Коршакова Александра."
+execute:
+  warning: false
+  message: false
+  error: false
+  echo: false
 editor_options: 
   chunk_output_type: console
 ---
 
-Александр Коршаков
+```{r}
+#| column: page
 
-По вопросам сотрудничества пишите:
+library(htmltools)
 
-- на e-mail: <i@akorshakov.ru>
+# создаем карточку
+html_card <- div(
+  style = "border-radius: 8px;
+           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+           background-color: #F7F9FC;
+           padding: 10px;
+           margin: 20px auto;
+           color: #666; 
+           font-size: 15px;",
+  
+  div(
+    style = "display: flex; justify-content: space-between;",
+    div(
+      style = "flex-basis: 100%; padding: 0 20px;",
+      h2("Александр Коршаков", style = "font-size: 24px; margin-top: 10px; margin-bottom: 20px;")
+      )
+    ),
+  
+  div(
+    style = "display: flex; justify-content: space-between;",
+    div(
+      style = "flex-basis: 10%; padding: 0 20px;",
+        img(
+          src = "img/me.jpg", 
+          style = "border-radius: 50%; display: block; margin: 0px; width: 80px; height: auto;"
+          )
+      ),
+    div(
+      style = "flex-basis: 90%; padding: 0 20px;",
+      p(style = "font-size: 18px; margin-top: 10px; margin-bottom: 20px;",
+        'По вопросам сотрудничества пишите:',
+        br(),
+        HTML('на e-mail: <a href="mailto:i@akorshakov.ru">i@akorshakov.ru</a>'),
+        br(),
+        strong('Telegram:'), HTML('<a href="https://t.me/a_korshakov" target="_blank">@a_korshakov</a>')
+        )
+      )
+    )
+  )
 
-- Telegram: <https://t.me/a_korshakov>
+browsable(tagList(html_card))
+```
 
+<br>
 
 ## Часы работы
 

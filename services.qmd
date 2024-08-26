@@ -1,5 +1,9 @@
 ---
 title: "Услуги"
+format:
+  html:
+    pagetitle: "Услуги | Hourglass"
+    description-meta: "Маркетинговые и рекламные услуги на основе данных"
 editor_options: 
   chunk_output_type: console
 ---

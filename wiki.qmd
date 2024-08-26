@@ -7,8 +7,6 @@ listing:
   categories: true
 format:
   html:
-    title-prefix: "Hourglass"
-    pagetitle: "Статьи и примеры работы"
+    pagetitle: "Статьи и примеры работы | Hourglass"
     description-meta: "Раздел статей и примеры работ Коршакова Александра"
-    author-meta: "Коршаков Александр"
 ---

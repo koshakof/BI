@@ -7,8 +7,6 @@ listing:
   categories: true
 format:
   html:
-    title-prefix: "Hourglass"
-    pagetitle: "Кейсы"
+    pagetitle: "Кейсы | Hourglass"
     description-meta: "Примеры работ Коршакова Александра"
-    author-meta: "Коршаков Александр"
 ---
