@@ -1,0 +1,414 @@
+---
+title: "Мы вас не слышим, или почему продавать слуховые аппараты через сайт — так себе идея"
+subtitle: "Кейс в нише медицинских товаров"
+author: "Александр Коршаков"
+categories: [Медицинские товары]
+date: "2024-08-26"
+date-format: long
+format:
+  html:
+    page-layout: article
+    toc: true
+    toc-location: right
+    fig-width: 10
+    fig-height: 6
+    pagetitle: "Кейс: Как продавать слуховые аппараты | Hourglass"
+    description-meta: "Кейс в нише продажи медицинских товаров"
+    date-meta: "2024-08-26"
+    author-meta: "Коршаков Александр"
+execute:
+  warning: false
+  message: false
+  error: false
+  echo: false
+editor_options:
+  chunk_output_type: console
+---
+
+```{r}
+library(htmltools)
+library(data.table)
+library(DT)
+library(ggplot2)
+```
+
+
+
+```{r}
+#| column: page
+
+# создаем карточку
+html_card <- div(
+  style = "border-radius: 8px;
+           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+           background-color: #F7F9FC;
+           padding: 10px;
+           margin: 20px auto;
+           color: #666; 
+           font-size: 15px;",
+  
+  div(
+    style = "display: flex; justify-content: space-between;",
+    div(
+      style = "flex-basis: 100%; padding: 0 20px;",
+      h2("Проект «МастерСлух»", style = "font-size: 24px; margin-top: 10px; margin-bottom: 20px;")
+      )
+    ),
+  
+  div(
+    style = "display: flex; justify-content: space-between;",
+    div(
+      style = "flex-basis: 20%; padding: 0 20px;",
+        img(
+          src = "img/mc_logo.png", 
+          style = "display: block; margin: 0 auto; width: 200px; height: auto;"
+          )
+      ),
+    
+    div(
+      style = "flex-basis: 80%; padding: 0 20px;",
+      p(
+        HTML(
+          'Заказчик — сеть медицинских центров <a href="https://mastersluh-krasnodar.ru/" target="_blank" style="color: inherit;">«МастерСлух»™</a>, занимающаяся диагностикой слуха и продажей слуховых аппаратов и аксессуаров к ним. Насчитывает 3 центра в Краснодаре и несколько центров по Краснодарскому краю.'
+          )
+        )
+      )
+    ),
+  
+  hr(style = "margin: 20px 20px;"),
+  
+  div(style = "display: flex; justify-content: space-between;",
+      
+      # column 1
+      div(
+        style = "flex-basis: 50%; padding: 0 20px;",  
+        p(strong("Задача")), 
+        p("Разработать стратегию привлечения заявок на покупку медицинских товаров из платных источников на основе вводных данных от клиента и ситуационного анализа."),
+        p(strong("Решение")),
+        p("Запуск рекламных кампаний в Директ и привлечение пациентов на услуги с дальнейшей продажей слуховых аппаратов клиенту по назначению врача.")
+        ),
+      
+      # column 2
+      div(
+        style = "flex-basis: 50%; padding: 0 20px;", 
+        p(strong("Результат")),
+        p(strong("400+"), "— обращений с сайта за весь период;"),
+        p(strong("600₽ - 1 900₽"), "— диапазон контольных границ по стоимости обращения (CPA) в пределаг одной сигмы;"),
+        p("контрольные границы по обращениям в пределах ± 1 сигмы:", strong("6 - 14"), "заявок в неделю;"),
+        p(strong("≈ 10%")," — конверсия сайта из пришедших на сайт по рекламной кампании на поиске;"),
+        p(strong("≈ 0,7%")," — конверсия сайта из пришедших на сайт по рекламной кампании в РСЯ.")
+        )
+      ),
+  
+  hr(style = "margin: 20px 20px;"),
+
+  div(style = "display: flex; justify-content: space-between;",  
+      div( style = "flex-basis: 100%; padding: 0 20px;",
+           p(strong("ИТ"), ": Сайт на Битрикс, колл-трекинг, GTM, Я.Метрика, API Директ, язык программирования R и Google таблицы для автоотчетов, контрольные карты Шухарта"),
+           p(strong("Срок"), ": 14 месяцев")
+           )
+      )
+  )
+
+browsable(tagList(html_card))
+```
+
+</br>
+
+## О проекте
+
+Разберем кейс в нише слуховых аппаратов. Далее расскажем почему продавать аппараты напрямую пациентам было не очень хорошей идеей, и к каким выводам мы пришли после сопровождения рекламных кампаний в Директе в течении года.
+
+
+### Ситуация
+
+Клиент поставил следующие задачи:
+
+* привлечь новых клиентов;
+* получить больше заявок;
+* увеличить продажи слуховых аппаратов.
+
+На старте у компании уже был готов сайт с товарами и услугами, но слуховые аппараты не продавались напрямую — клиенты могли отправить форму обратной связи для получения консультации по интересующему артиклу.
+
+На сайте был установлен счётчик Метрики, но цели не были настроены. Также не была установлена связь между Метрикой и CRM-системой. Бюджет компании был жёстко ограничен.
+
+
+### Цель
+
+Разработать стратегию привлечения пациентов с платных источников, исходя из вводных данных от клиента и ситуационного анализа. Рассчитать прогнозные KPI и использовать их в качестве реперных точек до момента накопления статистически значимых данных проекта.
+
+
+### Действия
+
+Провели ситуационный анализ и на основе данных сформулировали гипотезы по будущей стратегии и тактике привлечения клиентов. Также установили прогнозные KPI с помощью дискретного распределения Пуассона в качестве реперных точек. Было определено, что из Яндекс Директ при текущих бюджетах с вероятностью 90% возможно привлечь от 8 до 22 (в среднем 15) первичных обращений в месяц и примерно такое же кол-во обращений из Google Ads.
+
+
+```{r}
+#| column: page
+
+html_card_coment <- div(
+  style = "border-radius: 8px;
+           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+           background-color: #F7F9FC;
+           padding: 10px;
+           margin: 20px auto;
+           color: #666; 
+           font-size: 15px;",
+  div(
+    style = "display: flex; justify-content: space-between;",
+    div(
+      style = "flex-basis: 10%; padding: 0 20px;",
+        img(
+          src = "img/korshakov.jpg", 
+          style = "border-radius: 50%; display: block; margin: 0px; width: 80px; height: auto;"
+          )
+      ),
+    
+    div(
+      style = "flex-basis: 90%; padding: 0 20px;",
+      p(
+        strong("Александр Коршаков,"), 
+        br(),
+        "Руководитель проекта", 
+        style = "font-size: 18px; margin-top: 10px; margin-bottom: 20px;"
+        )
+      )
+    ),
+  
+  hr(),
+  
+  div(style = "display: flex; justify-content: space-between;",
+      div(
+        style = "flex-basis: 100%; padding: 0 20px;",
+        p(
+          "В работе я использую фреймворк SOSTAC для планирования и проведения маркетинговых кампаний. Сначала проводим ситуационный анализ, чтобы понять текущую ситуацию и определить возможности для улучшения. Затем определяем ключевые показатели эффективности (KPI), разрабатываем стратегию и тактику, а также контролируем реализацию стратегии."
+          )
+        )
+      )
+  )
+
+browsable(tagList(html_card_coment))
+```
+
+Затем создали рекламные кампании в соответствии с нашей стратегией, настроили аналитику и запустили кампании. Однако мы отказались от рекламы в Google Ads, так как не хватало бюджетов на обе системы.
+
+Рекламные кампании состояли из торговых рекламных кампаний, где использовались фиды данных и ключевые слова, относящиеся к вендорам и маркам слуховых аппаратов, в качестве таргетинга. Также была настроена брендовая рекламная кампания.
+
+После первого месяца работы мы получили 15 первичных обращений через звонки, формы и чаты. Это соответствовало нашим прогнозам. Однако основным источником лидов была брендовая рекламная кампания.
+
+```{r}
+
+# создаем таблицу с данными
+july_dt <- data.table(
+  Месяц = "Июль",
+  "Рабочих дней" = 31,
+  Клики = 500,
+  Обращений = 15,
+  "CR, %" = 3
+  )
+
+# выводим табличные данные через библиотеку DT
+datatable(
+  july_dt,
+  rownames = FALSE,
+  class   = 'display compact nowrap',
+  caption = htmltools::tags$caption(
+    style = 'caption-side: top; text-align: left; color: gray;', 
+    htmltools::p('Таблица: Итоги работы РК в Июле', style = "font-size: 16px; font-family: system-ui")),
+  options = list(
+    dom        = 't',
+    language   = list(url = 'https://cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json')
+  ))
+
+```
+
+</br>
+
+Нас это не устраивало, и мы отказались от брендовой РК. Далее до конца года мы искали различные комбинации таргетов и рекламных кампаний, однако кампании сначала давали результат, но потом быстро «затухали».  
+
+В сентябре 2023 была утверждена новая группа гипотез, предполагающая фокусирование на привлечение пациентов на те услуги, которые в дальнейшем приведут к продаже слуховых аппаратов. Были созданы и подключены соответствующие РК, а РК на основе фидов были остановлены.
+
+```{r}
+#| column: body-outset
+
+# создаем таблицу с данными
+result_dt <- data.table(
+  Month = factor(month.abb[7:12], levels = c(month.abb[7:12])),
+  Goals = c(15, 22, 12, 23, 28, 17)
+  )
+
+# создадим график
+ggplot(result_dt, aes(x = Month, y = Goals)) +
+  geom_bar(stat = "identity", show.legend = FALSE, fill = "#b290fc")+
+  geom_hline(
+    yintercept = mean(result_dt[["Goals"]]) + sd(result_dt[["Goals"]]),
+    colour = "gray50",
+    linetype = 2,
+    linewidth = .3
+    )+
+  geom_hline(
+    yintercept = mean(result_dt[["Goals"]]) - sd(result_dt[["Goals"]]),
+    colour = "gray50",
+    linetype = 2,
+    linewidth = .3
+    )+
+  theme_minimal()+
+  labs(
+    title = "Plot: Achieving goals in 2023 from the Direct"
+    ) +
+  theme(
+    plot.title = element_text(
+      family = "roboto", 
+      colour = "gray40", 
+      size = 14,
+      margin = ggplot2::margin(
+        t = 0.3,
+        r = 0.0, 
+        b = 0.5,
+        l = 0.0, 
+        "cm")),
+    axis.title = element_text(family = "roboto", colour = "gray40", size = 12),
+    axis.text = element_text(family = "roboto", colour = "gray40", size = 12),
+    panel.grid = element_blank(),
+    plot.margin = ggplot2::margin(
+        t = 0.3,
+        r = 0.3, 
+        b = 0.3,
+        l = 0.3, 
+        "cm"
+        )
+    )
+
+```
+
+Сначала компания не справлялась с поставленными задачами и не достигала целей. Однако в последующие месяцы принятые меры по её оптимизации начали приносить результаты.
+
+В целом рабочие границы по достижению целей в 2023 году составляли от 14 до 25 обращений в месяц.
+
+
+## Результат
+
+Перебрав множество различных комбинаций, на данный момент в проекте работает две рекламные кампании в «Директ». Одна на поиске и одна в РСЯ. При этом мы продолжаем обучать рекламную систему на микроконверсиях, что даёт стабильность и хорошие результаты.
+
+
+```{r}
+#| column: body-outset
+
+# создаем таблицу с данными
+ccsh_dt <- data.table(
+  Goals = c(28, 31, 48, 36, 75, 39, 43),
+  Month_num = 1:7  # Добавляем числовую ось для работы с geom_ribbon
+  )
+
+ggplot(ccsh_dt, aes(Month_num, Goals)) +
+  geom_ribbon(
+    aes(
+      ymin = mean(ccsh_dt[["Goals"]]) - sd(ccsh_dt[["Goals"]]), 
+      ymax = mean(ccsh_dt[["Goals"]]) + sd(ccsh_dt[["Goals"]])
+      ),
+    fill = '#b290fc',
+    alpha = .2
+    ) +
+   geom_ribbon(
+    aes(
+      ymin = mean(ccsh_dt[["Goals"]]) - 2*sd(ccsh_dt[["Goals"]]), 
+      ymax = mean(ccsh_dt[["Goals"]]) + 2*sd(ccsh_dt[["Goals"]])
+      ),
+    fill = '#b290fc',
+    alpha = .2
+    ) +
+  geom_line(color = "#ff79c6", alpha = 0.5)+
+  geom_point(color = "white", size = 3)+
+  geom_point(color = "#ff79c6", size = 2)+
+  scale_x_continuous(breaks = 1:7, labels = month.abb[1:7])+
+  scale_y_continuous(limits = c(0, NA))+ 
+  theme_minimal()+
+  labs(
+    title = "Plot: Goals by month",
+    x = NULL
+    ) +
+  theme(
+    plot.title = element_text(
+      family = "roboto", 
+      colour = "gray40", 
+      size = 14,
+      margin = ggplot2::margin(
+        t = 0.3,
+        r = 0.0, 
+        b = 0.5,
+        l = 0.0, 
+        "cm")),
+    axis.title = element_text(family = "roboto", colour = "gray40", size = 12),
+    axis.text = element_text(family = "roboto", colour = "gray40", size = 12),
+    panel.grid.minor = element_blank(),
+    panel.grid.major.y = element_blank(),
+    panel.background = element_rect(fill = "#f9fbfd", colour = "white"),
+    plot.margin = ggplot2::margin(
+        t = 0.3,
+        r = 0.3, 
+        b = 0.3,
+        l = 0.3, 
+        "cm"
+        )
+    )
+
+```
+
+В итоге компания получает от 6 до 14 целевых обращений с сайта в неделю. При этом система привлечение лидов находится в управляемом состоянии и работает стабильно.
+
+```{r}
+#| column: page
+
+html_card_coment_2 <- div(
+  style = "border-radius: 8px;
+           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+           background-color: #F7F9FC;
+           padding: 10px;
+           margin: 20px auto;
+           color: #666; 
+           font-size: 15px;",
+  div(
+    style = "display: flex; justify-content: space-between;",
+    div(
+      style = "flex-basis: 10%; padding: 0 20px;",
+        img(
+          src = "img/korshakov.jpg", 
+          style = "border-radius: 50%; display: block; margin: 0px; width: 80px; height: auto;"
+          )
+      ),
+    
+    div(
+      style = "flex-basis: 90%; padding: 0 20px;",
+      p(
+        strong("Александр Коршаков,"), 
+        br(),
+        "Руководитель проекта", 
+        style = "font-size: 18px; margin-top: 10px; margin-bottom: 20px;"
+        )
+      )
+    ),
+  
+  hr(),
+  
+  div(style = "display: flex; justify-content: space-between;",
+      div(
+        style = "flex-basis: 100%; padding: 0 20px;",
+        p(
+          "Лучшим решением в данном проекте было таргетироваться на людей, заинтересованных в услугах, а не в покупке слуховых аппаратов. Использование слуховых аппаратов предполагает, что пациент сначала посетит врача, который проведет нужные тесты и подберет лучший вариант устройства. Никто не будет покупать слуховой аппарат без консультации с врачом."),
+          p(HTML(
+            "Второе хорошее решение — это обучить рекламную систему на микроконверсиях. Причиной стало то, что Директу не хватало сигналов для обучения стратегии на стандартных целях. Это приводило к неконтролируемым, и соответственно не управляемым результатам. Сейчас показатели стабильны и дают возможность оптимизировать кампанию, используя <a href='/wiki/shewhart_control_card.html' target='_blank'>контрольные карты Шухарта.</a>"))
+        )
+      )
+  )
+
+browsable(tagList(html_card_coment_2))
+```
+
+
+Далее я планирую продолжать работу по увеличению кол-ва обращений в рамках бюджета и сокращению стоимости обращения.
+
+:::{.column-page .callout-important title="Есть проект, в котором я буду полезен?"}
+- Обращайтесь! [Контакты](/contacts.html)
+
+- Подписывайтесь на мой ТГ-канал [DDM & Ads](https://t.me/data_driven_ads)
+:::

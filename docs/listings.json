@@ -8,5 +8,11 @@
       "/wiki/ds_places_analysis.html",
       "/wiki/call_analysis.html"
     ]
+  },
+  {
+    "listing": "/cases.html",
+    "items": [
+      "/cases/master_slyh_case.html"
+    ]
   }
 ]

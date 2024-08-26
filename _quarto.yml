@@ -8,7 +8,7 @@ project:
 
 website:
   favicon: /favicon/favicon_ihourglass.jpg
-  title: "ihourglass"
+  title: "Hourglass"
   description: "Маркетинг, основанный на данных. Реклама и аналитика в интернете"
   navbar:
     left:
@@ -17,6 +17,8 @@ website:
         text: " "
       - href: services.qmd
         text: "Услуги"
+      - href: cases.qmd
+        text: "Кейсы"  
       - href: wiki.qmd
         text: "Wiki"
       - href: contacts.qmd

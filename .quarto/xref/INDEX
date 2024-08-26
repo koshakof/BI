@@ -115,5 +115,8 @@
   },
   "wiki/shewhart_control_card.qmd": {
     "shewhart_control_card.html": "4d7b46cc"
+  },
+  "cases/master_slyh_case.qmd": {
+    "master_slyh_case.html": "25936b1d"
   }
 }

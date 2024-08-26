@@ -1,19 +1,14 @@
 ---
 title: "Wiki"
-
 listing:
   contents: wiki/
   sort: "date desc"
   type: default
   categories: true
-
 format:
   html:
-    title-prefix: "ihourglass"
+    title-prefix: "Hourglass"
     pagetitle: "Статьи и примеры работы"
     description-meta: "Раздел статей и примеры работ Коршакова Александра"
     author-meta: "Коршаков Александр"
-
-editor_options: 
-  chunk_output_type: console
 ---

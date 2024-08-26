@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Коршаков Александр">
+<meta name="description" content="Примеры работ Коршакова Александра">
 
-<title>Hourglass - Маркетинг и реклама, основанные на данных</title>
+<title>Кейсы</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,11 +33,14 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href=".//favicon/favicon_ihourglass.jpg" rel="icon" type="image/jpeg">
+<script src="site_libs/quarto-listing/list.min.js"></script>
+<script src="site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="site_libs/cookie-consent/cookie-consent.js"></script>
 <link href="site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
@@ -70,6 +75,35 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Поиск"
   }
 }</script>
+<script>
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-listing .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-date','listing-title','listing-author','listing-subtitle','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      
+      searchColumns: ["listing-date","listing-title","listing-author","listing-subtitle","listing-image","listing-description","listing-categories"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
 
 <script type="text/javascript" charset="UTF-8">
 document.addEventListener('DOMContentLoaded', function () {
@@ -96,11 +130,40 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-KB6J3FZF');</script>
 <!-- End Google Tag Manager -->
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-fixed fullcontent">
+<body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -118,7 +181,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> <i class="bi bi-house" role="img">
+    <a class="nav-link" href="./index.html"> <i class="bi bi-house" role="img">
 </i> 
 <span class="menu-text"> </span></a>
   </li>  
@@ -127,7 +190,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <span class="menu-text">Услуги</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./cases.html"> 
+    <a class="nav-link active" href="./cases.html" aria-current="page"> 
 <span class="menu-text">Кейсы</span></a>
   </li>  
   <li class="nav-item">
@@ -149,37 +212,75 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        
+    <h5 class="quarto-listing-category-title">Категории</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">Все <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Медицинские товары">Медицинские товары <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
-<div class="quarto-about-trestles content">
-  <div class="about-entity">
-    <img src="img/me.jpg" class="about-image
-  round " style="height: 20em; width: 20em;">
+<main class="content" id="quarto-document-content">
+
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Маркетинг и реклама, основанные на данных</h1>
+<h1 class="title">Кейсы</h1>
 </div>
+
+
+
 <div class="quarto-title-meta">
+
+    
+  
+    
   </div>
+  
+
+
 </header>
-    <div class="about-links">
-  <a href="https://t.me/a_korshakov" class="about-link" rel="" target="_blank">
-    <i class="bi bi-telegram"></i>
-     <span class="about-link-text">Telegram</span>
-  </a>
-</div>
-  </div>
-  <div class="about-contents"><main class="content" id="quarto-document-content">
-<p>Меня зовут Александр, я из Краснодара. Работаю в сфере маркетинга и рекламы с 2017 года.</p>
-<p>Специализируюсь на привлечении новых клиентов для вашего бизнеса. Для этого я использую маркетинговые стратегии и настраиваю рекламные кампании на основе данных.</p>
-<p>С 2021 года работаю как самозанятый. Сотрудничаю с маркетинговыми и рекламными агентствами, а также со специалистами и бизнесами в сфере B2B и B2C.</p>
-<p>Если вам интересно узнать больше о моих услугах и подходе, смотрите подробную презентацию.</p>
-<p><a href="./about/korshakov.html" target="_blank">Презентация: Коршаков Александр</a></p>
 
 
-</main></div>
+
+
+
+
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-categories="Медицинские товары" data-listing-date-sort="1724371200000" data-listing-file-modified-sort="1724667742966" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="15" data-listing-word-count-sort="2858">
+<div class="thumbnail">
+<p><a href="./cases/master_slyh_case.html" class="no-external"></a></p><a href="./cases/master_slyh_case.html" class="no-external">
+<p class="card-img-top"><img src="cases/img/mc_logo.png"  class="thumbnail-image card-img"/></p>
+</a><p><a href="./cases/master_slyh_case.html" class="no-external"></a></p>
 </div>
- <!-- /main -->
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./cases/master_slyh_case.html" class="no-external">Мы вас не слышим, или почему продавать слуховые аппараты через сайт — так себе идея</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./cases/master_slyh_case.html" class="no-external">Кейс в нише медицинских товаров</a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('Медицинские товары'); return false;">
+Медицинские товары
+</div>
+</div>
+<div class="listing-description">
+<a href="./cases/master_slyh_case.html" class="no-external">Заказчик — сеть медицинских центров «МастерСлух»™, занимающаяся диагностикой слуха и продажей слуховых аппаратов и аксессуаров к ним. Насчитывает 3 центра в Краснодаре и…</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./cases/master_slyh_case.html" class="no-external">
+<div class="listing-date">
+23 авг. 2024 г.
+</div>
+<div class="listing-author">
+Александр Коршаков
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+Нет подходящих элементов
+</div>
+</div></main> <!-- /main -->
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KB6J3FZF" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
@@ -203,6 +304,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
   const isCodeAnnotation = (el) => {
     for (const clz of el.classList) {
       if (clz.startsWith('code-annotation-')) {                     

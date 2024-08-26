@@ -1,0 +1,14 @@
+---
+title: "Кейсы"
+listing:
+  contents: cases/
+  sort: "date desc"
+  type: default
+  categories: true
+format:
+  html:
+    title-prefix: "Hourglass"
+    pagetitle: "Кейсы"
+    description-meta: "Примеры работ Коршакова Александра"
+    author-meta: "Коршаков Александр"
+---
