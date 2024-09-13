@@ -7,6 +7,7 @@ project:
     - "*.qmd"
 
 website:
+  open-graph: true
   favicon: /favicon/favicon_ihourglass.jpg
   title: "Hourglass"
   description: "Маркетинг, основанный на данных. Реклама и аналитика в интернете"

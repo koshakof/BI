@@ -32,10 +32,10 @@ html_card <- div(
     style = "display: flex; justify-content: space-between;",
     div(
       style = "flex-basis: 100%; padding: 0 20px;",
-      h2("Александр Коршаков", style = "font-size: 24px; margin-top: 10px; margin-bottom: 20px;")
+      p(strong("Александр Коршаков — специалист в области маркетинга, основанного на данных"), style = "font-size: 20px; margin-bottom: 0px;")
       )
     ),
-  
+  hr(),
   div(
     style = "display: flex; justify-content: space-between;",
     div(
@@ -46,8 +46,8 @@ html_card <- div(
           )
       ),
     div(
-      style = "flex-basis: 90%; padding: 0 20px;",
-      p(style = "font-size: 18px; margin-top: 10px; margin-bottom: 20px;",
+      style = "flex-basis: 90%; padding: 0px 20px 0px 0px;",
+      p(style = "font-size: 18px;",
         'По вопросам сотрудничества пишите:',
         br(),
         HTML('на e-mail: <a href="mailto:i@akorshakov.ru">i@akorshakov.ru</a>'),
