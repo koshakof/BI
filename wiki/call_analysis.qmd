@@ -1,13 +1,9 @@
 ---
 title: 'Как проверить качество входящих звонков из рекламных кампаний, если нет CRM-системы и времени прослушивать каждый звонок'
-
 author: "Александр Коршаков"
-
 categories: [Анализ данных]
-
 date: "2024-03-20"
 date-format: long
-
 format:
   html:
     page-layout: article
@@ -19,17 +15,18 @@ format:
     pagetitle: "Как проверить качество входящих звонков из рекламных кампаний"
     description-meta: "Применяем метод статистической оценки для анализа эффективности входящиз звонков в компанию, если нет CRM-системы."
     author-meta: "Коршаков Александр"
-
   
 execute:
+  
   warning: false
   message: false
   error: false
   echo: false
-  
 editor_options:
   chunk_output_type: console
 ---
+
+<!-- Чанк для пред. настроек -->
 
 ```{r}
 #| label: setup
@@ -49,21 +46,11 @@ library(scales)
 ```
 
 
-<!-- Чанк для пред. настроек -->
-
 ```{r}
 # Пред. установки
 
 ## путь загрузки данных
-file_path <- '~/BI/wiki/data/'
-```
-
-
-```{r}
-# настройки для отображения текста на кирилице
-library(showtext)
-showtext_opts(dpi = 200)
-showtext_auto()
+file_path <- '~/Hourglass/wiki/data/'
 ```
 
 

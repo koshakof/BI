@@ -1,12 +1,9 @@
 ---
 title: 'Экономим рекламный бюджет с помощью кластерного анализа площадок в рекламных сетях Яндекса'
 author: "Александр Коршаков"
-
 date: "2024-03-29"
 date-format: long
-
 categories: [Реклама, Анализ данных]
-
 format:
   html:
     page-layout: article
@@ -14,10 +11,8 @@ format:
     toc-location: right
     fig-width: 10
     fig-height: 8
-
 editor_options: 
   chunk_output_type: console
-
 execute:
   warning: false
   message: false
@@ -45,7 +40,7 @@ library(NbClust)
 
 ```{r}
 # путь
-file_path <- '~/BI/wiki/data/'
+file_path <- '~/Hourglass/wiki/data/'
 ```
 
 
@@ -162,8 +157,6 @@ df$Placement <- NULL
 > **Таблица: Данные для анализа**
 
 ```{r}
-#| output: asis
-
 # выводим таблицу
 head(df) |> 
   kbl() |>
@@ -177,8 +170,6 @@ head(df) |>
 > **Таблица: Стандартизированная таблица**
 
 ```{r}
-#| output: asis
-
 # стандартизируем данные
 df_st <- as.data.frame(scale(df))
 
@@ -484,7 +475,7 @@ datatable(
   options = list(
     pageLength = 10,
     dom        = 'Btpli',
-    language   = list(url = '//cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json'),
+    language   = list(url = 'https:://cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json'),
     buttons    = c('csv', 'excel'),
     colReorder = TRUE,
     fixedHeader = TRUE)
@@ -546,7 +537,7 @@ datatable(
   options = list(
     pageLength = 10,
     dom        = 'Btpli',
-    language   = list(url = '//cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json'),
+    language   = list(url = 'https:://cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json'),
     buttons    = c('csv', 'excel'),
     colReorder = TRUE,
     fixedHeader = TRUE)
@@ -670,7 +661,7 @@ datatable(
   options = list(
     pageLength = 10,
     dom        = 'Btpli',
-    language   = list(url = '//cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json'),
+    language   = list(url = 'https:://cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json'),
     buttons    = c('csv', 'excel'),
     colReorder = TRUE,
     fixedHeader = TRUE)
@@ -745,12 +736,12 @@ datatable(
   options = list(
     pageLength = 10,
     dom = 'Btpli',
-    language = list(url = '//cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json'),
+    language = list(url = 'https:://cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json'),
     buttons = c('csv', 'excel'),
     colReorder = TRUE,
     fixedHeader = TRUE
-  )
-) |>
+    )
+  ) |>
   formatStyle(
     columns = 'Cost',
     background = styleColorBar(clicks_pl$Cost, '#EEC9E5'),

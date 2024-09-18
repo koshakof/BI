@@ -2,14 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ru" xml:lang="ru"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.555">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Коршаков Александр">
 <meta name="description" content="Применяем метод статистической оценки для анализа эффективности входящиз звонков в компанию, если нет CRM-системы.">
 
-<title>Как проверить качество входящих звонков из рекламных кампаний</title>
+<title>Как проверить качество входящих звонков из рекламных кампаний – ihourglass</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -111,7 +111,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <script src="../site_libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
@@ -141,7 +141,9 @@ window.Quarto = {
 };
 </script>
 
-<link rel="stylesheet" href="../styles.css">
+<meta property="og:title" content="Как проверить качество входящих звонков из рекламных кампаний">
+<meta property="og:description" content="Маркетинг, основанный на данных. Реклама и аналитика в интернете">
+<meta property="og:site_name" content="Hourglass">
 </head>
 
 <body class="nav-fixed">
@@ -156,7 +158,7 @@ window.Quarto = {
     </a>
   </div>
             <div id="quarto-search" class="" title="Поиск"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Переключить навигацию" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Переключить навигацию" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -184,7 +186,7 @@ window.Quarto = {
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
+            <div class="quarto-navbar-tools">
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -276,8 +278,8 @@ window.Quarto = {
 <p>Загрузим таблицу с данными, которая содержит транскрибацию входящих звонков.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div class="datatables html-widget html-fill-item" id="htmlwidget-3302cff85bb19b321e17" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-3302cff85bb19b321e17">{"x":{"filter":"none","vertical":false,"data":[["organic","organic","organic","organic","organic"],["Все регионы","Все регионы","Все регионы","Все регионы","Все регионы"],["2023-04-12T14:55:02Z","2023-04-12T14:55:02Z","2023-04-12T14:55:02Z","2023-04-12T14:55:02Z","2023-04-12T14:55:02Z"],[18269572,18269572,18269572,18269572,18269572],["повторный","повторный","повторный","повторный","повторный"],["Клиент","Клиент","Оператор","Клиент","Оператор"],["05:40","05:43","05:45","05:52","05:56"],["Угу.","А почему?","Потому что мы территориально закреплены Краснодарскому краю и Республики Адыгея.","А мы в Крыму не можем купить почему то.","Давайте я запишу ваш номер телефона."]],"container":"<table class=\"compact nowrap\">\n  <thead>\n    <tr>\n      <th>Медиум<\/th>\n      <th>Город<\/th>\n      <th>Дата<\/th>\n      <th>ID звонка<\/th>\n      <th>Первичный звонок<\/th>\n      <th>Канал<\/th>\n      <th>Время<\/th>\n      <th>Фраза<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"dom":"Btpli","language":{"url":"https:://cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json"},"columnDefs":[{"className":"dt-right","targets":3},{"name":"Медиум","targets":0},{"name":"Город","targets":1},{"name":"Дата","targets":2},{"name":"ID звонка","targets":3},{"name":"Первичный звонок","targets":4},{"name":"Канал","targets":5},{"name":"Время","targets":6},{"name":"Фраза","targets":7}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-4e6e09bc24933b5513c8" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-4e6e09bc24933b5513c8">{"x":{"filter":"none","vertical":false,"data":[["organic","organic","organic","organic","organic"],["Все регионы","Все регионы","Все регионы","Все регионы","Все регионы"],["2023-04-12T14:55:02Z","2023-04-12T14:55:02Z","2023-04-12T14:55:02Z","2023-04-12T14:55:02Z","2023-04-12T14:55:02Z"],[18269572,18269572,18269572,18269572,18269572],["повторный","повторный","повторный","повторный","повторный"],["Клиент","Клиент","Оператор","Клиент","Оператор"],["05:40","05:43","05:45","05:52","05:56"],["Угу.","А почему?","Потому что мы территориально закреплены Краснодарскому краю и Республики Адыгея.","А мы в Крыму не можем купить почему то.","Давайте я запишу ваш номер телефона."]],"container":"<table class=\"compact nowrap\">\n  <thead>\n    <tr>\n      <th>Медиум<\/th>\n      <th>Город<\/th>\n      <th>Дата<\/th>\n      <th>ID звонка<\/th>\n      <th>Первичный звонок<\/th>\n      <th>Канал<\/th>\n      <th>Время<\/th>\n      <th>Фраза<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"dom":"Btpli","language":{"url":"https:://cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json"},"columnDefs":[{"className":"dt-right","targets":3},{"name":"Медиум","targets":0},{"name":"Город","targets":1},{"name":"Дата","targets":2},{"name":"ID звонка","targets":3},{"name":"Первичный звонок","targets":4},{"name":"Канал","targets":5},{"name":"Время","targets":6},{"name":"Фраза","targets":7}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p><br></p>
@@ -289,8 +291,8 @@ window.Quarto = {
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<div class="datatables html-widget html-fill-item" id="htmlwidget-e41b17dff651e6a6c26e" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-e41b17dff651e6a6c26e">{"x":{"filter":"none","vertical":false,"data":[["organic","organic","organic","organic","organic"],["Все регионы","Все регионы","Все регионы","Все регионы","Все регионы"],["2023-04-12","2023-04-12","2023-04-12","2023-04-12","2023-04-12"],[18269572,18269572,18269572,18269572,18269572],["повторный","повторный","повторный","повторный","повторный"],["Клиент","Оператор","Оператор","Оператор","Оператор"],["01:57","01:57","01:57","02:00","02:00"],["трактор","примеру","трактору","спереди","поставить"],["15 Apr","15 Apr","15 Apr","15 Apr","15 Apr"],["3 Wed","3 Wed","3 Wed","3 Wed","3 Wed"],["18269572","18269572","18269572","18269572","18269572"],[100,101,102,103,104]],"container":"<table class=\"compact nowrap\">\n  <thead>\n    <tr>\n      <th>Медиум<\/th>\n      <th>Город<\/th>\n      <th>Дата<\/th>\n      <th>ID звонка<\/th>\n      <th>Первичный звонок<\/th>\n      <th>Канал<\/th>\n      <th>Время<\/th>\n      <th>Слово<\/th>\n      <th>Неделя<\/th>\n      <th>День<\/th>\n      <th>ID<\/th>\n      <th>N<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"dom":"Btpli","language":{"url":"https:://cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json"},"columnDefs":[{"className":"dt-right","targets":[3,11]},{"name":"Медиум","targets":0},{"name":"Город","targets":1},{"name":"Дата","targets":2},{"name":"ID звонка","targets":3},{"name":"Первичный звонок","targets":4},{"name":"Канал","targets":5},{"name":"Время","targets":6},{"name":"Слово","targets":7},{"name":"Неделя","targets":8},{"name":"День","targets":9},{"name":"ID","targets":10},{"name":"N","targets":11}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-ce5efd3fa0da7123bb07" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-ce5efd3fa0da7123bb07">{"x":{"filter":"none","vertical":false,"data":[["organic","organic","organic","organic","organic"],["Все регионы","Все регионы","Все регионы","Все регионы","Все регионы"],["2023-04-12","2023-04-12","2023-04-12","2023-04-12","2023-04-12"],[18269572,18269572,18269572,18269572,18269572],["повторный","повторный","повторный","повторный","повторный"],["Клиент","Оператор","Оператор","Оператор","Оператор"],["01:57","01:57","01:57","02:00","02:00"],["трактор","примеру","трактору","спереди","поставить"],["15 Apr","15 Apr","15 Apr","15 Apr","15 Apr"],["3 Wed","3 Wed","3 Wed","3 Wed","3 Wed"],["18269572","18269572","18269572","18269572","18269572"],[100,101,102,103,104]],"container":"<table class=\"compact nowrap\">\n  <thead>\n    <tr>\n      <th>Медиум<\/th>\n      <th>Город<\/th>\n      <th>Дата<\/th>\n      <th>ID звонка<\/th>\n      <th>Первичный звонок<\/th>\n      <th>Канал<\/th>\n      <th>Время<\/th>\n      <th>Слово<\/th>\n      <th>Неделя<\/th>\n      <th>День<\/th>\n      <th>ID<\/th>\n      <th>N<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"dom":"Btpli","language":{"url":"https:://cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json"},"columnDefs":[{"className":"dt-right","targets":[3,11]},{"name":"Медиум","targets":0},{"name":"Город","targets":1},{"name":"Дата","targets":2},{"name":"ID звонка","targets":3},{"name":"Первичный звонок","targets":4},{"name":"Канал","targets":5},{"name":"Время","targets":6},{"name":"Слово","targets":7},{"name":"Неделя","targets":8},{"name":"День","targets":9},{"name":"ID","targets":10},{"name":"N","targets":11}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p><br></p>
@@ -306,7 +308,7 @@ window.Quarto = {
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="call_analysis_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="960"></p>
+<p><img src="call_analysis_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="960"></p>
 </figure>
 </div>
 </div>
@@ -352,7 +354,7 @@ window.Quarto = {
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="call_analysis_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="960"></p>
+<p><img src="call_analysis_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="960"></p>
 </figure>
 </div>
 </div>
@@ -370,7 +372,7 @@ window.Quarto = {
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="call_analysis_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="960"></p>
+<p><img src="call_analysis_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="960"></p>
 </figure>
 </div>
 </div>
@@ -389,7 +391,7 @@ window.Quarto = {
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="call_analysis_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="960"></p>
+<p><img src="call_analysis_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="960"></p>
 </figure>
 </div>
 </div>
@@ -404,7 +406,7 @@ window.Quarto = {
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="call_analysis_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="960"></p>
+<p><img src="call_analysis_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="960"></p>
 </figure>
 </div>
 </div>
@@ -419,7 +421,7 @@ window.Quarto = {
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="call_analysis_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="960"></p>
+<p><img src="call_analysis_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="960"></p>
 </figure>
 </div>
 </div>
@@ -439,7 +441,7 @@ window.Quarto = {
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="call_analysis_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="960"></p>
+<p><img src="call_analysis_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="960"></p>
 </figure>
 </div>
 </div>
@@ -489,7 +491,7 @@ window.Quarto = {
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="call_analysis_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="960"></p>
+<p><img src="call_analysis_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="960"></p>
 </figure>
 </div>
 </div>
@@ -508,7 +510,7 @@ window.Quarto = {
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="call_analysis_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid figure-img" width="960"></p>
+<p><img src="call_analysis_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid figure-img" width="960"></p>
 </figure>
 </div>
 </div>
@@ -524,7 +526,7 @@ window.Quarto = {
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="call_analysis_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid figure-img" width="960"></p>
+<p><img src="call_analysis_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid figure-img" width="960"></p>
 </figure>
 </div>
 </div>
@@ -544,7 +546,7 @@ window.Quarto = {
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="call_analysis_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid figure-img" width="960"></p>
+<p><img src="call_analysis_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid figure-img" width="960"></p>
 </figure>
 </div>
 </div>
@@ -592,7 +594,7 @@ window.Quarto = {
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="call_analysis_files/figure-html/unnamed-chunk-40-1.png" class="img-fluid figure-img" width="960"></p>
+<p><img src="call_analysis_files/figure-html/unnamed-chunk-39-1.png" class="img-fluid figure-img" width="960"></p>
 </figure>
 </div>
 </div>
@@ -608,7 +610,7 @@ window.Quarto = {
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="call_analysis_files/figure-html/unnamed-chunk-42-1.png" class="img-fluid figure-img" width="960"></p>
+<p><img src="call_analysis_files/figure-html/unnamed-chunk-41-1.png" class="img-fluid figure-img" width="960"></p>
 </figure>
 </div>
 </div>
@@ -669,18 +671,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -712,7 +703,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -720,7 +733,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
@@ -1054,7 +1067,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p>Copyright 2024, Коршаков Александр</p>
+<p>Copyright © ihourglass.ru | Начиная с 2024 г. все права защищены.</p>
 </div>   
     <div class="nav-footer-center">
 

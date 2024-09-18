@@ -1,6 +1,6 @@
 ---
-title: "Как выбрать микроцель для обучения стратегии показов объявлений в любой рекламной системе"
-subtitle: "Часть 1. Корреляция и регрессия. Подробный разбор методологии с примерами"
+title: "Часть 1. Как выбрать микроцель для обучения стратегии показов объявлений в любой рекламной системе"
+subtitle: "Корреляция и регрессия. Подробный разбор методологии с примерами"
 author: "Александр Коршаков"
 
 categories: [Реклама, Анализ данных]
@@ -28,6 +28,7 @@ execute:
   warning: false
   message: false
   error: false
+  cache: true
 ---
 
 <!-- Чанки для пред. настроек -->
@@ -55,21 +56,9 @@ library(plotly)
 library(patchwork)
 ```
 
-```{r}
-#|echo: false
-
-# настройки для отображения текста на кирилице
-library(showtext)
-showtext_opts(dpi = 200)
-showtext_auto()
-```
 <!-- END -->
 
-
-
-**Для кого**
-
-Серия статей из двух частей, посвященная теме корреляционного анализа, будет полезна специалистам, которые имеют опыт ведения рекламных кампаний и знакомы с основами статистики (и я имею в виду статистику, ту, что «Ложь, большая ложь и статистика», а не интерфейс в «Директе»).
+Подготовил серию статей о корреляционном анализе. Она состоит из двух частей и пригодится тем, кто уже ведет рекламные кампании и знаком с основами статистики (имеется в виду статистика, та, что «Ложь, большая ложь и статистика», а не интерфейс в «Директе»).
 
 Начинающие специалисты смогут изучить методологию и понять, с чего начать.
 
@@ -85,7 +74,7 @@ showtext_auto()
 Подписывайтесь на мой ТГ-канал [DDM & Ads](https://t.me/data_driven_ads)
 :::
 
-</br>
+
 
 
 ## Введение
@@ -155,7 +144,7 @@ $\text{p-value} < 0.05$ означает, что вероятность найт
 #| echo: false
 
 df <- vroom::vroom(
-  "~/BI/wiki/data/mm.csv", 
+  "~/Hourglass/wiki/data/mm.csv", 
   show_col_types = FALSE
   )
 ```
@@ -223,7 +212,7 @@ datatable(
     buttons = c('csv', 'excel'),
     pageLength = 10,
     dom = 'Btpli',
-    language = list(url = '//cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json'),
+    language = list(url = 'https://cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json'),
     initComplete = JS(
     "function(settings, json) {",
     "$(this.api().table().header()).css({'background-color': '#7B7B7B', 'color': '#fff'});",
@@ -236,7 +225,7 @@ datatable(
   )
 ```
 
-</br>
+
 
 В таблице видно много пустых ячеек. Проверим по колонкам кол-во пропущенных значений.
 
@@ -385,7 +374,7 @@ datatable(
     buttons = c('csv', 'excel'),
     pageLength = 10,
     dom = 'Btpli',
-    language   = list(url = '//cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json'),
+    language   = list(url = 'https://cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json'),
     initComplete = JS(
     "function(settings, json) {",
     "$(this.api().table().header()).css({'background-color': '#7B7B7B', 'color': '#fff'});",
@@ -398,7 +387,7 @@ datatable(
   )
 ```
 
-</br>
+
 
 У нас остается 52 строки наблюдений, что вполне достаточно для анализа. Проверяем на кол-во пропущенных значений.
 
@@ -453,7 +442,7 @@ na_df_plt <- na_df |>
 plotly::ggplotly(na_df_plt)
 ```
 
-</br>
+
 
 Так намного лучше. У нас всего по 2 пропущенных значения в микроцелях, что не критично.
 
@@ -490,7 +479,6 @@ gt(
   )
 ```
 
-</br>
 
 
 **Вывод**

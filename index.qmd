@@ -1,6 +1,6 @@
 ---
 title: "Маркетинг и реклама, основанные на данных"
-image: img/me.jpg
+image: img/ak-4.jpg
 toc: false
 about: 
   template: trestles 

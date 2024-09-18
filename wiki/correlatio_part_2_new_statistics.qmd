@@ -1,16 +1,10 @@
 ---
-title: "Как выбрать микроцель для обучения стратегии показов объявлений в любой рекламной системе"
-
-subtitle: "Часть 2. Статистика оценок или почему не надо испольлзовать только метод проверки значимости нулевой гипотезы, основанный на p-value."
-
+title: "Часть 2. Как выбрать микроцель для обучения"
+subtitle: "Статистика оценок или почему не надо испольлзовать только метод проверки значимости нулевой гипотезы, основанный на p-value."
 author: "Александр Коршаков"
-
 categories: [Реклама, Анализ данных]
-
 date: "2024-07-29"
 date-format: long
-
-
 format:
   html:
     page-layout: article
@@ -26,14 +20,11 @@ format:
     other-links:
      - text: "Wikipedia: Estimation statistics"
        href: "https://en.wikipedia.org/wiki/Estimation_statistics"
-
   
 execute:
   warning: false
   message: false
   error: false
-
-
 editor_options:
   chunk_output_type: console
 ---
@@ -147,7 +138,7 @@ library(dabestr)
 #| echo: false
 
 # загрузка данных
-dt <- fread("~/BI/wiki/data/ccsh.csv")
+dt <- fread("~/Hourglass/wiki/data/ccsh.csv")
 ```
 
 

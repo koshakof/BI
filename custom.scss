@@ -1,0 +1,26 @@
+/*-- scss:defaults --*/
+$headings-font-weight:  400 !default;
+
+/*-- scss:rules --*/
+
+h1 {
+  font-weight: $headings-font-weight;
+}
+
+h2 {
+  margin-top: 3rem;
+  font-weight: $headings-font-weight;
+}
+
+h3,h4,h5,h5{
+  font-weight: $headings-font-weight;
+}
+
+.cell {
+  margin-bottom: 20px;
+  
+}
+
+.figure{
+  margin-bottom: 0px;
+}
