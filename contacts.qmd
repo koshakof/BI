@@ -32,7 +32,7 @@ html_card <- div(
     style = "display: flex; justify-content: space-between;",
     div(
       style = "flex-basis: 100%; padding: 0 20px;",
-      p("Александр Коршаков — DDM подход в маркетинге и рекламе", style = "font-size: 20px; margin-bottom: 0px;")
+      p("Александр Коршаков — Data-Driven подход в маркетинге и рекламе", style = "font-size: 20px; margin-bottom: 0px;")
       )
     ),
   hr(),
