@@ -78,7 +78,7 @@ format:
 Примеры некоторых работ.
 
 - [Ситуационный анализ и сратегическая канва в недвижимости](https://platzkart.ru/portfolio/case-nedvizhimost-krasnodar/)
-- [Применяем ГОСТ стандарт РФ «Контрольные карты Шухарта» для оптимизация рекламных кампаний и других источников трафика](https://koshakof.github.io/BI/wiki/shewhart_control_card_ydirect.html)
+- [Применяем ГОСТ стандарт РФ «Контрольные карты Шухарта» для оптимизация рекламных кампаний и других источников трафика](https://ihourglass.ru/wiki/shewhart_control_card.html)
 - [Как продавать сложные продукты через рекламные каналы в В2В в условиях кризиса с минимальным бюджетом](https://platzkart.ru/portfolio/case-mtz/)
 - [Как проверить качество входящих звонков из рекламных кампаний, если нет CRM-системы и времени прослушивать каждый звонок](https://koshakof.github.io/BI/wiki/call_analysis.html)
 - [Экономим рекламный бюджет с помощью кластерного анализа площадок в рекламных сетях Яндекса](https://koshakof.github.io/BI/wiki/ds_places_analysis.html)
