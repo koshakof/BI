@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Авторизация для работы с API Яндекс Директ с помощью R клиента YaDirectR</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      text-align: center;
+    }
+    .code {
+      font-size: 2em;
+      font-weight: bold;
+      color: #333;
+      margin: 10px 0;
+    }
+    .error {
+      font-size: 1.5em;
+      font-weight: bold;
+      color: red;
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Авторизация для работы с API Яндекс Директ с помощью R клиента YaDirectR</h1>
+    <div id="message"></div>
+  </div>
+
+  <script>
+    // Функция для извлечения параметров из URL
+    function getQueryParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
+    }
+
+    const code = getQueryParam("code");
+    const error = getQueryParam("error");
+
+    const messageDiv = document.getElementById("message");
+
+    if (code) {
+      messageDiv.innerHTML = `
+        <p>Ваш Код для получения токена:</p>
+        <div id="code" class="code">${code}</div>
+        <p>Код доступа автоматически был скопирован в буфер обмена, вы можете вернуться в RStudio и ввести его в консоль.</p>
+        <p>Введите значение данного токена в R консоль в качестве ответа на запрос "Enter authorize code:", после чего в R будет создан объект, содержащий токен доступа к API Яндекс Директ, и вы сможете получить данные с помощью функций, доступных в пакете ryandexdirect.</p>
+      `;
+
+      // Копируем код в буфер обмена
+      navigator.clipboard.writeText(code).then(() => {
+        console.log("Code copied to clipboard");
+      }).catch(err => {
+        console.error("Failed to copy code: ", err);
+      });
+    } else if (error) {
+      messageDiv.innerHTML = `
+        <p class="error">Ошибка авторизации:</p>
+        <div class="error">${error}</div>
+        <p>Вы отказали приложению в доступе или произошла ошибка. Пожалуйста, попробуйте снова.</p>
+      `;
+    } else {
+      messageDiv.innerHTML = `
+        <p class="error">Код не найден в URL</p>
+      `;
+    }
+  </script>
+</body>
+</html>
