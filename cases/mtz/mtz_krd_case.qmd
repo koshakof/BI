@@ -23,7 +23,6 @@ execute:
   echo: false
 editor_options:
   chunk_output_type: console
-draft: true  
 ---
 
 ```{r setup lybrary, include = FALSE}
