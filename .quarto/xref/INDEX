@@ -118,5 +118,8 @@
   },
   "cases/master_slyh_case.qmd": {
     "master_slyh_case.html": "25936b1d"
+  },
+  "cases/mtz/mtz_krd_case.qmd": {
+    "mtz_krd_case.html": "6d8f01f1"
   }
 }
