@@ -121,5 +121,8 @@
   },
   "cases/mtz/mtz_krd_case.qmd": {
     "mtz_krd_case.html": "6d8f01f1"
+  },
+  "cases/real_estate/real_estate_case.qmd": {
+    "real_estate_case.html": "bfc2dc60"
   }
 }

@@ -1,0 +1,2352 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru" xml:lang="ru"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Коршаков Александр">
+<meta name="dcterms.date" content="2021-06-01">
+<meta name="description" content="Исследование ситуации на рынке недвижимости Краснодарского края в 2021 году">
+
+<title>Кейс: Ситуационный маркетинговый анализ микрорайона | Hourglass – Hourglass</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../..//favicon/favicon_ihourglass.jpg" rel="icon" type="image/jpeg">
+<script src="../../site_libs/cookie-consent/cookie-consent.js"></script>
+<link href="../../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Поиск не дал результатов",
+    "search-matching-documents-text": "Результаты поиска",
+    "search-copy-link-title": "Скопировать ссылку",
+    "search-hide-matches-text": "Скрыть дополнительные результаты",
+    "search-more-match-text": "дополнительный результат в этом документе",
+    "search-more-matches-text": "дополнительных результата(-ов) в этом документе",
+    "search-clear-button-title": "Очистить",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Отменить",
+    "search-submit-button-title": "Найти",
+    "search-label": "Поиск"
+  }
+}</script>
+
+<script type="text/javascript" charset="UTF-8">
+document.addEventListener('DOMContentLoaded', function () {
+cookieconsent.run({
+  "notice_banner_type":"simple",
+  "consent_type":"implied",
+  "palette":"light",
+  "language":"en",
+  "page_load_consent_levels":["strictly-necessary","functionality","tracking","targeting"],
+  "notice_banner_reject_button_hide":false,
+  "preferences_center_close_button_hide":false,
+  "website_name":""
+  ,
+"language":"ru"
+  });
+});
+</script> 
+  
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-KB6J3FZF');</script>
+<!-- End Google Tag Manager -->
+<script src="../../site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="../../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta property="og:title" content="Кейс: Ситуационный маркетинговый анализ микрорайона | Hourglass">
+<meta property="og:description" content="Исследование ситуации на рынке недвижимости Краснодарского края в 2021 году">
+<meta property="og:site_name" content="Hourglass">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Hourglass</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Поиск"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Переключить навигацию" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> <i class="bi bi-house" role="img">
+</i> 
+<span class="menu-text"> </span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../services.html"> 
+<span class="menu-text">Услуги</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../cases.html"> 
+<span class="menu-text">Кейсы</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../wiki.html"> 
+<span class="menu-text">Wiki</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../contacts.html"> 
+<span class="menu-text">Контакты</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Содержание</h2>
+   
+  <ul>
+  <li><a href="#вводная-информация-по-исследованию" id="toc-вводная-информация-по-исследованию" class="nav-link active" data-scroll-target="#вводная-информация-по-исследованию">Вводная информация по исследованию</a>
+  <ul class="collapse">
+  <li><a href="#источники-информации" id="toc-источники-информации" class="nav-link" data-scroll-target="#источники-информации">Источники информации</a></li>
+  <li><a href="#о-субъективности" id="toc-о-субъективности" class="nav-link" data-scroll-target="#о-субъективности">О субъективности</a></li>
+  <li><a href="#цель-исследования" id="toc-цель-исследования" class="nav-link" data-scroll-target="#цель-исследования">Цель исследования</a></li>
+  </ul></li>
+  <li><a href="#тезисы-выведенные-на-основании-исследования" id="toc-тезисы-выведенные-на-основании-исследования" class="nav-link" data-scroll-target="#тезисы-выведенные-на-основании-исследования">Тезисы выведенные на основании исследования</a></li>
+  <li><a href="#revenue-breakdown" id="toc-revenue-breakdown" class="nav-link" data-scroll-target="#revenue-breakdown">Revenue Breakdown</a>
+  <ul class="collapse">
+  <li><a href="#дисклеймер" id="toc-дисклеймер" class="nav-link" data-scroll-target="#дисклеймер">Дисклеймер</a></li>
+  </ul></li>
+  <li><a href="#предиктивный-анализ-обращений" id="toc-предиктивный-анализ-обращений" class="nav-link" data-scroll-target="#предиктивный-анализ-обращений">Предиктивный анализ обращений</a></li>
+  <li><a href="#анализ-обращений-по-6-сигмам" id="toc-анализ-обращений-по-6-сигмам" class="nav-link" data-scroll-target="#анализ-обращений-по-6-сигмам">Анализ обращений по 6 сигмам</a>
+  <ul class="collapse">
+  <li><a href="#анализ-арифметической-средней-по-обращениям" id="toc-анализ-арифметической-средней-по-обращениям" class="nav-link" data-scroll-target="#анализ-арифметической-средней-по-обращениям">Анализ арифметической средней по обращениям</a></li>
+  <li><a href="#анализ-качественных-лидов" id="toc-анализ-качественных-лидов" class="nav-link" data-scroll-target="#анализ-качественных-лидов">Анализ качественных лидов</a></li>
+  </ul></li>
+  <li><a href="#анализ-целевой-аудитории" id="toc-анализ-целевой-аудитории" class="nav-link" data-scroll-target="#анализ-целевой-аудитории">Анализ целевой аудитории</a>
+  <ul class="collapse">
+  <li><a href="#jtbd" id="toc-jtbd" class="nav-link" data-scroll-target="#jtbd">JTBD</a></li>
+  <li><a href="#tam-sam-som" id="toc-tam-sam-som" class="nav-link" data-scroll-target="#tam-sam-som">TAM SAM SOM</a></li>
+  <li><a href="#характеристики-потребителей-жилья-комфорт-класса" id="toc-характеристики-потребителей-жилья-комфорт-класса" class="nav-link" data-scroll-target="#характеристики-потребителей-жилья-комфорт-класса">Характеристики потребителей жилья комфорт-класса</a></li>
+  <li><a href="#виды-досуга-и-цифровое-потребление" id="toc-виды-досуга-и-цифровое-потребление" class="nav-link" data-scroll-target="#виды-досуга-и-цифровое-потребление">Виды досуга и цифровое потребление</a></li>
+  <li><a href="#чувствительность-к-рекламным-источникам" id="toc-чувствительность-к-рекламным-источникам" class="nav-link" data-scroll-target="#чувствительность-к-рекламным-источникам">Чувствительность к рекламным источникам</a></li>
+  <li><a href="#используемые-сервисы" id="toc-используемые-сервисы" class="nav-link" data-scroll-target="#используемые-сервисы">Используемые сервисы</a></li>
+  </ul></li>
+  <li><a href="#анализ-факторов-выбора-квартир" id="toc-анализ-факторов-выбора-квартир" class="nav-link" data-scroll-target="#анализ-факторов-выбора-квартир">Анализ факторов выбора квартир</a>
+  <ul class="collapse">
+  <li><a href="#дизайн-и-цели-опроса" id="toc-дизайн-и-цели-опроса" class="nav-link" data-scroll-target="#дизайн-и-цели-опроса">Дизайн и цели опроса</a></li>
+  <li><a href="#формирование-выборки" id="toc-формирование-выборки" class="nav-link" data-scroll-target="#формирование-выборки">Формирование выборки</a></li>
+  <li><a href="#структура-опроса" id="toc-структура-опроса" class="nav-link" data-scroll-target="#структура-опроса">Структура опроса</a></li>
+  <li><a href="#результаты-опроса" id="toc-результаты-опроса" class="nav-link" data-scroll-target="#результаты-опроса">Результаты опроса</a>
+  <ul class="collapse">
+  <li><a href="#возраст-респондентов" id="toc-возраст-респондентов" class="nav-link" data-scroll-target="#возраст-респондентов">Возраст респондентов</a></li>
+  <li><a href="#распределение-по-группам" id="toc-распределение-по-группам" class="nav-link" data-scroll-target="#распределение-по-группам">Распределение по группам</a></li>
+  <li><a href="#причины-покупки-квартиры" id="toc-причины-покупки-квартиры" class="nav-link" data-scroll-target="#причины-покупки-квартиры">Причины покупки квартиры</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#quality-analysis-function-qfd" id="toc-quality-analysis-function-qfd" class="nav-link" data-scroll-target="#quality-analysis-function-qfd">Quality Analysis Function (QFD)</a></li>
+  <li><a href="#анализ-конкурентной-среды" id="toc-анализ-конкурентной-среды" class="nav-link" data-scroll-target="#анализ-конкурентной-среды">Анализ конкурентной среды</a>
+  <ul class="collapse">
+  <li><a href="#отбор-конкурентов" id="toc-отбор-конкурентов" class="nav-link" data-scroll-target="#отбор-конкурентов">Отбор конкурентов</a></li>
+  </ul></li>
+  <li><a href="#привлечение" id="toc-привлечение" class="nav-link" data-scroll-target="#привлечение">Привлечение</a>
+  <ul class="collapse">
+  <li><a href="#источники-трафика-используемые-конкурентами" id="toc-источники-трафика-используемые-конкурентами" class="nav-link" data-scroll-target="#источники-трафика-используемые-конкурентами">Источники трафика используемые конкурентами</a></li>
+  <li><a href="#посещаемость-сайтов-конкурентов" id="toc-посещаемость-сайтов-конкурентов" class="nav-link" data-scroll-target="#посещаемость-сайтов-конкурентов">Посещаемость сайтов конкурентов</a></li>
+  <li><a href="#поисковый-трафик-serp" id="toc-поисковый-трафик-serp" class="nav-link" data-scroll-target="#поисковый-трафик-serp">Поисковый трафик (SERP)</a></li>
+  <li><a href="#платная-выдача-яндекс" id="toc-платная-выдача-яндекс" class="nav-link" data-scroll-target="#платная-выдача-яндекс">Платная выдача Яндекс</a></li>
+  <li><a href="#аукцион-в-яндекс-директ" id="toc-аукцион-в-яндекс-директ" class="nav-link" data-scroll-target="#аукцион-в-яндекс-директ">Аукцион в Яндекс Директ</a></li>
+  <li><a href="#платная-выдача-google" id="toc-платная-выдача-google" class="nav-link" data-scroll-target="#платная-выдача-google">Платная выдача Google</a></li>
+  <li><a href="#органический-трафик-яндекс" id="toc-органический-трафик-яндекс" class="nav-link" data-scroll-target="#органический-трафик-яндекс">Органический трафик Яндекс</a></li>
+  <li><a href="#органический-трафик-google" id="toc-органический-трафик-google" class="nav-link" data-scroll-target="#органический-трафик-google">Органический трафик Google</a></li>
+  <li><a href="#сайты-прямых-конкурентов-в-поисковой-выдаче" id="toc-сайты-прямых-конкурентов-в-поисковой-выдаче" class="nav-link" data-scroll-target="#сайты-прямых-конкурентов-в-поисковой-выдаче">Сайты прямых конкурентов в поисковой выдаче</a></li>
+  <li><a href="#вертикальное-seo" id="toc-вертикальное-seo" class="nav-link" data-scroll-target="#вертикальное-seo">«Вертикальное SEO»</a></li>
+  <li><a href="#социальные-сети" id="toc-социальные-сети" class="nav-link" data-scroll-target="#социальные-сети">Социальные сети</a></li>
+  <li><a href="#медийная-реклама" id="toc-медийная-реклама" class="nav-link" data-scroll-target="#медийная-реклама">Медийная реклама</a></li>
+  <li><a href="#brand-lift" id="toc-brand-lift" class="nav-link" data-scroll-target="#brand-lift">Brand Lift</a></li>
+  </ul></li>
+  <li><a href="#вовлечение" id="toc-вовлечение" class="nav-link" data-scroll-target="#вовлечение">Вовлечение</a>
+  <ul class="collapse">
+  <li><a href="#позиционирование" id="toc-позиционирование" class="nav-link" data-scroll-target="#позиционирование">Позиционирование</a></li>
+  <li><a href="#контуры-объектов-недвижимости" id="toc-контуры-объектов-недвижимости" class="nav-link" data-scroll-target="#контуры-объектов-недвижимости">Контуры объектов недвижимости</a></li>
+  <li><a href="#анализ-конкурентов-по-контурам" id="toc-анализ-конкурентов-по-контурам" class="nav-link" data-scroll-target="#анализ-конкурентов-по-контурам">Анализ конкурентов по контурам</a></li>
+  <li><a href="#ценностно-стоимостная-карта-рынка" id="toc-ценностно-стоимостная-карта-рынка" class="nav-link" data-scroll-target="#ценностно-стоимостная-карта-рынка">Ценностно-стоимостная карта рынка</a></li>
+  </ul></li>
+  <li><a href="#анализ-тренда" id="toc-анализ-тренда" class="nav-link" data-scroll-target="#анализ-тренда">Анализ тренда</a>
+  <ul class="collapse">
+  <li><a href="#исследование-тренда-в-яндекс" id="toc-исследование-тренда-в-яндекс" class="nav-link" data-scroll-target="#исследование-тренда-в-яндекс">Исследование тренда в Яндекс</a></li>
+  <li><a href="#декомпозиция-временного-ряда" id="toc-декомпозиция-временного-ряда" class="nav-link" data-scroll-target="#декомпозиция-временного-ряда">Декомпозиция временного ряда</a></li>
+  <li><a href="#сезонность" id="toc-сезонность" class="nav-link" data-scroll-target="#сезонность">Сезонность</a></li>
+  <li><a href="#исследование-тренда-в-google" id="toc-исследование-тренда-в-google" class="nav-link" data-scroll-target="#исследование-тренда-в-google">Исследование тренда в Google</a></li>
+  </ul></li>
+  <li><a href="#прогностические-модели" id="toc-прогностические-модели" class="nav-link" data-scroll-target="#прогностические-модели">Прогностические модели</a>
+  <ul class="collapse">
+  <li><a href="#прогноз-для-яндекс" id="toc-прогноз-для-яндекс" class="nav-link" data-scroll-target="#прогноз-для-яндекс">Прогноз для Яндекс</a></li>
+  <li><a href="#прогнозная-модель-по-методу-arima" id="toc-прогнозная-модель-по-методу-arima" class="nav-link" data-scroll-target="#прогнозная-модель-по-методу-arima">Прогнозная модель по методу ARIMA</a></li>
+  <li><a href="#прогноз-для-google" id="toc-прогноз-для-google" class="nav-link" data-scroll-target="#прогноз-для-google">Прогноз для Google</a></li>
+  <li><a href="#точки-роста" id="toc-точки-роста" class="nav-link" data-scroll-target="#точки-роста">Точки роста</a></li>
+  </ul></li>
+  <li><a href="#дальнейшие-действия" id="toc-дальнейшие-действия" class="nav-link" data-scroll-target="#дальнейшие-действия">Дальнейшие действия</a>
+  <ul class="collapse">
+  <li><a href="#стратегия" id="toc-стратегия" class="nav-link" data-scroll-target="#стратегия">Стратегия</a></li>
+  <li><a href="#тактика" id="toc-тактика" class="nav-link" data-scroll-target="#тактика">Тактика</a></li>
+  <li><a href="#сквозная-аналитика" id="toc-сквозная-аналитика" class="nav-link" data-scroll-target="#сквозная-аналитика">Сквозная аналитика</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Ситуационный маркетинговый анализ микрорайона «N»</h1>
+<p class="subtitle lead">Исследование ситуации на рынке недвижимости Краснодарского края в 2021 году</p>
+  <div class="quarto-categories">
+    <div class="quarto-category">Недвижимость</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Автор</div>
+    <div class="quarto-title-meta-contents">
+             <p>Александр Коршаков </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Дата публикации</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">1 июня 2021 г.</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="вводная-информация-по-исследованию" class="level1">
+<h1>Вводная информация по исследованию</h1>
+<blockquote class="blockquote">
+<p>В некоторых местах информация скрыта по условиям NDA (от англ. non‑disclosure agreement) — это соглашение о неразглашении. Оно регламентирует порядок обращения с конфиденциальной информацией, которая указана в соглашении.</p>
+</blockquote>
+<p>Места со скрытой информацией обозначаются специальным сообщением и <span class="color_element">выделяется цветом</span>.</p>
+<section id="источники-информации" class="level2">
+<h2 class="anchored" data-anchor-id="источники-информации">Источники информации</h2>
+<p>Данные для исследования брались с сервисов аналитики, опубликованных исследований, из предоставленных отчётов Заказчика, из поисковых систем и сайтов конкурентов. Ссылки на исходные данные и сторонние исследования указаны в конце документа в части «Дополнительные материалы».</p>
+</section>
+<section id="о-субъективности" class="level2">
+<h2 class="anchored" data-anchor-id="о-субъективности">О субъективности</h2>
+<p>При анализе данных использовались экспертные мнения людей, найденные в открытых источниках, и накопленный опыт нашей компании, а значит результаты могут быть отчасти субъективными. Мы полагаем, что это, во-первых, неизбежно, а во-вторых, не критично для исследовательской ценности ситуационного маркетингового анализа.</p>
+</section>
+<section id="цель-исследования" class="level2">
+<h2 class="anchored" data-anchor-id="цель-исследования">Цель исследования</h2>
+<p>Собрать факты о текущей ситуации в интернете на рынке недвижимости Краснодарского края. Исследовать конкурентную среду в интернете. На основании собранных фактов и исследования конкурентной среды вывести тезисы предполагающие рост продаж квартир в Микрорайоне «N». Тезисы уложить в подходящий фреймворк (в данном случае матрица Остервальдера и Пинье) и предложить лучшие варианты стратегии и тактики.</p>
+</section>
+</section>
+<section id="тезисы-выведенные-на-основании-исследования" class="level1">
+<h1>Тезисы выведенные на основании исследования</h1>
+<ul>
+<li><p>Для улучшения текущей ситуации в рекламных кампаниях сосредоточить силы на повышение конверсии сайта и улучшении отклика по рекламным объявлениям.</p></li>
+<li><p>Согласно исследованиям Яндекс на рынке присутствует тренд покупателей всех классов жилья на боязнь упустить выгодное предложение. Главный акцент необходимо делать через послание «не упустите выгодное предложение». Использовать для «явного» захвата контактов пользователя. «Явный захват» — значит получить контактные данные человека.</p></li>
+</ul>
+<p><span class="color_element">… текст сокращен</span></p>
+</section>
+<section id="revenue-breakdown" class="level1">
+<h1>Revenue Breakdown</h1>
+<p>Revenue Breakdown — анализ который поможет увидеть «узкие места» в системе, воздействуя на которые можно получить наиболее быстрый результат.</p>
+<p>Данный анализ опирается на концепцию «бутылочного горлышка» Элияху Моше Голдратта. Суть в том, что для любых процессов существует «ключевое ограничение» - это этап, пропускная способность которого ограничивает и нормирует весь процесс.</p>
+<p>Мы создали модель revenue breakdown для рекламной кампании в Яндекс на основе представленных отчетов в эксель-таблицах и данных личного кабинета CallTouch. Цель — найти точки воздействия, которые дадут максимальный результат в ближайшем будущем и при этом не потребуют много усилий.</p>
+<section id="дисклеймер" class="level2">
+<h2 class="anchored" data-anchor-id="дисклеймер">Дисклеймер</h2>
+<p>Мы понимаем, что продажи квартир с данного рекламного источника обычно не проходят сразу по пути «пришел &gt; увидел &gt; купил» и мы имеем дело с отложенным спросом, однако улучшив рекламные кампании сейчас вы заложите фундамент на повышение продаж в период от 1 до 3 месяцев после внесения правок.</p>
+<blockquote class="blockquote">
+<p><strong>Таблица: revenue breakdown</strong></p>
+</blockquote>
+<p><span class="color_element">Данные в таблице приведены для примера.</span></p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="lightable-paper lightable-striped lightable-hover caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: center;" data-quarto-table-cell-role="th">Выручка</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Расходы</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Показы</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Клики</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">CTR</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">CPC</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Конверсия лендинг</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Лиды</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">CPL</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Качественных лидов</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">% в качественные</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">CPL2</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Продаж</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">% в сделку</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">CPO</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Ср чек</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Отказ</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">%BR</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Чтобы увеличить выручку</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Разница</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center; font-weight: bold;">120&nbsp;000&nbsp;000₽</td>
+<td style="text-align: center; font-weight: bold;">700&nbsp;000₽</td>
+<td style="text-align: center; font-weight: bold;">6&nbsp;000&nbsp;000</td>
+<td style="text-align: center; font-weight: bold;">30&nbsp;000</td>
+<td style="text-align: center; font-weight: bold;">0,50%</td>
+<td style="text-align: center; font-weight: bold;">22₽</td>
+<td style="text-align: center; font-weight: bold;">0,97%</td>
+<td style="text-align: center; font-weight: bold;"><span style="     ">290</span></td>
+<td style="text-align: center; font-weight: bold;">2&nbsp;414₽</td>
+<td style="text-align: center; font-weight: bold;">130</td>
+<td style="text-align: center; font-weight: bold;">45%</td>
+<td style="text-align: center; font-weight: bold;">5&nbsp;385₽</td>
+<td style="text-align: center; font-weight: bold;">80</td>
+<td style="text-align: center; font-weight: bold;">62%</td>
+<td style="text-align: center; font-weight: bold;">8&nbsp;750₽</td>
+<td style="text-align: center; font-weight: bold;">1&nbsp;500&nbsp;000₽</td>
+<td style="text-align: center; font-weight: bold;">160</td>
+<td style="text-align: center; font-weight: bold;">55%</td>
+<td style="text-align: center; font-weight: bold;">--</td>
+<td style="text-align: center; font-weight: bold;">--</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">144&nbsp;000&nbsp;000₽</td>
+<td style="text-align: center;">700&nbsp;000₽</td>
+<td style="text-align: center;">6&nbsp;000&nbsp;000</td>
+<td style="text-align: center;">30&nbsp;000</td>
+<td style="text-align: center;">0,50%</td>
+<td style="text-align: center;">22₽</td>
+<td style="text-align: center;">0,97%</td>
+<td style="text-align: center;"><span style="     ">290</span></td>
+<td style="text-align: center;">2&nbsp;414₽</td>
+<td style="text-align: center;">130</td>
+<td style="text-align: center;">45%</td>
+<td style="text-align: center;">5&nbsp;385₽</td>
+<td style="text-align: center;">80</td>
+<td style="text-align: center;">62%</td>
+<td style="text-align: center;">8&nbsp;750₽</td>
+<td style="text-align: center;">1&nbsp;500&nbsp;000₽</td>
+<td style="text-align: center;">160</td>
+<td style="text-align: center;"><span style="     color: white !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: red !important;">30%</span></td>
+<td style="text-align: center;">Уменьшить долю отказов на</td>
+<td style="text-align: center;">25,49%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">144&nbsp;000&nbsp;000₽</td>
+<td style="text-align: center;">700&nbsp;000₽</td>
+<td style="text-align: center;">6&nbsp;000&nbsp;000</td>
+<td style="text-align: center;">30&nbsp;000</td>
+<td style="text-align: center;">0,50%</td>
+<td style="text-align: center;">22₽</td>
+<td style="text-align: center;">0,97%</td>
+<td style="text-align: center;"><span style="     ">290</span></td>
+<td style="text-align: center;">2&nbsp;414₽</td>
+<td style="text-align: center;">130</td>
+<td style="text-align: center;">45%</td>
+<td style="text-align: center;">5&nbsp;385₽</td>
+<td style="text-align: center;">80</td>
+<td style="text-align: center;">62%</td>
+<td style="text-align: center;">8&nbsp;750₽</td>
+<td style="text-align: center;">1&nbsp;500&nbsp;000₽</td>
+<td style="text-align: center;"><span style="     color: white !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: red !important;">86</span></td>
+<td style="text-align: center;">55%</td>
+<td style="text-align: center;">Уменьшить кол-во отказов на</td>
+<td style="text-align: center;">74</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">144&nbsp;000&nbsp;000₽</td>
+<td style="text-align: center;">700&nbsp;000₽</td>
+<td style="text-align: center;">6&nbsp;000&nbsp;000</td>
+<td style="text-align: center;">30&nbsp;000</td>
+<td style="text-align: center;">0,50%</td>
+<td style="text-align: center;">22₽</td>
+<td style="text-align: center;">0,97%</td>
+<td style="text-align: center;"><span style="     ">290</span></td>
+<td style="text-align: center;">2&nbsp;414₽</td>
+<td style="text-align: center;">130</td>
+<td style="text-align: center;">45%</td>
+<td style="text-align: center;">5&nbsp;385₽</td>
+<td style="text-align: center;">80</td>
+<td style="text-align: center;">62%</td>
+<td style="text-align: center;">8&nbsp;750₽</td>
+<td style="text-align: center;"><span style="     color: white !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: red !important;">1&nbsp;800&nbsp;000₽</span></td>
+<td style="text-align: center;">160</td>
+<td style="text-align: center;">55%</td>
+<td style="text-align: center;">Увеличить средний чек на</td>
+<td style="text-align: center;">30 0000₽</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">144&nbsp;000&nbsp;000₽</td>
+<td style="text-align: center;">700&nbsp;000₽</td>
+<td style="text-align: center;">6&nbsp;000&nbsp;000</td>
+<td style="text-align: center;">30&nbsp;000</td>
+<td style="text-align: center;">0,50%</td>
+<td style="text-align: center;">22₽</td>
+<td style="text-align: center;">0,97%</td>
+<td style="text-align: center;"><span style="     ">290</span></td>
+<td style="text-align: center;">2&nbsp;414₽</td>
+<td style="text-align: center;">130</td>
+<td style="text-align: center;">45%</td>
+<td style="text-align: center;">5&nbsp;385₽</td>
+<td style="text-align: center;">80</td>
+<td style="text-align: center;">62%</td>
+<td style="text-align: center;"><span style="     color: white !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: red !important;">7&nbsp;292₽</span></td>
+<td style="text-align: center;">1&nbsp;500&nbsp;000₽</td>
+<td style="text-align: center;">160</td>
+<td style="text-align: center;">55%</td>
+<td style="text-align: center;">Снизить стоимость клиента на</td>
+<td style="text-align: center;">1&nbsp;458₽</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">144&nbsp;000&nbsp;000₽</td>
+<td style="text-align: center;">700&nbsp;000₽</td>
+<td style="text-align: center;">6&nbsp;000&nbsp;000</td>
+<td style="text-align: center;">30&nbsp;000</td>
+<td style="text-align: center;">0,50%</td>
+<td style="text-align: center;">22₽</td>
+<td style="text-align: center;">0,97%</td>
+<td style="text-align: center;"><span style="     ">290</span></td>
+<td style="text-align: center;">2&nbsp;414₽</td>
+<td style="text-align: center;">130</td>
+<td style="text-align: center;">45%</td>
+<td style="text-align: center;">5&nbsp;385₽</td>
+<td style="text-align: center;">80</td>
+<td style="text-align: center;"><span style="     color: white !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: red !important;">74%</span></td>
+<td style="text-align: center;">8&nbsp;750₽</td>
+<td style="text-align: center;">1&nbsp;500&nbsp;000₽</td>
+<td style="text-align: center;">160</td>
+<td style="text-align: center;">55%</td>
+<td style="text-align: center;">Увеличить процент в сделку на</td>
+<td style="text-align: center;">12,31%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">144&nbsp;000&nbsp;000₽</td>
+<td style="text-align: center;">700&nbsp;000₽</td>
+<td style="text-align: center;">6&nbsp;000&nbsp;000</td>
+<td style="text-align: center;">30&nbsp;000</td>
+<td style="text-align: center;">0,50%</td>
+<td style="text-align: center;">22₽</td>
+<td style="text-align: center;">0,97%</td>
+<td style="text-align: center;"><span style="     ">290</span></td>
+<td style="text-align: center;">2&nbsp;414₽</td>
+<td style="text-align: center;">130</td>
+<td style="text-align: center;">45%</td>
+<td style="text-align: center;">5&nbsp;385₽</td>
+<td style="text-align: center;"><span style="     color: white !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: red !important;">96</span></td>
+<td style="text-align: center;">62%</td>
+<td style="text-align: center;">8&nbsp;750₽</td>
+<td style="text-align: center;">1&nbsp;500&nbsp;000₽</td>
+<td style="text-align: center;">160</td>
+<td style="text-align: center;">55%</td>
+<td style="text-align: center;">Увеличить продажи на</td>
+<td style="text-align: center;">16</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">144&nbsp;000&nbsp;000₽</td>
+<td style="text-align: center;">700&nbsp;000₽</td>
+<td style="text-align: center;">6&nbsp;000&nbsp;000</td>
+<td style="text-align: center;">30&nbsp;000</td>
+<td style="text-align: center;">0,50%</td>
+<td style="text-align: center;">22₽</td>
+<td style="text-align: center;">0,97%</td>
+<td style="text-align: center;"><span style="     ">290</span></td>
+<td style="text-align: center;">2&nbsp;414₽</td>
+<td style="text-align: center;">130</td>
+<td style="text-align: center;">45%</td>
+<td style="text-align: center;"><span style="     color: white !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: red !important;">4&nbsp;487₽</span></td>
+<td style="text-align: center;">80</td>
+<td style="text-align: center;">62%</td>
+<td style="text-align: center;">8&nbsp;750₽</td>
+<td style="text-align: center;">1&nbsp;500&nbsp;000₽</td>
+<td style="text-align: center;">160</td>
+<td style="text-align: center;">55%</td>
+<td style="text-align: center;">Снизить стоимость качественного лида на</td>
+<td style="text-align: center;">897₽</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">144&nbsp;000&nbsp;000₽</td>
+<td style="text-align: center;">700&nbsp;000₽</td>
+<td style="text-align: center;">6&nbsp;000&nbsp;000</td>
+<td style="text-align: center;">30&nbsp;000</td>
+<td style="text-align: center;">0,50%</td>
+<td style="text-align: center;">22₽</td>
+<td style="text-align: center;">0,97%</td>
+<td style="text-align: center;"><span style="     ">290</span></td>
+<td style="text-align: center;">2&nbsp;414₽</td>
+<td style="text-align: center;">130</td>
+<td style="text-align: center;"><span style="     color: white !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: red !important;">54%</span></td>
+<td style="text-align: center;">5&nbsp;385₽</td>
+<td style="text-align: center;">80</td>
+<td style="text-align: center;">62%</td>
+<td style="text-align: center;">8&nbsp;750₽</td>
+<td style="text-align: center;">1&nbsp;500&nbsp;000₽</td>
+<td style="text-align: center;">160</td>
+<td style="text-align: center;">55%</td>
+<td style="text-align: center;">Увеличить процент качественных лидов на</td>
+<td style="text-align: center;">8,97%</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">144&nbsp;000&nbsp;000₽</td>
+<td style="text-align: center;">700&nbsp;000₽</td>
+<td style="text-align: center;">6&nbsp;000&nbsp;000</td>
+<td style="text-align: center;">30&nbsp;000</td>
+<td style="text-align: center;">0,50%</td>
+<td style="text-align: center;">22₽</td>
+<td style="text-align: center;">0,97%</td>
+<td style="text-align: center;"><span style="     ">290</span></td>
+<td style="text-align: center;">2&nbsp;414₽</td>
+<td style="text-align: center;"><span style="     color: white !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: red !important;">156</span></td>
+<td style="text-align: center;">45%</td>
+<td style="text-align: center;">5&nbsp;385₽</td>
+<td style="text-align: center;">80</td>
+<td style="text-align: center;">62%</td>
+<td style="text-align: center;">8&nbsp;750₽</td>
+<td style="text-align: center;">1&nbsp;500&nbsp;000₽</td>
+<td style="text-align: center;">160</td>
+<td style="text-align: center;">55%</td>
+<td style="text-align: center;">Увеличить кол-во качественных лидов на</td>
+<td style="text-align: center;">26</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">144&nbsp;000&nbsp;000₽</td>
+<td style="text-align: center;">700&nbsp;000₽</td>
+<td style="text-align: center;">6&nbsp;000&nbsp;000</td>
+<td style="text-align: center;">30&nbsp;000</td>
+<td style="text-align: center;">0,50%</td>
+<td style="text-align: center;">22₽</td>
+<td style="text-align: center;">0,97%</td>
+<td style="text-align: center;"><span style="     ">290</span></td>
+<td style="text-align: center;"><span style="     color: white !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: red !important;">2&nbsp;011₽</span></td>
+<td style="text-align: center;">130</td>
+<td style="text-align: center;">45%</td>
+<td style="text-align: center;">5&nbsp;385₽</td>
+<td style="text-align: center;">80</td>
+<td style="text-align: center;">62%</td>
+<td style="text-align: center;">8&nbsp;750₽</td>
+<td style="text-align: center;">1&nbsp;500&nbsp;000₽</td>
+<td style="text-align: center;">160</td>
+<td style="text-align: center;">55%</td>
+<td style="text-align: center;">Снизить стоимость лида на</td>
+<td style="text-align: center;">402₽</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">144&nbsp;000&nbsp;000₽</td>
+<td style="text-align: center;">700&nbsp;000₽</td>
+<td style="text-align: center;">6&nbsp;000&nbsp;000</td>
+<td style="text-align: center;">30&nbsp;000</td>
+<td style="text-align: center;">0,50%</td>
+<td style="text-align: center;">22₽</td>
+<td style="text-align: center;">0,97%</td>
+<td style="text-align: center;"><span style="     color: white !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: red !important;">348</span></td>
+<td style="text-align: center;">2&nbsp;414₽</td>
+<td style="text-align: center;">130</td>
+<td style="text-align: center;">45%</td>
+<td style="text-align: center;">5&nbsp;385₽</td>
+<td style="text-align: center;">80</td>
+<td style="text-align: center;">62%</td>
+<td style="text-align: center;">8&nbsp;750₽</td>
+<td style="text-align: center;">1&nbsp;500&nbsp;000₽</td>
+<td style="text-align: center;">160</td>
+<td style="text-align: center;">55%</td>
+<td style="text-align: center;">Увеличить кол-во лидов на</td>
+<td style="text-align: center;">58</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">144&nbsp;000&nbsp;000₽</td>
+<td style="text-align: center;">700&nbsp;000₽</td>
+<td style="text-align: center;">6&nbsp;000&nbsp;000</td>
+<td style="text-align: center;">30&nbsp;000</td>
+<td style="text-align: center;">0,50%</td>
+<td style="text-align: center;">22₽</td>
+<td style="text-align: center;"><span style="     color: white !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: red !important;">1,16%</span></td>
+<td style="text-align: center;"><span style="     ">290</span></td>
+<td style="text-align: center;">2&nbsp;414₽</td>
+<td style="text-align: center;">130</td>
+<td style="text-align: center;">45%</td>
+<td style="text-align: center;">5&nbsp;385₽</td>
+<td style="text-align: center;">80</td>
+<td style="text-align: center;">62%</td>
+<td style="text-align: center;">8&nbsp;750₽</td>
+<td style="text-align: center;">1&nbsp;500&nbsp;000₽</td>
+<td style="text-align: center;">160</td>
+<td style="text-align: center;">55%</td>
+<td style="text-align: center;">Увеличить конверсию страницы на</td>
+<td style="text-align: center;"><span style="     color: white !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: green !important;">0,19%</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">144&nbsp;000&nbsp;000₽</td>
+<td style="text-align: center;">700&nbsp;000₽</td>
+<td style="text-align: center;">6&nbsp;000&nbsp;000</td>
+<td style="text-align: center;">30&nbsp;000</td>
+<td style="text-align: center;">0,50%</td>
+<td style="text-align: center;"><span style="     color: white !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: red !important;">0,50%</span></td>
+<td style="text-align: center;">0,97%</td>
+<td style="text-align: center;"><span style="     ">290</span></td>
+<td style="text-align: center;">2&nbsp;414₽</td>
+<td style="text-align: center;">130</td>
+<td style="text-align: center;">45%</td>
+<td style="text-align: center;">5&nbsp;385₽</td>
+<td style="text-align: center;">80</td>
+<td style="text-align: center;">62%</td>
+<td style="text-align: center;">8&nbsp;750₽</td>
+<td style="text-align: center;">1&nbsp;500&nbsp;000₽</td>
+<td style="text-align: center;">160</td>
+<td style="text-align: center;">55%</td>
+<td style="text-align: center;">Снизить стоимость клика на</td>
+<td style="text-align: center;">12₽</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">144&nbsp;000&nbsp;000₽</td>
+<td style="text-align: center;">700&nbsp;000₽</td>
+<td style="text-align: center;">6&nbsp;000&nbsp;000</td>
+<td style="text-align: center;">30&nbsp;000</td>
+<td style="text-align: center;"><span style="     color: white !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: red !important;">0,60%</span></td>
+<td style="text-align: center;">22₽</td>
+<td style="text-align: center;">0,97%</td>
+<td style="text-align: center;"><span style="     ">290</span></td>
+<td style="text-align: center;">2&nbsp;414₽</td>
+<td style="text-align: center;">130</td>
+<td style="text-align: center;">45%</td>
+<td style="text-align: center;">5&nbsp;385₽</td>
+<td style="text-align: center;">80</td>
+<td style="text-align: center;">62%</td>
+<td style="text-align: center;">8&nbsp;750₽</td>
+<td style="text-align: center;">1&nbsp;500&nbsp;000₽</td>
+<td style="text-align: center;">160</td>
+<td style="text-align: center;">55%</td>
+<td style="text-align: center;">Увеличить CTR на</td>
+<td style="text-align: center;"><span style="     color: white !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: green !important;">0,10%</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">144&nbsp;000&nbsp;000₽</td>
+<td style="text-align: center;">700&nbsp;000₽</td>
+<td style="text-align: center;">6&nbsp;000&nbsp;000</td>
+<td style="text-align: center;"><span style="     color: white !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: red !important;">36&nbsp;000</span></td>
+<td style="text-align: center;">0,50%</td>
+<td style="text-align: center;">22₽</td>
+<td style="text-align: center;">0,97%</td>
+<td style="text-align: center;"><span style="     ">290</span></td>
+<td style="text-align: center;">2&nbsp;414₽</td>
+<td style="text-align: center;">130</td>
+<td style="text-align: center;">45%</td>
+<td style="text-align: center;">5&nbsp;385₽</td>
+<td style="text-align: center;">80</td>
+<td style="text-align: center;">62%</td>
+<td style="text-align: center;">8&nbsp;750₽</td>
+<td style="text-align: center;">1&nbsp;500&nbsp;000₽</td>
+<td style="text-align: center;">160</td>
+<td style="text-align: center;">55%</td>
+<td style="text-align: center;">Увеличить кол-во кликов на</td>
+<td style="text-align: center;">6 000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">144&nbsp;000&nbsp;000₽</td>
+<td style="text-align: center;">700&nbsp;000₽</td>
+<td style="text-align: center;"><span style="     color: white !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: red !important;">700&nbsp;000₽</span></td>
+<td style="text-align: center;">30&nbsp;000</td>
+<td style="text-align: center;">0,50%</td>
+<td style="text-align: center;">22₽</td>
+<td style="text-align: center;">0,97%</td>
+<td style="text-align: center;"><span style="     ">290</span></td>
+<td style="text-align: center;">2&nbsp;414₽</td>
+<td style="text-align: center;">130</td>
+<td style="text-align: center;">45%</td>
+<td style="text-align: center;">5&nbsp;385₽</td>
+<td style="text-align: center;">80</td>
+<td style="text-align: center;">62%</td>
+<td style="text-align: center;">8&nbsp;750₽</td>
+<td style="text-align: center;">1&nbsp;500&nbsp;000₽</td>
+<td style="text-align: center;">160</td>
+<td style="text-align: center;">55%</td>
+<td style="text-align: center;">Увеличить кол-во показов на</td>
+<td style="text-align: center;">1 200 000</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">144&nbsp;000&nbsp;000₽</td>
+<td style="text-align: center;"><span style="     color: white !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: red !important;">840&nbsp;000₽</span></td>
+<td style="text-align: center;">6&nbsp;000&nbsp;000</td>
+<td style="text-align: center;">30&nbsp;000</td>
+<td style="text-align: center;">0,50%</td>
+<td style="text-align: center;">22₽</td>
+<td style="text-align: center;">0,97%</td>
+<td style="text-align: center;"><span style="     ">290</span></td>
+<td style="text-align: center;">2&nbsp;414₽</td>
+<td style="text-align: center;">130</td>
+<td style="text-align: center;">45%</td>
+<td style="text-align: center;">5&nbsp;385₽</td>
+<td style="text-align: center;">80</td>
+<td style="text-align: center;">62%</td>
+<td style="text-align: center;">8&nbsp;750₽</td>
+<td style="text-align: center;">1&nbsp;500&nbsp;000₽</td>
+<td style="text-align: center;">160</td>
+<td style="text-align: center;">55%</td>
+<td style="text-align: center;">Увеличить средний дневной бюджет на</td>
+<td style="text-align: center;">140 000₽</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p><strong>Результаты</strong></p>
+<p>Создавая модель мы выдвинули цель поднять выручку с данного канала продаж на 20%. Получили следующие результаты:</p>
+<p><span class="color_element">Данные в таблице приведены для примера. К действительности не имеют отношения</span></p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="lightable-paper lightable-striped lightable-hover caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: center;" data-quarto-table-cell-role="th">Чтобы увеличить выручку</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Разница</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Уменьшить долю отказов на</td>
+<td style="text-align: center;">25,49%</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Уменьшить кол-во отказов на</td>
+<td style="text-align: center;">74</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Увеличить средний чек на</td>
+<td style="text-align: center;">30 0000₽</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Снизить стоимость клиента на</td>
+<td style="text-align: center;">1&nbsp;458₽</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Увеличить процент в сделку на</td>
+<td style="text-align: center;">12,31%</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Увеличить продажи на</td>
+<td style="text-align: center;">16</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Снизить стоимость качественного лида на</td>
+<td style="text-align: center;">897₽</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Увеличить процент качественных лидов на</td>
+<td style="text-align: center;">8,97%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Увеличить кол-во качественных лидов на</td>
+<td style="text-align: center;">26</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Снизить стоимость лида на</td>
+<td style="text-align: center;">402₽</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Увеличить кол-во лидов на</td>
+<td style="text-align: center;">58</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Увеличить конверсию страницы на</td>
+<td style="text-align: center;"><span style="     color: white !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: green !important;">0,19%</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Снизить стоимость клика на</td>
+<td style="text-align: center;">12₽</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Увеличить CTR на</td>
+<td style="text-align: center;"><span style="     color: white !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: green !important;">0,10%</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Увеличить кол-во кликов на</td>
+<td style="text-align: center;">6 000</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Увеличить кол-во показов на</td>
+<td style="text-align: center;">1 200 000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Увеличить средний дневной бюджет на</td>
+<td style="text-align: center;"><span style="     color: black !important;border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: yellow !important;">140 000₽</span></td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p>Цветовое кодирование в таблице показывает уровень сложности:</p>
+<ul>
+<li>зеленый относительно быстрый и простой способ увеличить выручку на <span class="math inline">\(20\%\)</span> исходя из текущих показателей</li>
+<li>желтый — средний уровень сложности</li>
+</ul>
+<p>Так, исходя из собственного опыта, увеличить конверсию сайта на <span class="math inline">\(0,19\%\)</span> и поднять <span class="math inline">\(ctr\)</span> на <span class="math inline">\(0,1\%\)</span> более реально, чем снизить стоимость обращения на <span class="math inline">\(20\%\)</span> или снизить долю отказов или мусорных запросов. Учитывая результаты QFD анализа сделать данную работу будет не сложно.</p>
+<p>Допустим способ связанный с увеличением бюджета. Так увеличив средний месячный бюджет на <span class="math inline">\(140\ 000\)</span>₽ сможем добиться поставленных целей при условии, что объем рынка позволит выкупить дополнительное кол-во показов. Также «игра» с бюджетом касается стоимости клика.</p>
+<p><span class="color_element">… текст сокращен</span>.</p>
+</section>
+</section>
+<section id="предиктивный-анализ-обращений" class="level1">
+<h1>Предиктивный анализ обращений</h1>
+<p>Допустим у нас получилось поднять конверсию сайта до <span class="math inline">\(n\)</span>. На какие результаты можно рассчитывать, учитывая, что сейчас в среднем в месяц из «Яндекс Директ» поступает <span class="math inline">\(m\)</span> обращений?</p>
+<p>Проведем вычисления в RStudio с помощью метода вероятного распределения Пуассона:</p>
+<p><img src="img/puas.png" class="img-fluid"></p>
+<p>Результаты показывают, что с <span class="math inline">\(92\%\)</span> вероятностью можно получить от <span class="math inline">\(340\)</span> до <span class="math inline">\(410\)</span> обращений ежемесячно с «Яндекс Директ». Если принять за константу конверсию сайта равной <span class="math inline">\(n\)</span>.</p>
+<p><span class="color_element">… текст сокращен</span>.</p>
+</section>
+<section id="анализ-обращений-по-6-сигмам" class="level1">
+<h1>Анализ обращений по 6 сигмам</h1>
+<p>Главная задача анализа по шести сигмам — научиться отличать системное от случайного, т.е какие данные можно отнести к статистически не случайным. Поняв мощность и границы работы системы, например какое в среднем кол-во обращений может выдавать рекламная кампания в Яндексе, мы сможем увидеть аномалии и провести их анализ с целью устранить или улучшить показатели системы. Так с помощью данного анализа можем шаг за шагом улучшить показатели рекламных кампаний и иных источников трафика.</p>
+<p>Сигма — это отношение среднего размаха для какого-то кол-ва подгрупп, деленное на коэффициент <span class="math inline">\(D2\)</span> из карт Шухарта для этого числа подгрупп.</p>
+<p>Что показал нам анализ обращений в рекламной кампании Яндекса.</p>
+<p><img src="img/6_sigm.png" class="img-fluid"></p>
+<p><strong>Дескриптор графика</strong></p>
+<p>Красная пунктирная линия обозначает среднее кол-во обращений с мая <span class="math inline">\(2020\)</span> по апрель <span class="math inline">\(2021\)</span>. Синим обозначены границы трех сигм.</p>
+<p>Выход за пределы данных сигм означает выход за нормальные производственные мощности системы. Т. е. увидев такой выброс за границы необходимо понять его причину. Если это выходя за верхний предел (т.е. положительное влияние), то понять в чем причина и внедрить в систему. Если выход за нижние пределы, то понять и впредь не допускать. Таким образом, шаг за шагом, постепенно улучшать каждый источник трафика.</p>
+<p><span class="color_element">… текст сокращен</span>.</p>
+<p><strong>Интерпретация графика</strong></p>
+<p>Период пандемии сильно искажает границы шести сигм и арифметическую среднюю, как и резкий скачок интереса. Поэтому уберем этот период и проанализируем данные с ноября <span class="math inline">\(2020\)</span> по апрель <span class="math inline">\(2021\)</span>.</p>
+<p><img src="img/6_sigm_2.png" class="img-fluid"></p>
+<p><strong>Интерпретация графика</strong></p>
+<p>Получили более равномерные данные, но по прежнему наблюдаются частые выходы за пределы границ системы. Видим что «Яндекс.Директ» генерирует от <span class="math inline">\(5\)</span> до <span class="math inline">\(16\)</span> заявок в день — это мощность рекламного канала на текущий период. Хорошо это или плохо не известно, но именно с таким КПД работает данная система.</p>
+<p><span class="color_element">… текст сокращен</span>.</p>
+<section id="анализ-арифметической-средней-по-обращениям" class="level2">
+<h2 class="anchored" data-anchor-id="анализ-арифметической-средней-по-обращениям">Анализ арифметической средней по обращениям</h2>
+<p>Шухар и Деминг выделили два критерия, которые должны указывать на рост и контроль системы:</p>
+<ul>
+<li>среднеарифметическая растет или снижается в зависимости от параметра.</li>
+<li>границы сигмы становятся все более узкими. Сокращая вариативность параметра мы берем управление под контроль.</li>
+</ul>
+<p>Зная мощность, а также тенденцию арифметической средней мы можем сказать контролируем ли мы рекламный источник, т. е. работаем над улучшением.</p>
+<p><img src="img/average.png" class="img-fluid"></p>
+<p>На графике изображено среднее значение обращений за <span class="math inline">\(22\)</span> недели с ноября по апрель. С ноября по декабрь среднее значение по обращениям постепенно снижалось. Затем январь и февраль с низкими значениями средней. В марте наблюдается выход на прежние показатели.</p>
+<p><span class="color_element">… текст сокращен</span>.</p>
+</section>
+<section id="анализ-качественных-лидов" class="level2">
+<h2 class="anchored" data-anchor-id="анализ-качественных-лидов">Анализ качественных лидов</h2>
+<p>Проведя анализ «качественных лидов» (синия линия на графике) мы заметили высокую корреляцию с «первичными обращениями» (черная линия на графике). Результаты корреляционного анализа непараметрическим методом Спирмена <span class="math inline">\(rho = 0.7592431\)</span> при <span class="math inline">\(p-value = 3.186e-12\)</span>.</p>
+<p><img src="img/leads.png" class="img-fluid"></p>
+<p>Теоретически это означает, что увеличив кол-во входящих «первичных обращений» увеличим и кол-во «качественных обращений». Как это сделать быстро показано в части «Revenue breakdown».</p>
+<p><span class="color_element">… текст сокращен</span>.</p>
+<p><br></p>
+</section>
+</section>
+<section id="анализ-целевой-аудитории" class="level1">
+<h1>Анализ целевой аудитории</h1>
+<p>В данной части мы рассмотрим целевую аудиторию и их характеристики. Рассчитаем объём рынка по модели «TAM SAM SOM». Расскажем о модели Клейтона Кристенсена JTBD и почему это важно. Данная часть разработана на основе собственных исследований и исследований Яндекса. Все ссылки на исследования и «сырые» данные указаны в части «Дополнительные материалы».</p>
+<section id="jtbd" class="level2">
+<h2 class="anchored" data-anchor-id="jtbd">JTBD</h2>
+<p>Американский бизнес-консультант Клейтон Кристенсен сформулировал теорию, которую назвал «теория работ», по-английски — Jobs To Be Done, или «работа, которая должна быть сделана». JTBD затрагивает больше различных аспектов рынка, чем изучение отдельных групп, поэтому изучать нужно не только целевые аудитории и социально-демографические группы, а типы работ, которые выполняют клиенты с помощью продукта, помня, что один и тот же клиент в разное время и различных обстоятельствах одним и тем же продуктом может выполнять разные работы.</p>
+<blockquote class="blockquote">
+<p><em>Например, допустим у нас ресторан в офисном здании. Каждый день к нам приходит сотрудники офисов. Кто-то на обед, кто-то на завтрак, а кто-то на завтрак, обед и ужин. Таким образом у нас один и тот же человек может «нанимать» ресторан до трех раз в день.</em></p>
+<p><em>Вот почему важно не описывать выдуманные профили людей в стиле: «это Света, ей от</em> <span class="math inline">\(20\)</span> до <span class="math inline">\(45\)</span>, у неё двое детей в возрасте от <span class="math inline">\(1\)</span> до <span class="math inline">\(20\)</span> и машина… стиральная машина», а знать зачем вашу компанию нанимают. Потому что Света, это вымышленный персонаж, который живет в голове составителя профиля и никакой пользы от этих знаний компания не получит.</p>
+<p><em>Но зная JTBD мы можем с большей точностью определить объем потребительского рынка, что не возможно сделать зная только лишь портрет ЦА. Вернемся к нашему примеру с рестораном и рассчитаем объем рынка. Ресторан знает, что в офисном здании каждый день работают</em> <span class="math inline">\(1000\)</span> человек. Тогда мы имеем <span class="math inline">\(3×1000=3000\)</span> потенциальных запросов. Это и есть объём JTBD, он же объем рынка. Допустим ресторан продает <span class="math inline">\(300\)</span> обедов, ужинов и завтраков в день, соответственно доля рынка у ресторана <span class="math inline">\(10\%\)</span>.</p>
+</blockquote>
+<p>В такой парадигме также можно подумать о рынке недвижимости. Изучив рынок и исследования в сфере недвижимости от Яндекс мы выделили следующие важные JTBD клиентов на рынке новостроек.</p>
+<p><span class="color_element">Таблица сокращена</span></p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="lightable-paper lightable-striped lightable-hover caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">JTBD</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">JTBD детально</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Улучшить жильей</td>
+<td style="text-align: left;">Улучшить жилищные условия</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Сменить съемное жилье на собственное, не тратить деньги на аренду</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">...</td>
+<td style="text-align: left;">...</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p>Однако нам не достаточно просто знаний о JTBD. Необходимо понять объем каждого JTBD, чтобы выделить наиболее больший сегмент с точки зрения потенциальной прибыли. Для анализа ёмкости рынка применим модель TAM SAM SOM и данные из исследования Яндекс (ссылки на исследования указаны в части «Дополнительные материалы»).</p>
+</section>
+<section id="tam-sam-som" class="level2">
+<h2 class="anchored" data-anchor-id="tam-sam-som">TAM SAM SOM</h2>
+<p>Расшифруем аббревиатуры модели:</p>
+<ul>
+<li>TAM (Total Addressable Market) — общий объём целевого рынка</li>
+<li>SAM (Served/Serviceable Available Market) — доступный объём целевого рынка, который мы могли бы занять обладая неограниченным ресурсами</li>
+<li>SOM (Serviceable &amp; Obtainable Market) — реально достижимый объём рынка, который мы можем занять сейчас при текущем уровне ресурсов</li>
+</ul>
+<p>Используя данные по процентному соотношению JTBD из исследования Яндекса вычислим объем рынка по каждому JTBD, при этом учтем и приблизительное кол-во запросов из поисковой системы Гугл. Согласно данным «Яндекс Радар» Google занимает примерно <span class="math inline">\(40\%\)</span> рынка, что дает нам около <span class="math inline">\(60\%\)</span> запросов от текущего объема из Яндекса.</p>
+<blockquote class="blockquote">
+<p><strong>Таблица: кол-во запросов из Яндекс и Гугл в год по ЮФО</strong></p>
+</blockquote>
+<p><span class="color_element">Таблица сокращена</span></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>JTBD</th>
+<th>TAM</th>
+<th>% JTBD</th>
+<th>SAM</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Улучшить жилье</td>
+<td>19 200 000</td>
+<td>47%</td>
+<td>9 024 000</td>
+</tr>
+</tbody>
+</table>
+<p><span class="color_element">…</span></p>
+<blockquote class="blockquote">
+<p><strong>Таблица: кол-во запросов из Яндекс и Гугл в месяц по ЮФО</strong></p>
+</blockquote>
+<p><span class="color_element">Таблица сокращена</span></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>JTBD</th>
+<th>TAM</th>
+<th>% JTBD</th>
+<th>SAM</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Улучшить жилье</td>
+<td>1 600 000</td>
+<td>47%</td>
+<td>752 000</td>
+</tr>
+</tbody>
+</table>
+<p><span class="color_element">…</span></p>
+<p>Ежемесячно с обоих источников генерируется примерно 1 600 000 запросов, при этом большая часть запросов — 47% относится к JTBD «Улучшить жилье».</p>
+<p>Совместим полученные данные с данными по среднему CTR объявлений из личного кабинета сервиса CallTouch.</p>
+<blockquote class="blockquote">
+<p><strong>Таблица: текущий охват рынка</strong></p>
+</blockquote>
+<p><span class="color_element">Таблица сокращена</span></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>JTBD</th>
+<th>TAM</th>
+<th>% JTBD</th>
+<th>SAM</th>
+<th>Reach</th>
+<th>SOM</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Улучшить жилье</td>
+<td>1 600 000</td>
+<td>47%</td>
+<td>752 000</td>
+<td>19 270</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td>Итого</td>
+<td>2,76%</td>
+<td>41 000</td>
+</tr>
+</tbody>
+</table>
+<p><span class="color_element">…</span></p>
+<p>Таким образом имеем представление, что «N» охватывает примерно <span class="math inline">\(3\%\)</span> целевой аудитории. Учитывая объем SAM известно, что потенциал роста точно имеется.</p>
+<p>Стоит учесть, что это примерные данные, тем не менее они создают систему координат в которой мы можем ориентироваться относительно других участников рынка. Более точные данные по объёму сегментов будут приведены в части анализа факторов выбора, так как данные будут опираться на результаты опроса целевой аудитории по краснодарскому краю.</p>
+</section>
+<section id="характеристики-потребителей-жилья-комфорт-класса" class="level2">
+<h2 class="anchored" data-anchor-id="характеристики-потребителей-жилья-комфорт-класса">Характеристики потребителей жилья комфорт-класса</h2>
+<p>В феврале <span class="math inline">\(2021\)</span> года компании «Яндекс» и «Бренд Пульс» провели исследование в ходе, которого вывели характеристики покупателей разных классов жилья. Ниже приведены данные по покупателям жилья класса «Комфорт», так как микрорайон «N» принадлежит данному классу.</p>
+<blockquote class="blockquote">
+<p><strong>Данные по поло-демографическим признакам и социальному статусу</strong></p>
+</blockquote>
+<p><img src="img/age.png" class="img-fluid"></p>
+<p><img src="img/sex.png" class="img-fluid"></p>
+<p>Потребители комфорт-класса моложе и имеют более выраженное ядро аудитории, чем остальные ЦА.</p>
+</section>
+<section id="виды-досуга-и-цифровое-потребление" class="level2">
+<h2 class="anchored" data-anchor-id="виды-досуга-и-цифровое-потребление">Виды досуга и цифровое потребление</h2>
+<p><img src="img/dosug.png" class="img-fluid"></p>
+<p><img src="img/dosug2.png" class="img-fluid"></p>
+<p>Основные виды досуга — посещение ТРЦ, просмотр видео и серфинг в соц.сетях.</p>
+</section>
+<section id="чувствительность-к-рекламным-источникам" class="level2">
+<h2 class="anchored" data-anchor-id="чувствительность-к-рекламным-источникам">Чувствительность к рекламным источникам</h2>
+<p><img src="img/ads_sens.png" class="img-fluid"> Потребители чувствительны к промо-акциям, замечают видео и баннерную рекламу в равной степени.</p>
+</section>
+<section id="используемые-сервисы" class="level2">
+<h2 class="anchored" data-anchor-id="используемые-сервисы">Используемые сервисы</h2>
+<p><img src="img/music.png" class="img-fluid"></p>
+<p><img src="img/taxi.png" class="img-fluid"></p>
+<p><img src="img/market.png" class="img-fluid"></p>
+<p><img src="img/video.png" class="img-fluid"></p>
+<p>Покупатели комфорт-класса:</p>
+<ul>
+<li>слушают «Яндекс.Музыку» и «Youtube Music»;</li>
+<li>используют «Яндекс.Такси»;</li>
+<li>покупают на «Avito» и «AliExpress»;</li>
+<li>активно потребляют контент на видеоплатформе «Youtube».</li>
+</ul>
+<p><strong>Точки роста</strong></p>
+<p><span class="color_element">… текст сокращен</span>.</p>
+</section>
+</section>
+<section id="анализ-факторов-выбора-квартир" class="level1">
+<h1>Анализ факторов выбора квартир</h1>
+<section id="дизайн-и-цели-опроса" class="level2">
+<h2 class="anchored" data-anchor-id="дизайн-и-цели-опроса">Дизайн и цели опроса</h2>
+<p>Цель проведения опроса выявить наиболее и наименее важные критерии выбора квартиры с помощью QFD-анализа. Также данные опроса используются для построения ценностно-стоимостной карты.&nbsp;</p>
+<p>Онлайн-опрос проведен через сервис «Яндекс Взгляд» по пользователям с интересом «недвижимость» по ЮФО.&nbsp;</p>
+</section>
+<section id="формирование-выборки" class="level2">
+<h2 class="anchored" data-anchor-id="формирование-выборки">Формирование выборки</h2>
+<p>Как мы уже знаем, ежемесячно в поисковых системах «Яндекс» и «Гугл» в среднем формируется <span class="math inline">\(1,6\)</span> млн запросов — это наша генеральная совокупность. Из неё формируем выборку для проведения онлайн-опроса по формуле:</p>
+<p><span class="math display">\[SS=\frac{Z^2×p×(1-p)}{c^2}\]</span></p>
+<p>где</p>
+<ul>
+<li><span class="math inline">\(Z\)</span> — доверительная вероятность, показывает с какой вероятностью случайный ответ попадет в доверительный интервал (например <span class="math inline">\(1,96\)</span> для <span class="math inline">\(95\%\)</span> доверительного интервала)</li>
+<li><span class="math inline">\(p\)</span> — процент интересующих респондентов или ответов (<span class="math inline">\(0,3\)</span>)</li>
+<li><span class="math inline">\(c\)</span> — доверительный интервал. Можно понимать как погрешность, задает размах части кривой распределения по обе стороны от выбранной точки, куда могут попадать ответы (<span class="math inline">\(0,05 = ± 5\%\)</span>).</li>
+</ul>
+<p>Мы получили выборку из <span class="math inline">\(458\)</span> человек, при этом нам необходимо получить примерно <span class="math inline">\(137\)</span> полностью заполненных анкет. В сервисе мы указали выборку из <span class="math inline">\(500\)</span> анкет. В итоге получили около <span class="math inline">\(600\)</span> анкет из них <span class="math inline">\(175\)</span> полностью заполненных.</p>
+</section>
+<section id="структура-опроса" class="level2">
+<h2 class="anchored" data-anchor-id="структура-опроса">Структура опроса</h2>
+<p>В опросник входили следующие вопросы: первый распределяющий вопрос: «Вы собираетесь или уже купили квартиру в новостройке Краснодара?». Цель вопроса распределить респондентов на три группы:</p>
+<ul>
+<li>группа 1 — планируют или уже купил квартиру;</li>
+<li>группа 2 — планирует покупать на вторичном рынке;</li>
+<li>группа 3 — не планирует покупать;</li>
+<li><span class="color_element">… пункты удалены</span>;</li>
+<li>последний вопрос просьба указать пол и возраст. В данный блок попадают респонденты всех групп. Важно понимать какую целевую аудиторию опросил сервис и сопоставляются ли данные с результатами исследования Яндекса, о которых мы говорили в части «Характеристики потребителей жилья комфорт-класса».</li>
+</ul>
+</section>
+<section id="результаты-опроса" class="level2">
+<h2 class="anchored" data-anchor-id="результаты-опроса">Результаты опроса</h2>
+<section id="возраст-респондентов" class="level3">
+<h3 class="anchored" data-anchor-id="возраст-респондентов">Возраст респондентов</h3>
+<p><img src="img/pol.png" class="img-fluid"></p>
+<p>Основная часть аудитории по которой проходил опрос это женщины от <span class="math inline">\(25 - 44\)</span> лет и мужчины той же возрастной группы. Данные прекрасно соотносятся с данными исследования Яндекса.</p>
+<p><span class="color_element">…текст сокращен</span></p>
+</section>
+<section id="распределение-по-группам" class="level3">
+<h3 class="anchored" data-anchor-id="распределение-по-группам">Распределение по группам</h3>
+<p><img src="img/otvet.png" class="img-fluid"></p>
+<p>Данное распределение мы можем экстраполировать на генеральную совокупность согласно статистическим принципам. В роли генеральной совокупности у нас количество ежемесячных запросов из поисковых систем. Таким образом мы получаем следующие распределение:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Ген совокупность</th>
+<th>Интент</th>
+<th>Распределение</th>
+<th>Кол-во</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1 600 000</td>
+<td>Интересуются покупкой</td>
+<td>17%</td>
+<td>270 000</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Вторичный рынок</td>
+<td>12%</td>
+<td>190 000</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>Остальные</td>
+<td>71%</td>
+<td>1 140 0000</td>
+</tr>
+</tbody>
+</table>
+<p>Важно отметить, что в таблице указано кол-во запросов, а не человек. Т.е. один человек в течении месяца может сделать несколько запросов. Тем не менее данное число может служить ориентиром при анализе рекламных кампаний.</p>
+<p>В сегмент «остальные» входят те кто купил квартиру, и все кто так или иначе связан с недвижимостью от риэлтора до аналитиков рынка. Данный сегмент во всех нишах всегда больше.</p>
+</section>
+<section id="причины-покупки-квартиры" class="level3">
+<h3 class="anchored" data-anchor-id="причины-покупки-квартиры">Причины покупки квартиры</h3>
+<p><img src="img/goal.png" class="img-fluid"></p>
+<p>По результатам опроса выделили три основных причины (JTBD) для покупки квартиры:</p>
+<ul>
+<li>переезд в Краснодар</li>
+<li>…</li>
+</ul>
+<p>Теперь можно скорректировать объем сегментов по JTBD согласно результатам наших опросов.</p>
+<p><span class="color_element">Таблица сокращена.</span></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>JTBD</th>
+<th>TAM</th>
+<th>%JTBD</th>
+<th>SAM</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Пeреезд в Краснодар</td>
+<td>270 000</td>
+<td>29%</td>
+<td>78 000</td>
+</tr>
+<tr class="even">
+<td>…</td>
+<td>…</td>
+<td>25%</td>
+<td>68 000</td>
+</tr>
+</tbody>
+</table>
+<p><span class="color_element">…текст сокращен</span></p>
+</section>
+</section>
+</section>
+<section id="quality-analysis-function-qfd" class="level1">
+<h1>Quality Analysis Function (QFD)</h1>
+<p>QFD, или построение матрицы развертывания функций качества, помогает просчитать факторы, по которым клиент выбирает ваш продукт.</p>
+<p><span class="color_element">…текст сокращен</span></p>
+<p>Матрицу QFD необходимо строить, если вы не знаете:</p>
+<ul>
+<li>какие характеристики нового продукт важны для покупателя;</li>
+<li>какое позиционирование выбрать для существующего продукта или услуги;</li>
+<li>какое позиционирование выбрать для вашей компании;</li>
+<li>на чем делать фокус в контентной стратегии (о чем рассказывать и под каким углом);</li>
+<li>какие точки контакта являются самыми важными для ваших клиентов.</li>
+</ul>
+<p>Существует два подхода к построению QFD анализа. Первый укороченный вариант «small QFD» — когда мы анализируем через бета-веса результаты опроса и определяем наиболее важные критерий. В данном исследовании применён именно данный подход.</p>
+<p><span class="color_element">…текст сокращен</span></p>
+<p><img src="img/qfd.png" class="img-fluid"></p>
+<p><strong>Результаты опроса</strong></p>
+<p>Потребители жилья комфорт-класса выделили следующие основные критерии выбора:</p>
+<ul>
+<li>близость социально и транспортной инфраструктуры;</li>
+<li>репутация застройщика;</li>
+<li>выгодные условия при покупке.</li>
+</ul>
+<p>Следует обратить особое внимание на данные факторы при выстраивании коммуникации с клиентами. Использовать их <span class="color_element">…текст сокращен.</span></p>
+</section>
+<section id="анализ-конкурентной-среды" class="level1">
+<h1>Анализ конкурентной среды</h1>
+<section id="отбор-конкурентов" class="level2">
+<h2 class="anchored" data-anchor-id="отбор-конкурентов">Отбор конкурентов</h2>
+<p>Методология отбора конкурентов строится на гипотезе, что чем больше показов у домена конкурента по выбранным ключевым словам (т. е. чем больше доля охвата), тем больше трафика получает домен, а значит это наш конкурент в сети.</p>
+<p>Для отбора конкурентов в интернете мы выгрузили семантику из Яндекс.Метрики запросили файл с существующей семантикой и дополнительно распарсили ключи в обеих поисковых системах. В итоге было отобрано для анализа в поисковой выдачи примерно <span class="math inline">\(1400\)</span> ключевых слов и <span class="math inline">\(500\)</span> в платной выдаче. Этого достаточно для оценки конкурентной ситуации в сети.</p>
+<p>В итоге по семантическому ядру выявлено уникальных доменов (не повторяющихся) конкурентов:</p>
+<ul>
+<li>Яндекс.Директ - <span class="math inline">\(312\)</span></li>
+<li>Гугл Реклама – <span class="math inline">\(71\)</span></li>
+<li>Поисковая выдача Яндекс - <span class="math inline">\(610\)</span></li>
+<li>Поисковая выдача Гугл – <span class="math inline">\(606\)</span></li>
+</ul>
+<p>Наличие данного кол-ва уникальных доменов в каждом из каналов показывает уровень конкуренции в этих каналах.</p>
+<p>Далее конкуренты для анализа отбирались по следующим критериям:</p>
+<ul>
+<li>наибольший охват семантического ядра. Т.е. учитывалась частота появления домена по анализируемым ключевым словам;</li>
+<li>присутствуют в большинстве каналов привлечения трафика – т. е. присутствуют и в органической выдаче Яндекса и Гугл, и в платной выдаче данных систем;</li>
+<li>являются прямыми конкурентами – т. е. предоставляют те же услуги и продукты, что и Вы и в том же регионе;</li>
+<li>домен не является сайтом агрегатором или маркетплейсом.</li>
+</ul>
+<p>В результате отобраны следующие прямые конкуренты для анализа:</p>
+<ul>
+<li><span class="color_element">…текст сокращен</span></li>
+</ul>
+</section>
+</section>
+<section id="привлечение" class="level1">
+<h1>Привлечение</h1>
+<p>В данном разделе мы ответим на вопрос из каких источников сайты конкурентов привлекают трафик на сайт. В каких источниках сильная конкуренция, а какие источники используются слабо.</p>
+<section id="источники-трафика-используемые-конкурентами" class="level2">
+<h2 class="anchored" data-anchor-id="источники-трафика-используемые-конкурентами">Источники трафика используемые конкурентами</h2>
+<p>Данные по источникам трафика собраны на основе анализа сайтов конкурентов с помощью сервиса «SimilarWeb». На гистограмме показаны агрегированные параметрические данные по трафику на десктопные устройства, т. е. это усредненный показатель по анализируемым конкурентам.</p>
+<p>Данные помогут понять структуру трафика, а также выяснить в каком из источников ожидается сильная конкурентная борьба за трафик, а каким источникам уделяется мало внимания.</p>
+<p><img src="img/traffic.png" class="img-fluid"></p>
+<p>На гистограмме видно, что компании активно используют как органический трафик, так и платные источники трафиков. Сервис «SimilarWeb» в источник «Referrals» записывает переходы из платной и бесплатной выдачи поисковой системы Яндекс, поэтому трафик из этого источника правильно распределить по источникам «Organic» и «Paid».</p>
+<p><span class="color_element">…текст сокращен</span></p>
+</section>
+<section id="посещаемость-сайтов-конкурентов" class="level2">
+<h2 class="anchored" data-anchor-id="посещаемость-сайтов-конкурентов">Посещаемость сайтов конкурентов</h2>
+<p>Сервис неточно предоставляет данные по кол-ву визитов на сайты конкурентов, к тому же имеются данные только посещений с десктопных устройств. Однако измерив показатели визитов конкурентов в метриках сервиса и сравних их с показателями сайта «N» можно понять наше место в конкурентном окружении.</p>
+<p>Данные следующие:</p>
+<p><span class="color_element">Таблица сокращена</span></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th><strong>№</strong></th>
+<th><strong>Конкуренты</strong></th>
+<th><strong>Визиты</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>…</td>
+<td>49 333</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>…</td>
+<td>44 000</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>…</td>
+<td>31 667</td>
+</tr>
+</tbody>
+</table>
+<p>Стоит отметить что в таблице представлены данные по визитам только с десктопных устройств и не учтены данные по посещению сайтов с мобильных устройств. Однако, представленных данных вполне достаточно для определения сильных конкурентов в интернете. Именно с этими сайтами будет происходить борьба за трафик по семантике и другим способами таргетирования.</p>
+<p>Что касается распределения трафика по типам устройств, 66% трафика приходится на мобильные устройства.</p>
+<p><img src="img/desk.png" class="img-fluid"></p>
+<p>Это важно учесть, так как первое знакомство с сайтом компании, как правило, происходит с мобильного устройства, особенно на уровне несформированного спроса. В первую очередь сайт должен быть оптимизирован под мобильные устройства.</p>
+<p>Далее мы подробно рассмотрим структуру платных и бесплатных источников трафика в SERP.</p>
+</section>
+<section id="поисковый-трафик-serp" class="level2">
+<h2 class="anchored" data-anchor-id="поисковый-трафик-serp">Поисковый трафик (SERP)</h2>
+<p>Собрав первичную семантику, мы с помощью программных средств сбора (Python) и анализа данных (RStudio) увидели кто из конкурентов встречается наиболее часто в платной и бесплатной выдачи и у кого больший охват по семантическому ядру.</p>
+<p>В платной выдачи участвовало <span class="color_element">…текст сокращен</span></p>
+<p>Показатель «Показы» в таблице — показывает суммарное кол-во показов по семантическому ядру, т. е. если «показ» равен <span class="math inline">\(492\)</span> это означает, что из <span class="math inline">\(520\)</span> ключевых слов домен показывался <span class="math inline">\(492\)</span> раза. Показатель «% охвата» — показывает долю охвата от семантики в относительных показателях.</p>
+</section>
+<section id="платная-выдача-яндекс" class="level2">
+<h2 class="anchored" data-anchor-id="платная-выдача-яндекс">Платная выдача Яндекс</h2>
+<p>Всего в платной выдаче по Краснодару обнаружено <span class="math inline">\(312\)</span> доменов. Это достаточно много, что говорит о сильной конкуренции в данном источнике.</p>
+<p>Показатель «Ср. позиция» в «Яндекс Директ» служит косвенным показателем того, кто больше всех платит за клик на аукционе. Чем ближе к нулю, тем большие ставки делает конкурент.</p>
+<blockquote class="blockquote">
+<p><strong>Таблица: конкуренты в платной выдачи Яндекс</strong></p>
+</blockquote>
+<p><span class="color_element">Таблица сокращена</span></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>№</th>
+<th>Домен</th>
+<th>Показы</th>
+<th>Ср. позиция</th>
+<th>% охват</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td><a href="http://mrqz.me">mrqz.me</a></td>
+<td>492</td>
+<td>10</td>
+<td>95%</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td><a href="http://avito.ru">Avito.ru</a></td>
+<td>447</td>
+<td>1</td>
+<td>86%</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td><a href="https://xn------6cd%20cabjcoin6azag3ceclezebefvs.xn--p1ai/">подбор-квартир-в-краснодаре.рф</a></td>
+<td>388</td>
+<td>9</td>
+<td>75%</td>
+</tr>
+</tbody>
+</table>
+<p>На первом месте сайт mrqz.me — сервис по созданию квизов. Ниже представлены компании и жилые комплексы, которые используют данный сервис (расположены в порядке частотности использование по убыванию):</p>
+<ul>
+<li><span class="color_element">…список сокращен</span></li>
+</ul>
+<p>Также среди доменов участвующих в аукционе замечена значительная доля сайтов агрегаторов. Данные сайты, судя по средней позиции, больше всех платят за клик, например «avito» и «kayn», при этом имеют наибольший охват по ключевым словам.</p>
+<p>Среди прямых конкурентов стоит отметить сайты <span class="color_element">…</span></p>
+<p>Интересно отметить присутствие в выдаче ресурса zen.yandex.ru. По ключевым словам ранжируются статьи со следующими заголовками:</p>
+<ul>
+<li>Почему так стремительно растут цены на жилье…</li>
+<li>Как мы 12 лет прожили на Юге России и почему по итогу…</li>
+<li>Актуальные планировки и цены на квартиры…</li>
+<li><span class="color_element">…список сокращен</span></li>
+</ul>
+<p>В основном статьи принадлежат блогерам. Страница на Дзен компании «N» — рекламный материал и это единственный застройщик, который замечен в платной выдаче через данную площадку. Также присутствует компания «N» предоставляющая аналитику и новости рынка недвижимости.</p>
+<p><span class="color_element">…текст сокращен</span></p>
+</section>
+<section id="аукцион-в-яндекс-директ" class="level2">
+<h2 class="anchored" data-anchor-id="аукцион-в-яндекс-директ">Аукцион в Яндекс Директ</h2>
+<p>Мы провели дополнительное мини исследование с целью выяснить меняется ли ставка в зависимости от домена.</p>
+<p>Загрузив в интерфейс «Директа» группы объявлений, где в каждой группе одно объявление таргетированное по ключу «купить однокомнатную квартиру» мы получили следующие данные по ставкам для объема трафика равному <span class="math inline">\(100\%\)</span>.</p>
+<p><span class="color_element">Таблица сокращена</span></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>ЖК</th>
+<th>URL</th>
+<th>Прогноз 100%</th>
+<th>Списываемая</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td></td>
+<td>633</td>
+<td>414</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>517</td>
+<td>344</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td>602</td>
+<td>397</td>
+</tr>
+</tbody>
+</table>
+<p>Видно, что у всех посадочных страниц разные прогнозные цены и списываемая цена. Самая низкая списываем цена у посадочной страницы .</p>
+<p>Дальнейший анализ посадочных страниц в части «Вовлечение» покажет, что у данная посадочная страница занимает последние место в рейтинге по раскрытию контуров (первое место у «ЖК Fresh»). Однако, «Яндекс» ставит им более низкую ставку. Возможно, что сама рекламная кампания внутри интерфейса грамотно настроена, либо пользуются бид-менеджером, что позволяет держать низкую ставку.</p>
+</section>
+<section id="платная-выдача-google" class="level2">
+<h2 class="anchored" data-anchor-id="платная-выдача-google">Платная выдача Google</h2>
+<p><span class="color_element">Раздел сокращен</span></p>
+</section>
+<section id="органический-трафик-яндекс" class="level2">
+<h2 class="anchored" data-anchor-id="органический-трафик-яндекс">Органический трафик Яндекс</h2>
+<p><span class="color_element">Таблица сокращена</span></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>№</th>
+<th>Домен</th>
+<th>Показы</th>
+<th>% охвата</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td><a href="http://avito.ru">avito.ru</a></td>
+<td>1577</td>
+<td>115%</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td><a href="http://krasnodar.cian.ru">krasnodar.cian.ru</a></td>
+<td>1430</td>
+<td>105%</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td><a href="http://realty.yandex.ru">realty.yandex.ru</a></td>
+<td>1367</td>
+<td>100%</td>
+</tr>
+</tbody>
+</table>
+<p>Как видно наибольший охват по анализируемому ядру имеют сайты агрегаторы. Т. е. когда человек вбивает запрос связанный с покупкой квартиры, то с высокой долей вероятности на первой странице он увидит сайты из данного списка. Как видно ни одного сайта конкурента в ТОП-20 нет.</p>
+<p><span class="color_element">…текст сокращен</span></p>
+</section>
+<section id="органический-трафик-google" class="level2">
+<h2 class="anchored" data-anchor-id="органический-трафик-google">Органический трафик Google</h2>
+<p><span class="color_element">Раздел сокращен</span></p>
+</section>
+<section id="сайты-прямых-конкурентов-в-поисковой-выдаче" class="level2">
+<h2 class="anchored" data-anchor-id="сайты-прямых-конкурентов-в-поисковой-выдаче">Сайты прямых конкурентов в поисковой выдаче</h2>
+<p>Что касается анализируемых доменов конкурентов то в поисковой выдаче они практически не присутствуют, что видно из таблицы по доли охвата семантики. Однако сайт N выделяется среди всех конкурентов, особенно в Google, что говорит о хорошей оптимизации сайта под данный поисковик.</p>
+<p><span class="color_element">Таблица сокращена</span></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>№</th>
+<th>Домен</th>
+<th>Охват в SERP Яндекс&nbsp;</th>
+<th>Охват в SERP Google</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>…</td>
+<td>5,3%</td>
+<td>26,7%</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>…</td>
+<td>1,2%</td>
+<td>6,9%</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>…</td>
+<td>0,8%</td>
+<td>0,6%</td>
+</tr>
+</tbody>
+</table>
+<p><span class="color_element">…текст сокращен</span></p>
+</section>
+<section id="вертикальное-seo" class="level2">
+<h2 class="anchored" data-anchor-id="вертикальное-seo">«Вертикальное SEO»</h2>
+<p>Стратегия вертикального SEO подразумевает размещения напрямую на сайтах агрегаторах, маркетплейсах и других подобных сайтах. Учитывая ситуацию в SERP это оптимальная стратегия, так как сайты застройщиков могут получать поисковый трафик в основном по брендовым запросам. Разместившись на как можно большем кол-ве указанных площадок есть вероятность получить дополнительный трафик.</p>
+<p>В первую очередь необходимо рассмотреть следующие ресурсы на которых можно разместить объявления:</p>
+<ul>
+<li>avito.ru</li>
+<li>krasnodar.cian.ru</li>
+<li>realty.yandex.ru</li>
+<li><span class="color_element">… список сокращён</span></li>
+</ul>
+</section>
+<section id="социальные-сети" class="level2">
+<h2 class="anchored" data-anchor-id="социальные-сети">Социальные сети</h2>
+<p><span class="color_element">Раздел сокращен</span></p>
+</section>
+<section id="медийная-реклама" class="level2">
+<h2 class="anchored" data-anchor-id="медийная-реклама">Медийная реклама</h2>
+<p><span class="color_element">Раздел сокращен</span></p>
+</section>
+<section id="brand-lift" class="level2">
+<h2 class="anchored" data-anchor-id="brand-lift">Brand Lift</h2>
+<p>Данная метрика показывает насколько известен бренд среди пользователей Яндекс по Краснодару и какой тренд у изучаемых брендов. Данные берутся из сервиса «Яндекс.Вордстат».</p>
+<p><img src="img/brand.png" class="img-fluid"></p>
+<p>Красная линия в частотной зоне от <span class="math inline">\(4\ 000\)</span> до <span class="math inline">\(6\ 000\)</span> обозначен бренд компании «N». Линия тренда явно стремится к росту, бренд становится более узнаваем в интернете на территории Краснодара.</p>
+<p>В частотной зоне от <span class="math inline">\(2\ 000\)</span> до <span class="math inline">\(4\ 000\)</span> расположились три компании:</p>
+<ul>
+<li><span class="color_element">… сокращено</span></li>
+</ul>
+<p><strong>Точка роста</strong></p>
+<p><span class="color_element">…текст сокращен</span></p>
+<p><img src="img/brand2.png" class="img-fluid"></p>
+<p>Ситуация по России несколько иная, в частотной зоне от <span class="math inline">\(10\ 000\)</span> до <span class="math inline">\(15\ 000\)</span> находится компания «N».</p>
+<p>В зоне от <span class="math inline">\(5к\)</span> до <span class="math inline">\(10к\)</span> расположились компании «N» (красная линия), «N» и «N».</p>
+<p><span class="color_element">…текст сокращен</span></p>
+<blockquote class="blockquote">
+<p><strong>Таблица: корреляционный анализ частотностей упоминания бренда по компаниям</strong></p>
+</blockquote>
+<p><span class="color_element">Сокращено…</span></p>
+<p>Если мы агрегируем частотности всех брендов, то получим метрику, которая косвенно покажет, что происходит со спросом на рынке недвижимости.</p>
+<p><img src="img/brand3.png" class="img-fluid"></p>
+<p>В данной нише хороший тренд на рост спроса, а это значит, что на ближайший год ожидается прирост пользователей интересующихся покупкой квартир на первичном рынке. Данную гипотезу мы далее исследуем через анализ тренда в RStudio.</p>
+</section>
+</section>
+<section id="вовлечение" class="level1">
+<h1>Вовлечение</h1>
+<p>В данном разделе мы покажем как компании проводят первичную коммуникацию с клиентами, чем вовлекают и как удерживают внимание. Проанализируем рынок на степень его зрелости через ценностно-стоимостную карту.</p>
+<section id="позиционирование" class="level2">
+<h2 class="anchored" data-anchor-id="позиционирование">Позиционирование</h2>
+<p>По поводу позиционирования в сфере девелопмента замечательно высказался наш московский коллега маркетолог И. Балахнин. Ето точку зрения, с которой мы полностью согласны, изложим ниже.</p>
+<blockquote class="blockquote">
+<p><em>Один из ключевых вызовов рынка девелопмента — переход застройщика к логике клиентоцентричности. Все чаще позиционирование строится не вокруг абстрактных слов и слоганов, а вокруг решения конкретных задач клиента.</em></p>
+<p>…</p>
+<p><em>Текущие ТТХ объектов воспринимаются покупателями как должное; то, что могло восхитить и явиться своего рода «Moment of Truth» ещё <span class="math inline">\(5\)</span> лет назад, сегодня напрочь перестало работать.</em></p>
+<p><em>Более того, заметно усложнилась и модель принятия решений: в условиях растущего предложения и высокого уровня ценовой прозрачности клиенты всё чаще обращают внимание не только и не столько на позиционирование ЖК. В связи с этим мы выделяем <span class="math inline">\(5\)</span> так называемых контуров, вокруг которых девелоперам стоит выстраивать позиционирование:</em></p>
+</blockquote>
+<p><img src="img/conturu.png" class="img-fluid"></p>
+</section>
+<section id="контуры-объектов-недвижимости" class="level2">
+<h2 class="anchored" data-anchor-id="контуры-объектов-недвижимости">Контуры объектов недвижимости</h2>
+<p>Внутренний контур <strong>«Квартиры»</strong>. Клиентов все чаще интересует планировки. Покупателям важно понять, как они смогут жить в этой квартире, насколько она закрывает или не закрывает их насущные потребности.</p>
+<p><strong>«Подъезд».</strong> Клиента волнует, как оформлены места общественного пользования, есть ли кладовые, насколько контингент жителей подъезда соответствует социальному статусу покупателя да и просто похож на него или не похож.</p>
+<p><span class="color_element">…текст сокращен</span></p>
+</section>
+<section id="анализ-конкурентов-по-контурам" class="level2">
+<h2 class="anchored" data-anchor-id="анализ-конкурентов-по-контурам">Анализ конкурентов по контурам</h2>
+<p>Взяв на вооружение данные контуры с небольшими корректировками (добавили контур район, а подъезд объединили с домом) мы проанализировали контент посадочных страниц, сделали выводы по качеству каждого контура и общему позиционированию.</p>
+<p>Будем оценивать каждый контур по ступенчатой десятибалльной шкале. Система оценок следующая:</p>
+<ul>
+<li>наличие контента — ставим <span class="math inline">\(3\)</span> балла;</li>
+<li>полнота — сгруппированная оценка состоящая из нескольких дополнительных параметров. Прибавляем к предыдущему критерию от <span class="math inline">\(0−3\)</span>;</li>
+<li>подача — сгруппированная оценка <span class="math inline">\(0−3\)</span> баллов;</li>
+<li>WOW-эффект — прибавляем <span class="math inline">\(1\)</span> балл к накопившимся.</li>
+</ul>
+<p>В итоге получили несколько таблиц:</p>
+<ul>
+<li>первая — общие итоги по качеству страниц по всем застройщикам;</li>
+<li>вторая — общие итоги детально по элементам;</li>
+<li>третья — итоги по каждому застройщику и место в рейтинге.</li>
+</ul>
+<p>В таблице ниже видим долю использования на сайте каждого контура по всем участницам исследования и показатель качества контуров (Quality Rate). Quality Rate — показывает у какой доли сайтов высокий (больше <span class="math inline">\(7\)</span>) балл по указанному элементу.</p>
+<blockquote class="blockquote">
+<p><strong>Таблица: общие итоги по застройщикам</strong></p>
+</blockquote>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Контуры</th>
+<th>Доля использования</th>
+<th>Quality Rate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Квартиры</td>
+<td>90%</td>
+<td>27%</td>
+</tr>
+<tr class="even">
+<td>Дом</td>
+<td>54%</td>
+<td>7%</td>
+</tr>
+<tr class="odd">
+<td>Двор</td>
+<td>69%</td>
+<td>3%</td>
+</tr>
+<tr class="even">
+<td>Район</td>
+<td>92%</td>
+<td>17%</td>
+</tr>
+<tr class="odd">
+<td>Застройщик</td>
+<td>88%</td>
+<td>46%</td>
+</tr>
+</tbody>
+</table>
+<p>Контур «квартиры» так или иначе представлен у всех, однако не со всеми элементами данного контура работают застройщики (об этом следующая таблица).</p>
+<p>Контуры «Дом» и «Двор» реже всего используются компаниями. Как правило это некое упоминание с невнятным описанием и фотографией.</p>
+<p>Зато хорошо говорим о себе, о чем говорят итоговые оценки по контуру «застройщик».</p>
+<blockquote class="blockquote">
+<p><strong>Таблица: итоги в разрезе элементов</strong></p>
+</blockquote>
+<p>Описание таблицы:</p>
+<ul>
+<li>столбец «Элементы исследования» — элементы из которых состоят контуры.</li>
+<li>«Средний балл» — средний балл по элементу по всем застройщикам.</li>
+<li>Значения в столбцах «Отлично», «Средне», «Приемлемо» — показывают кол-во компаний у которых элементы соответствуют указанному уровню качества.</li>
+<li>«Доля использования» — доля использования элемента на посадочной странице среди девелоперов.</li>
+<li>«Quality Rate» — показывает у какой доли сайтов высокий (больше 7) балл по указанному элементу.</li>
+</ul>
+<p><span class="color_element">Таблица сокращена</span></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 21%">
+<col style="width: 21%">
+<col style="width: 10%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 8%">
+<col style="width: 15%">
+<col style="width: 10%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Контуры</th>
+<th>Элементы исследования</th>
+<th>Средний балл</th>
+<th>Отлично</th>
+<th>Среднее</th>
+<th>Приемлемо</th>
+<th>Доля использования</th>
+<th>Quality Rate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Квартиры</td>
+<td>Контент по 1-2-3 квартирам</td>
+<td>5,5</td>
+<td>2</td>
+<td>9</td>
+<td>1</td>
+<td>100%</td>
+<td>17%</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Преимущества 1-2-3 квартир</td>
+<td>5,0</td>
+<td>1</td>
+<td>9</td>
+<td>2</td>
+<td>92%</td>
+<td>8%</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>Квартиры с отделкой</td>
+<td>4,5</td>
+<td>1</td>
+<td>3</td>
+<td>8</td>
+<td>67%</td>
+<td>8%</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Подбор квартир</td>
+<td>6,7</td>
+<td>9</td>
+<td>2</td>
+<td>1</td>
+<td>100%</td>
+<td>75%</td>
+</tr>
+</tbody>
+</table>
+<p>По контуру «квартиры». Большинство компании уделяют большое внимание функционалу подбора квартиры, но часто забывают указать преимущества квартир. Из контента по квартирам используют схемы, очень мало фотографий, дизайнерских 3D моделей, и только на одном сайте можно прогуляться по квартире и посмотреть в окна.</p>
+<p>Напомни, что это один из важнейших контуров, от того как его раскроет компания будет зависеть решение занесут ли застройщика в список рассматриваемых вариантов при прочих равных.</p>
+<p><span class="color_element">…текст сокращен</span></p>
+<blockquote class="blockquote">
+<p><strong>Таблица: итоги по каждому застройщику</strong></p>
+</blockquote>
+<p><span class="color_element">Таблица сокращена</span></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 3%">
+<col style="width: 12%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 10%">
+<col style="width: 9%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 7%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Компании</th>
+<th>ЖК</th>
+<th>Место в Рейтинге</th>
+<th>Средний балл</th>
+<th>Сумма баллов</th>
+<th>Комплектность</th>
+<th>Quality Rate</th>
+<th>Место Сумма баллов</th>
+<th>Место Комплексность</th>
+<th>Место QR</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>…</td>
+<td>…</td>
+<td>1</td>
+<td>6,8</td>
+<td>116</td>
+<td>94%</td>
+<td>56%</td>
+<td>1</td>
+<td>2</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>…</td>
+<td>…</td>
+<td>2</td>
+<td>5,2</td>
+<td>93</td>
+<td>100%</td>
+<td>22%</td>
+<td>3</td>
+<td>1</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>…</td>
+<td>…</td>
+<td>4</td>
+<td>5,4</td>
+<td>81</td>
+<td>83%</td>
+<td>22%</td>
+<td>4</td>
+<td>4</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Точки роста или что нам делать с этими данными</strong></p>
+<p>На сайтах компаний нет четкой структуры согласно контурам и не качественно, в большинстве случаев, реализованы критерии «полнота» и «подача». Так, например, о квартирах начинаем говорить где-то в середине посадочной странице, о дворе где-то в самом низу или вообще нет информации, о жилом комплексе и районе либо вверху страницы либо в середине.</p>
+<p>Отсюда нет четкого позиционирования у жилых комплексов комфорт-класса. Рынок стремится приобрести признаки коммодитивных рынков, т. е. клиенты выбирают застройщика ориентируясь в основном на цену за квадратный метр жилой площади.</p>
+<p>Исходя из всего вышесказанного рекомендуем <span class="color_element">…текст сокращен</span></p>
+<p>Раскрываем каждый контур подробно с особым вниманием к критериям «полнота данных» и «подача».</p>
+</section>
+<section id="ценностно-стоимостная-карта-рынка" class="level2">
+<h2 class="anchored" data-anchor-id="ценностно-стоимостная-карта-рынка">Ценностно-стоимостная карта рынка</h2>
+<p>Ценностно-стоимостная карта анализирует цену на уровне конкурентов. Цель составления карты узнать уровень зрелости рынка, который поможет ответить на вопрос: «а клиенты хорошо понимают, за что они платят?» и «что нам делать (какой стратегии придерживаться) в том или ином случаи?»</p>
+<p>Для построения анализа мы взяли цену квадратного метра в однокомнатной квартире и данные по бета-весам критериев выбора. Далее провели анализ жилых комплексов по доступным в сети материалам (сайт, соцсети, POSы) проставляя коэффициент «проявленности критерия» по шкале от <span class="math inline">\(1\)</span> до <span class="math inline">\(5\)</span> напротив каждого критерия по каждому ЖК, где <span class="math inline">\(1\)</span> — критерий никак не встречается, а <span class="math inline">\(5\)</span> - является основным доминирующим критерием. Перемножив коэффициенты и бета-веса критериев мы сформировали метрику «ценность».</p>
+<p>Полученные данные разместили на декартовой системе координат, где по оси абсцисс указываем цену, а по оси ординат ценность.</p>
+<p><img src="img/karta.png" class="img-fluid"></p>
+<p>На графике видно, что участники рынка стремятся выстроиться в линию. Это означает что рынок приближается к зрелой стадии, когда участники точно знают соотношение цены качества (пример такого рынка может служить например рынок телевизоров, где есть четкие стандарты и участники рынка выстраиваются практически по идеальной прямой).</p>
+<p>Однако в нашем случаи есть возможности для представления стоимости за счет лучшего раскрытия критериев перед конкурентами. Это хорошо видно на прямой, когда некоторые конкуренты запрашивают высокую стоимость квартиры, но плохо её презентуют. Такие игроки рынка находятся под красной линией.</p>
+<p>Что касается микрорайона «N», то <span class="color_element">… текст сокращен</span></p>
+</section>
+</section>
+<section id="анализ-тренда" class="level1">
+<h1>Анализ тренда</h1>
+<p>Даное исследование проводиться с целью увидеть куда движется интерес пользователей в интернете. Он растет, стабилен или падает. Зная уровень интереса мы можем корректировать стратегии и планировать объем необходимых ресурсов для привлечения новых клиентов.</p>
+<p>Исследуем:</p>
+<ul>
+<li>тренды в поисковых системах Яндекс и Гугл</li>
+<li>создадим прогностические модели спроса на следующий год</li>
+</ul>
+<section id="исследование-тренда-в-яндекс" class="level2">
+<h2 class="anchored" data-anchor-id="исследование-тренда-в-яндекс">Исследование тренда в Яндекс</h2>
+<p>Анализ тренда проводился путем сложения частотностей запросов по месяцам основного семантического ядра. Регион сбора частотности ЮФО. Статистику собирали с помощью парсинга сервиса Яндекс.Вордстат через программу Key Collector. Собрав данные и просуммировав все частотности по всем ключевым словам в ядре, далее обработав данные в RStudio мы получили общую картину по направлению тренда.</p>
+<blockquote class="blockquote">
+<p><strong>Представление тренда</strong></p>
+</blockquote>
+<p><img src="img/trend.png" class="img-fluid"></p>
+<p>Как видно из графика тренд имеет явное направление на рост, что говорит о возрастающем интересе к данной теме. Эти данные хорошо соотносятся с данными по проведенному анализу Brand Lift.</p>
+</section>
+<section id="декомпозиция-временного-ряда" class="level2">
+<h2 class="anchored" data-anchor-id="декомпозиция-временного-ряда">Декомпозиция временного ряда</h2>
+<p>Временные ряды в общем виде можно представить как сумму трех компонент: тренда, сезонных изменений и шума (колебаний, связанных со случайными факторами). Хорошее понимание структуры временного ряда является важным условием для построения надежных прогнозных моделей.</p>
+<p>Разложим временной ряд на тренд с помощью локальной полиномиальной регрессии (STL) при этом переведем частотность в логарифмическую шкалу для лучшего визуального анализа дисперсии.</p>
+<p><img src="img/decomp.png" class="img-fluid"></p>
+<p>На графике выделенные с помощью метода STL компоненты временного ряда:</p>
+<ul>
+<li>Log — анализируемый временной ряд;</li>
+<li>trend — тренд;</li>
+<li>remainder — остатки.</li>
+</ul>
+<p>Если просуммировать компоненты, то получим исходный ряд (приведен на верхнем графике). Серые вертикальные столбцы, изображенные слева от графиков, отражают удельный вклад каждой компоненты в общую дисперсию в данных.</p>
+<p>Из графика видно, что наибольший вклад в общую дисперсию вносит тренд, так как диапазон по дисперсии почти полностью совпадает с временным рядом, тогда как шум (remainder) вносит минимальный вклад, что видно по диапазону в логарифмической шкале (охватывает десятичные доли в пределах от <span class="math inline">\(0\)</span> до <span class="math inline">\(0,1\)</span>).</p>
+</section>
+<section id="сезонность" class="level2">
+<h2 class="anchored" data-anchor-id="сезонность">Сезонность</h2>
+<p>Построим график сезонности за два года по агрегированным частотностям ключевых слов.</p>
+<p><img src="img/sessons.png" class="img-fluid"></p>
+<p>На графике можно видеть сезонные колебания. Например, рост интереса в летние месяцы и постепенный спад к концу года. Заметно снижение спроса с марта по апрель. При этом сезонность имеет накопительный эффект, т.е. год от года число запросов растет. Также стоит отметить резкий рост запросов в <span class="math inline">\(2020-м\)</span> году.</p>
+</section>
+<section id="исследование-тренда-в-google" class="level2">
+<h2 class="anchored" data-anchor-id="исследование-тренда-в-google">Исследование тренда в Google</h2>
+<p><span class="color_element">Раздел сокращен</span></p>
+</section>
+</section>
+<section id="прогностические-модели" class="level1">
+<h1>Прогностические модели</h1>
+<p>Для построения прогнозов по исследуемым временным рядам в Яндекс мы используем либо метод ARIMA (autoregressive integrated moving average) — интегрированная модель авторегрессии скользящего среднего, либо метод тройного экспоненциального сглаживания, или алгоритм Хольта-Винтерса. Метод Хольта-Винтерса хорошо работает, когда в структуре данных прослеживается явная периодичность/сезонность. Например, в B2B-нишах в выходные дни фиксируется спад активности клиентов, а в будни — подъем. Наблюдаем в бизнесе типичный волнообразный цикл.</p>
+<p>Можно довольно точно спрогнозировать количество лидов, сессий, продаж или посчитать другие метрики на будущий период с помощью данных предиктивных моделей. В данном исследовании мы прогнозируем частотность запросов и направление линии регрессии.</p>
+<section id="прогноз-для-яндекс" class="level2">
+<h2 class="anchored" data-anchor-id="прогноз-для-яндекс">Прогноз для Яндекс</h2>
+<p>На основе полученных данных по тренду в Яндекс делаем вывод, что во временном ряду присутствует слабо выраженная сезонность и в формирование данных большую роль вносит постоянно возрастающий уровень запросов в теме недвижимости. В данном случаи можно использовать оба метода либо ARIMA, либо Хольт-Винтерса и выбрать лучшую модель по результатам проверки на среднюю абсолютную удельную ошибку (mean absolute percentage error, MAPE).</p>
+<blockquote class="blockquote">
+<p><strong>Прогнозная модель по методу Хольта-Винтерса</strong></p>
+</blockquote>
+<p><img src="img/hv.png" class="img-fluid"></p>
+<p>На графике в зеленой области, которая обозначает 80-ти процентный доверительный интервал (т.е. значения с восьмидесятью процентной вероятностью будут находится в данной окрашенной области) проходит красная пунктирная линия предсказанных средних значений. Однако, нас интересует не точные данные, а тренд (красная линия). Как видно из графика тренд на ближайший год показывает рост запросов в поисковой системе Яндекс.</p>
+</section>
+<section id="прогнозная-модель-по-методу-arima" class="level2">
+<h2 class="anchored" data-anchor-id="прогнозная-модель-по-методу-arima">Прогнозная модель по методу ARIMA</h2>
+<p>Такую же картину мы наблюдаем в модели ARIMA. Ожидается рост интереса в ближайший год в Яндекс.</p>
+<p><img src="img/arima.png" class="img-fluid"></p>
+<p>Проверим модели на среднюю абсолютную удельную ошибку (mean absolute percentage error, MAPE) в RStudio:</p>
+<p><img src="img/mape.png" class="img-fluid"></p>
+<p>Обе модели имеют низкую удельную ошибку, но лучшая по МАРЕ модель Хольта-Винтерса.</p>
+<p>Если говорить об абсолютных и относительных значениях, то через <span class="math inline">\(12\)</span> месяцев начиная с июня <span class="math inline">\(2021\)</span> ожидается рост спроса по ЮФО, согласно модели Хольта-Винтерса, примерно на <span class="math inline">\(45\%\)</span>, что составит около 1 млн запросов.</p>
+</section>
+<section id="прогноз-для-google" class="level2">
+<h2 class="anchored" data-anchor-id="прогноз-для-google">Прогноз для Google</h2>
+<p><span class="color_element">Раздел сокращен</span></p>
+</section>
+<section id="точки-роста" class="level2">
+<h2 class="anchored" data-anchor-id="точки-роста">Точки роста</h2>
+<p>Мы выяснили, что кол-во запросов в Яндексе будет расти, а в Гугл интерес находится на достаточно высоком уровне. Яндекс дает больше вариантов для решения вопросов связанных с продвижением недвижимости, за счет собственных сервисов и различных агрегаторов. Поэтому ожидается дальнейший рост интереса к поисковой системе Яндекс.</p>
+<p><span class="color_element">…текст сокращен</span></p>
+</section>
+</section>
+<section id="дальнейшие-действия" class="level1">
+<h1>Дальнейшие действия</h1>
+<section id="стратегия" class="level2">
+<h2 class="anchored" data-anchor-id="стратегия">Стратегия</h2>
+<p>Необходимо:</p>
+<ul>
+<li>оптимизировать существующую систему привлечения клиентов согласно отчету Revenue breakdown.</li>
+<li>Контролировать мощность рекламных систем по генерации качественных лидов согласно анализу шести сигм.</li>
+<li>Отделять системное от случайного. Когда выходим за границы системы, анализируем почему это произошло и, в зависимости от ситуации, внедрять или делать так, чтобы этого не происходило.</li>
+<li><span class="color_element">…список сокращен</span></li>
+</ul>
+<p>Нужно учитывать зрелость рынка по фокусу конкуренции.</p>
+<blockquote class="blockquote">
+<p><em>Согласно данной модели все участники рынка проходят через несколько стадий фокусировки преимуществ продукта: фокус на <strong>функциональность</strong>. Например наш чайник может нагревать воду строго до установленной температуры. </em></p>
+<p><em>Со временем потребители понимают какой уровень функциональности продукта их устраивает в данной нише и от функциональности фокус перетекает в область <strong>безопасности</strong>. Т.е. всех начинает интересовать, а насколько продукт безопасен, не вреден, полезен и так далее.</em></p>
+<p><em>Далее потребители начинают понимать какой уровень безопасности им нужен, а какой уже излишен и тогда после безопасности фокусировка перетекает в <strong>сервис.</strong></em></p>
+<p><em>Однако со временем сервис научаются предоставлять все и тогда рынок перетекает в завершающую стадию фокусировка на <strong>цены</strong>. Такие рынки называются «коммодитивные». На данных рынках нельзя выиграть конкуренцию иначе как ценой.</em></p>
+</blockquote>
+<p>Учитывая зрелость рынка недвижимости, помимо контуров и критериев, необходимо сместить фокус <span class="color_element">…текст сокращен</span></p>
+</section>
+<section id="тактика" class="level2">
+<h2 class="anchored" data-anchor-id="тактика">Тактика</h2>
+<ul>
+<li>Необходимо провести медиапланирование рекламных источников опираясь на данные прогнозных моделей.</li>
+</ul>
+<p><span class="color_element">…текст сокращен</span></p>
+</section>
+<section id="сквозная-аналитика" class="level2">
+<h2 class="anchored" data-anchor-id="сквозная-аналитика">Сквозная аналитика</h2>
+<p>Важно получать данные по статусам сделки из CRM системы в одну из систем аналитики, чтобы оптимизировать рекламные кампании на уровне дохода, а не по кол-ву обращений. Схема аналитики для Яндекс Метрики может выглядеть следующим образом:</p>
+<p><span class="color_element">Текст и графики сокращены…</span></p>
+<p>Обращайтесь за ситуационным анализом. Пишите на email: <a href="mailto:i@akorshakov.ru" class="email">i@akorshakov.ru</a></p>
+
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KB6J3FZF" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Скопировано");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Скопировано");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+          // default icon
+          link.classList.add("external");
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Copyright © ihourglass.ru | Начиная с 2024 г. все права защищены.</p>
+</div>   
+    <div class="nav-footer-center">
+
+<div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+    <div class="nav-footer-right">
+<p>Сайт создан с помощью <a href="https://www.r-project.org/about.html" target="_blank"><i class="fa-brands fa-r-project" title="R Project" aria-label="r-project"></i></a> and <a href="https://quarto.org/" target="_blank">Quarto</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
